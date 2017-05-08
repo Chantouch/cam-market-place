@@ -1,5 +1,4 @@
 @extends('layouts.front.app')
-
 @section('banner-nav-right')
     @include('front.pages.banner-nav-right')
 @stop
