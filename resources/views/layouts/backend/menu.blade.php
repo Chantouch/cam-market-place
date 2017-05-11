@@ -1,23 +1,43 @@
 <ul class="list">
     <li class="header">MAIN NAVIGATION</li>
-    <li class="active">
-        <a href="index.html">
+    <li class="{!! Request::is('admin/dashboard*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.dashboard') !!}">
             <i class="material-icons">home</i>
             <span>Home</span>
         </a>
     </li>
-    <li>
-        <a href="pages/typography.html">
+    <li class="header">Settings</li>
+    <li class="{!! Request::is('admin/countries*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.countries.index') !!}">
             <i class="material-icons">text_fields</i>
-            <span>Typography</span>
+            <span>Countries</span>
         </a>
     </li>
-    <li>
-        <a href="pages/helper-classes.html">
+    <li class="{!! Request::is('admin/cities*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.cities.index') !!}">
             <i class="material-icons">layers</i>
-            <span>Helper Classes</span>
+            <span>Cities</span>
         </a>
     </li>
+    <li class="{!! Request::is('admin/communes*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.communes.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Communes</span>
+        </a>
+    </li>
+    <li class="{!! Request::is('admin/categories*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.categories.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Categories</span>
+        </a>
+    </li>
+    <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.currencies.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Currencies</span>
+        </a>
+    </li>
+    <li class="header">Products</li>
     <li>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">widgets</i>

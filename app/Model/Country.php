@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Model;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Country extends Model
+{
+    use SoftDeletes;
+    protected $fillable = [
+        'name', 'description', 'status', 'country_id', 'code'
+    ];
+
+    //===============Validation===============//
+    public static function rules()
+    {
+        return [
+            'name' => 'required|unique:countries|max:255',
+            'code' => 'required|unique:countries|max:5',
+        ];
+    }
+
+    public static function messages()
+    {
+        return [
+            'name.required' => 'Please enter your country name',
+        ];
+    }
+
+}

@@ -29,9 +29,10 @@ class CreateCustomersTable extends Migration
             $table->string('enrollment_id')->nullable();
             $table->integer('verified_by', false, true)->nullable();
             $table->dateTime('verified_at')->nullable();
-            $table->integer('status')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('verified_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');

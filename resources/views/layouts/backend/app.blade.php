@@ -19,12 +19,10 @@
     <link href="{!! asset('backend/plugins/node-waves/waves.css') !!}" rel="stylesheet"/>
     <!-- Animation Css -->
     <link href="{!! asset('backend/plugins/animate-css/animate.css') !!}" rel="stylesheet"/>
-    <!-- Morris Chart Css-->
-    <link href="{!! asset('backend/plugins/morrisjs/morris.css') !!}" rel="stylesheet"/>
+@yield('style')
     <!-- Custom Css -->
     <link href="{!! asset('backend/css/style.css') !!}" rel="stylesheet">
-    @yield('style')
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{!! asset('backend/css/themes/all-themes.min.css') !!}" rel="stylesheet"/>
     <!-- Scripts -->
     <script>
@@ -283,29 +281,40 @@
 <section>
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
+    @if (Auth::guard('admin')->check())
         <!-- User Info -->
-        <div class="user-info">
-            <div class="image">
-                <img src="{!! asset('backend/images/user.png') !!}" width="48" height="48" alt="User"/>
-            </div>
-            <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
-                <div class="btn-group user-helper-dropdown">
-                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                        <li role="seperator" class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                        <li role="seperator" class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
-                    </ul>
+            <div class="user-info">
+                <div class="image">
+                    <img src="{!! asset('backend/images/user.png') !!}" width="48" height="48" alt="User"/>
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="false">{{ Auth::guard('admin')->user()->username }}</div>
+                    <div class="email">{{ Auth::guard('admin')->user()->email }}</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="{{ route('admin.logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="material-icons">input</i>Sign Out</a>
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- #User Info -->
+    @endif
+    <!-- #User Info -->
         <!-- Menu -->
         <div class="menu">
             @include('layouts.backend.menu')
@@ -478,30 +487,13 @@
 <!-- Bootstrap Core Js -->
 <script src="{!! asset('backend/plugins/bootstrap/js/bootstrap.js') !!}"></script>
 
-<!-- Select Plugin Js -->
-<script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
+@yield('plugins')
 <!-- Slimscroll Plugin Js -->
 <script src="{!! asset('backend/plugins/jquery-slimscroll/jquery.slimscroll.js') !!}"></script>
 <!-- Waves Effect Plugin Js -->
 <script src="{!! asset('backend/plugins/node-waves/waves.js') !!}"></script>
-<!-- Jquery CountTo Plugin Js -->
-<script src="{!! asset('backend/plugins/jquery-countto/jquery.countTo.js') !!}"></script>
-<!-- Morris Plugin Js -->
-<script src="{!! asset('backend/plugins/raphael/raphael.min.js') !!}"></script>
-<script src="{!! asset('backend/plugins/morrisjs/morris.js') !!}"></script>
-<!-- ChartJs -->
-<script src="{!! asset('backend/plugins/chartjs/Chart.bundle.js') !!}"></script>
-<!-- Flot Charts Plugin Js -->
-<script src="{!! asset('backend/plugins/flot-charts/jquery.flot.js') !!}"></script>
-<script src="{!! asset('backend/plugins/flot-charts/jquery.flot.resize.js') !!}"></script>
-<script src="{!! asset('backend/plugins/flot-charts/jquery.flot.pie.js') !!}"></script>
-<script src="{!! asset('backend/plugins/flot-charts/jquery.flot.categories.js') !!}"></script>
-<script src="{!! asset('backend/plugins/flot-charts/jquery.flot.time.js') !!}"></script>
-<!-- Sparkline Chart Plugin Js -->
-<script src="{!! asset('backend/plugins/jquery-sparkline/jquery.sparkline.js') !!}"></script>
 <!-- Custom Js -->
 <script src="{!! asset('backend/js/admin.js') !!}"></script>
-<script src="{!! asset('backend/js/pages/index.js') !!}"></script>
 @yield('script')
 <!-- Demo Js -->
 <script src="{!! asset('backend/js/demo.js') !!}"></script>
