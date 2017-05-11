@@ -34,7 +34,7 @@
                     <p>
                         {!! $city->description !!}
                     </p>
-                    <a href="{!! route('admin.countries.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
+                    <a href="{!! route('admin.cities.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
             </div>
         </div>

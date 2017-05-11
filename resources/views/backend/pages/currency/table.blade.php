@@ -4,9 +4,13 @@
             <thead>
             <tr>
                 <th>#</th>
+                <th>Symbol</th>
                 <th>Name</th>
+                <th>Symbol Native</th>
+                <th>Decimal Digits</th>
+                <th>Rounding</th>
                 <th>Code</th>
-                <th>Description</th>
+                <th>Name Plural</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -15,17 +19,21 @@
             @foreach($currencies as $currency)
                 <tr>
                     <th scope="row">{!! $currency->id !!}</th>
+                    <td>{!! $currency->symbol !!}</td>
                     <td>{!! $currency->name !!}</td>
+                    <td>{!! $currency->symbol_native !!}</td>
+                    <td>{!! $currency->decimal_digits !!}</td>
+                    <td>{!! $currency->rounding !!}</td>
                     <td>{!! $currency->code !!}</td>
-                    <td>{!! str_limit($currency->description, 70) !!}</td>
+                    <td>{!! str_limit($currency->name_plural, 70) !!}</td>
                     <td>{!! $currency->status !!}</td>
                     <td>
-                        {!! Form::open(['route' => ['admin.currencies.destroy', $currency->id], 'method' => 'delete']) !!}
-                        <a href="{!! route('admin.currencies.show', [$currency->id]) !!}"
+                        {!! Form::open(['route' => ['admin.currencies.destroy', $currency->hashid], 'method' => 'delete']) !!}
+                        <a href="{!! route('admin.currencies.show', [$currency->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{!! route('admin.currencies.edit', [$currency->id]) !!}"
+                        <a href="{!! route('admin.currencies.edit', [$currency->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>
@@ -36,6 +44,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! $currencies->render() !!}
     @else
         <p>There is no data here.</p>
     @endif

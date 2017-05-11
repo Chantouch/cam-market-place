@@ -7,9 +7,16 @@ use App\Model\Currency;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Vinkla\Hashids\HashidsManager;
 
 class CurrencyController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +24,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $currencies = Currency::where('status', 1)->paginate(10);
+        $currencies = Currency::paginate(10);
         return view('backend.pages.currency.index', compact('currencies'));
     }
 
@@ -58,22 +65,34 @@ class CurrencyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Currency  $currency
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function show(Currency $currency)
+    public function show($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.currencies.index')->with('error', 'We can not find currency with that id, please try the other');
+        }
+        $currency = Currency::find($id);
         return view('backend.pages.currency.show', compact('currency'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Currency  $currency
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Currency $currency)
+    public function edit($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.currencies.index')->with('error', 'We can not find currency with that id, please try the other');
+        }
+        $currency = Currency::find($id);
         return view('backend.pages.currency.edit', compact('currency'));
     }
 
@@ -81,13 +100,19 @@ class CurrencyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Currency  $currency
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Currency $currency)
+    public function update(Request $request, $id)
     {
         try {
             $data = $request->all();
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.currencies.index')->with('error', 'We can not find currency with that id, please try the other');
+            }
+            $currency = Currency::find($id);
             $validator = Validator::make($data, Currency::rules(), Currency::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
@@ -105,11 +130,17 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Currency  $currency
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Currency $currency)
+    public function destroy($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.currencies.index')->with('error', 'We can not find currency with that id, please try the other');
+        }
+        $currency = Currency::find($id);
         $delete = $currency->delete();
         if (!$delete) {
             return back()->with('error', 'Your currency can not delete from your system right now. Plz try again later.');

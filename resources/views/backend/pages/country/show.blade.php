@@ -20,9 +20,9 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.countries.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.countries.edit', [$country->id]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin.countries.edit', [$country->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.countries.destroy', $country->id], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin.countries.destroy', $country->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>

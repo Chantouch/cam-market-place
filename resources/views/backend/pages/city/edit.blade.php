@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($city, ['route' => ['admin.cities.update', $city->id], 'method' => 'patch']) !!}
+                    {!! Form::model($city, ['route' => ['admin.cities.update', $city->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.city.fields')
                     {!! Form::close() !!}
                 </div>

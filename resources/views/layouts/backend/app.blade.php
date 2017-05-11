@@ -483,9 +483,9 @@
 </section>
 
 <!-- Jquery Core Js -->
-<script src="{!! asset('backend/plugins/jquery/jquery.min.js') !!}"></script>
+<script src="{!! asset('js/jquery.js') !!}"></script>
 <!-- Bootstrap Core Js -->
-<script src="{!! asset('backend/plugins/bootstrap/js/bootstrap.js') !!}"></script>
+<script src="{!! asset('js/bootstrap.min.js') !!}"></script>
 
 @yield('plugins')
 <!-- Slimscroll Plugin Js -->
@@ -494,6 +494,7 @@
 <script src="{!! asset('backend/plugins/node-waves/waves.js') !!}"></script>
 <!-- Custom Js -->
 <script src="{!! asset('backend/js/admin.js') !!}"></script>
+<script src="{!! asset('backend/js/script.js') !!}"></script>
 @yield('script')
 <!-- Demo Js -->
 <script src="{!! asset('backend/js/demo.js') !!}"></script>

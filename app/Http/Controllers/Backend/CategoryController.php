@@ -8,9 +8,17 @@ use App\Model\SubCategory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Vinkla\Hashids\HashidsManager;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -67,22 +75,34 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Category $category
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+        }
+        $category = Category::whereNull('category_id')->find($id);
         return view('backend.pages.category.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Category $category
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+        }
+        $category = Category::whereNull('category_id')->find($id);
         $categories = Category::where('status', 1)->orderBy('id')->pluck('name', 'id');
         return view('backend.pages.category.edit', compact('category', 'categories'));
     }
@@ -91,35 +111,51 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\Category $category
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
         try {
+            DB::beginTransaction();
             $data = $request->all();
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+            }
+            $category = Category::whereNull('category_id')->find($id);
             $validator = Validator::make($data, Category::rules(), Category::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
             $update = $category->update($data);
             if (!$update) {
+                DB::rollBack();
                 return back()->with('error', 'Your category can not add to your system right now. Plz try again later.');
             }
+            DB::commit();
             return redirect()->route('admin.categories.index')->with('success', 'Category added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your category can not add to your system right now. Plz try again later.');
         }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Category $category
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+        }
+        $category = Category::whereNull('category_id')->find($id);
         $delete = $category->delete();
         if (!$delete) {
             return back()->with('error', 'Your category can not delete from your system right now. Plz try again later.');

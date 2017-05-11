@@ -4,10 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Country extends Model
 {
     use SoftDeletes;
+    protected $appends = ['hashid'];
     protected $fillable = [
         'name', 'description', 'status', 'country_id', 'code'
     ];
@@ -26,6 +28,14 @@ class Country extends Model
         return [
             'name.required' => 'Please enter your country name',
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
     }
 
 }

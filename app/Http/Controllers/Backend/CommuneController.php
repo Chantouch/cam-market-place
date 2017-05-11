@@ -9,9 +9,17 @@ use App\Model\Country;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Vinkla\Hashids\HashidsManager;
 
 class CommuneController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,26 +70,38 @@ class CommuneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Commune $commune
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Commune $commune)
+    public function show($id)
     {
-        $countries = Country::where('status', 1)->where('country_id', null)->pluck('name', 'id');
-        $cities = City::where('status', 1)->where('country_id', !null)->where('city_id', null)->pluck('name', 'id');
+        $countries = Country::where('status', 1)->whereNull('country_id')->pluck('name', 'id');
+        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->pluck('name', 'id');
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.communes.index')->with('error', 'We can not find commune with that id, please try the other');
+        }
+        $commune = Commune::whereNotNull('country_id')->whereNotNull('city_id')->find($id);
         return view('backend.pages.commune.show', compact('commune', 'countries', 'cities'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Commune $commune
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Commune $commune)
+    public function edit($id)
     {
-        $countries = Country::where('status', 1)->where('country_id', null)->pluck('name', 'id');
-        $cities = City::where('status', 1)->where('country_id', !null)->where('city_id', null)->pluck('name', 'id');
+        $countries = Country::where('status', 1)->whereNull('country_id')->pluck('name', 'id');
+        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->pluck('name', 'id');
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.communes.index')->with('error', 'We can not find commune with that id, please try the other');
+        }
+        $commune = Commune::whereNotNull('country_id')->whereNotNull('city_id')->find($id);
         return view('backend.pages.commune.edit', compact('commune', 'countries', 'cities'));
     }
 
@@ -89,13 +109,19 @@ class CommuneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\Commune $commune
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, Commune $commune)
+    public function update(Request $request, $id)
     {
         try {
             $data = $request->all();
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.communes.index')->with('error', 'We can not find commune with that id, please try the other');
+            }
+            $commune = Commune::whereNotNull('country_id')->whereNotNull('city_id')->find($id);
             $validator = Validator::make($data, Commune::rules(), Commune::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
@@ -113,11 +139,17 @@ class CommuneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Commune $commune
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commune $commune)
+    public function destroy($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.communes.index')->with('error', 'We can not find commune with that id, please try the other');
+        }
+        $commune = Commune::whereNotNull('country_id')->whereNotNull('city_id')->find($id);
         $delete = $commune->delete();
         if (!$delete) {
             return back()->with('error', 'Your commune can not delete from your system right now. Plz try again later.');

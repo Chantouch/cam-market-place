@@ -3,10 +3,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Vinkla\Hashids\Facades\Hashids;
 
 class City extends Model
 {
     protected $table = "countries";
+    protected $appends = ['hashid'];
     protected $fillable = [
         'name', 'description', 'status', 'country_id', 'code'
     ];
@@ -26,5 +28,13 @@ class City extends Model
             'name.required' => 'Please enter your city name',
             'country_id.required' => 'Please select a country',
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
     }
 }

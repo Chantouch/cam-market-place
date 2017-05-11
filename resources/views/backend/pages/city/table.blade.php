@@ -20,12 +20,12 @@
                     <td>{!! str_limit($city->description, 70) !!}</td>
                     <td>{!! $city->status !!}</td>
                     <td>
-                        {!! Form::open(['route' => ['admin.cities.destroy', $city->id], 'method' => 'delete']) !!}
-                        <a href="{!! route('admin.cities.show', [$city->id]) !!}"
+                        {!! Form::open(['route' => ['admin.cities.destroy', $city->hashid], 'method' => 'delete']) !!}
+                        <a href="{!! route('admin.cities.show', [$city->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{!! route('admin.cities.edit', [$city->id]) !!}"
+                        <a href="{!! route('admin.cities.edit', [$city->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>

@@ -8,9 +8,17 @@ use App\Model\Country;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Vinkla\Hashids\HashidsManager;
 
 class CityController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +26,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->paginate(10);
+        $cities = City::whereNotNull('country_id')->whereNull('city_id')->paginate(10);
         return view('backend.pages.city.index', compact('cities'));
     }
 
@@ -60,41 +68,59 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\City $city
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.cities.index')->with('error', 'We can not find city with that id, please try the other');
+        }
+        $city = City::whereNotNull('country_id')->whereNull('city_id')->find($id);
         return view('backend.pages.city.show', compact('city'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\City $city
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit($id)
     {
-        $countries = Country::where('status', 1)->where('country_id', null)->pluck('name', 'id');
-        return view('backend.pages.city.edit', compact('city','countries'));
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.cities.index')->with('error', 'We can not find employee with that id, please try the other');
+        }
+        $countries = City::where('status', 1)->where('country_id', null)->pluck('name', 'id');
+        $city = City::whereNotNull('country_id')->whereNull('city_id')->find($id);
+        return view('backend.pages.city.edit', compact('city', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\City $city
+     * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, $id)
     {
         try {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.cities.index')->with('error', 'We can not find city with that id, please try the other');
+            }
             $data = $request->all();
             $validator = Validator::make($data, City::rules(), City::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
+            $city = City::whereNotNull('country_id')->whereNull('city_id')->find($id);
             $update = $city->update($data);
             if (!$update) {
                 return back()->with('error', 'Your country can not add to your system right now. Plz try again later.');
@@ -111,12 +137,22 @@ class CityController extends Controller
      * @param  \App\Model\City $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy($id)
     {
-        $delete = $city->delete();
-        if (!$delete) {
-            return back()->with('error', 'Your city can not delete from your system right now. Plz try again later.');
+        try {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.cities.index')->with('error', 'We can not find city with that id, please try the other');
+            }
+            $city = City::whereNotNull('country_id')->whereNull('city_id')->find($id);
+            $delete = $city->delete();
+            if (!$delete) {
+                return back()->with('error', 'Your city can not delete from your system right now. Plz try again later.');
+            }
+            return redirect()->route('admin.cities.index')->with('success', 'City deleted successfully');
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('admin.cities.index')->with('error', 'We can not find city with that id, please try the other');
         }
-        return redirect()->route('admin.cities.index')->with('success', 'City deleted successfully');
     }
 }

@@ -1,15 +1,15 @@
 @extends('layouts.backend.app')
 @section('content')
-    <div class="block-header">
-        <h2>COUNTRIES</h2>
-    </div>
+    {{--<div class="block-header">--}}
+        {{--<h2>COUNTRIES</h2>--}}
+    {{--</div>--}}
     <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT COUNTRY
+                        EDIT CURRENCY
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($country, ['route' => ['admin.currencies.update', $country->id], 'method' => 'patch']) !!}
+                    {!! Form::model($currency, ['route' => ['admin.currencies.update', $currency->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.currency.fields')
                     {!! Form::close() !!}
                 </div>

@@ -4,11 +4,13 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Commune extends Model
 {
     use SoftDeletes;
     protected $table = 'countries';
+    protected $appends = ['hashid'];
     protected $fillable = [
         'name', 'description', 'status', 'city_id', 'code', 'country_id'
     ];
@@ -27,5 +29,12 @@ class Commune extends Model
         return [
 //            'name.required' => 'Please enter your country name',
         ];
+    }
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
     }
 }

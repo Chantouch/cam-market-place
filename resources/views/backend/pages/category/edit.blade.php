@@ -1,4 +1,8 @@
 @extends('layouts.backend.app')
+@section('style')
+    <!-- Bootstrap Select Css -->
+    <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+@stop
 @section('content')
     <div class="block-header">
         <h2>COUNTRIES</h2>
@@ -26,7 +30,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($category, ['route' => ['admin.categories.update', $category->id], 'method' => 'patch']) !!}
+                    {!! Form::model($category, ['route' => ['admin.categories.update', $category->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.category.fields')
                     {!! Form::close() !!}
                 </div>
@@ -34,4 +38,8 @@
         </div>
     </div>
     <!-- #END# Vertical Layout -->
+@stop
+@section('plugins')
+    <!-- Select Plugin Js -->
+    <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
 @stop

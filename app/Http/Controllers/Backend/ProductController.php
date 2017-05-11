@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Vinkla\Hashids\HashidsManager;
 
 class ProductController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
     /**
      * Display a listing of the resource.
      *

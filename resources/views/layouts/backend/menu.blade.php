@@ -6,7 +6,7 @@
             <span>Home</span>
         </a>
     </li>
-    <li class="header">Settings</li>
+    <li class="header">Master</li>
     <li class="{!! Request::is('admin/countries*') ? 'active' : '' !!}">
         <a href="{!! route('admin.countries.index') !!}">
             <i class="material-icons">text_fields</i>
@@ -35,6 +35,13 @@
         <a href="{!! route('admin.currencies.index') !!}">
             <i class="material-icons">layers</i>
             <span>Currencies</span>
+        </a>
+    </li>
+    <li class="header">Settings</li>
+    <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.home-sliders.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Home Slider</span>
         </a>
     </li>
     <li class="header">Products</li>

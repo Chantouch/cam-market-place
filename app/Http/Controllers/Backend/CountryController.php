@@ -7,9 +7,16 @@ use App\Model\Country;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Vinkla\Hashids\HashidsManager;
 
 class CountryController extends Controller
 {
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->hashid = $hashid;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -58,22 +65,34 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Country $country
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Country $country)
+    public function show($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.countries.index')->with('error', 'We can not find city with that id, please try the other');
+        }
+        $country = Country::whereNull('country_id')->whereNull('city_id')->find($id);
         return view('backend.pages.country.show', compact('country'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Country $country
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.countries.index')->with('error', 'We can not find city with that id, please try the other');
+        }
+        $country = Country::whereNull('country_id')->whereNull('city_id')->find($id);
         return view('backend.pages.country.edit', compact('country'));
     }
 
@@ -81,12 +100,18 @@ class CountryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\Country $country
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, $id)
     {
         try {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.countries.index')->with('error', 'We can not find city with that id, please try the other');
+            }
+            $country = Country::whereNull('country_id')->whereNull('city_id')->find($id);
             $data = $request->all();
             $validator = Validator::make($data, Country::rules(), Country::messages());
             if ($validator->fails()) {
@@ -105,11 +130,17 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Country $country
+     * @param  \App\Model\$id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy($id)
     {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.countries.index')->with('error', 'We can not find city with that id, please try the other');
+        }
+        $country = Country::whereNull('country_id')->whereNull('city_id')->find($id);
         $delete = $country->delete();
         if (!$delete) {
             return back()->with('error', 'Your country can not delete from your system right now. Plz try again later.');

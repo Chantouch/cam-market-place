@@ -20,9 +20,9 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.currencies.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.currencies.edit', [$currency->id]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin.currencies.edit', [$currency->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.currencies.destroy', $currency->id], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin.currencies.destroy', $currency->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>
@@ -31,10 +31,13 @@
                     </ul>
                 </div>
                 <div class="body">
-                    <p>
-                        {!! $currency->description !!}
-                    </p>
-                    <a href="{!! route('admin.currencies.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
+                    <p>{!! $currency->symbol_native !!}</p>
+                    <p>{!! $currency->decimal_digits !!}</p>
+                    <p>{!! $currency->rounding !!}</p>
+                    <p>{!! $currency->code !!}</p>
+                    <p>{!! $currency->name_plural !!}</p>
+                    <a href="{!! route('admin.currencies.index') !!}"
+                       class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
             </div>
         </div>

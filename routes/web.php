@@ -21,6 +21,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('communes', 'Backend\CommuneController');
     Route::resource('categories', 'Backend\CategoryController');
     Route::resource('currencies', 'Backend\CurrencyController');
+    Route::resource('home-sliders', 'Backend\HomeSliderController');
 });
 
 Auth::routes();

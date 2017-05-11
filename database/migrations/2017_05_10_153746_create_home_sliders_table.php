@@ -15,15 +15,38 @@ class CreateHomeSlidersTable extends Migration
     {
         Schema::create('home_sliders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent_id', false, true)->nullable();
             $table->string('name')->nullable();
             $table->string('caption')->nullable();
             $table->string('description')->nullable();
             $table->string('url')->nullable();
-            $table->tinyInteger('pause_on_hover')->default(0);
-            $table->tinyInteger('loop_forever')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->string('img_name')->nullable();
+            $table->string('img_path')->nullable();
+            $table->integer('speed')->nullable();
+            $table->tinyInteger('pause_on_hover')->nullable();
+            $table->tinyInteger('loop_forever')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('parent_id')->references('id')->on('home_sliders')->onDelete('cascade');
         });
+
+//        Schema::create('image_sliders', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->integer('home_slider_id', false, true)->nullable();
+//            $table->string('name')->nullable();
+//            $table->string('caption')->nullable();
+//            $table->string('description')->nullable();
+//            $table->string('url')->nullable();
+//            $table->string('img_name')->nullable();
+//            $table->string('img_path')->nullable();
+//            $table->tinyInteger('status')->nullable();
+//            $table->timestamps();
+//            $table->softDeletes();
+//
+//            $table->foreign('home_slider_id')->references('id')->on('home_sliders')->onDelete('cascade');
+//        });
     }
 
     /**
@@ -34,5 +57,6 @@ class CreateHomeSlidersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('home_sliders');
+//        Schema::dropIfExists('image_sliders');
     }
 }

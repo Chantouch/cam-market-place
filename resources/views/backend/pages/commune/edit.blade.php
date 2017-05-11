@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($commune, ['route' => ['admin.communes.update', $commune->id], 'method' => 'patch']) !!}
+                    {!! Form::model($commune, ['route' => ['admin.communes.update', $commune->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.commune.fields')
                     {!! Form::close() !!}
                 </div>
