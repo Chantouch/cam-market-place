@@ -27,7 +27,7 @@ class HomeSliderController extends Controller
      */
     public function index()
     {
-        $sliders = HomeSlider::with('image_slider')->whereNull('parent_id')->firstOrFail();
+        $sliders = HomeSlider::with('image_slider')->whereNull('parent_id')->first();
         if (!empty($sliders)) {
             return $this->show($sliders->id);
         }
@@ -52,17 +52,31 @@ class HomeSliderController extends Controller
      */
     public function store(Request $request)
     {
+        $slider = HomeSlider::with('image_slider')->whereNull('parent_id')->first();
         try {
             DB::beginTransaction();
             $data = $request->all();
-            $validator = Validator::make($data, HomeSlider::rules(), HomeSlider::messages());
-            if ($validator->fails()) {
-                return redirect()->route('admin.home-sliders.index')->withInput()->withErrors($validator);
-            }
-            $setting = HomeSlider::create($data);
-            if (!$setting) {
-                DB::rollBack();
-                return back()->with('error', 'Your settings can not add to our system right now. Plz try again later.');
+            if ($request->has('speed')) {
+                $validator = Validator::make($data, HomeSlider::rules(), HomeSlider::messages());
+                if ($validator->fails()) {
+                    return redirect()->route('admin.home-sliders.index')->withInput()->withErrors($validator);
+                }
+                $setting = HomeSlider::create($data);
+                if (!$setting) {
+                    DB::rollBack();
+                    return back()->with('error', 'Your settings can not add to our system right now. Plz try again later.');
+                }
+            } else {
+                $validator = Validator::make($data, ImageSlider::rules(), ImageSlider::messages());
+                if ($validator->fails()) {
+                    return back()->withInput()->withErrors($validator);
+                }
+                $data['parent_id'] = $slider->id;
+                $slide_list = ImageSlider::create($data);
+                if (!$slide_list) {
+                    DB::rollBack();
+                    return back()->with('error', 'Your settings can not add to our system right now. Plz try again later.');
+                }
             }
             DB::commit();
             return redirect()->route('admin.home-sliders.index')->with('success', 'Settings saved successfully.');
@@ -86,7 +100,7 @@ class HomeSliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -104,7 +118,7 @@ class HomeSliderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)

@@ -12,15 +12,16 @@ class ImageSlider extends Model
     protected $table = "home_sliders";
     protected $appends = ['hashid'];
     protected $fillable = [
-        'name', 'caption', 'description', 'status', 'parent_id', 'img_name', 'img_path'
+        'name', 'caption', 'description', 'status', 'parent_id', 'img_name', 'img_path', 'url'
     ];
 
     //===============Validation===============//
     public static function rules()
     {
         return [
-            'name' => 'required|unique:countries|max:255',
-            'caption' => 'required|unique:countries|max:3',
+            'name' => 'required',
+            'url' => 'required',
+            'caption' => 'required',
         ];
     }
 

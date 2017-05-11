@@ -26,12 +26,20 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.countries.store'], 'method' => 'POST']) !!}
-                    @include('backend.pages.setting.home-slider.fields')
+                    {!! Form::open(['route' => ['admin.home-sliders.store'], 'method' => 'POST']) !!}
+                    @include('backend.pages.setting.home-slider.field-slide')
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
     <!-- #END# Vertical Layout -->
+@stop
+
+@section('script')
+    <script>
+        $('#img_name').change(function () {
+            uploadPreview(this, 'img_preview');
+        });
+    </script>
 @stop

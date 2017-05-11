@@ -18,8 +18,8 @@
     @endif
 </div>
 
-{!! Form::label('name', 'Name:') !!}
-<div class="form-group">
+{!! Form::label('name', 'Title:') !!}
+<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
     <div class="form-line">
         {!! Form::text('name', null, ['class' => 'form-control']) !!}
     </div>
