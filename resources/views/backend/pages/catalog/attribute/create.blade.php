@@ -50,18 +50,19 @@
         $(function () {
             $('#p_name').show();
             $('#color_value').hide();
+            let attr = $('#attribute_group').val();
             $('#attribute_group').change(function () {
                 if ($('#attribute_group').val() === '') {
                     $('#p_name').show();
                     $('#color_value').hide();
-                } else if ($('#attribute_group').val() === 'color' || $('#attribute_group').val() === 'colour') {
+                } else if ($('#attribute_group').val() === 'Color'
+                    || $('#attribute_group').val() === 'Colour'
+                    || $('#attribute_group').val() === 'color' || $('#attribute_group').val() === 'colour') {
                     {
+                        alert('thanks');
                         $('#p_name').hide();
                         $('#color_value').show();
                     }
-                } else {
-                    $('#p_name').hide();
-                    $('#color_value').hide();
                 }
             });
         });

@@ -50,4 +50,4 @@
 <label for="status">Active</label>
 <br>
 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
-<a href="{!! route('admin.categories.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>
+<a href="{!! route('admin.attributes.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>
