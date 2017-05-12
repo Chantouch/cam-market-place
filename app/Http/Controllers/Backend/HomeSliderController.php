@@ -44,6 +44,9 @@ class HomeSliderController extends Controller
      */
     public function create()
     {
+        $slider = HomeSlider::with('image_slider')->whereNull('parent_id')->first();
+        if (empty($slider))
+            return redirect()->route('admin.home-sliders.index')->with('error', 'Please update your settings first, before adding new slide.');
         return view('backend.pages.setting.home-slider.create');
     }
 
@@ -72,6 +75,8 @@ class HomeSliderController extends Controller
                     }
                     break;
                 case "slide_list":
+                    if (empty($slider))
+                        return redirect()->route('admin.home-sliders.index')->with('error', 'Please update your settings before adding new slide.');
                     $validator = Validator::make($data, ImageSlider::rules(), ImageSlider::messages());
                     if ($validator->fails()) {
                         return back()->withInput()->withErrors($validator);

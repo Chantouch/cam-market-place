@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Attribute;
+use App\Model\SubAttribute;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
@@ -51,13 +52,30 @@ class AttributeController extends Controller
     {
         try {
             $data = $request->all();
-            $validator = Validator::make($data, Attribute::rules(), Attribute::messages());
-            if ($validator->fails()) {
-                return back()->withInput()->withErrors($validator);
-            }
-            $create = Attribute::create($data);
-            if (!$create) {
-                return back()->with('error', 'Your attribute can not add to our system right now. Plz try again later.');
+            if ($request->has('parent_id')) {
+                $validator = Validator::make($data, SubAttribute::rules(), SubAttribute::messages());
+                if ($validator->fails()) {
+                    return back()->withInput()->withErrors($validator);
+                }
+                $records = SubAttribute::count();
+                $current_id = 1;
+                if (!$records == 0) {
+                    $current_id = SubAttribute::orderBy('id', 'DESC')->first()->id + 1;
+                }
+                $data['position'] = $current_id;
+                $create = SubAttribute::create($data);
+                if (!$create) {
+                    return back()->with('error', 'Your attribute can not add to our system right now. Plz try again later.');
+                }
+            } else {
+                $validator = Validator::make($data, Attribute::rules(), Attribute::messages());
+                if ($validator->fails()) {
+                    return back()->withInput()->withErrors($validator);
+                }
+                $create = Attribute::create($data);
+                if (!$create) {
+                    return back()->with('error', 'Your attribute can not add to our system right now. Plz try again later.');
+                }
             }
             return redirect()->route('admin.attributes.index')->with('success', 'Attribute added successfully.');
         } catch (ModelNotFoundException $exception) {
@@ -96,8 +114,8 @@ class AttributeController extends Controller
             return redirect()->route('admin.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
         }
         $attributes = Attribute::where('status', 1)->whereNull('parent_id')->pluck('name', 'id');
-        $attribute = Attribute::whereNull('parent_id')->find($id);
-        return view('backend.pages.catalog.attribute.edit', compact('attribute','attributes'));
+        $attribute = SubAttribute::find($id);
+        return view('backend.pages.catalog.attribute.edit', compact('attribute', 'attributes'));
     }
 
     /**

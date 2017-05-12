@@ -46,7 +46,7 @@
                                 @foreach($attribute->sub_attribute as $attribute)
                                     <tr>
                                         <th scope="row">{!! $attribute->id !!}</th>
-                                        <td>{!! $attribute->value !!}</td>
+                                        <td>{!! $attribute->name !!}</td>
                                         <td>{!! $attribute->position !!}</td>
                                         <td>
                                             {!! Form::open(['route' => ['admin.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}

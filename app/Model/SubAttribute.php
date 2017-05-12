@@ -10,7 +10,7 @@ class SubAttribute extends Model
     protected $table = "attributes";
     protected $appends = ['hashid'];
     protected $fillable = [
-        'value', 'position', 'parent_id', 'status'
+        'value', 'position', 'parent_id', 'status', 'name'
     ];
 
     //===============Validation===============//
@@ -18,7 +18,6 @@ class SubAttribute extends Model
     {
         return [
             'name' => 'required|max:255',
-            'public_name' => 'required|max:255',
         ];
     }
 
