@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\HomeSlider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.pages.index');
+        $slide = HomeSlider::with('image_slider')->whereNull('parent_id')->firstOrFail();
+        return view('front.pages.index',compact('slide'));
     }
 }

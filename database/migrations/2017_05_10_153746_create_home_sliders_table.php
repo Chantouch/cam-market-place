@@ -20,8 +20,8 @@ class CreateHomeSlidersTable extends Migration
             $table->string('caption')->nullable();
             $table->string('description')->nullable();
             $table->string('url')->nullable();
-            $table->string('img_name')->nullable();
             $table->string('img_path')->nullable();
+            $table->string('img_name')->nullable();
             $table->integer('speed')->nullable();
             $table->tinyInteger('pause_on_hover')->nullable();
             $table->tinyInteger('loop_forever')->nullable();

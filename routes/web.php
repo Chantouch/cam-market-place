@@ -22,6 +22,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', 'Backend\CategoryController');
     Route::resource('currencies', 'Backend\CurrencyController');
     Route::resource('home-sliders', 'Backend\HomeSliderController');
+    Route::resource('attributes', 'Backend\AttributeController');
 });
 
 Auth::routes();

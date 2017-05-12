@@ -13,7 +13,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    {!! Form::model($slider, ['route' => ['admin.home-sliders.update', $slider->hashid], 'method' => 'patch']) !!}
+                    {!! Form::model($slider, ['route' => ['admin.home-sliders.update', $slider->hashid], 'method' => 'patch','files'=>'true']) !!}
                     @include('backend.pages.setting.home-slider.field-slide')
                     {!! Form::close() !!}
                 </div>

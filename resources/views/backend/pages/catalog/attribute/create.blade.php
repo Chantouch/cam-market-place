@@ -1,15 +1,19 @@
 @extends('layouts.backend.app')
+@section('style')
+    <!-- Bootstrap Select Css -->
+    <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+@stop
 @section('content')
-    <div class="block-header">
-        <h2>COUNTRIES</h2>
-    </div>
+    {{--<div class="block-header">--}}
+    {{--<h2>ATTRIBUTE</h2>--}}
+    {{--</div>--}}
     <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        ADD COUNTRY
+                        ADD ATTRIBUTE
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -26,8 +30,8 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.home-sliders.store'], 'method' => 'POST','files'=>'true']) !!}
-                    @include('backend.pages.setting.home-slider.field-slide')
+                    {!! Form::open(['route' => ['admin.attributes.store'], 'method' => 'POST']) !!}
+                    @include('backend.pages.catalog.attribute.fields')
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -36,10 +40,30 @@
     <!-- #END# Vertical Layout -->
 @stop
 
+@section('plugins')
+    <!-- Select Plugin Js -->
+    <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
+@stop
+
 @section('script')
     <script>
-        $('#img_name').change(function () {
-            uploadPreview(this, 'img_preview');
+        $(function () {
+            $('#p_name').show();
+            $('#color_value').hide();
+            $('#attribute_group').change(function () {
+                if ($('#attribute_group').val() === '') {
+                    $('#p_name').show();
+                    $('#color_value').hide();
+                } else if ($('#attribute_group').val() === 'color' || $('#attribute_group').val() === 'colour') {
+                    {
+                        $('#p_name').hide();
+                        $('#color_value').show();
+                    }
+                } else {
+                    $('#p_name').hide();
+                    $('#color_value').hide();
+                }
+            });
         });
     </script>
 @stop

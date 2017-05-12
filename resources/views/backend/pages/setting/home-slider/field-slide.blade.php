@@ -1,10 +1,18 @@
 {!! Form::label('img_name', 'Image:') !!}
 <div class="form-group{{ $errors->has('img_name') ? ' has-error' : '' }}">
-    <img id="img_preview" src="#" alt="Image slider" class="img-thumbnail"/>
+    @if(isset($slider))
+        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'images/1600x500.png') !!}"
+             alt="{!! isset($slider->img_name) ? $slider->name : 'Image slide' !!}"
+             class="img-thumbnail" id="img_preview">
+    @else
+        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'images/1600x500.png') !!}"
+             alt="{!! isset($slider->img_name) ? $slider->name : 'Image slide' !!}"
+             class="img-thumbnail" id="img_preview">
+    @endif
     <div class="form-line">
         <div class="input-group">
             <label class="input-group-btn">
-                    <span class="btn btn-primary">
+                    <span class="btn btn-primary waves-effect waves-light">
                         Browse&hellip; {!! Form::file('img_name', ['class' => 'form-control hide','id' => 'img_name']) !!}
                     </span>
             </label>
@@ -66,11 +74,28 @@
     @endif
 </div>
 
+{!! Form::label('status', 'Enabled:') !!}
+<div class="form-group">
+    <div class="form-line">
+        <div class="switch">
+            <div class="switch">
+                {!! Form::hidden('status', false) !!}
+                <label>OFF{!! Form::checkbox('status', '1', null) !!}<span class="lever"></span>ON</label>
+            </div>
+        </div>
+    </div>
+    @if ($errors->has('status'))
+        <span class="help-block">
+            <strong>{{ $errors->first('status') }}</strong>
+        </span>
+    @endif
+</div>
+
 <div class="form-group text-right">
-    <button type="submit" class="btn btn-primary m-t-15 waves-effect">
+    <button type="submit" class="btn btn-primary m-t-15 waves-effect waves-light" name="submit_button" value="slide_list">
         <i class="material-icons">save</i> <span class="icon-name">SAVE</span>
     </button>
-    <a href="{!! route('admin.home-sliders.index') !!}" class="btn btn-primary m-t-15 waves-effect">
+    <a href="{!! route('admin.home-sliders.index') !!}" class="btn btn-primary m-t-15 waves-effect waves-light">
         <i class="material-icons">cancel</i> <span class="icon-name">CANCEL</span>
     </a>
 </div>

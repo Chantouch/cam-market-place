@@ -20,7 +20,7 @@ class ImageSlider extends Model
     {
         return [
             'name' => 'required',
-            'img_name' => 'dimensions:width=1600,height=500,min_width=1200,max_width=300',
+            'img_name' => 'dimensions:width=1600,height=500|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'url' => 'required',
             'caption' => 'required',
         ];
