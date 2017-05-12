@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.home-sliders.store'], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['admin.home-sliders.store'], 'method' => 'POST','enctype'=>'multipart/form-data']) !!}
                     @include('backend.pages.setting.home-slider.field-slide')
                     {!! Form::close() !!}
                 </div>

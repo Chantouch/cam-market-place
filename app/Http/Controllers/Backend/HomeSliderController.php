@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Model\HomeSlider;
 use App\Model\ImageSlider;
+use function GuzzleHttp\Psr7\str;
 use Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\HashidsManager;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class HomeSliderController extends Controller
 {
@@ -72,6 +74,21 @@ class HomeSliderController extends Controller
                     return back()->withInput()->withErrors($validator);
                 }
                 $data['parent_id'] = $slider->id;
+                $img_path = 'uploads/home-slider/img/';
+                $des_path = public_path($img_path);
+                if ($request->hasFile('img_name')) {
+                    if ($request->file('img_name')->isValid()) {
+                        if (!file_exists($des_path)) {
+                            mkdir($des_path, 0777, true);
+                        }
+                        $img_name = Image::make($request->file('img_name'))->resize(16000, 500);
+                        //====remove string from name ====//
+                        $no_space = preg_replace('/\s+/', '_', strtolower($request->name));
+                        $file_name = uniqid(time() . '_' . $no_space . '_' . 'home_slider' . '_') . '.' . $request->file('img_name')->getClientOriginalExtension();
+                        $img_name->save($des_path . '/' . $file_name, '100');
+                        $data['img_path'] = $img_path;
+                    }
+                }
                 $slide_list = ImageSlider::create($data);
                 if (!$slide_list) {
                     DB::rollBack();
