@@ -77,7 +77,7 @@ class AttributeController extends Controller
                     return back()->with('error', 'Your attribute can not add to our system right now. Plz try again later.');
                 }
             }
-            return redirect()->route('admin.attributes.index')->with('success', 'Attribute added successfully.');
+            return redirect()->route('admin.catalogs.attributes.index')->with('success', 'Attribute added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your attribute can not add to our system right now. Plz try again later.');
         }
@@ -94,10 +94,14 @@ class AttributeController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
+            return redirect()->route('admin.catalogs.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
         }
         $attribute = Attribute::with('sub_attribute')->whereNull('parent_id')->find($id);
-        return view('backend.pages.catalog.attribute.show', compact('attribute'));
+        if ($attribute !== null) {
+            return view('backend.pages.catalog.attribute.show', compact('attribute'));
+        } else {
+            return redirect()->route('admin.catalogs.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
+        }
     }
 
     /**
@@ -111,7 +115,7 @@ class AttributeController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
+            return redirect()->route('admin.catalogs.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
         }
         $attributes = Attribute::where('status', 1)->whereNull('parent_id')->pluck('name', 'id');
         $attribute = SubAttribute::find($id);
@@ -133,20 +137,33 @@ class AttributeController extends Controller
             $decoded = $this->hashid->decode($id);
             $id = @$decoded[0];
             if ($id === null) {
-                return redirect()->route('admin.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
+                return redirect()->route('admin.catalogs.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
             }
-            $attribute = Attribute::whereNull('parent_id')->find($id);
-            $validator = Validator::make($data, Attribute::rules(), Attribute::messages());
-            if ($validator->fails()) {
-                return back()->withInput()->withErrors($validator);
-            }
-            $update = $attribute->update($data);
-            if (!$update) {
-                DB::rollBack();
-                return back()->with('error', 'Your attribute can not add to your system right now. Plz try again later.');
+            if ($request->has('parent_id')) {
+                $attribute = SubAttribute::whereNotNull('parent_id')->find($id);
+                $validator = Validator::make($data, SubAttribute::rules(), SubAttribute::messages());
+                if ($validator->fails()) {
+                    return back()->withInput()->withErrors($validator);
+                }
+                $update = $attribute->update($data);
+                if (!$update) {
+                    DB::rollBack();
+                    return back()->with('error', 'Your attribute can not add to your system right now. Plz try again later.');
+                }
+            } else {
+                $attribute = Attribute::whereNull('parent_id')->find($id);
+                $validator = Validator::make($data, Attribute::rules(), Attribute::messages());
+                if ($validator->fails()) {
+                    return back()->withInput()->withErrors($validator);
+                }
+                $update = $attribute->update($data);
+                if (!$update) {
+                    DB::rollBack();
+                    return back()->with('error', 'Your attribute can not add to your system right now. Plz try again later.');
+                }
             }
             DB::commit();
-            return redirect()->route('admin.attributes.index')->with('success', 'Attribute added successfully.');
+            return redirect()->route('admin.catalogs.attributes.index')->with('success', 'Attribute added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your attribute can not add to your system right now. Plz try again later.');
         }
@@ -164,13 +181,13 @@ class AttributeController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
+            return redirect()->route('admin.catalogs.attributes.index')->with('error', 'We can not find attribute with that id, please try the other');
         }
         $attribute = Attribute::whereNull('parent_id')->find($id);
         $delete = $attribute->delete();
         if (!$delete) {
             return back()->with('error', 'Your attribute can not delete from your system right now. Plz try again later.');
         }
-        return redirect()->route('admin.attributes.index')->with('success', 'Attribute deleted successfully');
+        return redirect()->route('admin.catalogs.attributes.index')->with('success', 'Attribute deleted successfully');
     }
 }

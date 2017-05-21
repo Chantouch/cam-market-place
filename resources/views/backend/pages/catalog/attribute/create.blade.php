@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.attributes.store'], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['admin.catalogs.attributes.store'], 'method' => 'POST']) !!}
                     @include('backend.pages.catalog.attribute.fields')
                     {!! Form::close() !!}
                 </div>
@@ -55,16 +55,27 @@
                 if ($('#attribute_group').val() === '') {
                     $('#p_name').show();
                     $('#color_value').hide();
-                } else if ($('#attribute_group').val() === 'Color'
-                    || $('#attribute_group').val() === 'Colour'
-                    || $('#attribute_group').val() === 'color' || $('#attribute_group').val() === 'colour') {
-                    {
-                        alert('thanks');
-                        $('#p_name').hide();
-                        $('#color_value').show();
-                    }
+                } else if ($('#attribute_group').val() === '2') {
+                    $('#p_name').hide();
+                    $('#color_value').show();
+                } else if ($('#attribute_group').val() === '1') {
+                    $('#p_name').hide();
+                    $('#color_value').hide();
                 }
             });
+            myFunction();
         });
+
+        function myFunction() {
+            let marca = $("select#attribute_group option:selected").attr('value');
+            if (marca === '1') {
+                $('#p_name').hide();
+                $('#color_value').hide();
+            }
+            if (marca === '2') {
+                $('#p_name').hide();
+                $('#color_value').show();
+            }
+        }
     </script>
 @stop

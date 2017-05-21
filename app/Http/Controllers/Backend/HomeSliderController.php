@@ -59,24 +59,32 @@ class HomeSliderController extends Controller
     public function store(Request $request)
     {
         $slider = HomeSlider::with('image_slider')->whereNull('parent_id')->first();
-        try {
-            DB::beginTransaction();
-            $data = $request->all();
-            switch ($request->submit_button) {
-                case "settings":
+        DB::beginTransaction();
+        $data = $request->all();
+        switch ($request->submit_button) {
+            case "settings":
+                try {
                     $validator = Validator::make($data, HomeSlider::rules(), HomeSlider::messages());
                     if ($validator->fails()) {
                         return redirect()->route('admin.home-sliders.index')->withInput()->withErrors($validator);
                     }
+                    if ($request->loop_ferever == null)
+                        $data['loop_forever'] = 0;
+                    if ($request->pause_on_hover == null)
+                        $data['pause_on_hover'] = 0;
                     $setting = HomeSlider::create($data);
                     if (!$setting) {
                         DB::rollBack();
                         return back()->with('error', 'Your settings can not add to our system right now. Plz try again later.');
                     }
-                    break;
-                case "slide_list":
-                    if (empty($slider))
-                        return redirect()->route('admin.home-sliders.index')->with('error', 'Please update your settings before adding new slide.');
+                } catch (ModelNotFoundException $exception) {
+                    return redirect()->route('admin.home-sliders.index')->with('error', 'Error on saving settings.');
+                }
+                break;
+            case "slide_list":
+                if (empty($slider))
+                    return redirect()->route('admin.home-sliders.index')->with('error', 'Please update your settings before adding new slide.');
+                try {
                     $validator = Validator::make($data, ImageSlider::rules(), ImageSlider::messages());
                     if ($validator->fails()) {
                         return back()->withInput()->withErrors($validator);
@@ -104,15 +112,16 @@ class HomeSliderController extends Controller
                         DB::rollBack();
                         return back()->with('error', 'Your settings can not add to our system right now. Plz try again later.');
                     }
-                    break;
-                default:
-                    break;
-            }
-            DB::commit();
-            return redirect()->route('admin.home-sliders.index')->with('success', 'Settings saved successfully.');
-        } catch (ModelNotFoundException $exception) {
-            return redirect()->route('admin.home-sliders.index')->with('error', 'Error on saving settings.');
+                } catch (ModelNotFoundException $exception) {
+                    return redirect()->route('admin.home-sliders.index')->with('error', 'Error on saving settings.');
+                }
+                break;
+            default:
+                break;
         }
+        DB::commit();
+        return redirect()->route('admin.home-sliders.index')->with('success', 'Settings saved successfully.');
+
     }
 
     /**

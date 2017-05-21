@@ -18,12 +18,12 @@
                     <td>{!! str_limit($attribute->public_name, 70) !!}</td>
                     <td>{!! Helper::status($attribute->status) !!}</td>
                     <td>
-                        {!! Form::open(['route' => ['admin.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
-                        <a href="{!! route('admin.attributes.show', [$attribute->hashid]) !!}"
+                        {!! Form::open(['route' => ['admin.catalogs.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
+                        <a href="{!! route('admin.catalogs.attributes.show', [$attribute->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{!! route('admin.attributes.edit', [$attribute->hashid]) !!}"
+                        <a href="{!! route('admin.catalogs.attributes.edit', [$attribute->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>

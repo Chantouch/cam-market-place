@@ -2,6 +2,7 @@
 @section('style')
     <!-- Bootstrap Select Css -->
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+    <link href="{!! asset('backend/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css') !!}" rel="stylesheet"/>
 @stop
 @section('content')
     <div class="block-header">
@@ -30,7 +31,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($attribute, ['route' => ['admin.attributes.update', $attribute->hashid], 'method' => 'patch']) !!}
+                    {!! Form::model($attribute, ['route' => ['admin.catalogs.attributes.update', $attribute->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.catalog.attribute.fields')
                     {!! Form::close() !!}
                 </div>
@@ -42,4 +43,42 @@
 @section('plugins')
     <!-- Select Plugin Js -->
     <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
+    <script src="{!! asset('backend/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js') !!}"></script>
+@stop
+
+@section('script')
+    <script>
+        $(function () {
+            $('.colorpicker').colorpicker();
+
+            $('#p_name').show();
+            $('#color_value').hide();
+            let attr = $('#attribute_group').val();
+            $('#attribute_group').change(function () {
+                if ($('#attribute_group').val() === '') {
+                    $('#p_name').show();
+                    $('#color_value').hide();
+                } else if ($('#attribute_group').val() === '2') {
+                    $('#p_name').hide();
+                    $('#color_value').show();
+                } else if ($('#attribute_group').val() === '1') {
+                    $('#p_name').hide();
+                    $('#color_value').hide();
+                }
+            });
+            myFunction();
+        });
+
+        function myFunction() {
+            let marca = $("select#attribute_group option:selected").attr('value');
+            if (marca === '1') {
+                $('#p_name').hide();
+                $('#color_value').hide();
+            }
+            if (marca === '2') {
+                $('#p_name').hide();
+                $('#color_value').show();
+            }
+        }
+    </script>
 @stop

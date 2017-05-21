@@ -25,12 +25,6 @@
             <span>Communes</span>
         </a>
     </li>
-    <li class="{!! Request::is('admin/categories*') ? 'active' : '' !!}">
-        <a href="{!! route('admin.categories.index') !!}">
-            <i class="material-icons">layers</i>
-            <span>Categories</span>
-        </a>
-    </li>
     <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}">
         <a href="{!! route('admin.currencies.index') !!}">
             <i class="material-icons">layers</i>
@@ -44,33 +38,29 @@
             <span>Home Slider</span>
         </a>
     </li>
-    <li class="{!! Request::is('admin/attributes*') ? 'active' : '' !!}">
-        <a href="{!! route('admin.attributes.index') !!}">
-            <i class="material-icons">layers</i>
-            <span>Attributes</span>
-        </a>
-    </li>
     <li class="header">Products</li>
-    <li>
+    <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">widgets</i>
-            <span>CATALOG</span>
+            <i class="material-icons">perm_media</i>
+            <span>CATALOGS</span>
         </a>
         <ul class="ml-menu">
-            <li>
-            <li>
-                <a href="javascript:void(0);">
-                    <span>Product</span>
+            <li class="{!! Request::is('admin/catalogs/categories*') ? 'active' : '' !!}">
+                <a href="#">
+                    Products
                 </a>
-                <a href="javascript:void(0);">
-                    <span>Categories</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <span>Attributes</span>
+            </li>
+            <li class="{!! Request::is('admin/catalogs/attributes*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.catalogs.attributes.index') !!}">Attributes</a>
+            </li>
+            <li class="{!! Request::is('admin/catalogs/categories*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.catalogs.categories.index') !!}">
+                    Categories
                 </a>
             </li>
         </ul>
     </li>
+
     <li>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">trending_down</i>

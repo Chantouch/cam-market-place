@@ -19,10 +19,10 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.attributes.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.attributes.edit', [$attribute->hashid]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin.catalogs.attributes.create') !!}">Add</a></li>
+                                <li><a href="{!! route('admin.catalogs.attributes.edit', [$attribute->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin.catalogs.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>
@@ -49,12 +49,12 @@
                                         <td>{!! $attribute->name !!}</td>
                                         <td>{!! $attribute->position !!}</td>
                                         <td>
-                                            {!! Form::open(['route' => ['admin.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
-                                            <a href="{!! route('admin.attributes.show', [$attribute->hashid]) !!}"
-                                               class='btn btn-default btn-xs'>
-                                                <i class="material-icons">remove_red_eye</i>
-                                            </a>
-                                            <a href="{!! route('admin.attributes.edit', [$attribute->hashid]) !!}"
+                                            {!! Form::open(['route' => ['admin.catalogs.attributes.destroy', $attribute->hashid], 'method' => 'delete']) !!}
+                                            {{--<a href="{!! route('admin.catalogs.attributes.show', [$attribute->hashid]) !!}"--}}
+                                               {{--class='btn btn-default btn-xs'>--}}
+                                                {{--<i class="material-icons">remove_red_eye</i>--}}
+                                            {{--</a>--}}
+                                            <a href="{!! route('admin.catalogs.attributes.edit', [$attribute->hashid]) !!}"
                                                class='btn btn-default btn-xs'>
                                                 <i class="material-icons">mode_edit</i>
                                             </a>
@@ -69,7 +69,7 @@
                             <p>There is no data here.</p>
                         @endif
                     </div>
-                    <a href="{!! route('admin.attributes.index') !!}"
+                    <a href="{!! route('admin.catalogs.attributes.index') !!}"
                        class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
             </div>

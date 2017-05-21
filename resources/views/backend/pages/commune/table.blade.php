@@ -6,6 +6,8 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Code</th>
+                <th>City</th>
+                <th>Country</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -17,8 +19,10 @@
                     <th scope="row">{!! $commune->id !!}</th>
                     <td>{!! $commune->name !!}</td>
                     <td>{!! $commune->code !!}</td>
+                    <td>{!! Helper::relationship($commune->city) !!}</td>
+                    <td>{!! $commune->city->country->name !!}</td>
                     <td>{!! str_limit($commune->description, 70) !!}</td>
-                    <td>{!! $commune->status !!}</td>
+                    <td>{!! Helper::status($commune->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.communes.destroy', $commune->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.communes.show', [$commune->hashid]) !!}"

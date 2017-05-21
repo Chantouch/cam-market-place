@@ -20,7 +20,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.attributes.create') !!}">Add</a></li>
+                                <li><a href="{!! route('admin.catalogs.attributes.create') !!}">Add</a></li>
                                 <li><a href="javascript:void(0);">Another action</a></li>
                                 <li><a href="javascript:void(0);">Something else here</a></li>
                             </ul>

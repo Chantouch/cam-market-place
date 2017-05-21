@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->paginate(10);
-        return view('backend.pages.category.index', compact('categories'));
+        return view('backend.pages.catalog.category.index', compact('categories'));
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::where('status', 1)->orderBy('id')->pluck('name', 'id');
-        return view('backend.pages.category.create', compact('categories'));
+        return view('backend.pages.catalog.category.create', compact('categories'));
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoryController extends Controller
                     return back()->with('error', 'Your category can not add to our system right now. Plz try again later.');
                 }
             }
-            return redirect()->route('admin.categories.index')->with('success', 'Category added successfully.');
+            return redirect()->route('admin.catalogs.categories.index')->with('success', 'Category added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your category can not add to our system right now. Plz try again later.');
         }
@@ -83,10 +83,10 @@ class CategoryController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+            return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
         $category = Category::whereNull('category_id')->find($id);
-        return view('backend.pages.category.show', compact('category'));
+        return view('backend.pages.catalog.category.show', compact('category'));
     }
 
     /**
@@ -100,11 +100,11 @@ class CategoryController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+            return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
         $category = Category::whereNull('category_id')->find($id);
         $categories = Category::where('status', 1)->orderBy('id')->pluck('name', 'id');
-        return view('backend.pages.category.edit', compact('category', 'categories'));
+        return view('backend.pages.catalog.category.edit', compact('category', 'categories'));
     }
 
     /**
@@ -122,7 +122,7 @@ class CategoryController extends Controller
             $decoded = $this->hashid->decode($id);
             $id = @$decoded[0];
             if ($id === null) {
-                return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+                return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
             }
             $category = Category::whereNull('category_id')->find($id);
             $validator = Validator::make($data, Category::rules(), Category::messages());
@@ -135,7 +135,7 @@ class CategoryController extends Controller
                 return back()->with('error', 'Your category can not add to your system right now. Plz try again later.');
             }
             DB::commit();
-            return redirect()->route('admin.categories.index')->with('success', 'Category added successfully.');
+            return redirect()->route('admin.catalogs.categories.index')->with('success', 'Category added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your category can not add to your system right now. Plz try again later.');
         }
@@ -153,13 +153,13 @@ class CategoryController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.categories.index')->with('error', 'We can not find category with that id, please try the other');
+            return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
         $category = Category::whereNull('category_id')->find($id);
         $delete = $category->delete();
         if (!$delete) {
             return back()->with('error', 'Your category can not delete from your system right now. Plz try again later.');
         }
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('admin.catalogs.categories.index')->with('success', 'Category deleted successfully');
     }
 }

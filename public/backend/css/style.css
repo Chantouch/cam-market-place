@@ -10769,7 +10769,7 @@ html.ie11 .bs-searchbox .form-control {
 
 button span, .form-group a span {
     position: relative;
-    top: -3px;
+    top: 0;
     left: 2px;
 }
 

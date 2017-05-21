@@ -20,8 +20,13 @@
 <div id="color_value">
     {!! Form::label('value', 'Color:') !!}
     <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
-        <div class="form-line">
-            {!! Form::text('value', null, ['class' => 'form-control', 'placeholder' => 'Enter your color value']) !!}
+        <div class="input-group colorpicker">
+            <div class="form-line">
+                {!! Form::text('value', null, ['class' => 'form-control', 'placeholder' => 'Enter your color value']) !!}
+            </div>
+            <span class="input-group-addon">
+                <i></i>
+            </span>
         </div>
         @if ($errors->has('value'))
             <span class="help-block">
@@ -50,4 +55,4 @@
 <label for="status">Active</label>
 <br>
 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
-<a href="{!! route('admin.attributes.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>
+<a href="{!! route('admin.catalogs.attributes.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>

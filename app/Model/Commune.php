@@ -30,11 +30,20 @@ class Commune extends Model
 //            'name.required' => 'Please enter your country name',
         ];
     }
+
     /**
      * @return mixed
      */
     public function getHashidAttribute()
     {
         return Hashids::encode($this->attributes['id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

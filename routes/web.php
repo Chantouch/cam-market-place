@@ -19,10 +19,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('countries', 'Backend\CountryController');
     Route::resource('cities', 'Backend\CityController');
     Route::resource('communes', 'Backend\CommuneController');
-    Route::resource('categories', 'Backend\CategoryController');
     Route::resource('currencies', 'Backend\CurrencyController');
     Route::resource('home-sliders', 'Backend\HomeSliderController');
-    Route::resource('attributes', 'Backend\AttributeController');
+    Route::prefix('catalogs')->name('catalogs.')->group(function () {
+        Route::resource('categories', 'Backend\CategoryController');
+        Route::resource('attributes', 'Backend\AttributeController');
+    });
 });
 
 Auth::routes();

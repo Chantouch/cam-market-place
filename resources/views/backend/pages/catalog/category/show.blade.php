@@ -19,10 +19,10 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.categories.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.categories.edit', [$category->hashid]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin..catalogs.categories.create') !!}">Add</a></li>
+                                <li><a href="{!! route('admin..catalogs.categories.edit', [$category->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.categories.destroy', $category->hashid], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin..catalogs.categories.destroy', $category->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>
@@ -34,7 +34,7 @@
                     <p>
                         {!! $category->description !!}
                     </p>
-                    <a href="{!! route('admin.categories.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
+                    <a href="{!! route('admin..catalogs.categories.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
             </div>
         </div>

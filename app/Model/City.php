@@ -37,4 +37,12 @@ class City extends Model
     {
         return Hashids::encode($this->attributes['id']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

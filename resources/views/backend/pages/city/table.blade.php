@@ -6,6 +6,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Code</th>
+                <th>Country</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -17,6 +18,7 @@
                     <th scope="row">{!! $city->id !!}</th>
                     <td>{!! $city->name !!}</td>
                     <td>{!! $city->code !!}</td>
+                    <td>{!! Helper::relationship($city->country) !!}</td>
                     <td>{!! str_limit($city->description, 70) !!}</td>
                     <td>{!! $city->status !!}</td>
                     <td>
@@ -38,5 +40,4 @@
         </table>
     @else
         <p>There is no data here.</p>
-    @endif
-</div>
+    @endif</div>

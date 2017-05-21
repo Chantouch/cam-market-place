@@ -30,8 +30,8 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.categories.store'], 'method' => 'POST']) !!}
-                    @include('backend.pages.category.fields')
+                    {!! Form::open(['route' => ['admin.catalogs.categories.store'], 'method' => 'POST']) !!}
+                    @include('backend.pages.catalog.category.fields')
                     {!! Form::close() !!}
                 </div>
             </div>
