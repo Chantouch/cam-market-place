@@ -1,7 +1,7 @@
 <div class="categori-and-slider">
     <div class="container">
         <div class="row">
-            <!-- Start categori -->
+            <!-- Start category -->
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="categori-menu">
                     <div class="sidebar-menu-title">
@@ -117,9 +117,9 @@
                     </div>
                 </div>
             </div>
-            <!-- End categori -->
+            <!-- End category -->
             <!-- Start slider -->
-            <div class="col-xs-12 col-sm-8 col-md-9">
+            <div class="col-xs-12 col-sm-5 col-md-7">
                 <div class="slider-area">
                     <div id="slider" class="nivoSlider">
                         <img style="display:none" src="img/home-4/slider/7.jpg" data-thumb="img/home-4/slider/7.jpg"
@@ -158,6 +158,165 @@
                 </div>
             </div>
             <!-- End slider -->
+            <div class="col-xs-12 col-sm-3 col-md-2">
+                <!-- Start categori slide product -->
+                <div class="categori-slide-product home-slide">
+                    <div class="slide-product-title">
+                        <h5>SALE OFF</h5>
+                    </div>
+                    <div class="slide-product">
+                        <!-- Start slide product item -->
+                        <div class="slide-product-item">
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-summer-dress1.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-5%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress3.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">printed chiffon dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress5.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End slide product item -->
+                        <!-- Start slide product item -->
+                        <div class="slide-product-item">
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress2.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress6.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End slide product item -->
+                        <!-- Start slide product item -->
+                        <div class="slide-product-item">
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress7.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress11.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress10.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End slide product item -->
+                        <!-- Start slide product item -->
+                        <div class="slide-product-item">
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress8.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                            <div class="item3">
+                                <div class="product-image">
+                                    <a href="single-product.html">
+                                        <img src="img/home-4/product-mini/printed-chiffon-dress12.jpg" alt="">
+                                    </a>
+                                    <span class="price-percent-reduction">-20%</span>
+                                </div>
+                                <div class="product-info">
+                                    <a href="single-product.html">Printed Summer Dress</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End slide product item -->
+                    </div>
+                </div>
+                <!-- End categori slide product -->
+            </div>
         </div>
     </div>
 </div>

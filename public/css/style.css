@@ -235,12 +235,12 @@ body.home-1{}
     margin-top: 2px;
 }
 .logo{
-    margin-top: 45px;
+    margin-top: 20px;
 }
 .logo a{}
 .logo a img{}
 .user-info-adn-search{
-    margin-top: 28px;
+    margin-top: 10px;
 }
 .user-info{
     overflow: hidden;
@@ -541,7 +541,7 @@ body.home-1{}
 /*----------------------------------------*/
 .mainmenu-area{
     background: #ededed;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 .mean-container .mean-bar{
     background: #ffa200 none repeat scroll 0 0;
@@ -709,17 +709,17 @@ body.home-1{}
 }
 .slider-area .nivo-caption {
     background: transparent none repeat scroll 0 0;
-    bottom: 165px;
-    box-sizing: border-box;
-    color: #fff;
-    display: none;
-    left: 0;
-    opacity: 0.8;
-    overflow: hidden;
-    padding: 5px 10px;
-    position: absolute;
-    width: 100%;
-    z-index: 8;
+    /*bottom: 165px;*/
+    /*box-sizing: border-box;*/
+    /*color: #fff;*/
+    /*display: none;*/
+    /*left: 0;*/
+    /*opacity: 0.8;*/
+    /*overflow: hidden;*/
+    /*padding: 5px 10px;*/
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*z-index: 8;*/
 }
 .slider-area .nivo-directionNav a{
     background-color: #fff;
@@ -926,12 +926,12 @@ body.home-1{}
 .sidebar-menu ul li a {
     color: #666;
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Khula",sans-serif;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 40px;
     overflow: hidden;
-    padding: 4px 15px 2.5px;
+    padding: 0 15px 0;
     text-decoration: none;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -2683,7 +2683,7 @@ body.home-4 .mean-container .mean-bar {
 }
 body.home-4 .categori-and-slider{
     margin-bottom: 30px;
-    margin-top: 35px;
+    margin-top: 5px;
 }
 body.home-4 .pos_description .title1 .txt {
     animation: 1000ms linear 0s normal none 1 running fadeInLeft;
@@ -2728,7 +2728,7 @@ body.home-4 .pos_description .pos-slideshow-readmore a {
     transition: all 500ms ease 0s;
 }
 body.home-4 .pos_description {
-    margin-bottom: 140px;
+    margin-bottom: 80px;
     padding-top: 70px;
 }
 body.home-4 .pos_description .pos-slideshow-readmore a:hover {
@@ -2988,10 +2988,9 @@ body.shop .shop-area{
 /* shop sidebar */
 .shop-categori{
     background-color: #fff;
-    border-color: -moz-use-text-color #e8e8e8 #e8e8e8;
     border-image: none;
-    border-style: none solid solid;
-    border-width: 0 1px 1px;
+    border: 1px solid #e8e8e8;
+    border-top: 0 none -moz-use-text-color;
     overflow: hidden;
     padding: 20px 20px 0;
 }
@@ -3196,8 +3195,6 @@ span.cat-title {
     height: 40px;
     line-height: 22px;
     width: 40px;
-    cursor: pointer;
-    display: block;
     transition: all 0.3s ease 0s;
 }
 .catagori-short ul li a i {

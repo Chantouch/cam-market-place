@@ -2,7 +2,7 @@
 @media (min-width: 1169px) and (max-width: 1366px){
     .container {width:1170px}
     .slider-area .nivo-caption {
-        bottom: 60px;
+        bottom: 10px;
     }
     .slide-product-item {
         text-align: center;

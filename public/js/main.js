@@ -63,7 +63,7 @@
     /*--------------------------------
      popular tab product
      ---------------------------------- */
-    var owl = $(".popular-tab-product-4");
+    let owl = $(".popular-tab-product-4");
     owl.owlCarousel({
         navigation: true,
         slideSpeed: 600,
@@ -166,7 +166,7 @@
         controlNav: 1,
         controlNavThumbs: false,
         pauseOnHover: false,
-        manualAdvance: false,
+        manualAdvance: true,
         prevText: '<i class="fa fa-angle-left nivo-prev-icon"></i>',
         nextText: '<i class="fa fa-angle-right nivo-next-icon"></i>'
     });
