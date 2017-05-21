@@ -931,7 +931,7 @@ body.home-1{}
     font-weight: 600;
     line-height: 40px;
     overflow: hidden;
-    padding: 0 15px 0;
+    padding: 0.5px 15px 0;
     text-decoration: none;
     text-overflow: ellipsis;
     text-transform: uppercase;
