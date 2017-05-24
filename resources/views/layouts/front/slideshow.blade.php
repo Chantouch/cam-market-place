@@ -5,7 +5,7 @@
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="categori-menu">
                     <div class="sidebar-menu-title">
-                        <h2><i class="fa fa-th-list"></i>Categories</h2>
+                        <h2><i class="fa fa-th-list"></i>MY MARKETS</h2>
                     </div>
                     <div class="sidebar-menu">
                         <ul>
