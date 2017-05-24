@@ -1,29 +1,35 @@
 <div class="body table-responsive">
-    @if(count($categories))
+    @if(count($products))
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>#</th>
+                <th>Img</th>
                 <th>Name</th>
-                <th>Description</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Qty</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($categories as $category)
+            @foreach($products as $product)
                 <tr>
-                    <th scope="row">{!! $category->id !!}</th>
-                    <td>{!! $category->name !!}</td>
-                    <td>{!! str_limit($category->description, 70) !!}</td>
-                    <td>{!! $category->status !!}</td>
+                    <th scope="row">{!! $product->id !!}</th>
+                    <td>{!! $product->name !!}</td>
+                    <td>{!! $product->name !!}</td>
+                    <td>{!! Helper::relationship($product->category) !!}</td>
+                    <td>{!! $product->price !!}</td>
+                    <td>{!! $product->qty !!}</td>
+                    <td>{!! $product->status !!}</td>
                     <td>
-                        {!! Form::open(['route' => ['admin.catalogs.categories.destroy', $category->hashid], 'method' => 'delete']) !!}
-                        <a href="{!! route('admin.catalogs.categories.show', [$category->hashid]) !!}"
+                        {!! Form::open(['route' => ['admin.catalogs.products.destroy', $product->hashid], 'method' => 'delete']) !!}
+                        <a href="{!! route('admin.catalogs.products.show', [$product->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{!! route('admin.catalogs.categories.edit', [$category->hashid]) !!}"
+                        <a href="{!! route('admin.catalogs.products.edit', [$product->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>

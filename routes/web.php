@@ -24,6 +24,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('catalogs')->name('catalogs.')->group(function () {
         Route::resource('categories', 'Backend\CategoryController');
         Route::resource('attributes', 'Backend\AttributeController');
+        Route::resource('products', 'Backend\ProductController');
     });
 });
 

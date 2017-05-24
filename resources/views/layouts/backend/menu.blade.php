@@ -45,8 +45,8 @@
             <span>CATALOGS</span>
         </a>
         <ul class="ml-menu">
-            <li class="{!! Request::is('admin/catalogs/categories*') ? 'active' : '' !!}">
-                <a href="#">
+            <li class="{!! Request::is('admin/catalogs/products*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.catalogs.products.index') !!}">
                     Products
                 </a>
             </li>
