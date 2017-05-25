@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->integer('language_id', false, true)->nullable();
             $table->tinyInteger('new')->default(0);
             $table->tinyInteger('popular')->default(0);
+            $table->string('img_path')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
