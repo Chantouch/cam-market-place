@@ -16,20 +16,21 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->integer('category_id', false, true)->nullable();
             $table->decimal('cost')->nullable();
             $table->integer('qty')->nullable();
             $table->decimal('price')->nullable();
-            $table->double('discount_percent')->nullable();
-            $table->decimal('discount_amount')->nullable();
+            $table->double('discount')->nullable();
+            $table->enum('discount_type', ['1', '2'])->nullable();
             $table->string('short_description')->nullable();
+            $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->string('code')->nullable();
             $table->string('origin_place')->nullable();
             $table->integer('city_id', false, true)->nullable();
             $table->integer('currency_id', false, true)->nullable();
+            $table->integer('user_id', false, true)->nullable();
             $table->string('author')->nullable();
-            $table->integer('language_id', false, true)->nullable();
+            $table->integer('can_order')->default(1);
             $table->tinyInteger('new')->default(0);
             $table->tinyInteger('popular')->default(0);
             $table->string('img_path')->default(0);
@@ -37,7 +38,9 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

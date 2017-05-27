@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
+                <th>Cost</th>
                 <th>Qty</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -19,10 +20,18 @@
                     <th scope="row">{!! $product->id !!}</th>
                     <td>{!! $product->name !!}</td>
                     <td>{!! $product->name !!}</td>
-                    <td>{!! Helper::relationship($product->category) !!}</td>
-                    <td>{!! $product->price !!}</td>
+                    <td>
+                        @if(count($product->categories))
+                            @foreach($product->categories as $category)
+                                {{ $loop->first ? '' : ', ' }}
+                                <span class="label label-info">{!! Helper::relationship($category) !!}</span>
+                            @endforeach
+                        @endif
+                    </td>
+                    <td>{!! $product->price !!} ({!! $product->currency->symbol !!})</td>
+                    <td>{!! $product->cost !!} ({!! $product->currency->symbol !!})</td>
                     <td>{!! $product->qty !!}</td>
-                    <td>{!! $product->status !!}</td>
+                    <td>{!! Helper::status($product->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.catalogs.products.destroy', $product->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.catalogs.products.show', [$product->hashid]) !!}"

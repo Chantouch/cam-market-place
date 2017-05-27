@@ -2,16 +2,17 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Product extends Model
 {
     protected $appends = ['hashid'];
-
+    use Sluggable;
     protected $fillable = [
         'name', 'code', 'cost', 'price', 'origin_place', 'city_id', 'currency_id', 'description',
-        'category_id', 'discount_percent', 'discount_amount', 'author', 'language_id', 'new',
+        'discount', 'discount_type', 'author', 'can_order', 'new', 'qty', 'user_id', 'img_path',
         'popular', 'status', 'short_description', 'city_id'
     ];
 
@@ -20,6 +21,8 @@ class Product extends Model
     {
         return [
             'name' => 'required|max:255',
+            'qty' => 'required|integer',
+            'short_description' => 'max:255',
         ];
     }
 
@@ -28,14 +31,6 @@ class Product extends Model
         return [
 
         ];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHashidAttribute()
-    {
-        return Hashids::encode($this->attributes['id']);
     }
 
     /**
@@ -62,12 +57,58 @@ class Product extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    //----------PivotTable-----------//
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function language()
+    public function languages()
     {
-        return $this->belongsTo(Language::class);
+        return $this->belongsToMany(Language::class, 'products_languages', 'product_id', 'language_id')->withPivot('product_id', 'language_id')->withTimestamps();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id')->withPivot('product_id', 'category_id')->withTimestamps();
+    }
+
+    //----------Sluggable---------//
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+
+    //-------GetAttributes--------//
+
+    /**
+     * @return string
+     */
+    public function getSeoUrlAttribute()
+    {
+        return $this->name . '-from-' . $this->city->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
+    }
+
 
 }

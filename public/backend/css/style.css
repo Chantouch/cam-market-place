@@ -3247,9 +3247,9 @@ section.content {
 }
 
 .btn:not(.btn-link):not(.btn-circle) i {
-    font-size: 20px;
+    font-size: inherit;
     position: relative;
-    top: 3px;
+    top: 2px;
 }
 
 .btn-warning,

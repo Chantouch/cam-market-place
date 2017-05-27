@@ -37,4 +37,15 @@ class Language extends Model
         return Hashids::encode($this->attributes['id']);
     }
 
+
+    //==============Relationship=============//
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class)->where('status', 1);
+    }
+
 }
