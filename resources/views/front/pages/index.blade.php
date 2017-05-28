@@ -3,40 +3,31 @@
  <!-- Start slider -->
 <div class="col-xs-12 col-sm-5 col-md-7">
     <div class="slider-area">
-        <div id="slider" class="nivoSlider">
-            <img style="display:none" src="img/home-4/slider/7.jpg" data-thumb="img/home-4/slider/7.jpg"
-                 alt="" title="#htmlcaption7"/>
-            <img style="display:none" src="img/home-4/slider/8.jpg" data-thumb="img/home-4/slider/8.jpg"
-                 alt="" title="#htmlcaption8"/>
+        <div id="slider-home" class="nivoSlider">
+            <?php $i=1;?>
+            @foreach($sliders->image_slider as $slider)
+            <img style="display:none" src="{!! asset($slider->img_path.$slider->img_name) !!}" data-thumb="{!! $slider->img_path.$slider->img_name !!}" alt="{!! $slider->name !!}" title="#htmlcaption<?php echo $i;?>"/>
+            <?php 
+                $i++;
+            ?>
+            @endforeach
         </div>
-        <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
+        <?php $j=1;?>
+        @foreach($sliders->image_slider as $slider)
+        <div id="htmlcaption<?php echo $j;?>" class="pos-slideshow-caption nivo-html-caption nivo-caption">
             <div class="pos-slideshow-info pos-slideshow-info7">
                 <div class="container">
                     <div class="pos_description hidden-xs hidden-sm">
-                        <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
-                        </div>
-                        <div class="title2"><span class="txt">For every type of sleeper</span></div>
+                        {!! $slider->description!!}
                         <div class="pos-slideshow-readmore">
-                            <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
+                            <a href="{!! $slider->url !!}" title="{!! $slider->caption !!}">{!! $slider->caption !!}</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="htmlcaption8" class="pos-slideshow-caption nivo-html-caption nivo-caption">
-            <div class="pos-slideshow-info pos-slideshow-info8">
-                <div class="container">
-                    <div class="pos_description hidden-xs hidden-sm">
-                        <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
-                        </div>
-                        <div class="title2"><span class="txt">For every type of sleeper</span></div>
-                        <div class="pos-slideshow-readmore">
-                            <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php $j++;?>
+        @endforeach
     </div>
 </div>
 <!-- End slider -->
@@ -4494,3 +4485,30 @@
     </div>
     <!-- End camera and cosmatic area -->
 @stop
+@section('scripts')
+    <script type="text/javascript">
+        $('#slider-home').nivoSlider({
+            effect: 'random',                 // Specify sets like: 'fold,fade,sliceDown'
+            slices: 15,                       // For slice animations
+            boxCols: 8,                       // For box animations
+            boxRows: 4,                       // For box animations
+            animSpeed: 600,                   // Slide transition speed
+            pauseTime: {!! $sliders->speed !!},                  // How long each slide will show
+            startSlide: 0,                    // Set starting Slide (0 index)
+            directionNav: true,               // Next & Prev navigation
+            controlNav: true,                 // 1,2,3... navigation
+            controlNavThumbs: false,          // Use thumbnails for Control Nav, style of image
+            pauseOnHover: {!! $sliders->pause_on_hover !!},               // Stop animation while hovering
+            manualAdvance: false,             // Force manual transitions, auto play
+            prevText: '<i class="fa fa-angle-left nivo-prev-icon"></i>',                 // Prev directionNav text
+            nextText: '<i class="fa fa-angle-right nivo-next-icon"></i>',                 // Next directionNav text
+            randomStart: true,               // Start on a random slide
+            beforeChange: function(){},       // Triggers before a slide transition
+            afterChange: function(){},        // Triggers after a slide transition
+            slideshowEnd: function(){},       // Triggers after all slides have been shown
+            lastSlide: function(){},          // Triggers when last slide is shown
+            afterLoad: function(){}           // Triggers when slider has loaded
+        });
+    </script>
+
+    @stop

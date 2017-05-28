@@ -73,74 +73,21 @@
                         </div>
                         <div class="search-and-cart">
                             <div class="search-categori">
-                                <div class="categori">
-                                    <form id="select-categoris" method="post" class="form-horizontal">
-                                        <select name="language">
-                                            <option value="">Categories</option>
-                                            <option value="12">Automotive</option>
-                                            <option value="21">electronic</option>
-                                            <option value="25">Camera</option>
-                                            <option value="26">Electronic</option>
-                                            <option value="27">Cosmetic</option>
-                                            <option value="28">Medical</option>
-                                            <option value="29">Laptop</option>
-                                            <option value="30">Phasellus</option>
-                                            <option value="22">mobile</option>
-                                            <option value="31">Camcorders</option>
-                                            <option value="32">Electronic</option>
-                                            <option value="33">Cosmetic</option>
-                                            <option value="34">Laptop</option>
-                                            <option value="35">Medical</option>
-                                            <option value="36">Phasellus</option>
-                                            <option value="23">laptop</option>
-                                            <option value="37">Phasellus</option>
-                                            <option value="38">Healthcare</option>
-                                            <option value="39">Electronic</option>
-                                            <option value="40">Cosmetic</option>
-                                            <option value="13">Electronics</option>
-                                            <option value="24">camcorder</option>
-                                            <option value="46">Healthcare</option>
-                                            <option value="47">Laptop</option>
-                                            <option value="48">Camera</option>
-                                            <option value="41">Medical</option>
-                                            <option value="49">Camera</option>
-                                            <option value="50">Camcorders</option>
-                                            <option value="51">Camcorders</option>
-                                            <option value="42">Healthcare</option>
-                                            <option value="52">Medical</option>
-                                            <option value="53">Healthcare</option>
-                                            <option value="54">Healthcare</option>
-                                            <option value="14">Sports</option>
-                                            <option value="43">category 1</option>
-                                            <option value="60">day</option>
-                                            <option value="61">evening</option>
-                                            <option value="62">night</option>
-                                            <option value="44">category 2</option>
-                                            <option value="63">kids</option>
-                                            <option value="64">men</option>
-                                            <option value="65">Women</option>
-                                            <option value="45">category 3</option>
-                                            <option value="66">clothing</option>
-                                            <option value="67">Accessories</option>
-                                            <option value="15">Smartphone</option>
-                                            <option value="55">category 1</option>
-                                            <option value="56">category 2</option>
-                                            <option value="57">category 3</option>
-                                            <option value="16">Beauty</option>
-                                            <option value="58">category 1</option>
-                                            <option value="59">category 2</option>
-                                            <option value="17">Bags, Shoes</option>
-                                            <option value="18">Networking</option>
-                                            <option value="19">Accessories</option>
-                                            <option value="20">Entertainment</option>
-                                        </select>
-                                    </form>
-                                </div>
-                                <div class="search-box">
-                                    <input type="text" class="form-control input-sm" maxlength="64"
-                                           placeholder="Enter your search key ... "/>
-                                    <button type="submit">Search</button>
-                                </div>
+                                <form id="select-categoris" method="post" class="form-horizontal">
+                                    <div class="categori">
+                                            <select name="language">
+                                                <option value="">Categories</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{!! $category->id !!}">{!! $category->name !!}</option>
+                                                @endforeach
+                                            </select>
+                                    </div>
+                                    <div class="search-box">
+                                        <input type="text" class="form-control input-sm" maxlength="64"
+                                               placeholder="Enter your search key ... "/>
+                                        <button type="submit">Search</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="shoping-cart">
                                 <a href="cart.html"><span>My Cart (3)</span></a>
@@ -310,4 +257,4 @@
     </div>
     <!-- End mobile menu -->
 </header>
-<!-- End header -->
+<!-- End header

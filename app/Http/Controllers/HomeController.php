@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\HomeSlider;
+use App\Model\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliders = HomeSlider::with('image_slider')->whereNull('parent_id')->firstOrFail();
-        return view('front.pages.index',compact('sliders'));
+        $sliders = HomeSlider::with('image_slider')->where('status','1')->whereNull('parent_id')->firstOrFail();
+        $categories = Category::where('status',1)->get();
+        return view('front.pages.index',compact('sliders'),compact('categories'));
     }
 }
