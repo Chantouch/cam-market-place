@@ -19,8 +19,8 @@
                 <tr>
                     <th scope="row">{!! $product->id !!}</th>
                     <td width="20">
-                        @foreach($product->images as $image)
-                            <img src="{!! $product->img_path.$image->img_name !!}" alt="{!! $product->name !!}" class="img-thumbnail">
+                        @foreach($product->images->take(1) as $image)
+                            <img src="{!! asset($product->img_path.$image->img_name) !!}" alt="{!! $product->name !!}" class="img-thumbnail">
                         @endforeach
                     </td>
                     <td>{!! $product->name !!}</td>

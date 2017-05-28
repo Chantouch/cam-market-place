@@ -3,6 +3,37 @@
     <!-- Bootstrap Select Css -->
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
     <link href="{!! asset('plugins/summernote/summernote.css') !!}" rel="stylesheet"/>
+    <style>
+        input[type="file"] {
+            display: block;
+        }
+
+        .imageThumb {
+            max-height: 75px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+
+        .pip, .img {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+
+        .remove {
+            display: block;
+            background: #444;
+            border: 1px solid black;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+    </style>
 @stop
 @section('content')
     {{--<div class="block-header">--}}
@@ -48,6 +79,42 @@
                 maxHeight: null,             // set maximum height of editor
                 focus: false                  // set focus to editable area after initializing summernote
             });
+        });
+        $(document).ready(function () {
+            $(".remove").click(function () {
+                $(this).parent(".img").remove();
+            });
+            if (window.File && window.FileList && window.FileReader) {
+                $("#img_name").on("change", function (e) {
+                    let files = e.target.files,
+                        filesLength = files.length;
+                    for (let i = 0; i < filesLength; i++) {
+                        let f = files[i];
+                        let fileReader = new FileReader();
+                        fileReader.onload = (function (e) {
+                            let file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove image</span>" +
+                                "</span>").insertAfter("#img_name");
+                            $(".remove").click(function () {
+                                $(this).parent(".pip").remove();
+                            });
+
+                            // Old code here
+                            /*$("<img></img>", {
+                             class: "imageThumb",
+                             src: e.target.result,
+                             title: file.name + " | Click to remove"
+                             }).insertAfter("#img_name").click(function(){$(this).remove();});*/
+
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
         });
     </script>
 @stop

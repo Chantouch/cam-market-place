@@ -4,7 +4,16 @@
         {!! Form::label('name', 'Image:') !!}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
             <div class="form-line">
-                {!! Form::file('img_name[]', ['class' => 'form-control', 'multiple']) !!}
+                {!! Form::file('img_name[]', ['class' => 'form-control', 'multiple', 'id'=>'img_name']) !!}
+                @if(isset($product))
+                    @foreach($product->images as $image)
+                        <span class="img">
+                        <img src="{!! asset($product->img_path.$image->img_name) !!}" alt="{!! $product->name !!}"
+                             class="imageThumb">
+                        <span class="remove" onclick="deleteArticle('{{ $image->hashid }}')">Remove image</span>
+                    </span>
+                    @endforeach
+                @endif
             </div>
             @if ($errors->has('name'))
                 <span class="help-block">

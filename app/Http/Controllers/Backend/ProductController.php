@@ -16,6 +16,7 @@ use Validator;
 use DB;
 use Intervention\Image\ImageManagerStatic as Images;
 use App\Model\Image;
+use File;
 
 class ProductController extends Controller
 {
@@ -174,8 +175,8 @@ class ProductController extends Controller
                 $data['user_id'] = $this->auth()->id;
             }
             if ($request->hasFile('img_name')) {
-                $path = '/uploads/product/img/';
-                $destinationPath = public_path() . $path;
+                $path = 'uploads/product/img/';
+                $destinationPath = public_path($path);
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
@@ -224,9 +225,10 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Model\Product $id
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
@@ -234,10 +236,42 @@ class ProductController extends Controller
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
         $product = Product::find($id);
-        $delete = $product->delete();
-        if (!$delete) {
-            return back()->with('error', 'Your product can not delete from your system right now. Plz try again later.');
+        if ($request->ajax()) {
+            $ids = array();
+            foreach ($product->images as $photo) {
+                File::delete($product->img_path);
+                $ids[] = $photo->id;
+            }
+            $product->images()->detach();
+            Image::whereIn('id', $ids)->delete();
+            //$product->delete();
+            return response()->json('message', 'Successfully deleted image');
+        } else {
+            $delete = $product->delete();
+            if (!$delete) {
+                return back()->with('error', 'Your product can not delete from your system right now. Plz try again later.');
+            }
         }
         return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
+    }
+
+    public function destroy_image(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return response()->json(['error' => 'Can not find this image id']);
+            }
+            $image = Image::find($id);
+            $product = $image->products->first();
+            $old_file = [$product->img_path . $image->img_name];
+            if (File::exists($product->img_path)) {
+                File::delete($old_file);
+            }
+            $image->delete();
+            return response()->json(['message' => 'Successfully deleted image']);
+        }
+        return response()->json(['error' => 'Error deleted image']);
     }
 }
