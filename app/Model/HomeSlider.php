@@ -11,7 +11,7 @@ class HomeSlider extends Model
     use SoftDeletes;
     protected $appends = ['hashid'];
     protected $fillable = [
-        'pause_on_hover', 'loop_forever', 'speed'
+        'pause_on_hover', 'loop_forever', 'speed', 'status'
     ];
 
     //===============Validation===============//
@@ -44,6 +44,6 @@ class HomeSlider extends Model
      */
     public function image_slider()
     {
-        return $this->hasMany(ImageSlider::class,'parent_id')->whereNotNull('parent_id');
+        return $this->hasMany(ImageSlider::class, 'parent_id')->whereNotNull('parent_id');
     }
 }

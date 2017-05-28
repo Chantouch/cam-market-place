@@ -72,6 +72,7 @@ class HomeSliderController extends Controller
                         $data['loop_forever'] = 0;
                     if ($request->pause_on_hover == null)
                         $data['pause_on_hover'] = 0;
+                    $data['status'] = 1;
                     $setting = HomeSlider::create($data);
                     if (!$setting) {
                         DB::rollBack();
@@ -176,6 +177,8 @@ class HomeSliderController extends Controller
                     if ($validator->fails()) {
                         return back()->withInput()->withErrors($validator);
                     }
+                    if ($home_slider->status == 0)
+                        $data['status'] = 1;
                     $update = $home_slider->update($data);
                     if (!$update) {
                         return back()->with('error', 'Your country can not add to your system right now. Plz try again later.');
