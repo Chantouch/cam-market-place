@@ -5,7 +5,7 @@
 @stop
 @section('content')
     <div class="block-header">
-        <h2>COUNTRIES</h2>
+        <h2>CITY</h2>
     </div>
     <!-- Vertical Layout -->
     <div class="row clearfix">

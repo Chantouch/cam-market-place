@@ -1,7 +1,7 @@
 @extends('layouts.backend.app')
 @section('content')
     <div class="block-header">
-        <h2>COUNTRIES</h2>
+        <h2>Product</h2>
     </div>
     <!-- Basic Card -->
     <div class="row clearfix">
@@ -9,8 +9,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        {!! $country->name !!}
-                        <small>{!! $country->code !!}</small>
+                        {!! $product->name !!}
+                        <small>{!! $product->code !!}</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -19,10 +19,10 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.countries.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.countries.edit', [$country->hashid]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin.catalogs.products.create') !!}">Add</a></li>
+                                <li><a href="{!! route('admin.catalogs.products.edit', [$product->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.countries.destroy', $country->hashid], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin.catalogs.products.destroy', $product->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>
@@ -32,9 +32,9 @@
                 </div>
                 <div class="body">
                     <p>
-                        {!! $country->description !!}
+                        {!! $product->description !!}
                     </p>
-                    <a href="{!! route('admin.countries.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
+                    <a href="{!! route('admin.catalogs.products.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
             </div>
         </div>

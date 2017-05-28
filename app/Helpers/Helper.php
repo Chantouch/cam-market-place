@@ -34,6 +34,15 @@ class Helper
         ];
     }
 
+
+    public static function discount_types()
+    {
+        return [
+            '1' => '$',
+            '2' => '%'
+        ];
+    }
+
     //-------Show at the front end of user-----------------//
 
     /**
@@ -43,9 +52,9 @@ class Helper
     public static function status($status)
     {
         if ($status == 0) {
-            return "<span class=\"label label-danger\">Disabled</span>";
+            return "<span class=\"label label-danger\">Offline</span>";
         } elseif ($status == 1) {
-            return "<span class=\"label label-success\">Active</span>";
+            return "<span class=\"label label-success\">Online</span>";
         } elseif ($status == 2) {
             return "<span class=\"label label-info\">Filled Up</span>";
         } elseif ($status == 3) {
@@ -53,7 +62,6 @@ class Helper
         } else {
             return "<span class=\"label label-danger\">Unpublished</span>";
         }
-        //return $status;
     }
 
     /**

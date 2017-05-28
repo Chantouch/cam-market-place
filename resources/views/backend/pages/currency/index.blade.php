@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        COUNTRIES LIST
+                        CURRENCIES LIST
                         {{--<small>Add <code>.table-hover</code> to enable a hover state on table rows within a <code>&lt;tbody&gt;</code>.--}}
                         {{--</small>--}}
                     </h2>
@@ -21,8 +21,8 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.currencies.create') !!}">Add</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                <li><a href="javascript:void(0);">Import</a></li>
+                                <li><a href="javascript:void(0);">Export</a></li>
                             </ul>
                         </li>
                     </ul>

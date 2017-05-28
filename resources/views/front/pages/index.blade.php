@@ -1,4 +1,205 @@
 @extends('layouts.front.app')
+@section('slideshow-area')
+ <!-- Start slider -->
+<div class="col-xs-12 col-sm-5 col-md-7">
+    <div class="slider-area">
+        <div id="slider" class="nivoSlider">
+            <img style="display:none" src="img/home-4/slider/7.jpg" data-thumb="img/home-4/slider/7.jpg"
+                 alt="" title="#htmlcaption7"/>
+            <img style="display:none" src="img/home-4/slider/8.jpg" data-thumb="img/home-4/slider/8.jpg"
+                 alt="" title="#htmlcaption8"/>
+        </div>
+        <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
+            <div class="pos-slideshow-info pos-slideshow-info7">
+                <div class="container">
+                    <div class="pos_description hidden-xs hidden-sm">
+                        <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
+                        </div>
+                        <div class="title2"><span class="txt">For every type of sleeper</span></div>
+                        <div class="pos-slideshow-readmore">
+                            <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="htmlcaption8" class="pos-slideshow-caption nivo-html-caption nivo-caption">
+            <div class="pos-slideshow-info pos-slideshow-info8">
+                <div class="container">
+                    <div class="pos_description hidden-xs hidden-sm">
+                        <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
+                        </div>
+                        <div class="title2"><span class="txt">For every type of sleeper</span></div>
+                        <div class="pos-slideshow-readmore">
+                            <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End slider -->
+<div class="col-xs-12 col-sm-3 col-md-2">
+    <!-- Start categori slide product -->
+    <div class="categori-slide-product home-slide">
+        <div class="slide-product-title">
+            <h5>SALE OFF</h5>
+        </div>
+        <div class="slide-product">
+            <!-- Start slide product item -->
+            <div class="slide-product-item">
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-summer-dress1.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-5%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress3.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">printed chiffon dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress5.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End slide product item -->
+            <!-- Start slide product item -->
+            <div class="slide-product-item">
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress2.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress6.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End slide product item -->
+            <!-- Start slide product item -->
+            <div class="slide-product-item">
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress7.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress11.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress10.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End slide product item -->
+            <!-- Start slide product item -->
+            <div class="slide-product-item">
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress8.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+                <div class="item3">
+                    <div class="product-image">
+                        <a href="single-product.html">
+                            <img src="img/home-4/product-mini/printed-chiffon-dress12.jpg" alt="">
+                        </a>
+                        <span class="price-percent-reduction">-20%</span>
+                    </div>
+                    <div class="product-info">
+                        <a href="single-product.html">Printed Summer Dress</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End slide product item -->
+        </div>
+    </div>
+    <!-- End categori slide product -->
+</div>
+@stop
 @section('content-area')
     <!-- Start two banner area -->
     <div class="two-banner-area">
@@ -50,12 +251,12 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Faded Short Sleeves T-shirt</a>
+                                    <a href="{!! url('single_product')!!}">Faded Short Sleeves T-shirt</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -80,12 +281,12 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/blouse.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Blouse</a>
+                                    <a href="{!! url('single_product')!!}">Blouse</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -110,13 +311,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -141,12 +342,12 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -171,13 +372,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-summer-dress5.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Summer Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -202,12 +403,12 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-summer-dress6.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Summer Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -232,12 +433,12 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress7.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -262,13 +463,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress8.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -293,13 +494,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress9.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -324,13 +525,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress10.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -355,13 +556,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress11.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -386,13 +587,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress12.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -417,13 +618,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress13.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -448,13 +649,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress14.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -479,13 +680,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress15.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -510,13 +711,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress16.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -541,13 +742,13 @@
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
-                                    <a href="single-product.html">
+                                    <a href="{!! url('single_product')!!}">
                                         <img src="img/home-4/product/printed-chiffon-dress17.jpg" alt="">
                                     </a>
                                     <span class="price-percent-reduction">-20%</span>
                                 </div>
                                 <div class="featured-info">
-                                    <a href="single-product.html">Printed Chiffon Dress</a>
+                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                     <p class="reating">
                                             <span class="rate">
                                                 <i class="fa fa-star"></i>
@@ -589,35 +790,35 @@
                             <div class="slide-product-item">
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-summer-dress1.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-5%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress3.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">printed chiffon dress</a>
+                                        <a href="{!! url('single_product')!!}">printed chiffon dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress5.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                             </div>
@@ -626,35 +827,35 @@
                             <div class="slide-product-item">
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress2.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress6.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                             </div>
@@ -663,35 +864,35 @@
                             <div class="slide-product-item">
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress7.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress11.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress10.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                             </div>
@@ -700,35 +901,35 @@
                             <div class="slide-product-item">
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress8.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                                 <div class="item3">
                                     <div class="product-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product-mini/printed-chiffon-dress12.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="product-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
                             </div>
@@ -788,13 +989,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Faded Short Sleeves
+                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
                                                                 T-shirt</a>
                                                             <p class="reating">
                                                                     <span class="rate">
@@ -822,12 +1023,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/blouse.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Blouse</a>
+                                                            <a href="{!! url('single_product')!!}">Blouse</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -854,13 +1055,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -887,12 +1088,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -919,14 +1120,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress5.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -953,13 +1154,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress6.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -986,13 +1187,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress7.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1019,14 +1220,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress8.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1053,14 +1254,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress9.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1087,14 +1288,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress10.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1121,14 +1322,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress11.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1155,14 +1356,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress12.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1189,14 +1390,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress13.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1223,14 +1424,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress14.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1257,14 +1458,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress15.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1291,14 +1492,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress16.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1325,14 +1526,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress17.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1365,14 +1566,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress5.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1399,13 +1600,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress6.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1432,13 +1633,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress7.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1465,14 +1666,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress8.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1499,13 +1700,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Faded Short Sleeves
+                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
                                                                 T-shirt</a>
                                                             <p class="reating">
                                                                     <span class="rate">
@@ -1533,12 +1734,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/blouse.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Blouse</a>
+                                                            <a href="{!! url('single_product')!!}">Blouse</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1565,13 +1766,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1598,12 +1799,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1630,14 +1831,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress9.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1664,14 +1865,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress10.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1698,14 +1899,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress11.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1732,14 +1933,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress12.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1766,14 +1967,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress13.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1800,14 +2001,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress14.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1834,14 +2035,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress15.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1868,14 +2069,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress16.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1902,14 +2103,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress17.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1942,14 +2143,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress9.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -1976,14 +2177,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress10.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2010,14 +2211,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress11.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2044,14 +2245,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress12.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2078,13 +2279,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Faded Short Sleeves
+                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
                                                                 T-shirt</a>
                                                             <p class="reating">
                                                                     <span class="rate">
@@ -2112,12 +2313,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/blouse.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Blouse</a>
+                                                            <a href="{!! url('single_product')!!}">Blouse</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2144,13 +2345,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2177,12 +2378,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2209,14 +2410,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress5.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2243,13 +2444,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress6.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2276,13 +2477,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress7.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2309,14 +2510,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress8.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2343,14 +2544,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress13.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2377,14 +2578,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress14.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2411,14 +2612,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress15.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2445,14 +2646,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress16.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2479,14 +2680,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress17.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2519,14 +2720,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress14.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2553,14 +2754,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress15.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2587,14 +2788,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress16.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2621,14 +2822,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress17.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2655,13 +2856,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Faded Short Sleeves
+                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
                                                                 T-shirt</a>
                                                             <p class="reating">
                                                                     <span class="rate">
@@ -2689,12 +2890,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/blouse.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Blouse</a>
+                                                            <a href="{!! url('single_product')!!}">Blouse</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2721,13 +2922,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2754,12 +2955,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2786,14 +2987,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress5.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2820,13 +3021,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress6.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2853,13 +3054,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress7.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2886,14 +3087,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress8.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2920,14 +3121,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress9.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2954,14 +3155,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress10.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -2988,14 +3189,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress11.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3022,14 +3223,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress12.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3056,14 +3257,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress13.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3096,13 +3297,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Faded Short Sleeves
+                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
                                                                 T-shirt</a>
                                                             <p class="reating">
                                                                     <span class="rate">
@@ -3130,12 +3331,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/blouse.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Blouse</a>
+                                                            <a href="{!! url('single_product')!!}">Blouse</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3162,13 +3363,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3195,12 +3396,12 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3227,14 +3428,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress5.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3261,13 +3462,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-summer-dress6.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Summer Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3294,13 +3495,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress7.jpg"
                                                                      alt="">
                                                             </a>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3327,14 +3528,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress8.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3361,14 +3562,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress9.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3395,14 +3596,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress10.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3429,14 +3630,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress11.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3463,14 +3664,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress12.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3497,14 +3698,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress13.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3531,14 +3732,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress14.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3565,14 +3766,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress15.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3599,14 +3800,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress16.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3633,14 +3834,14 @@
                                                 <div class="col-sm-3">
                                                     <div class="featured-inner">
                                                         <div class="featured-image">
-                                                            <a href="single-product.html">
+                                                            <a href="{!! url('single_product')!!}">
                                                                 <img src="img/home-4/product/printed-chiffon-dress17.jpg"
                                                                      alt="">
                                                             </a>
                                                             <span class="price-percent-reduction">-20%</span>
                                                         </div>
                                                         <div class="featured-info">
-                                                            <a href="single-product.html">Printed Chiffon Dress</a>
+                                                            <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -3760,12 +3961,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Faded Short Sleeves T-shirt</a>
+                                        <a href="{!! url('single_product')!!}">Faded Short Sleeves T-shirt</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3788,12 +3989,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/blouse.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Blouse</a>
+                                        <a href="{!! url('single_product')!!}">Blouse</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3816,13 +4017,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3845,12 +4046,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3873,13 +4074,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-summer-dress5.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3902,12 +4103,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-summer-dress6.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3930,12 +4131,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress7.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3958,13 +4159,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress8.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -3987,13 +4188,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress9.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4031,12 +4232,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-summer-dress6.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4059,12 +4260,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress7.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4087,13 +4288,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress8.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4116,13 +4317,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-chiffon-dress9.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Chiffon Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4145,12 +4346,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Faded Short Sleeves T-shirt</a>
+                                        <a href="{!! url('single_product')!!}">Faded Short Sleeves T-shirt</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4173,12 +4374,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/blouse.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Blouse</a>
+                                        <a href="{!! url('single_product')!!}">Blouse</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4201,13 +4402,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-dress2.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4230,12 +4431,12 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-dress3.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
@@ -4258,13 +4459,13 @@
                                 <!-- Start featured item -->
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="single-product.html">
+                                        <a href="{!! url('single_product')!!}">
                                             <img src="img/home-4/product/printed-summer-dress5.jpg" alt="">
                                         </a>
                                         <span class="price-percent-reduction">-20%</span>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="single-product.html">Printed Summer Dress</a>
+                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
                                         <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>

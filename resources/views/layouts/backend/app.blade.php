@@ -19,11 +19,11 @@
     <link href="{!! asset('backend/plugins/node-waves/waves.css') !!}" rel="stylesheet"/>
     <!-- Animation Css -->
     <link href="{!! asset('backend/plugins/animate-css/animate.css') !!}" rel="stylesheet"/>
-@yield('style')
+    @yield('style')
     <!-- Custom Css -->
     <link href="{!! asset('backend/css/style.css') !!}" rel="stylesheet">
-<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{!! asset('backend/css/themes/all-themes.min.css') !!}" rel="stylesheet"/>
+    @yield('style-plugins')
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([

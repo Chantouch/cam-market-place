@@ -38,6 +38,12 @@
             <span>Home Slider</span>
         </a>
     </li>
+    <li class="{!! Request::is('admin/settings/languages*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.settings.languages.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Languages</span>
+        </a>
+    </li>
     <li class="header">Products</li>
     <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">

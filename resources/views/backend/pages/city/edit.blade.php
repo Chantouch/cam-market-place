@@ -1,7 +1,11 @@
 @extends('layouts.backend.app')
+@section('style-plugins')
+    <!-- Bootstrap Select Css -->
+    <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+@stop
 @section('content')
     <div class="block-header">
-        <h2>COUNTRIES</h2>
+        <h2>CITY</h2>
     </div>
     <!-- Vertical Layout -->
     <div class="row clearfix">
@@ -9,7 +13,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT COUNTRY
+                        EDIT <span>{!! $city->name !!}</span> CITY
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -34,4 +38,9 @@
         </div>
     </div>
     <!-- #END# Vertical Layout -->
+@stop
+
+@section('plugins')
+    <!-- Select Plugin Js -->
+    <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
 @stop

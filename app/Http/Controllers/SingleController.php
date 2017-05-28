@@ -24,7 +24,7 @@ class SingleController extends Controller
     public function index()
     {
 
-       return view('front.pages.single');
+       return view('front.pages.view_product');
     }
 
     /**

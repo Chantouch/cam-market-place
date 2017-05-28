@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Category;
+use App\Model\City;
+use App\Model\Currency;
+use App\Model\Language;
 use App\Model\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Vinkla\Hashids\HashidsManager;
 use Validator;
 use DB;
+use Intervention\Image\ImageManagerStatic as Images;
+use App\Model\Image;
 
 class ProductController extends Controller
 {
@@ -18,6 +25,11 @@ class ProductController extends Controller
     {
         $this->hashid = $hashid;
         $this->middleware('auth:admin');
+    }
+
+    public function auth()
+    {
+        return auth()->user();
     }
 
     /**
@@ -42,7 +54,14 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.pages.catalog.product.create');
+        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $discount_types = \Helper::discount_types();
+        return view('backend.pages.catalog.product.create',
+            compact('cities', 'languages', 'currencies', 'categories', 'discount_types')
+        );
     }
 
     /**
@@ -59,7 +78,17 @@ class ProductController extends Controller
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
+            $data['user_id'] = $this->auth()->id;
             $create = Product::create($data);
+            if ($create) {
+                if (isset($request->language_id)) {
+                    $create->languages()->attach($request->language_id);
+                }
+                if (isset($request->category_id)) {
+                    $create->categories()->attach($request->category_id);
+                }
+
+            }
             if (!$create) {
                 return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
             }
@@ -99,8 +128,25 @@ class ProductController extends Controller
         if ($id === null) {
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
-        $product = Product::with('city')->find($id);
-        return view('backend.pages.catalog.product.edit', compact('product'));
+        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $language = Language::all();
+        $languages = array();
+        foreach ($language as $lg) {
+            $languages[$lg->id] = $lg->name;
+        }
+
+        $category = Category::all();
+        $categories = array();
+        foreach ($category as $cat) {
+            $categories[$cat->id] = $cat->name;
+        }
+
+        $discount_types = \Helper::discount_types();
+        $product = Product::with('city')->with('currency')->with('languages')->find($id);
+        return view('backend.pages.catalog.product.edit',
+            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
+        );
     }
 
     /**
@@ -119,14 +165,54 @@ class ProductController extends Controller
             if ($id === null) {
                 return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
             }
-            $product = Product::find($id);
             $validator = Validator::make($data, Product::rules(), Product::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
-            $update = $product->update($data);
-            if (!$update) {
-                return back()->with('error', 'Your product can not add to your system right now. Plz try again later.');
+            $product = Product::find($id);
+            if ($product->user_id == null || empty($product->user_id)) {
+                $data['user_id'] = $this->auth()->id;
+            }
+            if ($request->hasFile('img_name')) {
+                $path = '/uploads/product/img/';
+                $destinationPath = public_path() . $path;
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true);
+                }
+                $picture = '';
+                if ($request->hasFile('img_name')) {
+                    $files = $request->file('img_name');
+                    foreach ($files as $file) {
+                        $image = Images::make($file);//->resize(787, 787);
+                        //to remove space from string
+                        $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                        $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                        $image->save($destinationPath . '/' . $fileName, 100);
+                        $data['img_path'] = $path;
+                        $data['img_name'] = $fileName;
+                        $images = new  Image($data);
+                        $product->images()->save($images);
+                    }
+                }
+
+                if (!empty($product['img_name'])) {
+                    $product['img_name'] = $picture;
+                } else {
+                    unset($product['img_name']);
+                }
+            }
+            $product->update($data);
+            if ($product) {
+                if (isset($request->language_id)) {
+                    $product->languages()->sync($request->language_id);
+                } else {
+                    $product->languages()->sync(array());
+                }
+                if (isset($request->category_id)) {
+                    $product->categories()->sync($request->category_id);
+                } else {
+                    $product->categories()->sync(array());
+                }
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product updated successfully.');
         } catch (ModelNotFoundException $exception) {

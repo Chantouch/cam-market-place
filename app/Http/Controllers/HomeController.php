@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slide = HomeSlider::with('image_slider')->whereNull('parent_id')->firstOrFail();
-        return view('front.pages.index',compact('slide'));
+        $sliders = HomeSlider::with('image_slider')->whereNull('parent_id')->firstOrFail();
+        return view('front.pages.index',compact('sliders'));
     }
 }

@@ -55,7 +55,14 @@
 @include('layouts.front.header')
 <!-- End header -->
     <!-- Start categori and slider -->
-    @include('layouts.front.slideshow');
+    <div class="categori-and-slider">
+        <div class="container">
+            <div class="row">
+            @include('layouts.front.menu-left')
+            @yield('slideshow-area')
+            </div>
+        </div>
+    </div>
     <!-- End categori and slider -->
     <!-- Yield content -->
 @yield('content-area')
@@ -73,6 +80,26 @@
 <!-- JS -->
 <!-- jquery-1.11.3.min js============================================ -->
 <script src="{!! asset('js/vendor/jquery-1.11.3.min.js') !!}"></script>
+
+<!--Config zoom in product detail-->
+<script type="text/javascript" src="{!! asset('js/jquery.ez-plus.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/web.js?m=20100203') !!}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#zoom_03').ezPlus({
+        gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+        imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+    });
+
+        //pass the images to Fancybox
+        $('#zoom_03').bind('click', function (e) {
+            var ez = $('#zoom_03').data('ezPlus');
+            $.fancyboxPlus(ez.getGalleryList());
+            return false;
+        });
+                        
+    });
+</script>
 <!-- bootstrap js============================================ -->
 <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
 <!-- owl.carousel.min js============================================ -->
