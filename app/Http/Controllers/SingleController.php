@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Category;
 
 class SingleController extends Controller
 {
@@ -23,8 +24,9 @@ class SingleController extends Controller
      */
     public function index()
     {
+        $categories = Category::where('status',1)->get();
 
-       return view('front.pages.view_product');
+       return view('front.pages.view_product',compact('categories'));
     }
 
     /**
