@@ -3,6 +3,8 @@
     <!-- Bootstrap Select Css -->
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
     <link href="{!! asset('plugins/summernote/summernote.css') !!}" rel="stylesheet"/>
+    <!-- Dropzone Css -->
+    <link href="{!! asset('plugins/dropzone/dropzone.css') !!}" rel="stylesheet">
 @stop
 @section('content')
     {{--<div class="block-header">--}}
@@ -14,7 +16,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT EXISTING PRODUCT
+                        EDIT {!! $product->name !!}
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -31,7 +33,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($product, ['route' => ['admin.catalogs.products.update', $product->hashid], 'method' => 'patch']) !!}
+                    {!! Form::model($product, ['route' => ['admin.catalogs.products.update', $product->hashid], 'method' => 'patch', 'files'=> true]) !!}
                     @include('backend.pages.catalog.product.fields')
                     {!! Form::close() !!}
                 </div>
@@ -45,7 +47,8 @@
     <!-- Select Plugin Js -->
     <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
     <script src="{!! asset('plugins/summernote/summernote.min.js') !!}"></script>
-
+    <!-- Dropzone Plugin Js -->
+    <script src="{!! asset('plugins/dropzone/dropzone.js') !!}"></script>
     <script>
         $(document).ready(function () {
             $('#description').summernote({
@@ -69,5 +72,23 @@
         $("#category_id").selectpicker({
             allowClear: true
         }).val({!! $product->categories()->pluck('categories.id') !!}).trigger('change');
+        $(function () {
+            //Dropzone
+            Dropzone.options.frmFileUpload = {
+                paramName: "file",
+                maxFilesize: 10,
+                maxFiles: 2000,
+                addRemoveLinks: true,
+                url: "{!! route('admin.catalogs.products.update', $product->hashid) !!}",
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                headers: {
+                    'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                },
+                dictRemoveFile: 'Remove',
+                success: function (file, response) {
+                    console.log(response);
+                }
+            };
+        });
     </script>
 @stop

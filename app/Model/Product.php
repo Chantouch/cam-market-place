@@ -57,6 +57,11 @@ class Product extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    public function images()
+    {
+        return $this->morphToMany(Image::class, 'imageable');
+    }
+
     //----------PivotTable-----------//
 
     /**

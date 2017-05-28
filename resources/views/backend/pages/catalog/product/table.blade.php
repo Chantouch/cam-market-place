@@ -18,7 +18,11 @@
             @foreach($products as $product)
                 <tr>
                     <th scope="row">{!! $product->id !!}</th>
-                    <td>{!! $product->name !!}</td>
+                    <td width="20">
+                        @foreach($product->images as $image)
+                            <img src="{!! $product->img_path.$image->img_name !!}" alt="{!! $product->name !!}" class="img-thumbnail">
+                        @endforeach
+                    </td>
                     <td>{!! $product->name !!}</td>
                     <td>
                         @if(count($product->categories))

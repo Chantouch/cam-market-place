@@ -1,5 +1,18 @@
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        {!! Form::label('name', 'Image:') !!}
+        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
+            <div class="form-line">
+                {!! Form::file('img_name[]', ['class' => 'form-control', 'multiple']) !!}
+            </div>
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('name') }}</strong>
+                </span>
+            @endif
+        </div>
+
         {!! Form::label('name', 'Product Name:') !!}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
             <div class="form-line">

@@ -10,9 +10,12 @@ use App\Model\Language;
 use App\Model\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Vinkla\Hashids\HashidsManager;
 use Validator;
 use DB;
+use Intervention\Image\ImageManagerStatic as Images;
+use App\Model\Image;
 
 class ProductController extends Controller
 {
@@ -84,6 +87,7 @@ class ProductController extends Controller
                 if (isset($request->category_id)) {
                     $create->categories()->attach($request->category_id);
                 }
+
             }
             if (!$create) {
                 return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
@@ -168,6 +172,34 @@ class ProductController extends Controller
             $product = Product::find($id);
             if ($product->user_id == null || empty($product->user_id)) {
                 $data['user_id'] = $this->auth()->id;
+            }
+            if ($request->hasFile('img_name')) {
+                $path = '/uploads/product/img/';
+                $destinationPath = public_path() . $path;
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true);
+                }
+                $picture = '';
+                if ($request->hasFile('img_name')) {
+                    $files = $request->file('img_name');
+                    foreach ($files as $file) {
+                        $image = Images::make($file);//->resize(787, 787);
+                        //to remove space from string
+                        $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                        $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                        $image->save($destinationPath . '/' . $fileName, 100);
+                        $data['img_path'] = $path;
+                        $data['img_name'] = $fileName;
+                        $images = new  Image($data);
+                        $product->images()->save($images);
+                    }
+                }
+
+                if (!empty($product['img_name'])) {
+                    $product['img_name'] = $picture;
+                } else {
+                    unset($product['img_name']);
+                }
             }
             $product->update($data);
             if ($product) {
