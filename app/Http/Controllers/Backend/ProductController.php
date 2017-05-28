@@ -8,6 +8,7 @@ use App\Model\City;
 use App\Model\Currency;
 use App\Model\Language;
 use App\Model\Product;
+use App\Model\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -195,11 +196,20 @@ class ProductController extends Controller
                         $product->images()->save($images);
                     }
                 }
-
                 if (!empty($product['img_name'])) {
                     $product['img_name'] = $picture;
                 } else {
                     unset($product['img_name']);
+                }
+            }
+            if ($request->has('tags')) {
+                $tags = $request->tags;
+                foreach ($tags as $tag) {
+                    $data['tags'] = $tag;
+                    $tgs = new Tag($data);
+                    $product->tags()->save($tgs);
+                    if (!$product->tags()->save($tgs))
+                        throw new ModelNotFoundException();
                 }
             }
             $product->update($data);
@@ -269,6 +279,10 @@ class ProductController extends Controller
             if (File::exists($product->img_path)) {
                 File::delete($old_file);
             }
+            //$product->images()->detach();
+            DB::table('imageables')
+                ->where('image_id', $image->id)
+                ->delete();
             $image->delete();
             return response()->json(['message' => 'Successfully deleted image']);
         }

@@ -116,7 +116,7 @@ class CityController extends Controller
                 return redirect()->route('admin.cities.index')->with('error', 'We can not find city with that id, please try the other');
             }
             $data = $request->all();
-            $validator = Validator::make($data, City::rules(), City::messages());
+            $validator = Validator::make($data, City::rules($id), City::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }

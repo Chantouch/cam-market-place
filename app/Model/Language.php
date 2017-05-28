@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Vinkla\Hashids\Facades\Hashids;
+use Request;
 
 class Language extends Model
 {
@@ -15,11 +16,28 @@ class Language extends Model
     ];
 
     //===============Validation===============//
-    public static function rules()
+    public static function rules($id = null)
     {
-        return [
-            'name' => 'required|unique:languages|max:255',
-        ];
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required'
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|unique:languages,name,' . $id . ',id',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
     }
 
     public static function messages()

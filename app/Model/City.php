@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
+use Request;
 
 class City extends Model
 {
@@ -13,13 +14,33 @@ class City extends Model
         'name', 'description', 'status', 'country_id', 'code'
     ];
 
+
     //===============Validation===============//
-    public static function rules()
+    public static function rules($id = null)
     {
-        return [
-            'name' => 'required|unique:countries|max:255',
-            'country_id' => 'required',
-        ];
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required|unique:countries|max:255',
+                    'code' => 'required|unique:countries|max:255',
+                    'country_id' => 'required',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|unique:countries,name,' . $id . ',id',
+                    'code' => 'required|unique:countries,code,' . $id . ',id',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
     }
 
     public static function messages()

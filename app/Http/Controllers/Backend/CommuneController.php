@@ -122,7 +122,7 @@ class CommuneController extends Controller
                 return redirect()->route('admin.communes.index')->with('error', 'We can not find commune with that id, please try the other');
             }
             $commune = Commune::whereNotNull('country_id')->whereNotNull('city_id')->find($id);
-            $validator = Validator::make($data, Commune::rules(), Commune::messages());
+            $validator = Validator::make($data, Commune::rules($id), Commune::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
@@ -130,7 +130,7 @@ class CommuneController extends Controller
             if (!$update) {
                 return back()->with('error', 'Your commune can not add to your system right now. Plz try again later.');
             }
-            return redirect()->route('admin.communes.index')->with('success', 'Country added successfully.');
+            return redirect()->route('admin.communes.index')->with('success', 'Commune updated successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your commune can not add to your system right now. Plz try again later.');
         }
@@ -154,6 +154,6 @@ class CommuneController extends Controller
         if (!$delete) {
             return back()->with('error', 'Your commune can not delete from your system right now. Plz try again later.');
         }
-        return redirect()->route('admin.communes.index')->with('success', 'City deleted successfully');
+        return redirect()->route('admin.communes.index')->with('success', 'Commune deleted successfully');
     }
 }

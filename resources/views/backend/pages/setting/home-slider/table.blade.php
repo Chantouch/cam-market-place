@@ -15,7 +15,7 @@
             @foreach($sliders->image_slider as $slider)
                 <tr>
                     <th scope="row">{!! $slider->id !!}</th>
-                    <td width="700">
+                    <td width="70">
                         @if(isset($slider))
                             <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'images/1600x500.png') !!}"
                                  alt="{!! isset($slider->img_name) ? $slider->name : 'Image slide' !!}"
@@ -27,7 +27,7 @@
                         @endif
                     </td>
                     <td>{!! $slider->caption !!}</td>
-                    <td>{!! str_limit($slider->description, 70) !!}</td>
+                    <td>{!! str_limit($slider->description, 50) !!}</td>
                     <td>{!! Helper::status($slider->status) !!}</td>
                     <td>
                         <div class="col-md-2">
