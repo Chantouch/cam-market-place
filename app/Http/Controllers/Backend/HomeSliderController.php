@@ -102,7 +102,6 @@ class HomeSliderController extends Controller
                             //====remove string from name ====//
                             $no_space = preg_replace('/\s+/', '_', strtolower($request->name));
                             $file_name = uniqid(time() . '_' . $no_space . '_' . 'home_slider' . '_') . '.' . $request->file('img_name')->getClientOriginalExtension();
-
                             $img_name->save($des_path . '/' . $file_name, '100');
                             $data['img_path'] = $img_path;
                             $data['img_name'] = $file_name;
@@ -198,7 +197,7 @@ class HomeSliderController extends Controller
                             if (!file_exists($des_path)) {
                                 mkdir($des_path, 0777, true);
                             }
-                            $img_name = Image::make($request->file('img_name'))->resize(1600, 500);
+                            $img_name = Image::make($request->file('img_name'))->resize(640, 373);
                             //====remove string from name ====//
                             $no_space = preg_replace('/\s+/', '_', strtolower($request->name));
                             $file_name = uniqid(time() . '_' . $no_space . '_' . 'home_slider' . '_') . '.' . $request->file('img_name')->getClientOriginalExtension();

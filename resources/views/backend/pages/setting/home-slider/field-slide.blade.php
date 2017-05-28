@@ -1,11 +1,11 @@
 {!! Form::label('img_name', 'Image:') !!}
 <div class="form-group{{ $errors->has('img_name') ? ' has-error' : '' }}">
     @if(isset($slider))
-        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'img/1600x500.png') !!}"
+        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'img/1280x746.png') !!}"
              alt="{!! isset($slider->img_name) ? $slider->name : 'Image slide' !!}"
              class="img-thumbnail" id="img_preview">
     @else
-        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'img/1600x500.png') !!}"
+        <img src="{!! asset(isset($slider->img_path) ? $slider->img_path. $slider->img_name : 'img/1280x746.png') !!}"
              alt="{!! isset($slider->img_name) ? $slider->name : 'Image slide' !!}"
              class="img-thumbnail" id="img_preview">
     @endif
