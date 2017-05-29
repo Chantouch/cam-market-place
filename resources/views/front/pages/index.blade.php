@@ -40,150 +40,70 @@
         <div class="slide-product">
             <!-- Start slide product item -->
             <div class="slide-product-item">
+                <?php for($i=1;$i<=3;$i++){?>
+                    <div class="item3">
+                        <div class="product-image">
+                            <a href="{!! url('single-product') !!}">
+                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                            </a>
+                            <span class="price-percent-reduction">-5%</span>
+                        </div>
+                        <div class="product-info">
+                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                        </div>
+                    </div>
+                <?php }?>
+            </div>
+            <!-- End slide product item -->
+            <!-- Start slide product item -->
+            <div class="slide-product-item">
+               <?php for($i=4;$i<=6;$i++){?>
                 <div class="item3">
                     <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-summer-dress1.jpg" alt="">
+                        <a href="{!! url('single-product') !!}">
+                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
                         </a>
                         <span class="price-percent-reduction">-5%</span>
                     </div>
                     <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
+                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
                     </div>
                 </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress3.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">printed chiffon dress</a>
-                    </div>
-                </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress5.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
+                <?php }?>
             </div>
             <!-- End slide product item -->
             <!-- Start slide product item -->
             <div class="slide-product-item">
+                <?php for($i=7;$i<=9;$i++){?>
                 <div class="item3">
                     <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress2.jpg" alt="">
+                        <a href="{!! url('single-product') !!}">
+                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
                         </a>
-                        <span class="price-percent-reduction">-20%</span>
+                        <span class="price-percent-reduction">-5%</span>
                     </div>
                     <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
+                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
                     </div>
                 </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress6.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
+                <?php }?>
             </div>
             <!-- End slide product item -->
             <!-- Start slide product item -->
             <div class="slide-product-item">
+                <?php for($i=10;$i<=12;$i++){?>
                 <div class="item3">
                     <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress7.jpg" alt="">
+                        <a href="{!! url('single-product') !!}">
+                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
                         </a>
-                        <span class="price-percent-reduction">-20%</span>
+                        <span class="price-percent-reduction">-5%</span>
                     </div>
                     <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
+                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
                     </div>
                 </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress11.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress10.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
-            </div>
-            <!-- End slide product item -->
-            <!-- Start slide product item -->
-            <div class="slide-product-item">
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress8.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
-                <div class="item3">
-                    <div class="product-image">
-                        <a href="single-product.html">
-                            <img src="img/home-4/product-mini/printed-chiffon-dress12.jpg" alt="">
-                        </a>
-                        <span class="price-percent-reduction">-20%</span>
-                    </div>
-                    <div class="product-info">
-                        <a href="single-product.html">Printed Summer Dress</a>
-                    </div>
-                </div>
+                <?php }?>
             </div>
             <!-- End slide product item -->
         </div>
@@ -196,33 +116,17 @@
     <div class="two-banner-area">
         <div class="container">
             <div class="row">
+                <?php for($i=1;$i<=3;$i++){?>
                 <div class="col-sm-4">
                     <div class="banner-left">
                         <div class="banner-image">
                             <a href="#">
-                                <img src="img/home-4/banner/cms41.jpg" alt="">
+                                <img src="{!! asset('img/banner/'.$i.'.jpg') !!}" alt="">
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="banner-right">
-                        <div class="banner-image">
-                            <a href="#">
-                                <img src="img/home-4/banner/cms42.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="banner-right">
-                        <div class="banner-image">
-                            <a href="#">
-                                <img src="img/home-4/banner/cms43.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php }?>
             </div>
         </div>
     </div>
@@ -239,526 +143,37 @@
                 <div class="featured-product">
                     <div class="featured-item">
                         <!-- Start featured item -->
+                        <?php for($i=1;$i<=17;$i++){?>
                         <div class="col-sm-3">
                             <div class="featured-inner">
                                 <div class="featured-image">
                                     <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/faded-short-sleeves-tshirt1.jpg" alt="">
+                                        <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
                                     </a>
                                 </div>
                                 <div class="featured-info">
                                     <a href="{!! url('single_product')!!}">Faded Short Sleeves T-shirt</a>
                                     <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
+                                        <span class="rate">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span>
                                     </p>
                                     <span class="price">$16.51</span>
                                     <div class="featured-button">
                                         <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
                                         <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
                                         <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
+                                            to cart
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/blouse.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Blouse</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$27.00</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-dress2.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$26.00</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-dress3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$50.00</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-summer-dress5.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$28.00</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-summer-dress6.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$30.00</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress7.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$16.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress8.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$16.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress9.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$16.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress10.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$306.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress11.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$26.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress12.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$26.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress13.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$120.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress14.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$20.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress15.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$30.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress16.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$200.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End featured item -->
-                        <!-- Start featured item -->
-                        <div class="col-sm-3">
-                            <div class="featured-inner">
-                                <div class="featured-image">
-                                    <a href="{!! url('single_product')!!}">
-                                        <img src="img/home-4/product/printed-chiffon-dress17.jpg" alt="">
-                                    </a>
-                                    <span class="price-percent-reduction">-20%</span>
-                                </div>
-                                <div class="featured-info">
-                                    <a href="{!! url('single_product')!!}">Printed Chiffon Dress</a>
-                                    <p class="reating">
-                                            <span class="rate">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </span>
-                                    </p>
-                                    <span class="price">$200.40</span>
-                                    <div class="featured-button">
-                                        <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                        <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                        <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                            to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php }?>
                         <!-- End featured item -->
                     </div>
                 </div>
@@ -779,150 +194,70 @@
                         <div class="slide-product">
                             <!-- Start slide product item -->
                             <div class="slide-product-item">
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-summer-dress1.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-5%</span>
+                                <?php for($i=1;$i<=3;$i++){?>
+                                    <div class="item3">
+                                        <div class="product-image">
+                                            <a href="{!! url('single-product') !!}">
+                                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                            </a>
+                                            <span class="price-percent-reduction">-5%</span>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress3.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">printed chiffon dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress5.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
+                                <?php }?>
                             </div>
                             <!-- End slide product item -->
                             <!-- Start slide product item -->
                             <div class="slide-product-item">
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress2.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
+                                <?php for($i=4;$i<=6;$i++){?>
+                                    <div class="item3">
+                                        <div class="product-image">
+                                            <a href="{!! url('single-product') !!}">
+                                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                            </a>
+                                            <span class="price-percent-reduction">-5%</span>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress6.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
+                                <?php }?>
                             </div>
                             <!-- End slide product item -->
                             <!-- Start slide product item -->
                             <div class="slide-product-item">
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress7.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
+                                <?php for($i=7;$i<=9;$i++){?>
+                                    <div class="item3">
+                                        <div class="product-image">
+                                            <a href="{!! url('single-product') !!}">
+                                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                            </a>
+                                            <span class="price-percent-reduction">-5%</span>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress11.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress10.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
+                                <?php }?>
                             </div>
                             <!-- End slide product item -->
                             <!-- Start slide product item -->
                             <div class="slide-product-item">
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress8.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
+                                <?php for($i=10;$i<=12;$i++){?>
+                                    <div class="item3">
+                                        <div class="product-image">
+                                            <a href="{!! url('single-product') !!}">
+                                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                            </a>
+                                            <span class="price-percent-reduction">-5%</span>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress4.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single_product')!!}">
-                                            <img src="img/home-4/product-mini/printed-chiffon-dress12.jpg" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single_product')!!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
+                                <?php }?>
                             </div>
                             <!-- End slide product item -->
                         </div>
