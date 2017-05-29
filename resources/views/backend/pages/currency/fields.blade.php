@@ -59,7 +59,7 @@
 </div>
 
 {!! Form::label('code', 'Currency Code:') !!}
-<div class="form-group">
+<div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
     <div class="form-line">
         {!! Form::text('code', null, ['class' => 'form-control', 'placeholder' => 'Enter your currency code']) !!}
     </div>

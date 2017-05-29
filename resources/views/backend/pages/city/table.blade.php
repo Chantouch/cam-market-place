@@ -20,7 +20,7 @@
                     <td>{!! $city->code !!}</td>
                     <td>{!! Helper::relationship($city->country) !!}</td>
                     <td>{!! str_limit($city->description, 70) !!}</td>
-                    <td>{!! $city->status !!}</td>
+                    <td>{!! Helper::status($city->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.cities.destroy', $city->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.cities.show', [$city->hashid]) !!}"

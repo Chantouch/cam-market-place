@@ -113,7 +113,7 @@ class CountryController extends Controller
             }
             $country = Country::whereNull('country_id')->whereNull('city_id')->find($id);
             $data = $request->all();
-            $validator = Validator::make($data, Country::rules(), Country::messages());
+            $validator = Validator::make($data, Country::rules($id), Country::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }

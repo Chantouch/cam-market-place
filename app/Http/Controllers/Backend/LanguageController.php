@@ -113,7 +113,7 @@ class LanguageController extends Controller
                 return redirect()->route('admin.settings.languages.index')->with('error', 'We can not find language with that id, please try the other');
             }
             $language = Language::find($id);
-            $validator = Validator::make($data, Language::rules(), Language::messages());
+            $validator = Validator::make($data, Language::rules($id), Language::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }

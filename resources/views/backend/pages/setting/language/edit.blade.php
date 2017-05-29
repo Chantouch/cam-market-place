@@ -1,8 +1,8 @@
 @extends('layouts.backend.app')
 @section('content')
-    <div class="block-header">
-        <h2>LANGUAGE</h2>
-    </div>
+    {{--<div class="block-header">--}}
+        {{--<h2>LANGUAGE</h2>--}}
+    {{--</div>--}}
     <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($country, ['route' => ['admin.settings.languages.update', $country->hashid], 'method' => 'patch']) !!}
+                    {!! Form::model($language, ['route' => ['admin.settings.languages.update', $language->hashid], 'method' => 'patch']) !!}
                     @include('backend.pages.setting.language.fields')
                     {!! Form::close() !!}
                 </div>

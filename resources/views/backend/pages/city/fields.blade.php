@@ -15,9 +15,9 @@
     <div class="form-line">
         {!! Form::select('country_id',$countries , null, ['class' => 'form-control show-tick', 'data-live-search' => 'true']) !!}
     </div>
-    @if ($errors->has('name'))
+    @if ($errors->has('country_id'))
         <span class="help-block">
-            <strong>{{ $errors->first('name') }}</strong>
+            <strong>{{ $errors->first('country_id') }}</strong>
         </span>
     @endif
 </div>

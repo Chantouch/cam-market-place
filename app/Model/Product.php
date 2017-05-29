@@ -62,6 +62,14 @@ class Product extends Model
         return $this->morphToMany(Image::class, 'imageable');
     }
 
+    /**
+     * Get all of the tags for the post.
+     */
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     //----------PivotTable-----------//
 
     /**

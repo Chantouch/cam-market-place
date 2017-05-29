@@ -47,4 +47,12 @@ class Category extends Model
     {
         return $this->hasMany(Product::class)->where('status', 1);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sub_category()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id')->whereNotNull('category_id');
+    }
 }

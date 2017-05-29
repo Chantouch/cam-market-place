@@ -16,7 +16,7 @@
                     <th scope="row">{!! $category->id !!}</th>
                     <td>{!! $category->name !!}</td>
                     <td>{!! str_limit($category->description, 70) !!}</td>
-                    <td>{!! $category->status !!}</td>
+                    <td>{!! Helper::status($category->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.catalogs.categories.destroy', $category->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.catalogs.categories.show', [$category->hashid]) !!}"
@@ -34,6 +34,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! $categories->render() !!}
     @else
         <p>There is no data here.</p>
     @endif

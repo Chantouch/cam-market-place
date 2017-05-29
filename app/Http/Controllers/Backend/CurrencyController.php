@@ -113,7 +113,7 @@ class CurrencyController extends Controller
                 return redirect()->route('admin.currencies.index')->with('error', 'We can not find currency with that id, please try the other');
             }
             $currency = Currency::find($id);
-            $validator = Validator::make($data, Currency::rules(), Currency::messages());
+            $validator = Validator::make($data, Currency::rules($id), Currency::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
@@ -121,7 +121,7 @@ class CurrencyController extends Controller
             if (!$update) {
                 return back()->with('error', 'Your currency can not add to your system right now. Plz try again later.');
             }
-            return redirect()->route('admin.currencies.index')->with('success', 'Currency added successfully.');
+            return redirect()->route('admin.currencies.index')->with('success', 'Currency updated successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your currency can not add to your system right now. Plz try again later.');
         }

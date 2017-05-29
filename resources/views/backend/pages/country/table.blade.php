@@ -18,7 +18,7 @@
                     <td>{!! $country->name !!}</td>
                     <td>{!! $country->code !!}</td>
                     <td>{!! str_limit($country->description, 70) !!}</td>
-                    <td>{!! $country->status !!}</td>
+                    <td>{!! Helper::status($country->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.countries.destroy', $country->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.countries.show', [$country->hashid]) !!}"

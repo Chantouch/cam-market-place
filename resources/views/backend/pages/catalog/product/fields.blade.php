@@ -124,6 +124,18 @@
                         </span>
                     @endif
                 </div>
+
+                {!! Form::label('tags', 'Tags:') !!}
+                <div class="form-group demo-tagsinput-area">
+                    <div class="form-line">
+                        {!! Form::text('tags[]', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinputs']) !!}
+                    </div>
+                    @if ($errors->has('tags'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">

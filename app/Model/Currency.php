@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Vinkla\Hashids\Facades\Hashids;
+use Request;
 
 class Currency extends Model
 {
@@ -15,12 +16,30 @@ class Currency extends Model
     ];
 
     //===============Validation===============//
-    public static function rules()
+    public static function rules($id = null)
     {
-        return [
-            'name' => 'required|unique:countries|max:255',
-            'code' => 'required|unique:countries|max:3',
-        ];
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required|unique:currencies|max:255',
+                    'code' => 'required|unique:currencies|max:5',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|unique:currencies,name,' . $id . ',id',
+                    'code' => 'required|unique:currencies,code,' . $id . ',id',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
     }
 
     public static function messages()

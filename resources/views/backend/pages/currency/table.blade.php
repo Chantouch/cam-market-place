@@ -26,7 +26,7 @@
                     <td>{!! $currency->rounding !!}</td>
                     <td>{!! $currency->code !!}</td>
                     <td>{!! str_limit($currency->name_plural, 70) !!}</td>
-                    <td>{!! $currency->status !!}</td>
+                    <td>{!! Helper::status($currency->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.currencies.destroy', $currency->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.currencies.show', [$currency->hashid]) !!}"

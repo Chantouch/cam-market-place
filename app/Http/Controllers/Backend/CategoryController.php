@@ -19,6 +19,7 @@ class CategoryController extends Controller
     {
         $this->hashid = $hashid;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -75,7 +76,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -85,14 +86,16 @@ class CategoryController extends Controller
         if ($id === null) {
             return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
-        $category = Category::whereNull('category_id')->find($id);
+        $category = Category::find($id);
+        if ($category->category_id !== null)
+            $category = SubCategory::with('category')->find($id);
         return view('backend.pages.catalog.category.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -102,7 +105,9 @@ class CategoryController extends Controller
         if ($id === null) {
             return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
-        $category = Category::whereNull('category_id')->find($id);
+        $category = Category::find($id);
+        if ($category->category_id !== null)
+            $category = SubCategory::with('category')->find($id);
         $categories = Category::where('status', 1)->orderBy('id')->pluck('name', 'id');
         return view('backend.pages.catalog.category.edit', compact('category', 'categories'));
     }
@@ -111,7 +116,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -124,7 +129,10 @@ class CategoryController extends Controller
             if ($id === null) {
                 return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
             }
-            $category = Category::whereNull('category_id')->find($id);
+            $category = Category::find($id);
+            if ($category->category_id !== null)
+                $category = SubCategory::with('category')->find($id);
+
             $validator = Validator::make($data, Category::rules(), Category::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
@@ -145,7 +153,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\$id
+     * @param  \App\Model\ $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -155,7 +163,9 @@ class CategoryController extends Controller
         if ($id === null) {
             return redirect()->route('admin.catalogs.categories.index')->with('error', 'We can not find category with that id, please try the other');
         }
-        $category = Category::whereNull('category_id')->find($id);
+        $category = Category::find($id);
+        if ($category->category_id !== null)
+            $category = SubCategory::with('category')->find($id);
         $delete = $category->delete();
         if (!$delete) {
             return back()->with('error', 'Your category can not delete from your system right now. Plz try again later.');

@@ -9,8 +9,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        {!! $country->name !!}
-                        <small>{!! $country->code !!}</small>
+                        {!! $language->name !!}
+                        <small>{!! $language->code !!}</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -20,9 +20,9 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.settings.languages.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.settings.languages.edit', [$country->hashid]) !!}">Edit</a></li>
+                                <li><a href="{!! route('admin.settings.languages.edit', [$language->hashid]) !!}">Edit</a></li>
                                 <li>
-                                    {!! Form::open(['route' => ['admin.settings.languages.destroy', $country->hashid], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['admin.settings.languages.destroy', $language->hashid], 'method' => 'delete']) !!}
                                     {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs m-l-15', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                     {!! Form::close() !!}
                                 </li>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="body">
                     <p>
-                        {!! $country->description !!}
+                        {!! $language->description !!}
                     </p>
                     <a href="{!! route('admin.settings.languages.index') !!}" class="btn btn-primary m-t-15 waves-effect">BACK</a>
                 </div>
