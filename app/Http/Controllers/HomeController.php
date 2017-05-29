@@ -25,8 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliders = HomeSlider::with('image_slider')->where('status','1')->whereNull('parent_id')->firstOrFail();
-        $categories = Category::where('status',1)->get();
-        return view('front.pages.index',compact('sliders'),compact('categories'));
+        $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->firstOrFail();
+        $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
+        return view('front.pages.index', compact('sliders'), compact('categories'));
     }
 }

@@ -34,6 +34,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! $categories->render() !!}
     @else
         <p>There is no data here.</p>
     @endif
