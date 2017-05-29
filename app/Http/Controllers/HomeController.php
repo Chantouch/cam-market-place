@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\HomeSlider;
 use App\Model\Category;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,8 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->firstOrFail();
-        $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
-        return view('front.pages.index', compact('sliders'), compact('categories'));
+        try {
+            $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->first();
+            $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
+            return view('front.pages.index', compact('sliders'), compact('categories'));
+        } catch (ModelNotFoundException $exception) {
+            return response()->json(['error' => 'can not get sliders']);
+        }
     }
 }
