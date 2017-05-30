@@ -22,7 +22,7 @@
     @endif
 </div>
 
-{!! Form::hidden('status', false) !!}
+{{ Form::hidden('status', '0', array('id' => 'status')) }}
 {!! Form::checkbox('status', '1', null, ['class' => 'filled-in', 'id'=> 'status']) !!}
 <label for="status">Online</label>
 <br>

@@ -138,6 +138,7 @@
                         {{--</span>--}}
                     {{--@endif--}}
                 {{--</div>--}}
+
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
@@ -276,7 +277,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {!! Form::hidden('status', false) !!}
+                                    {{ Form::hidden('status', '0', array('id' => 'status')) }}
                                     <label>NO{!! Form::checkbox('status', '1', null) !!}<span
                                                 class="lever"></span>YES</label>
                                 </div>
@@ -298,7 +299,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {!! Form::hidden('new', false) !!}
+                                    {{ Form::hidden('new', '0', array('id' => 'new')) }}
                                     <label>NO{!! Form::checkbox('new', '1', null) !!}<span
                                                 class="lever"></span>YES</label>
                                 </div>
@@ -320,7 +321,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {!! Form::hidden('popular', false) !!}
+                                    {{ Form::hidden('popular', '0', array('id' => 'popular')) }}
                                     <label>NO{!! Form::checkbox('popular', '1', null) !!}<span class="lever"></span>YES</label>
                                 </div>
                             </div>

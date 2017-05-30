@@ -22,7 +22,7 @@
             <div class="form-line">
                 <div class="switch">
                     <div class="switch">
-                        {!! Form::hidden('pause_on_hover', false) !!}
+                        {{ Form::hidden('pause_on_hover', '0', array('id' => 'pause_on_hover')) }}
                         <label>OFF{!! Form::checkbox('pause_on_hover', '1', null) !!}<span
                                     class="lever"></span>ON</label>
                     </div>
@@ -45,7 +45,7 @@
             <div class="form-line">
                 <div class="switch">
                     <div class="switch">
-                        {!! Form::hidden('loop_forever', false) !!}
+                        {{ Form::hidden('loop_forever', '0', array('id' => 'loop_forever')) }}
                         <label>OFF{!! Form::checkbox('loop_forever', '1', null) !!}<span class="lever"></span>ON</label>
                     </div>
                 </div>

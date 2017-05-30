@@ -5,7 +5,7 @@
         <div class="slider-area">
             @if(isset($sliders))
                 @if(!empty($sliders))
-                    @if(count($sliders->home_slider))
+                    @if(count($sliders->image_slider))
                         <div id="slider-home" class="nivoSlider">
                             <?php $i = 1;?>
                             @foreach($sliders->image_slider as $slider)
