@@ -126,9 +126,11 @@
                 </div>
 
                 {!! Form::label('tags', 'Tags:') !!}
-                <div class="form-group demo-tagsinput-area">
+                <div class="form-group tagsinput-area">
                     <div class="form-line">
-                        {!! Form::text('tags[]', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinputs']) !!}
+                        {{--{!! Form::text('tags[]', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinputs', 'id'=>'tags']) !!}--}}
+                        {!! Form::select('tags[]',$tags , null, ['data-role' => 'tagsinput', 'id'=>'tags' , 'multiple']) !!}
+                        {{--<input type="text" value="" data-role="tagsinput" id="tags"/>--}}
                     </div>
                     @if ($errors->has('tags'))
                         <span class="help-block">

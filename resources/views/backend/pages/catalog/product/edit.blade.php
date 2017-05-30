@@ -35,6 +35,10 @@
             background: white;
             color: black;
         }
+
+        .tagsinput-area .bootstrap-select {
+            display: none !important;
+        }
     </style>
 @stop
 @section('content')
@@ -103,11 +107,9 @@
         $("#category_id").selectpicker({
             allowClear: true
         }).val({!! $product->categories()->pluck('categories.id') !!}).trigger('change');
-        $('#tags').tagsinput({
-            itemValue: function(item) {
-                return item.id;
-            }
-        });
+        {{--$('#tags').tagsinput({--}}
+            {{--source: {!! $product->tags()->pluck('tags.tags') !!}--}}
+        {{--});--}}
         $(document).ready(function () {
             $(".remove").click(function () {
                 $(this).parent(".img").remove();

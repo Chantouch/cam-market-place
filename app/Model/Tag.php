@@ -10,6 +10,21 @@ class Tag extends Model
     protected $appends = ['hashid'];
     protected $fillable = ['tags'];
 
+    //===============Validation===============//
+    public static function rules()
+    {
+        return [
+            'tags' => 'sometimes|exists:tags,id',
+        ];
+    }
+
+    public static function messages()
+    {
+        return [
+
+        ];
+    }
+
     /**
      * @return mixed
      */

@@ -144,10 +144,16 @@ class ProductController extends Controller
             $categories[$cat->id] = $cat->name;
         }
 
+        $tag = Tag::all();
+        $tags = array();
+        foreach ($tag as $tg) {
+            $tags[$tg->tags] = $tg->tags;
+        }
+
         $discount_types = \Helper::discount_types();
         $product = Product::with('city')->with('currency')->with('languages')->find($id);
         return view('backend.pages.catalog.product.edit',
-            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
+            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'tags')
         );
     }
 
@@ -203,11 +209,17 @@ class ProductController extends Controller
                 }
             }
             if ($request->has('tags')) {
+                //$tags = explode(',', $request->tags[0]);
                 $tags = $request->tags;
+                $tagIds = [];
                 foreach ($tags as $tag) {
                     $data['tags'] = $tag;
                     $tgs = new Tag($data);
-                    $product->tags()->save($tgs);
+                    $validator = Validator::make($data, Tag::rules(), Tag::messages());
+                    if ($validator->fails()) {
+                        $tagIds[] = $tgs->id;
+                    }
+                    $product->tags()->attach($tgs);
                     if (!$product->tags()->save($tgs))
                         throw new ModelNotFoundException();
                 }
