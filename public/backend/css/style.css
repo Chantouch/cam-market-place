@@ -10773,7 +10773,12 @@ button span, .form-group a span {
     left: 2px;
 }
 
-/*h2 span {*/
-    /*position: relative;*/
-    /*top: -5px;*/
-/*}*/
+.dropdown-header {
+    position: absolute;
+    list-style: none;
+    display: inline-table;
+}
+
+.form-product-fix {
+    width: 53px !important;
+}

@@ -28,6 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('attributes', 'Backend\AttributeController');
         Route::resource('products', 'Backend\ProductController');
         Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
+        Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
     });
 });
 

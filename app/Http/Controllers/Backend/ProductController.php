@@ -289,13 +289,20 @@ class ProductController extends Controller
         if ($request->ajax()) {
             $ids = array();
             foreach ($product->images as $photo) {
-                File::delete($product->img_path);
+                $old_file = [$product->img_path . $photo->img_name];
+                if (File::exists($product->img_path)) {
+                    File::delete($old_file);
+                }
                 $ids[] = $photo->id;
             }
-            $product->images()->detach();
+            $product->categories()->detach();
+            $product->languages()->detach();
             Image::whereIn('id', $ids)->delete();
-            $product->delete();
-            return response()->json('message', 'Successfully deleted image');
+            $delete = $product->forceDelete();
+            if (!$delete) {
+                return response()->json(['error', 'Your product can not delete from your system right now. Plz try again later.']);
+            }
+            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
         } else {
             $ids = array();
             foreach ($product->images as $photo) {
@@ -335,5 +342,22 @@ class ProductController extends Controller
             return response()->json(['message' => 'Successfully deleted image']);
         }
         return response()->json(['error' => 'Error deleted image']);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function duplicate($id)
+    {
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return response()->json(['error' => 'Can not find this image id']);
+        }
+        $product = Product::find($id);
+        $new_product = $product->replicate();
+        $new_product->save();
+        return redirect()->route('admin.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
     }
 }

@@ -49,7 +49,7 @@
             e.preventDefault();
             var id = $(this).data('id');
             swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete this product?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -57,12 +57,21 @@
                 },
                 function () {
                     $.ajax({
-                        type: "POST",
-                        url: "{{url('/destroy')}}",
+                        type: "DELETE",
+                        url: "/admin/catalogs/products/" + id,
                         data: {id: id},
+                        dataType: JSON,
+                        headers: {'X-CSRF-TOKEN': $("[name='_token']:first").val()},
                         success: function (data) {
-                            //
+                            console.log(data);
                         }
+                    }).done(function (data) {
+                        swal("Window Product Deleted!", "Window Product was successfully delete.", "success");
+                    }).error(function (data) {
+                        swal("Product deleted success!", "Window Product was successfully delete.", "success");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
                     });
                 });
         });

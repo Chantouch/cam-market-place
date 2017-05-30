@@ -25,13 +25,15 @@ class Product extends Model
             'qty' => 'required|integer',
             'short_description' => 'required',
             'currency_id' => 'required|integer',
+            'category_id' => 'required',
         ];
     }
 
     public static function messages()
     {
         return [
-            'currency_id.required' => 'The currency field is required'
+            'currency_id.required' => 'The currency field is required',
+            'category_id.required' => 'The category field is required',
         ];
     }
 
