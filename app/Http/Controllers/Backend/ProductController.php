@@ -60,9 +60,10 @@ class ProductController extends Controller
         $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
         $discount_types = \Helper::discount_types();
         return view('backend.pages.catalog.product.create',
-            compact('cities', 'languages', 'currencies', 'categories', 'discount_types')
+            compact('cities', 'languages', 'currencies', 'categories', 'discount_types', 'tags')
         );
     }
 
@@ -81,6 +82,8 @@ class ProductController extends Controller
                 return back()->withInput()->withErrors($validator);
             }
             $data['user_id'] = $this->auth()->id;
+            $path = 'uploads/product/img/';
+            $data['img_path'] = $path;
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->language_id)) {
@@ -89,9 +92,40 @@ class ProductController extends Controller
                 if (isset($request->category_id)) {
                     $create->categories()->attach($request->category_id);
                 }
-
-            }
-            if (!$create) {
+                if (isset($request->img_name)) {
+                    if ($request->hasFile('img_name')) {
+                        $destinationPath = public_path($path);
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0777, true);
+                        }
+                        $files = $request->file('img_name');
+                        foreach ($files as $file) {
+                            $image = Images::make($file);//->resize(787, 787);
+                            //to remove space from string
+                            $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                            $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                            $image->save($destinationPath . '/' . $fileName, 100);
+                            $images = new Image();
+                            $images->img_name = $fileName;
+                            $create->images()->save($images);
+                            if (!$create->images()->save($images))
+                                throw new ModelNotFoundException();
+                        }
+                    }
+                }
+//                if (isset($request->tags)) {
+//                    //$tags = explode(',', $request->tags[0]);
+//                    $tags = $request->tags;
+//                    foreach ($tags as $tag) {
+//                        $data['tags'] = $tag;
+//                        $tgs = new Tag($data);
+//                        $create->tags()->save($tgs);
+//                        if (!$create->tags()->save($tgs))
+//                            throw new ModelNotFoundException();
+//                    }
+//                }
+            } else {
+                DB::rollback();
                 return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added successfully.');
@@ -144,16 +178,16 @@ class ProductController extends Controller
             $categories[$cat->id] = $cat->name;
         }
 
-        $tag = Tag::all();
-        $tags = array();
-        foreach ($tag as $tg) {
-            $tags[$tg->tags] = $tg->tags;
-        }
+//        $tag = Tag::all();
+//        $tags = array();
+//        foreach ($tag as $tg) {
+//            $tags[$tg->tags] = $tg->tags;
+//        }
 
         $discount_types = \Helper::discount_types();
         $product = Product::with('city')->with('currency')->with('languages')->find($id);
         return view('backend.pages.catalog.product.edit',
-            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'tags')
+            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
         );
     }
 
@@ -188,42 +222,36 @@ class ProductController extends Controller
                     mkdir($destinationPath, 0777, true);
                 }
                 $picture = '';
-                if ($request->hasFile('img_name')) {
-                    $files = $request->file('img_name');
-                    foreach ($files as $file) {
-                        $image = Images::make($file);//->resize(787, 787);
-                        //to remove space from string
-                        $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                        $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                        $image->save($destinationPath . '/' . $fileName, 100);
-                        $data['img_path'] = $path;
-                        $data['img_name'] = $fileName;
-                        $images = new  Image($data);
-                        $product->images()->save($images);
-                    }
-                }
-                if (!empty($product['img_name'])) {
-                    $product['img_name'] = $picture;
-                } else {
-                    unset($product['img_name']);
-                }
-            }
-            if ($request->has('tags')) {
-                //$tags = explode(',', $request->tags[0]);
-                $tags = $request->tags;
-                $tagIds = [];
-                foreach ($tags as $tag) {
-                    $data['tags'] = $tag;
-                    $tgs = new Tag($data);
-                    $validator = Validator::make($data, Tag::rules(), Tag::messages());
-                    if ($validator->fails()) {
-                        $tagIds[] = $tgs->id;
-                    }
-                    $product->tags()->attach($tgs);
-                    if (!$product->tags()->save($tgs))
+                $files = $request->file('img_name');
+                foreach ($files as $file) {
+                    $image = Images::make($file);//->resize(787, 787);
+                    //to remove space from string
+                    $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                    $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    $image->save($destinationPath . '/' . $fileName, 100);
+                    $data['img_path'] = $path;
+                    $images = Image::FirstOrNew(['img_name' => $fileName]);
+                    $product->images()->save($images);
+                    if (!$product->images()->save($images))
                         throw new ModelNotFoundException();
                 }
+                if (!empty($product->images['img_name'])) {
+                    $product->images['img_name'] = $picture;
+                } else {
+                    unset($product->images['img_name']);
+                }
             }
+//            if ($request->has('tags')) {
+//                //$tags = explode(',', $request->tags[0]);
+//                $tags = $request->tags;
+//                foreach ($tags as $tag) {
+//                    $data['tags'] = $tag;
+//                    $tgs = Tag::firstOrNew(array('tags' => $tag));
+//                    $product->tags()->save($tgs);
+//                    if (!$product->tags()->save($tgs))
+//                        throw new ModelNotFoundException();
+//                }
+//            }
             $product->update($data);
             if ($product) {
                 if (isset($request->language_id)) {
@@ -266,10 +294,21 @@ class ProductController extends Controller
             }
             $product->images()->detach();
             Image::whereIn('id', $ids)->delete();
-            //$product->delete();
+            $product->delete();
             return response()->json('message', 'Successfully deleted image');
         } else {
-            $delete = $product->delete();
+            $ids = array();
+            foreach ($product->images as $photo) {
+                $old_file = [$product->img_path . $photo->img_name];
+                if (File::exists($product->img_path)) {
+                    File::delete($old_file);
+                }
+                $ids[] = $photo->id;
+            }
+            $product->categories()->detach();
+            $product->languages()->detach();
+            Image::whereIn('id', $ids)->delete();
+            $delete = $product->forceDelete();
             if (!$delete) {
                 return back()->with('error', 'Your product can not delete from your system right now. Plz try again later.');
             }
@@ -285,16 +324,13 @@ class ProductController extends Controller
             if ($id === null) {
                 return response()->json(['error' => 'Can not find this image id']);
             }
-            $image = Image::find($id);
-            $product = $image->products->first();
+            $image = Image::with('imageable')->find($id);
+            $product = $image->imageable->first();
             $old_file = [$product->img_path . $image->img_name];
             if (File::exists($product->img_path)) {
                 File::delete($old_file);
             }
             //$product->images()->detach();
-            DB::table('imageables')
-                ->where('image_id', $image->id)
-                ->delete();
             $image->delete();
             return response()->json(['message' => 'Successfully deleted image']);
         }

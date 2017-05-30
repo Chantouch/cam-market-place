@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price')->nullable();
             $table->double('discount')->nullable();
             $table->enum('discount_type', ['1', '2'])->nullable();
-            $table->string('short_description')->nullable();
+            $table->longText('short_description')->nullable();
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->string('code')->nullable();

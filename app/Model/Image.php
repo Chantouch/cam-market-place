@@ -8,7 +8,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Image extends Model
 {
     protected $appends = ['hashid'];
-    protected $fillable = ['img_name'];
+    protected $fillable = ['img_name', 'imageable_id', 'imageable_type'];
 
     /**
      * @return mixed
@@ -16,14 +16,6 @@ class Image extends Model
     public function getHashidAttribute()
     {
         return Hashids::encode($this->attributes['id']);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function products()
-    {
-        return $this->morphedByMany(Product::class, 'imageable');
     }
 
     /**

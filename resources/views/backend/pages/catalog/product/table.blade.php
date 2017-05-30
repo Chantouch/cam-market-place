@@ -19,9 +19,12 @@
                 <tr>
                     <th scope="row">{!! $product->id !!}</th>
                     <td width="20">
-                        @foreach($product->images->take(1) as $image)
-                            <img src="{!! asset($product->img_path.$image->img_name) !!}" alt="{!! $product->name !!}" class="img-thumbnail">
-                        @endforeach
+                        @if(count($product->images))
+                            @foreach($product->images->take(1) as $image)
+                                <img src="{!! asset($product->img_path.$image->img_name) !!}"
+                                     alt="{!! $product->name !!}" class="img-thumbnail">
+                            @endforeach
+                        @endif
                     </td>
                     <td>{!! $product->name !!}</td>
                     <td>
@@ -46,7 +49,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>
-                        {!! Form::button('<i class="material-icons">delete</i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="material-icons">delete</i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs button', 'data-id' => "$product->hashid"]) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

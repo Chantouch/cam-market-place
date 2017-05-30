@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Product extends Model
@@ -22,14 +23,15 @@ class Product extends Model
         return [
             'name' => 'required|max:255',
             'qty' => 'required|integer',
-            'short_description' => 'max:255',
+            'short_description' => 'required',
+            'currency_id' => 'required|integer',
         ];
     }
 
     public static function messages()
     {
         return [
-
+            'currency_id.required' => 'The currency field is required'
         ];
     }
 
@@ -59,7 +61,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->morphToMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     /**
@@ -67,7 +69,7 @@ class Product extends Model
      */
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphMany(Tag::class, 'taggable');
     }
 
     //----------PivotTable-----------//
@@ -88,6 +90,14 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'products_categories', 'product_id', 'category_id')->withPivot('product_id', 'category_id')->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     //----------Sluggable---------//
 
     /**
@@ -99,7 +109,7 @@ class Product extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'seo_url'
             ]
         ];
     }
@@ -112,7 +122,7 @@ class Product extends Model
      */
     public function getSeoUrlAttribute()
     {
-        return $this->name . '-from-' . $this->city->name;
+        return $this->name . '-of-' . $this->user->username;
     }
 
     /**

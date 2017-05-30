@@ -8,7 +8,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Tag extends Model
 {
     protected $appends = ['hashid'];
-    protected $fillable = ['tags'];
+    protected $fillable = ['tags', 'taggable_id', 'taggable_type'];
 
     //===============Validation===============//
     public static function rules()
@@ -31,14 +31,6 @@ class Tag extends Model
     public function getHashidAttribute()
     {
         return Hashids::encode($this->attributes['id']);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function products()
-    {
-        return $this->morphedByMany(Product::class, 'taggable');
     }
 
     /**

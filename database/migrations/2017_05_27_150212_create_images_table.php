@@ -16,13 +16,6 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
             $table->text('img_name');
-            $table->timestamps();
-        });
-
-        Schema::create('imageables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('image_id');
-            $table->foreign('image_id')->references('id')->on('images');
             $table->integer('imageable_id');
             $table->string('imageable_type');
             $table->timestamps();

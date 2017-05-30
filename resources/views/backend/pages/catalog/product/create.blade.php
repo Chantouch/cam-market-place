@@ -3,6 +3,9 @@
     <!-- Bootstrap Select Css -->
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
     <link href="{!! asset('plugins/summernote/summernote.css') !!}" rel="stylesheet"/>
+    <!-- Bootstrap Tagsinput Css -->
+    <link href="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') !!}" rel="stylesheet">
+
     <style>
         input[type="file"] {
             display: block;
@@ -33,6 +36,9 @@
             background: white;
             color: black;
         }
+        .tagsinput-area .bootstrap-select {
+            display: none !important;
+        }
     </style>
 @stop
 @section('content')
@@ -49,7 +55,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.catalogs.products.store'], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['admin.catalogs.products.store'], 'method' => 'POST', 'files'=> true]) !!}
                     @include('backend.pages.catalog.product.fields')
                     {!! Form::close() !!}
                 </div>
@@ -64,6 +70,8 @@
     <!-- Select Plugin Js -->
     <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
     <script src="{!! asset('plugins/summernote/summernote.min.js') !!}"></script>
+    <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') !!}"></script>
 
     <script>
         $(document).ready(function () {

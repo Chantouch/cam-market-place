@@ -1,7 +1,11 @@
 @extends('layouts.backend.app')
+@section('style')
+    <!-- Sweetalert Css -->
+    <link href="{!! asset('plugins/sweetalert/sweetalert.css') !!}" rel="stylesheet"/>
+@stop
 @section('content')
     {{--<div class="block-header">--}}
-        {{--<h2>COUNTRIES</h2>--}}
+    {{--<h2>COUNTRIES</h2>--}}
     {{--</div>--}}
     <!-- Hover Rows -->
     <div class="row clearfix">
@@ -32,4 +36,35 @@
         </div>
     </div>
     <!-- #END# Hover Rows -->
+@stop
+
+@section('plugins')
+    <!-- SweetAlert Plugin Js -->
+    <script src="{!! asset('plugins/sweetalert/sweetalert.min.js') !!}"></script>
+@stop
+
+@section('script')
+    <script>
+        $(document).on('click', '.button', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                    title: "Are you sure!",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                },
+                function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{url('/destroy')}}",
+                        data: {id: id},
+                        success: function (data) {
+                            //
+                        }
+                    });
+                });
+        });
+    </script>
 @stop
