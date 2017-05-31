@@ -41,11 +41,11 @@ class Category extends Model
     //==============Relationship=============//
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function products()
     {
-        return $this->hasMany(Product::class)->where('status', 1);
+        return $this->belongsToMany(Product::class, 'products_categories', 'category_id', 'product_id')->withPivot('category_id', 'product_id')->withTimestamps();
     }
 
     /**

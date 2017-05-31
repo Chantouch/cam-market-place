@@ -29,9 +29,9 @@ class HomeController extends Controller
     {
         try {
             $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->first();
-            $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
-            $products = Product::with('category')->where('status',1)->get();
-            return view('front.pages.index', compact('sliders'), compact('categories','products'));
+            $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
+            $products = Product::with('categories')->where('status', 1)->get();
+            return view('front.pages.index', compact('sliders'), compact('categories', 'products'));
         } catch (ModelNotFoundException $exception) {
             return response()->json(['error' => 'can not get sliders']);
         }
