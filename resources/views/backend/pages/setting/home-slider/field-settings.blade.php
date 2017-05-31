@@ -22,7 +22,7 @@
             <div class="form-line">
                 <div class="switch">
                     <div class="switch">
-                        {{ Form::hidden('pause_on_hover', '0', array('id' => 'pause_on_hover')) }}
+                        {{ Form::hidden('pause_on_hover', '0') }}
                         <label>OFF{!! Form::checkbox('pause_on_hover', '1', null) !!}<span
                                     class="lever"></span>ON</label>
                     </div>

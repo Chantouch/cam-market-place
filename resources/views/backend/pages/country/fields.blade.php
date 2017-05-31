@@ -34,7 +34,7 @@
     @endif
 </div>
 
-{{ Form::hidden('status', '0', array('id' => 'status')) }}
+{{ Form::hidden('status', '0') }}
 {!! Form::checkbox('status', '1', null, ['class' => 'filled-in', 'id'=> 'status']) !!}
 <label for="status">Active</label>
 <br>

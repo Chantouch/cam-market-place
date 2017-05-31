@@ -1,4 +1,8 @@
 @extends('layouts.front.app')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{!! asset('plugins/xZoom/xzoom.css') !!}" media="all"/>
+    <link type="text/css" rel="stylesheet" media="all" href="{!! asset('plugins/xZoom/magnific-popup.css') !!}"/>
+@stop
 @section('slideshow-area')
     <div class="col-xs-12 col-sm-8 col-md-9">
         <!-- Start page content -->
@@ -6,84 +10,40 @@
             <!-- Start single product image -->
             <div class="col-sm-5">
                 <div class="single-product-image">
-                    <div id="content-eleyas">
-                        <div id="my-tab-content" class="tab-content">
-
-                            <div class="tab-pane active" id="view1">
-                                <span class="new-box">
-                                    <span class="new-label">{!! $product->new !!}</span>
-                                </span>
-                                <a class="fancybox" href="{!! $product->img_path !!}"
-                                   data-fancybox-group="gallery" title="">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt1.jpg" alt="">
-                                    <span>View larger<i class="fa fa-search-plus"></i></span>
-                                </a>
+                    <!-- magnific start -->
+                    <section id="magnific">
+                        <div class="row">
+                            <div class="large-12 column"><h3>With Magnific Pop-up</h3>Left click while zooming</div>
+                            <div class="large-5 column">
+                                <div class="xzoom-container">
+                                    <img class="xzoom5" id="xzoom-magnific"
+                                         src="{!! asset('images/gallery/preview/01_b_car.jpg') !!}"
+                                         xoriginal="{!! asset('images/gallery/original/01_b_car.jpg') !!}"/>
+                                    <div class="xzoom-thumbs">
+                                        <a href="{!! asset('images/gallery/original/01_b_car.jpg') !!}">
+                                            <img class="xzoom-gallery5" width="80"
+                                                 src="{!! asset('images/gallery/thumbs/01_b_car.jpg') !!}"
+                                                 xpreview="{!! asset('images/gallery/preview/01_b_car.jpg') !!}"
+                                                 title="The description goes here"></a>
+                                        <a href="{!! asset('images/gallery/original/02_o_car.jpg') !!}">
+                                            <img class="xzoom-gallery5" width="80"
+                                                 src="{!! asset('images/gallery/preview/02_o_car.jpg') !!}"
+                                                 title="The description goes here"></a>
+                                        <a href="{!! asset('images/gallery/original/03_r_car.jpg') !!}">
+                                            <img class="xzoom-gallery5" width="80"
+                                                 src="{!! asset('images/gallery/preview/03_r_car.jpg') !!}"
+                                                 title="The description goes here"></a>
+                                        <a href="{!! asset('images/gallery/original/04_g_car.jpg') !!}">
+                                            <img class="xzoom-gallery5" width="80"
+                                                 src="{!! asset('images/gallery/preview/04_g_car.jpg') !!}"
+                                                 title="The description goes here"></a>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="tab-pane" id="view2">
-                                                <span class="new-box">
-                                                    <span class="new-label">New</span>
-                                                </span>
-                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt2.jpg"
-                                   data-fancybox-group="gallery" title="">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt2.jpg" alt="">
-                                    <span>View larger<i class="fa fa-search-plus"></i></span>
-                                </a>
-                            </div>
-                            <div class="tab-pane" id="view3">
-                                                <span class="new-box">
-                                                    <span class="new-label">New</span>
-                                                </span>
-                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt3.jpg"
-                                   data-fancybox-group="gallery" title="">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt3.jpg" alt="">
-                                    <span>View larger<i class="fa fa-search-plus"></i></span>
-                                </a>
-                            </div>
-                            <div class="tab-pane" id="view4">
-                                                <span class="new-box">
-                                                    <span class="new-label">New</span>
-                                                </span>
-                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt4.jpg"
-                                   data-fancybox-group="gallery" title="">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt4.jpg" alt=""><span>View larger<i
-                                                class="fa fa-search-plus"></i></span>
-                                </a>
-                            </div>
-                            <div class="tab-pane" id="view5">
-                                                <span class="new-box">
-                                                    <span class="new-label">New</span>
-                                                </span>
-                                <a class="fancybox" href="img/single-product/printed-chiffon-dress1.jpg"
-                                   data-fancybox-group="gallery" title="">
-                                    <img src="img/single-product/printed-chiffon-dress1.jpg" alt="">
-                                    <span>View larger<i class="fa fa-search-plus"></i></span>
-                                </a>
-                            </div>
+                            <div class="large-7 column"></div>
                         </div>
-                        <div id="viewproduct" class="nav nav-tabs product-view" data-tabs="tabs">
-                            <div class="pro-view active">
-                                <a href="#view1" data-toggle="tab">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt1m.jpg" alt="">
-                                </a></div>
-                            <div class="pro-view">
-                                <a href="#view2" data-toggle="tab">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt2m.jpg" alt="">
-                                </a></div>
-                            <div class="pro-view">
-                                <a href="#view3" data-toggle="tab">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt3m.jpg" alt="">
-                                </a></div>
-                            <div class="pro-view">
-                                <a href="#view4" data-toggle="tab">
-                                    <img src="img/single-product/faded-short-sleeves-tshirt4m.jpg" alt="">
-                                </a></div>
-                            <div class="pro-view">
-                                <a href="#view5" data-toggle="tab">
-                                    <img src="img/single-product/printed-chiffon-dress.jpg" alt="">
-                                </a></div>
-                        </div>
-                    </div>
+                    </section>
+                    <!-- magnific end -->
                 </div>
             </div>
             <!-- End single product image -->
@@ -282,4 +242,11 @@
         </div>
     </div>
     <!-- End featured product -->
+@stop
+
+@section('scripts')
+    <!-- XZOOM JQUERY PLUGIN  -->
+    <script type="text/javascript" src="{!! asset('plugins/xZoom/xzoom.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('plugins/xZoom/magnific-popup.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('plugins/xZoom/setup.js') !!}"></script>
 @stop

@@ -1,4 +1,8 @@
 @extends('layouts.front.app')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{!! asset('plugins/xZoom/xzoom.css') !!}" media="all"/>
+    <link type="text/css" rel="stylesheet" media="all" href="{!! asset('plugins/xZoom/magnific-popup.css') !!}" />
+@stop
 @section('slideshow-area')
     <div class="col-xs-12 col-sm-8 col-md-9">
         <!-- Start page content -->
@@ -214,12 +218,18 @@
                                 </div>
                             </div>
                         </div>
-                    <?php }?>
-                    <!-- End featured item -->
+                        <!-- End featured item -->
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End featured product -->
+@stop
+
+@section('scripts')
+    <!-- XZOOM JQUERY PLUGIN  -->
+    <script type="text/javascript" src="{!! asset('plugins/xZoom/xzoom.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('plugins/xZoom/magnific-popup.js') !!}"></script>
 @stop

@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="{!! asset('css/nivo-slider.css') !!}">
     <link rel="stylesheet" href="{!! asset('css/style.css') !!}">
     <link rel="stylesheet" href="{!! asset('css/responsive.css') !!}">
+    @yield('style')
     <script src="{!! asset('js/vendor/modernizr-2.8.3.min.js') !!}"></script>
 </head>
 <body class="home-4">

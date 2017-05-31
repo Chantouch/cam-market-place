@@ -18,7 +18,7 @@
             @foreach($products as $index => $product)
                 <tr class="remove">
                     <th scope="row">{!! $index+1 !!}</th>
-                    <td width="20">
+                    <td width="60">
                         @if(count($product->images))
                             @foreach($product->images->take(1) as $image)
                                 <img src="{!! asset($product->img_path.$image->img_name) !!}"

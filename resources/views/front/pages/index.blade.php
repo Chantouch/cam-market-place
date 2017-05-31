@@ -345,7 +345,7 @@
                                                             <div class="col-sm-3">
                                                                 <div class="featured-inner">
                                                                     <div class="featured-image">
-                                                                        <a href="{!! route('products.details', [$product->slug]) !!}}">
+                                                                        <a href="{!! route('products.details', [$product->slug]) !!}">
                                                                             @if(count($product->images))
                                                                                 @foreach($product->images->take(1) as $image)
                                                                                     <img src="{!! asset($product->img_path.$image->img_name) !!}"

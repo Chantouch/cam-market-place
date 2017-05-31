@@ -79,7 +79,7 @@
     <div class="form-line">
         <div class="switch">
             <div class="switch">
-                {{ Form::hidden('status', '0', array('id' => 'status')) }}
+                {{ Form::hidden('status', '0') }}
                 <label>OFF{!! Form::checkbox('status', '1', null) !!}<span class="lever"></span>ON</label>
             </div>
         </div>

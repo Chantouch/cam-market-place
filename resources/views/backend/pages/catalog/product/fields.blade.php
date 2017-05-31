@@ -277,7 +277,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {{ Form::hidden('status', '0', array('id' => 'status')) }}
+                                    {{ Form::hidden('status', '0') }}
                                     <label>NO{!! Form::checkbox('status', '1', null) !!}<span
                                                 class="lever"></span>YES</label>
                                 </div>
@@ -299,7 +299,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {{ Form::hidden('new', '0', array('id' => 'new')) }}
+                                    {{ Form::hidden('new', '0') }}
                                     <label>NO{!! Form::checkbox('new', '1', null) !!}<span
                                                 class="lever"></span>YES</label>
                                 </div>
@@ -321,7 +321,7 @@
                         <div class="form-line">
                             <div class="switch">
                                 <div class="switch">
-                                    {{ Form::hidden('popular', '0', array('id' => 'popular')) }}
+                                    {{ Form::hidden('popular', '0') }}
                                     <label>NO{!! Form::checkbox('popular', '1', null) !!}<span class="lever"></span>YES</label>
                                 </div>
                             </div>
