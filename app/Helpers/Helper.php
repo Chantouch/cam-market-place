@@ -125,4 +125,17 @@ class Helper
             return $model->name;
         }
     }
+
+    /**
+     * @param $model
+     * @return string
+     */
+    public static function currency($model)
+    {
+        if ($model == null) {
+            return "Not Selected";
+        } else {
+            return $model->symbol;
+        }
+    }
 }

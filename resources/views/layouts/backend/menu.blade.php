@@ -67,6 +67,21 @@
         </ul>
     </li>
 
+    <li class="header">Manages</li>
+    <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
+        <a href="javascript:void(0);" class="menu-toggle">
+            <i class="material-icons">perm_media</i>
+            <span>MANAGING</span>
+        </a>
+        <ul class="ml-menu">
+            <li class="{!! Request::is('admin/catalogs/products*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.catalogs.products.index') !!}">
+                    Partners
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">trending_down</i>

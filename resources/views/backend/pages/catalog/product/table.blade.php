@@ -15,9 +15,9 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $product)
+            @foreach($products as $index => $product)
                 <tr class="remove">
-                    <th scope="row">{!! $product->id !!}</th>
+                    <th scope="row">{!! $index+1 !!}</th>
                     <td width="20">
                         @if(count($product->images))
                             @foreach($product->images->take(1) as $image)

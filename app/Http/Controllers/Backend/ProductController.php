@@ -100,7 +100,7 @@ class ProductController extends Controller
                         }
                         $files = $request->file('img_name');
                         foreach ($files as $file) {
-                            $image = Images::make($file);//->resize(787, 787);
+                            $image = Images::make($file)->resize(500, 500);
                             //to remove space from string
                             $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
                             $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
@@ -224,7 +224,7 @@ class ProductController extends Controller
                 $picture = '';
                 $files = $request->file('img_name');
                 foreach ($files as $file) {
-                    $image = Images::make($file);//->resize(787, 787);
+                    $image = Images::make($file)->resize(500, 500);
                     //to remove space from string
                     $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
                     $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
