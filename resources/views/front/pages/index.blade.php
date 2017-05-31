@@ -154,8 +154,8 @@
                     <?php }?>
                 </div>
             </div>
-            <!-- End categori slide product -->
         </div>
+        <!-- End categori slide product -->
     </div>
 @stop
 @section('content-area')

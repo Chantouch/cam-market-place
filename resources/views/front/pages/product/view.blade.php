@@ -10,105 +10,110 @@
             <!-- Start single product image -->
             <div class="col-sm-5">
                 <div class="single-product-image">
-                    <!-- magnific start -->
-                    <section id="magnific">
-                        <div class="row">
-                            <div class="large-12 column"><h3>With Magnific Pop-up</h3>Left click while zooming</div>
-                            <div class="large-5 column">
-                                <div class="xzoom-container">
-                                    <img class="xzoom5" id="xzoom-magnific"
-                                         src="{!! asset('images/gallery/preview/01_b_car.jpg') !!}"
-                                         xoriginal="{!! asset('images/gallery/original/01_b_car.jpg') !!}"/>
-                                    <div class="xzoom-thumbs">
-                                        <a href="{!! asset('images/gallery/original/01_b_car.jpg') !!}">
-                                            <img class="xzoom-gallery5" width="80"
-                                                 src="{!! asset('images/gallery/thumbs/01_b_car.jpg') !!}"
-                                                 xpreview="{!! asset('images/gallery/preview/01_b_car.jpg') !!}"
-                                                 title="The description goes here"></a>
-                                        <a href="{!! asset('images/gallery/original/02_o_car.jpg') !!}">
-                                            <img class="xzoom-gallery5" width="80"
-                                                 src="{!! asset('images/gallery/preview/02_o_car.jpg') !!}"
-                                                 title="The description goes here"></a>
-                                        <a href="{!! asset('images/gallery/original/03_r_car.jpg') !!}">
-                                            <img class="xzoom-gallery5" width="80"
-                                                 src="{!! asset('images/gallery/preview/03_r_car.jpg') !!}"
-                                                 title="The description goes here"></a>
-                                        <a href="{!! asset('images/gallery/original/04_g_car.jpg') !!}">
-                                            <img class="xzoom-gallery5" width="80"
-                                                 src="{!! asset('images/gallery/preview/04_g_car.jpg') !!}"
-                                                 title="The description goes here"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="large-7 column"></div>
+                    <div id="magnific">
+                        <span>Left click while zooming</span>
+                        <img class="xzoom5" id="xzoom-magnific"
+                             src="{!! asset('images/gallery/preview/01_b_car.jpg') !!}"
+                             xoriginal="{!! asset('images/gallery/original/01_b_car.jpg') !!}"/>
+                        <div class="xzoom-thumbs">
+                            <a href="{!! asset('images/gallery/original/02_o_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/02_o_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
+                            <a href="{!! asset('images/gallery/original/03_r_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/03_r_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
+                            <a href="{!! asset('images/gallery/original/04_g_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/04_g_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
+                            <a href="{!! asset('images/gallery/original/02_o_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/02_o_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
+                            <a href="{!! asset('images/gallery/original/03_r_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/03_r_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
+                            <a href="{!! asset('images/gallery/original/04_g_car.jpg') !!}">
+                                <img class="xzoom-gallery5" width="80"
+                                     src="{!! asset('images/gallery/preview/04_g_car.jpg') !!}"
+                                     title="The description goes here">
+                            </a>
                         </div>
-                    </section>
-                    <!-- magnific end -->
+                    </div>
                 </div>
             </div>
-            <!-- End single product image -->
-            <!-- Start single product details -->
-            <div class="col-sm-7">
-                <div class="single-product-details">
-                    <h1>{!! $product->name !!}</h1>
-                    <div class="sin-social">
-                        <p>
-                            <a class="btn btn-default twitter" href="#"><i class="fa fa-twitter"></i>Tweet</a>
-                            <a class="btn btn-default facebook" href="#"><i class="fa fa-facebook"></i>Share</a>
-                            <a class="btn btn-default google-plus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
-                            <a class="btn btn-default pinterest" href="#"><i class="fa fa-pinterest"></i>Pinterest</a>
-                        </p>
-                    </div>
-                    <p class="rating-and-review">
+        </div>
+        <!-- End single product image -->
+        <!-- Start single product details -->
+        <div class="col-sm-7">
+            <div class="single-product-details">
+                <h1>{!! $product->name !!}</h1>
+                <div class="sin-social">
+                    <p>
+                        <a class="btn btn-default twitter" href="#"><i class="fa fa-twitter"></i>Tweet</a>
+                        <a class="btn btn-default facebook" href="#"><i class="fa fa-facebook"></i>Share</a>
+                        <a class="btn btn-default google-plus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
+                        <a class="btn btn-default pinterest" href="#"><i class="fa fa-pinterest"></i>Pinterest</a>
+                    </p>
+                </div>
+                <p class="rating-and-review">
                         <span>
                             <i class="fa fa-star"></i><i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i><i class="fa fa-star"></i>
                         </span>
-                        <a href="#">Read reviews (0)</a>
-                        <a href="#">Write a review</a>
-                    </p>
-                    <h2><span>£ 19.81</span></h2>
-                    <p><strong>Reference:</strong> demo_1 </p>
-                    <p><strong>Condition:</strong> {!! $product->new !!} </p>
-                    <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit.
-                        Accessorize with a straw hat and you're ready for summer!</p>
-                    <p class="sin-item">
-                        <span class="sin-item-text"> 292 Items </span><span class="sin-item-btn">In stock</span>
-                    </p>
-                    <form method="post" action="#">
-                        <div class="numbers-row">
-                            <label>Quantity</label>
-                            <input type="number" name="french-hens" id="french-hens">
-                        </div>
-                    </form>
-                    <p class="selector1">
-                        <label>Size</label>
-                        <select id="selectProductSort1" class="selectProductSort form-control">
-                            <option value="position:asc" selected="selected">S</option>
-                            <option value="price:asc">M</option>
-                            <option value="price:desc">L</option>
-                        </select>
-                    </p>
-                    <p class="selector1">
-                        <label>Color</label>
-                        <a href="#" title="Orange" class="color orange"></a><a href="#" title="Blue"
-                                                                               class="color blue"></a>
-                    </p>
-                    <p class="buttons_bottom_block no-print" id="add_to_cart">
-                        <button class="exclusive" name="Submit" type="submit">
-                            <span>Add to cart</span>
-                        </button>
-                    </p>
-                    <p class="sin-adto-cart-bottom">
-                        <a href="#"><i class="fa fa-envelope-o"></i>Send to a friend</a>
-                        <a href="#"><i class="fa fa-print"></i>Print</a>
-                        <a href="#"><i class="fa fa-heart"></i>Add to wishlist</a>
-                    </p>
-                </div>
+                    <a href="#">Read reviews (0)</a>
+                    <a href="#">Write a review</a>
+                </p>
+                <h2><span>£ 19.81</span></h2>
+                <p><strong>Reference:</strong> demo_1 </p>
+                <p><strong>Condition:</strong> {!! $product->new !!} </p>
+                <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit.
+                    Accessorize with a straw hat and you're ready for summer!</p>
+                <p class="sin-item">
+                    <span class="sin-item-text"> 292 Items </span><span class="sin-item-btn">In stock</span>
+                </p>
+                <form method="post" action="#">
+                    <div class="numbers-row">
+                        <label>Quantity</label>
+                        <input type="number" name="french-hens" id="french-hens">
+                    </div>
+                </form>
+                <p class="selector1">
+                    <label>Size</label>
+                    <select id="selectProductSort1" class="selectProductSort form-control">
+                        <option value="position:asc" selected="selected">S</option>
+                        <option value="price:asc">M</option>
+                        <option value="price:desc">L</option>
+                    </select>
+                </p>
+                <p class="selector1">
+                    <label>Color</label>
+                    <a href="#" title="Orange" class="color orange"></a><a href="#" title="Blue"
+                                                                           class="color blue"></a>
+                </p>
+                <p class="buttons_bottom_block no-print" id="add_to_cart">
+                    <button class="exclusive" name="Submit" type="submit">
+                        <span>Add to cart</span>
+                    </button>
+                </p>
+                <p class="sin-adto-cart-bottom">
+                    <a href="#"><i class="fa fa-envelope-o"></i>Send to a friend</a>
+                    <a href="#"><i class="fa fa-print"></i>Print</a>
+                    <a href="#"><i class="fa fa-heart"></i>Add to wishlist</a>
+                </p>
             </div>
-            <!-- End single product details -->
         </div>
+        <!-- End single product details -->
+    </div>
     </div>
 @stop
 @section('content-area')

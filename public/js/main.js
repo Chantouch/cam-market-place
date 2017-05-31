@@ -147,6 +147,22 @@
         itemsTablet: [767, 4],
         itemsMobile: [480, 2]
     });
+
+    /*--------------------------------
+     View Product Details
+     ---------------------------------- */
+    $(".xzoom-thumbs").owlCarousel({
+        navigation: true,
+        pagination: false,
+        slideSpeed: 600,
+        paginationSpeed: 400,
+        items: 5,
+        itemsDesktop: [1199, 4],
+        itemsDesktopSmall: [979, 3],
+        itemsTablet: [767, 4],
+        itemsMobile: [480, 2],
+        navigationText: ['<i class="icon-left-open"><i class="fa fa-angle-left"></i></i>', '<i class="icon-right-open"><i class="fa fa-angle-right"></i></i>']
+    });
     /*--------------------------------
      mobile menu tab
      ---------------------------------- */
