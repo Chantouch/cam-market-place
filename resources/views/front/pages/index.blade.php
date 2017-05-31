@@ -204,7 +204,7 @@
                                         </a>
                                     </div>
                                     <div class="featured-info">
-                                        <a href="{!! url('single_product')!!}">{!! $product->name !!}</a>
+                                        <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
                                         <p class="reating">
                                         <span class="rate">
                                             <i class="fa fa-star"></i>
@@ -355,7 +355,8 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Faded Short Sleeves
+                                                                            <a href="{!! url('single_product')!!}">Faded
+                                                                                Short Sleeves
                                                                                 T-shirt</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -368,12 +369,14 @@
                                                                             </p>
                                                                             <span class="price">$16.51</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -384,7 +387,8 @@
                                                                     <div class="featured-inner">
                                                                         <div class="featured-image">
                                                                             <a href="{!! url('single_product')!!}">
-                                                                                <img src="img/home-4/product/blouse.jpg" alt="">
+                                                                                <img src="img/home-4/product/blouse.jpg"
+                                                                                     alt="">
                                                                             </a>
                                                                         </div>
                                                                         <div class="featured-info">
@@ -400,12 +404,14 @@
                                                                             </p>
                                                                             <span class="price">$27.00</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -416,12 +422,14 @@
                                                                     <div class="featured-inner">
                                                                         <div class="featured-image">
                                                                             <a href="{!! url('single_product')!!}">
-                                                                                <img src="img/home-4/product/printed-dress2.jpg" alt="">
+                                                                                <img src="img/home-4/product/printed-dress2.jpg"
+                                                                                     alt="">
                                                                             </a>
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -433,12 +441,14 @@
                                                                             </p>
                                                                             <span class="price">$26.00</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -449,11 +459,13 @@
                                                                     <div class="featured-inner">
                                                                         <div class="featured-image">
                                                                             <a href="{!! url('single_product')!!}">
-                                                                                <img src="img/home-4/product/printed-dress3.jpg" alt="">
+                                                                                <img src="img/home-4/product/printed-dress3.jpg"
+                                                                                     alt="">
                                                                             </a>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Dress</a>
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
                                                                         <i class="fa fa-star"></i>
@@ -465,12 +477,14 @@
                                                                             </p>
                                                                             <span class="price">$50.00</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -487,7 +501,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Summer
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Summer
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -500,12 +515,14 @@
                                                                             </p>
                                                                             <span class="price">$28.00</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -521,7 +538,8 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Summer
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Summer
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -534,12 +552,14 @@
                                                                             </p>
                                                                             <span class="price">$30.00</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -555,7 +575,8 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -568,12 +589,14 @@
                                                                             </p>
                                                                             <span class="price">$16.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -590,7 +613,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -603,12 +627,14 @@
                                                                             </p>
                                                                             <span class="price">$16.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -625,7 +651,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -638,12 +665,14 @@
                                                                             </p>
                                                                             <span class="price">$16.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -660,7 +689,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -673,12 +703,14 @@
                                                                             </p>
                                                                             <span class="price">$306.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -695,7 +727,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -708,12 +741,14 @@
                                                                             </p>
                                                                             <span class="price">$26.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -730,7 +765,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -743,12 +779,14 @@
                                                                             </p>
                                                                             <span class="price">$26.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -765,7 +803,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -778,12 +817,14 @@
                                                                             </p>
                                                                             <span class="price">$120.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -800,7 +841,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -813,12 +855,14 @@
                                                                             </p>
                                                                             <span class="price">$20.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -835,7 +879,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -848,12 +893,14 @@
                                                                             </p>
                                                                             <span class="price">$30.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -870,7 +917,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -883,12 +931,14 @@
                                                                             </p>
                                                                             <span class="price">$200.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -905,7 +955,8 @@
                                                                             <span class="price-percent-reduction">-20%</span>
                                                                         </div>
                                                                         <div class="featured-info">
-                                                                            <a href="{!! url('single_product')!!}">Printed Chiffon
+                                                                            <a href="{!! url('single_product')!!}">Printed
+                                                                                Chiffon
                                                                                 Dress</a>
                                                                             <p class="reating">
                                                                     <span class="rate">
@@ -918,12 +969,14 @@
                                                                             </p>
                                                                             <span class="price">$200.40</span>
                                                                             <div class="featured-button">
-                                                                                <a href="wishlists.html" class="wishlist"><i
+                                                                                <a href="wishlists.html"
+                                                                                   class="wishlist"><i
                                                                                             class="fa fa-heart"></i></a>
                                                                                 <a href="#" class="fetu-comment"><i
                                                                                             class="fa fa-signal"></i></a>
                                                                                 <a href="cart.html" class="add-to-card"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Add
+                                                                                    to cart</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -933,9 +986,9 @@
                                                         @endif
                                                     @endforeach
                                                 </div>
-                                            @endforeach
-                                        @endif
-                                        <!-- End popular tab product -->
+                                        @endforeach
+                                    @endif
+                                    <!-- End popular tab product -->
                                     </div>
                                 </div>
                             </div>

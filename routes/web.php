@@ -35,4 +35,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('single_product','SingleController@index');
+Route::get('single_product', 'SingleController@index');
+
+
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('details/{slug}', 'Frontend\ProductController@show')->name('details');
+});

@@ -7,23 +7,81 @@
             <div class="col-sm-5">
                 <div class="single-product-image">
                     <div id="content-eleyas">
-                        <div class="featured-image">
-                            <img id="img_01" src="images/small/image1.jpg" data-zoom-image="images/large/image1.jpg"/>
-                        </div>
-                        <div id="gal1">
-                            <div class="tab-pane" id="view1">
-                                <a href="#" data-image="images/small/image1.jpg"
-                                   data-zoom-image="images/large/image1.jpg">
-                                    <img id="img_01" src="images/thumb/image1.jpg"/>
-                                </a>
-                            </div>
-                            <div class="tab-pane" id="view2">
-                                <a href="#" data-image="images/small/image1.jpg"
-                                   data-zoom-image="images/large/image1.jpg">
-                                    <img id="img_01" src="images/thumb/image1.jpg"/>
+                        <div id="my-tab-content" class="tab-content">
+
+                            <div class="tab-pane active" id="view1">
+                                <span class="new-box">
+                                    <span class="new-label">{!! $product->new !!}</span>
+                                </span>
+                                <a class="fancybox" href="{!! $product->img_path !!}"
+                                   data-fancybox-group="gallery" title="">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt1.jpg" alt="">
+                                    <span>View larger<i class="fa fa-search-plus"></i></span>
                                 </a>
                             </div>
 
+                            <div class="tab-pane" id="view2">
+                                                <span class="new-box">
+                                                    <span class="new-label">New</span>
+                                                </span>
+                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt2.jpg"
+                                   data-fancybox-group="gallery" title="">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt2.jpg" alt="">
+                                    <span>View larger<i class="fa fa-search-plus"></i></span>
+                                </a>
+                            </div>
+                            <div class="tab-pane" id="view3">
+                                                <span class="new-box">
+                                                    <span class="new-label">New</span>
+                                                </span>
+                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt3.jpg"
+                                   data-fancybox-group="gallery" title="">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt3.jpg" alt="">
+                                    <span>View larger<i class="fa fa-search-plus"></i></span>
+                                </a>
+                            </div>
+                            <div class="tab-pane" id="view4">
+                                                <span class="new-box">
+                                                    <span class="new-label">New</span>
+                                                </span>
+                                <a class="fancybox" href="img/single-product/faded-short-sleeves-tshirt4.jpg"
+                                   data-fancybox-group="gallery" title="">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt4.jpg" alt=""><span>View larger<i
+                                                class="fa fa-search-plus"></i></span>
+                                </a>
+                            </div>
+                            <div class="tab-pane" id="view5">
+                                                <span class="new-box">
+                                                    <span class="new-label">New</span>
+                                                </span>
+                                <a class="fancybox" href="img/single-product/printed-chiffon-dress1.jpg"
+                                   data-fancybox-group="gallery" title="">
+                                    <img src="img/single-product/printed-chiffon-dress1.jpg" alt="">
+                                    <span>View larger<i class="fa fa-search-plus"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="viewproduct" class="nav nav-tabs product-view" data-tabs="tabs">
+                            <div class="pro-view active">
+                                <a href="#view1" data-toggle="tab">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt1m.jpg" alt="">
+                                </a></div>
+                            <div class="pro-view">
+                                <a href="#view2" data-toggle="tab">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt2m.jpg" alt="">
+                                </a></div>
+                            <div class="pro-view">
+                                <a href="#view3" data-toggle="tab">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt3m.jpg" alt="">
+                                </a></div>
+                            <div class="pro-view">
+                                <a href="#view4" data-toggle="tab">
+                                    <img src="img/single-product/faded-short-sleeves-tshirt4m.jpg" alt="">
+                                </a></div>
+                            <div class="pro-view">
+                                <a href="#view5" data-toggle="tab">
+                                    <img src="img/single-product/printed-chiffon-dress.jpg" alt="">
+                                </a></div>
                         </div>
                     </div>
                 </div>
@@ -32,7 +90,7 @@
             <!-- Start single product details -->
             <div class="col-sm-7">
                 <div class="single-product-details">
-                    <h1>Printed Chiffon Dress</h1>
+                    <h1>{!! $product->name !!}</h1>
                     <div class="sin-social">
                         <p>
                             <a class="btn btn-default twitter" href="#"><i class="fa fa-twitter"></i>Tweet</a>
@@ -42,24 +100,26 @@
                         </p>
                     </div>
                     <p class="rating-and-review">
-                        <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                        <span>
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                        </span>
                         <a href="#">Read reviews (0)</a>
                         <a href="#">Write a review</a>
                     </p>
                     <h2><span>£ 19.81</span></h2>
                     <p><strong>Reference:</strong> demo_1 </p>
-                    <p><strong>Condition:</strong> New product </p>
+                    <p><strong>Condition:</strong> {!! $product->new !!} </p>
                     <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit.
                         Accessorize with a straw hat and you're ready for summer!</p>
-                    <p class="sin-item"><span class="sin-item-text"> 292 Items </span><span class="sin-item-btn">In stock</span>
+                    <p class="sin-item">
+                        <span class="sin-item-text"> 292 Items </span><span class="sin-item-btn">In stock</span>
                     </p>
                     <form method="post" action="#">
                         <div class="numbers-row">
                             <label>Quantity</label>
                             <input type="number" name="french-hens" id="french-hens">
-                            <div class="inc button">+</div>
-                            <div class="dec button">-</div>
                         </div>
                     </form>
                     <p class="selector1">
