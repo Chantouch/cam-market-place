@@ -18,16 +18,11 @@
                         <div class="top-menu">
                             <nav>
                                 <ul>
-                                    <li><a href="#">English <i class="fa fa-caret-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">English</a></li>
-                                            <li><a href="#">Fran�ais</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">USD <i class="fa fa-caret-down"></i></a>
+                                    <li>
+                                        <a href="#">USD <i class="fa fa-caret-down"></i></a>
                                         <ul>
                                             <li><a href="#">Dollar (USD)</a></li>
-                                            <li><a href="#">Pound (GBP)</a></li>
+                                            <li><a href="#">RIEL (KHR)</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -57,7 +52,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="logo">
-                        <a href="index.html"><img src="img/home-4/logo.png" alt=""></a>
+                        <a href="/"><img src="{!! asset('img/home-4/logo.png') !!}" alt="">CAMMARKET</a>
                     </div>
                 </div>
                 <div class="col-sm-9">
@@ -65,10 +60,10 @@
                     <div class="user-info-adn-search">
                         <div class="user-info">
                             <p>
-                                <a href="#"><i class="fa fa-user"></i> My Account</a>
-                                <a href="wishlists.html"><i class="fa fa-heart-o"></i> Wishlist</a>
-                                <a href="#"><i class="fa fa-key"></i> Sign out</a>
-                                <a href="#"><i class="fa fa-signal"></i> Compare</a>
+                                <a href="{!! url('register') !!}"><i class="fa fa-user"></i> My Account</a>
+                                <a href="{!! url('login') !!}"><i class="fa fa-key"></i> Sign In</a>
+                                <a href="{!! url('wishlists') !!}"><i class="fa fa-heart-o"></i> Wishlist</a>
+                                <a href="{!! url('compare') !!}"><i class="fa fa-signal"></i> Compare</a>
                             </p>
                         </div>
                         <div class="search-and-cart">
@@ -90,50 +85,25 @@
                                 </form>
                             </div>
                             <div class="shoping-cart">
-                                <a href="cart.html"><span>My Cart (3)</span></a>
+                                <a href="{!! url('cart') !!}"><span>My Cart (3)</span></a>
                                 <div class="add-to-cart-product">
+                                    @for($i=1;$i<=3;$i++)
                                     <div class="cart-product product-item11">
                                         <div class="cart-product-image">
-                                            <a href="single-product.html"><img
-                                                    src="img/cart/faded-short-sleeves-tshirt.jpg" alt="Product"></a>
+                                            <a href="{!! url('single-product') !!}">
+                                                <img src="{!! asset('img/cart/faded-short-sleeves-tshirt.jpg') !!}" alt="Product">
+                                            </a>
                                         </div>
                                         <div class="cart-product-info">
-                                            <p><span>1</span>x<a href="single-product.html">Faded...</a></p>
-                                            <a href="single-product.html">S, Orange</a>
+                                            <p><span>1</span>x<a href="{!! url('single-product') !!}">Faded...</a></p>
+                                            <a href="{!! url('single-product') !!}">S, Orange</a>
                                             <span class="price">� 19.81</span>
                                         </div>
                                         <div class="cart-product-remove">
                                             <i class="fa fa-times"></i>
                                         </div>
                                     </div>
-                                    <div class="cart-product">
-                                        <div class="cart-product-image">
-                                            <a href="single-product.html"><img src="img/cart/printed-dress.jpg"
-                                                                               alt="Product"></a>
-                                        </div>
-                                        <div class="cart-product-info">
-                                            <p><span>1</span>x<a href="single-product.html">blouse</a></p>
-                                            <a href="single-product.html">S, Black</a>
-                                            <span class="price">� 32.40</span>
-                                        </div>
-                                        <div class="cart-product-remove">
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </div>
-                                    <div class="cart-product">
-                                        <div class="cart-product-image">
-                                            <a href="single-product.html"><img
-                                                    src="img/cart/printed-summer-dress.jpg" alt="Product"></a>
-                                        </div>
-                                        <div class="cart-product-info">
-                                            <p><span>1</span>x<a href="single-product.html">Printed...</a></p>
-                                            <a href="single-product.html">S, Yellow</a>
-                                            <span class="price">� 36.60</span>
-                                        </div>
-                                        <div class="cart-product-remove">
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </div>
+                                    @endfor;
                                     <div class="cart-price">
                                         <div class="cart-product-line fast-line">
                                             <span>Shipping</span>
@@ -145,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div class="cart-checkout">
-                                        <a href="checkout.html">Check out<i class="fa fa-chevron-right"></i></a>
+                                        <a href="{!! url('checkout') !!}">Check out<i class="fa fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -164,41 +134,13 @@
                 <div class="mainmenu">
                     <nav>
                         <ul>
-                            <li><a class="home" href="index.html">Home</a>
-                                <ul>
-                                    <li><a href="index-2.html"><span>Home2</span></a></li>
-                                    <li><a href="index-3.html"><span>Home3</span></a></li>
-                                    <li><a href="index-4.html"><span>Home4</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="shop-grid.html">shop</a></li>
-                            <li><a href="#">Delivery</a></li>
-                            <li><a href="blog.html">Blog</a>
-                                <ul>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-non-sidebar.html">Blog non sidebar</a></li>
-                                    <li><a href="single-blog.html">Single blog</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="">Pages</a>
-                                <ul>
-                                    <li><a href="about-us.html"><span>About us</span></a></li>
-                                    <li><a href="blog.html"><span>Blog</span></a></li>
-                                    <li><a href="blog-non-sidebar.html"><span>blog non sidebar</span></a></li>
-                                    <li><a href="single-blog.html"><span>single blog</span></a></li>
-                                    <li><a href="shop-grid.html"><span>shop grid</span></a></li>
-                                    <li><a href="shop-list.html"><span>shop list</span></a></li>
-                                    <li><a href="single-product.html"><span>single product</span></a></li>
-                                    <li><a href="cart.html"><span>cart</span></a></li>
-                                    <li><a href="wishlists.html"><span>wishlists</span></a></li>
-                                    <li><a href="checkout.html"><span>checkout</span></a></li>
-                                    <li><a href="login.html"><span>Login</span></a></li>
-                                    <li><a href="contact-us.html"><span>contact us</span></a></li>
-                                    <li><a href="404.html"><span>404</span></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a class="home" href="/">Home</a></li>
+                            <li><a href="{!! url('about-us') !!}">About us</a></li>
+                            <li><a href="{!! url('best-seller') !!}">BestSellers</a></li>
+                            <li><a href="{!! url('comming-soon') !!}">Comming Soon</a></li>
+                            <li><a href="{!! url('highlight') !!}">HighLights</a></li>
+                            <li><a href="{!! url('bargain-shop') !!}">Bargain Shop</a></li>
+                            <li><a href="{!! url('contact-us') !!}">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -214,40 +156,13 @@
                     <div class="mobile-menu">
                         <nav id="dropdown">
                             <ul class="nav">
-                                <li><a class="home" href="index.html">Home</a>
-                                    <ul>
-                                        <li><a href="index-2.html"><span>Home2</span></a></li>
-                                        <li><a href="index-3.html"><span>Home3</span></a></li>
-                                        <li><a href="index-4.html"><span>Home4</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About us</a></li>
-                                <li><a href="shop-grid.html">shop</a></li>
-                                <li><a href="#">Delivery</a></li>
-                                <li><a href="blog.html">Blog</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-non-sidebar.html">Blog non sidebar</a></li>
-                                        <li><a href="single-blog.html">Single blog</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="">Pages</a>
-                                    <ul>
-                                        <li><a href="about-us.html"><span>About us</span></a></li>
-                                        <li><a href="blog.html"><span>Blog</span></a></li>
-                                        <li><a href="blog-non-sidebar.html"><span>blog non sidebar</span></a></li>
-                                        <li><a href="single-blog.html"><span>single blog</span></a></li>
-                                        <li><a href="shop-grid.html"><span>shop grid</span></a></li>
-                                        <li><a href="shop-list.html"><span>shop list</span></a></li>
-                                        <li><a href="single-product.html"><span>single product</span></a></li>
-                                        <li><a href="cart.html"><span>cart</span></a></li>
-                                        <li><a href="wishlists.html"><span>wishlists</span></a></li>
-                                        <li><a href="checkout.html"><span>checkout</span></a></li>
-                                        <li><a href="contact-us.html"><span>contact us</span></a></li>
-                                        <li><a href="404.html"><span>404</span></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact-us.html">Contact</a></li>
+                                <li><a class="home" href="/">Home</a></li>
+                                <li><a href="{!! url('about-us') !!}">About us</a></li>
+                                <li><a href="{!! url('best-seller') !!}">BestSellers</a></li>
+                                <li><a href="{!! url('comming-soon') !!}">Comming Soon</a></li>
+                                <li><a href="{!! url('highlight') !!}">HighLights</a></li>
+                                <li><a href="{!! url('bargain-shop') !!}">Bargain Shop</a></li>
+                                <li><a href="{!! url('contact-us') !!}">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
