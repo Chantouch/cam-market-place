@@ -84,6 +84,13 @@ class ProductController extends Controller
             $data['user_id'] = $this->auth()->id;
             $path = 'uploads/product/img/';
             $data['img_path'] = $path;
+            $records = Product::count();
+            $current_id = 1;
+            if (!$records == 0) {
+                $current_id = Product::orderBy('id', 'DESC')->first()->id + 1;
+            }
+            $product_code = 'REF' . str_pad($current_id, 8, '0', STR_PAD_LEFT);
+            $data['code'] = $product_code;
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->language_id)) {
@@ -272,6 +279,16 @@ class ProductController extends Controller
 //                        throw new ModelNotFoundException();
 //                }
 //            }
+            if (empty($product->code) || $product->code == null) {
+                $records = Product::count();
+                $current_id = 1;
+                if (!$records == 0) {
+                    $current_id = Product::orderBy('id', 'DESC')->first()->id + 1;
+                }
+                $product_code = 'REF' . str_pad($current_id, 8, '0', STR_PAD_LEFT);
+                $data['code'] = $product_code;
+            }
+
             $product->update($data);
             if ($product) {
                 if (isset($request->language_id)) {

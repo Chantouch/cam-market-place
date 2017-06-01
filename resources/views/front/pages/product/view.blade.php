@@ -31,7 +31,6 @@
                 <div class="single-products">
                     <!-- Start single product image -->
                     <div class="col-sm-4">
-                        <span>Left click while zooming</span>
                         <div class="single-product-image">
                             <div id="magnific">
                                 @foreach($product->images->take(1) as $image)
@@ -70,22 +69,28 @@
                                 </p>
                             </div>
                             <p class="rating-and-review">
-                                <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                            class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                                <span>
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                </span>
                                 <a href="#">Read reviews (0)</a>
                                 <a href="#">Write a review</a>
                             </p>
-                            <h2><span>£ 19.81</span></h2>
-                            <p><strong>Reference:</strong> demo_1 </p>
-                            <p><strong>Condition:</strong> New product </p>
-                            <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a
-                                comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                            <p class="sin-item"><span class="sin-item-text"> 292 Items </span><span
-                                        class="sin-item-btn">In stock</span></p>
+                            <h2><span>{!! Helper::currency($product->currency).$product->price !!}</span></h2>
+                            <p><strong>Reference:</strong> {!! $product->code !!} </p>
+                            <p>
+                                <strong>Condition:</strong>
+                                @if($product->new == 1)
+                                    New Product
+                                @endif
+                            </p>
+                            <p>{!! $product->short_description !!}</p>
+                            <p class="sin-item"><span class="sin-item-text"> 292 Items </span>
+                                <span class="sin-item-btn">In stock</span></p>
                             <form method="post" action="#">
                                 <div class="numbers-row">
-                                    <label>Quantity</label>
-                                    <input type="number" name="french-hens" id="french-hens">
+                                    <label for="qty">Quantity</label>
+                                    <input type="number" name="french-hens" id="qty">
                                     <div class="inc button">+</div>
                                     <div class="dec button">-</div>
                                 </div>
@@ -301,13 +306,13 @@
                                                         <i class="fa fa-star"></i>
                                                     </span>
                                                 </p>
-                                                <span class="price">$27.00</span>
+                                                <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
                                                 <div class="featured-button">
-                                                    <a href="wishlists.html" class="wishlist"><i
-                                                                class="fa fa-heart"></i></a>
+                                                    <a href="wishlists.html" class="wishlist">
+                                                        <i class="fa fa-heart"></i></a>
                                                     <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                                    <a href="cart.html" class="add-to-card"><i
-                                                                class="fa fa-shopping-cart"></i>Add
+                                                    <a href="cart.html" class="add-to-card">
+                                                        <i class="fa fa-shopping-cart"></i>Add
                                                         to cart</a>
                                                 </div>
                                             </div>
