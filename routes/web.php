@@ -39,12 +39,10 @@ Route::get('single_product', 'SingleController@index');
 
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('details/{slug}', 'Frontend\ProductController@show')->name('details');
+    Route::resource('carts', 'Frontend\CartController');
+    Route::delete('empty-cart', 'Frontend\CartController@emptyCart');
+    Route::post('switch-to-wish-list/{id}', 'Frontend\CartController@switchToWishlist')->name('switch.wishlist');
+    Route::resource('wish-lists', 'Frontend\WishlistController');
+    Route::delete('empty-wish-list', 'Frontend\WishlistController@emptyWishlist')->name('empty.wishlist');
+    Route::post('switch-to-cart/{id}', 'Frontend\WishlistController@switchToCart')->name('switch.cart');
 });
-
-Route::resource('carts', 'Frontend\CartController');
-Route::delete('emptyCart', 'Frontend\CartController@emptyCart');
-Route::post('switchToWishlist/{id}', 'Frontend\CartController@switchToWishlist');
-
-Route::resource('wishlists', 'Frontend\WishlistController');
-Route::delete('emptyWishlist', 'Frontend\WishlistController@emptyWishlist');
-Route::post('switchToCart/{id}', 'Frontend\WishlistController@switchToCart');

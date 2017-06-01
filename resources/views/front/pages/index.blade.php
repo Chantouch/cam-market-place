@@ -233,11 +233,20 @@
                                         </p>
                                         <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart
-                                            </a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -387,17 +396,20 @@
                                                                         </p>
                                                                         <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
                                                                         <div class="featured-button">
-                                                                            <a href="wishlists.html"
-                                                                               class="wishlist">
+                                                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                                                            <button class="btn wishlist" name="wishlist" type="button">
                                                                                 <i class="fa fa-heart"></i>
-                                                                            </a>
-                                                                            <a href="#" class="fetu-comment">
+                                                                            </button>
+                                                                            <button class="btn fetu-comment" name="comment" type="button">
                                                                                 <i class="fa fa-signal"></i>
-                                                                            </a>
-                                                                            <a href="cart.html"
-                                                                               class="add-to-card">
-                                                                                <i class="fa fa-shopping-cart"></i>
-                                                                                Add to cart</a>
+                                                                            </button>
+                                                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                                                            </button>
+                                                                            {!! Form::close() !!}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -519,10 +531,20 @@
                                         </p>
                                         <span class="price">$16.51</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -547,10 +569,20 @@
                                         </p>
                                         <span class="price">$27.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -576,10 +608,20 @@
                                         </p>
                                         <span class="price">$26.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -604,10 +646,20 @@
                                         </p>
                                         <span class="price">$50.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -633,10 +685,20 @@
                                         </p>
                                         <span class="price">$28.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -661,10 +723,20 @@
                                         </p>
                                         <span class="price">$30.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -689,10 +761,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -718,10 +800,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -747,10 +839,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -790,10 +892,20 @@
                                         </p>
                                         <span class="price">$30.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -818,10 +930,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -847,10 +969,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -876,10 +1008,20 @@
                                         </p>
                                         <span class="price">$16.40</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -904,10 +1046,20 @@
                                         </p>
                                         <span class="price">$16.51</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -932,10 +1084,20 @@
                                         </p>
                                         <span class="price">$27.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -961,10 +1123,20 @@
                                         </p>
                                         <span class="price">$26.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -989,10 +1161,20 @@
                                         </p>
                                         <span class="price">$50.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -1018,10 +1200,20 @@
                                         </p>
                                         <span class="price">$28.00</span>
                                         <div class="featured-button">
-                                            <a href="wishlists.html" class="wishlist"><i class="fa fa-heart"></i></a>
-                                            <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                            <a href="cart.html" class="add-to-card"><i class="fa fa-shopping-cart"></i>Add
-                                                to cart</a>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            <button class="btn fetu-comment" name="comment" type="button">
+                                                <i class="fa fa-signal"></i>
+                                            </button>
+                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>

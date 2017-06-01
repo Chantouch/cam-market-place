@@ -84,14 +84,11 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
-
-                                            <form action="{{ url('switchToWishlist', [$item->rowId]) }}" method="POST"
-                                                  class="side-by-side">
-                                                {!! csrf_field() !!}
-                                                <button type="submit" class="btn btn-success btn-sm">
-                                                    <i class="fa fa-heart"></i>
-                                                </button>
-                                            </form>
+                                            {!! Form::open(['route' => ['products.switch.wishlist',$item->rowId], 'method' => 'POST']) !!}
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="fa fa-heart"></i>
+                                            </button>
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -133,11 +130,11 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
+                            <a href="{{ route('home') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
                             <a href="#" class="btn btn-success btn-lg">Proceed to Checkout</a>
 
                             <div style="float:right">
-                                <form action="{{ url('/emptyCart') }}" method="POST">
+                                <form action="{{ route('products.empty.wishlist') }}" method="POST">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
@@ -146,7 +143,7 @@
                         @else
 
                             <h3>You have no items in your shopping cart</h3>
-                            <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
+                            <a href="{{ route('home') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
 
                         @endif
                     </div>
@@ -217,7 +214,6 @@
     </div>
     <!-- End page content -->
 @stop
-
 @section('scripts')
     <!-- XZOOM JQUERY PLUGIN  -->
     <script type="text/javascript" src="{!! asset('plugins/xZoom/xzoom.min.js') !!}"></script>
@@ -225,29 +221,24 @@
     <script type="text/javascript" src="{!! asset('plugins/xZoom/setup.js') !!}"></script>
     <script>
         (function () {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             $('.quantity').on('change', function () {
                 var id = $(this).attr('data-id');
                 $.ajax({
                     type: "PATCH",
-                    url: '{{ url("/carts") }}' + '/' + id,
+                    url: '{{ url("/products/carts") }}' + '/' + id,
                     data: {
                         'quantity': this.value,
                     },
                     success: function (data) {
-                        window.location.href = '{{ url('/carts') }}';
+                        window.location.href = '{{ url('/products/carts') }}';
                     }
                 });
-
             });
-
         })();
-
     </script>
 @stop

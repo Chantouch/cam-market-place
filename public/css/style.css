@@ -1251,15 +1251,15 @@ body.home-1{}
     position: relative;
     transition: all 0.3s ease 0s;
 }
-.featured-inner:hover .featured-button a.fetu-comment{
+.featured-inner:hover .featured-button button.fetu-comment{
     animation: 300ms linear 0s normal none 1 running fadeInLeft;
     opacity: 1;
 }
-.featured-inner:hover .featured-button a.wishlist{
+.featured-inner:hover .featured-button button.wishlist{
     animation: 300ms linear 0s normal none 1 running fadeInRight;
     opacity: 1;
 }
-.featured-inner:hover .featured-button a.add-to-card{
+.featured-inner:hover .featured-button button.add-to-card{
     background: #f06262 none repeat scroll 0 0;
     border-bottom: 2px solid #ca3030;
     border-style: none none solid;
@@ -1351,7 +1351,7 @@ body.home-1{}
 }
 .featured-button{}
 .featured-button a{}
-.featured-button a.wishlist{
+.featured-button button.wishlist{
     background: #ffa200 none repeat scroll 0 0;
     border-bottom: 2px solid #e68700;
     border-radius: 3px;
@@ -1360,13 +1360,14 @@ body.home-1{}
     float: left;
     font-size: 20px;
     height: 35px;
-    line-height: 40px;
+    line-height: 20px;
     margin: 0 3px;
     opacity: 0;
+    padding: 6px 6px;
     width: 35px;
     transition: all 0.3s ease 0s;
 }
-.featured-button a.fetu-comment{
+.featured-button button.fetu-comment{
     background: #44b5aa none repeat scroll 0 0;
     border-bottom: 2px solid #379a90;
     border-radius: 3px;
@@ -1375,19 +1376,20 @@ body.home-1{}
     float: right;
     font-size: 20px;
     height: 35px;
-    line-height: 40px;
+    line-height: 20px;
     margin: 0 3px;
     opacity: 0;
     width: 35px;
+    padding: 6px 6px;
     transition: all 0.3s ease 0s;
 }
-.featured-button a.add-to-card{
+.featured-button button.add-to-card{
     background: #fff none repeat scroll 0 0;
     border: 1px solid #e5e5e5;
     border-radius: 3px;
     color: #3f3f3f;
     display: block;
-    font-size: 16px;
+    font-size: 15px;
     font-family: "Khula",sans-serif;
     font-weight: 400;
     line-height: 32px;
@@ -1400,7 +1402,7 @@ body.home-1{}
     white-space: nowrap;
     word-wrap: break-word;
 }
-.featured-button a.add-to-card i{
+.featured-button button.add-to-card i{
     padding: 0 5px 0 0;
 }
 .featured-product-area .owl-buttons div {
@@ -2144,8 +2146,8 @@ body.home-2 .user-info p a:hover {
 body.home-2 .top-menu ul li:hover {
     background: #f981a6;
 }
-body.home-2 .featured-info a.wishlist:hover,
-body.home-2 .featured-info a.fetu-comment:hover{
+body.home-2 .featured-info button.wishlist:hover,
+body.home-2 .featured-info button.fetu-comment:hover{
     color: #fff;
 }
 body.home-2 .banner-image a:after {
@@ -2178,7 +2180,7 @@ body.home-2 .progrtee-box.icon3:hover {
 body.home-2 .progrtee-box:hover {
     border-color: #22adc2;
 }
-body.home-2 .featured-inner:hover .featured-button a.add-to-card {
+body.home-2 .featured-inner:hover .featured-button button.add-to-card {
     background: #f981a6 none repeat scroll 0 0;
     border-color: -moz-use-text-color -moz-use-text-color #f35c9f;
     border-image: none;
@@ -2186,11 +2188,11 @@ body.home-2 .featured-inner:hover .featured-button a.add-to-card {
     border-width: 0 0 2px;
     color: #fff;
 }
-body.home-2 .featured-button a.wishlist {
+body.home-2 .featured-button button.wishlist {
     background: #44b5aa none repeat scroll 0 0;
     border-bottom: 2px solid #22adc2;
 }
-body.home-2 .featured-button a.fetu-comment {
+body.home-2 .featured-button button.fetu-comment {
     background: #ffa200 none repeat scroll 0 0;
     border-bottom: 2px solid #e69200;
 }
@@ -2486,19 +2488,19 @@ body.home-3 .two-banner-area {
 body.home-3 .camera-and-cosmatic-area .home3-d{
     margin-top: 5px;
 }
-body.home-3 .featured-button a.wishlist,
-body.home-3 .featured-button a.fetu-comment {
+body.home-3 .featured-button button.wishlist,
+body.home-3 .featured-button button.fetu-comment {
     background: transparent none repeat scroll 0 0;
     border: 1px solid #e5e5e5;
     color: #3f3f3f;
 }
-body.home-3 .featured-button a.wishlist:hover,
-body.home-3 .featured-button a.fetu-comment:hover {
+body.home-3 .featured-button button.wishlist:hover,
+body.home-3 .featured-button button.fetu-comment:hover {
     background: #c9a96e none repeat scroll 0 0;
     color: #fff;
     border-bottom: 2px solid #ad915c;
 }
-body.home-3 .featured-inner:hover .featured-button a.add-to-card {
+body.home-3 .featured-inner:hover .featured-button button.add-to-card {
     background: #c9a96e none repeat scroll 0 0;
     color: #fff;
     border-bottom: 2px solid #ad915c;
@@ -2808,20 +2810,20 @@ body.home-4 .categori-slide-product .owl-prev:hover,
 body.home-4 .categori-slide-product .owl-next:hover {
     background: #ca7379 none repeat scroll 0 0 !important;
 }
-body.home-4 .featured-inner:hover .featured-button a.add-to-card {
+body.home-4 .featured-inner:hover .featured-button button.add-to-card {
     background: #ca7379 none repeat scroll 0 0;
     border-bottom:2px solid #ad6267;
 }
-body.home-4 .featured-button a.wishlist {
+body.home-4 .featured-button button.wishlist {
     background: #c1ac91 none repeat scroll 0 0;
     border-bottom: 2px solid #a5937c;
 }
-body.home-4 .featured-button a.fetu-comment {
+body.home-4 .featured-button button.fetu-comment {
     background: #8090a0 none repeat scroll 0 0;
     border-bottom: 2px solid #647687;
 }
-body.home-4 .featured-button a.wishlist i,
-body.home-4 .featured-button a.fetu-comment i{
+body.home-4 .featured-button button.wishlist i,
+body.home-4 .featured-button button.fetu-comment i{
     color: #fff;
 }
 body.home-4 .item3:hover {
@@ -3337,7 +3339,7 @@ body.shop .catagori-short .nav-tabs > li.active > a i {
     white-space: nowrap;
     word-wrap: break-word;
 }
-#list .featured-inner:hover a.add-to-card{
+#list .featured-inner:hover button.add-to-card{
     color: #fff;
 }
 #list .featured-inner a:hover{
@@ -3372,7 +3374,7 @@ body.shop .catagori-short .nav-tabs > li.active > a i {
 #list .featured-info p.reating::before {
     background: transparent;
 }
-#list .featured-button a.wishlist{
+#list .featured-button button.wishlist{
     animation: 0s ease 0s normal none 1 running none;
     background: #fff none repeat scroll 0 0;
     border: 1px solid #e5e5e5;
@@ -3381,7 +3383,7 @@ body.shop .catagori-short .nav-tabs > li.active > a i {
     opacity: 1;
     padding-left: 7px;
 }
-#list .featured-button a.fetu-comment{
+#list .featured-button button.fetu-comment{
     animation: 0s ease 0s normal none 1 running none;
     background: #fff none repeat scroll 0 0;
     border: 1px solid #e5e5e5;
@@ -3390,13 +3392,13 @@ body.shop .catagori-short .nav-tabs > li.active > a i {
     opacity: 1;
     padding-left: 7px;
 }
-#list .featured-inner:hover a.wishlist {
+#list .featured-inner:hover button.wishlist {
     background: #ffa200 none repeat scroll 0 0;
     border-bottom: 2px solid #e68700;
     float: left;
     color: #fff;
 }
-#list .featured-inner:hover a.fetu-comment {
+#list .featured-inner:hover button.fetu-comment {
     background: #44b5aa none repeat scroll 0 0;
     border-bottom: 2px solid #379a90;
     float: right;

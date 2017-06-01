@@ -62,7 +62,9 @@
                             <p>
                                 <a href="{!! url('register') !!}"><i class="fa fa-user"></i> My Account</a>
                                 <a href="{!! url('login') !!}"><i class="fa fa-key"></i> Sign In</a>
-                                <a href="{!! url('wishlists') !!}"><i class="fa fa-heart-o"></i> Wishlist</a>
+                                <a href="{!! route('products.wish-lists.index') !!}">
+                                    <i class="fa fa-heart-o"></i> Wishlist
+                                </a>
                                 <a href="{!! url('compare') !!}"><i class="fa fa-signal"></i> Compare</a>
                             </p>
                         </div>
@@ -85,7 +87,8 @@
                                 </form>
                             </div>
                             <div class="shoping-cart">
-                                <a href="{!! url('carts') !!}"><span>My Cart ({!! count(Cart::content()) !!})</span></a>
+                                <a href="{!! route('products.carts.index') !!}"><span>My Cart ({!! count(Cart::content()) !!}
+                                        )</span></a>
                                 @if (sizeof(Cart::content()) > 0)
                                     <div class="add-to-cart-product">
                                         @foreach (Cart::content() as $item)
