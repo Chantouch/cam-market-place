@@ -55,17 +55,54 @@
     <!-- Start header -->
 @include('layouts.front.header')
 <!-- End header -->
-    <!-- Yield content -->
-@yield('content-area')
-<!-- Start brand and client -->
-@include('layouts.front.partner')
-<!-- End brand and client -->
+    <div class="page-content">
+        <!-- Yield content -->
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+    <!-- Start page content -->
+    <div class="page-content">
+        @yield('content-area')
+    </div>
+    <!-- End page content -->
+    <!-- Start brand and client -->
+    <div class="brand-and-client">
+        @include('layouts.front.partner')
+    </div>
+    <!-- End brand and client -->
     <!-- Start blog area -->
-@include('layouts.front.blog')
-<!-- End blog area -->
+    <div class="blog-area">
+        @include('layouts.front.blog')
+    </div>
+    <!-- End blog area -->
     <!-- Start footer -->
-@include('layouts.front.footer')
-<!-- End footer -->
+    <footer>
+        @include('layouts.front.footer')
+    </footer>
+    <!-- End footer -->
 </div>
 <!-- End main area -->
 <!-- JS -->

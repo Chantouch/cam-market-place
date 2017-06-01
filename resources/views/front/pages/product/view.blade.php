@@ -4,8 +4,6 @@
     <link type="text/css" rel="stylesheet" media="all" href="{!! asset('plugins/xZoom/magnific-popup.css') !!}"/>
 @stop
 @section('content-area')
-    <!-- Start page content -->
-    <div class="page-content">
         <!-- Start breadcume area -->
         <div class="breadcume-area">
             <div class="container">
@@ -109,9 +107,15 @@
                                                                                        class="color blue"></a>
                             </p>
                             <p class="buttons_bottom_block no-print" id="add_to_cart">
+                                {!! Form::open(['route' => ['carts.store'], 'method' => 'POST']) !!}
+                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                <input type="hidden" name="price" value="{{ $product->price }}">
                                 <button class="exclusive" name="Submit" type="submit">
                                     <span>Add to cart</span>
                                 </button>
+                                {!! Form::close() !!}
+
                             </p>
                             <p class="sin-adto-cart-bottom">
                                 <a href="#"><i class="fa fa-envelope-o"></i>Send to a friend</a>
@@ -326,8 +330,6 @@
             </div>
         </div>
         <!-- End featured product -->
-    </div>
-    <!-- End page content -->
 @stop
 
 @section('scripts')

@@ -4088,25 +4088,25 @@ table.cart-table {
 .cart-table tbody tr td:last-child {
     padding: 15px 20px;
 }
-body.cart .cart-table h6 {
+.cart .cart-table h6 {
     font-size: 15px;
     font-weight: bold;
     width: 155px;
 }
-body.cart .cart-price,
-body.cart .cart-subtotal {
+.cart .cart-price,
+.cart .cart-subtotal {
     color: #fc5d5a;
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
     padding: 0 15px;
 }
-body.cart .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+.cart .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
     display: block;
     height: 127px;
     max-width: 100%;
 }
-body.cart .cart-table input {
+.cart .cart-table input {
     background: #f2f2f4 none repeat scroll 0 0;
     border: medium none;
     color: #000;
@@ -4116,17 +4116,17 @@ body.cart .cart-table input {
     text-align: center;
     width: 85px;
 }
-body.cart .cart-table tbody tr td.actions {
+.cart .cart-table tbody tr td.actions {
     padding: 14px 0;
 }
-body.cart .cartPage-btn {
+.cart .cartPage-btn {
     float: right;
 }
-body.cart .cartPage-btn li {
+.cart .cartPage-btn li {
     display: inline-block;
     margin-right: 9px;
 }
-body.cart .cartPage-btn li a.cbtn {
+.cart .cartPage-btn li a.cbtn {
     background: #282828 none repeat scroll 0 0;
     color: #fff;
     display: block;
@@ -4141,7 +4141,7 @@ body.cart .cartPage-btn li a.cbtn {
     width: 204px;
     transition: all 0.3s ease 0s;
 }
-body.cart .cartPage-btn li a.cbtn:hover {
+.cart .cartPage-btn li a.cbtn:hover {
     background: #ED4F50;
 }
 /*-------------------------------
@@ -4200,7 +4200,7 @@ body.cart .cartPage-btn li a.cbtn:hover {
     width: 126px;
 }
 .cart-discount-code-area a:hover,
-body.cart .Stmate-shoping-and-cart form button:hover{
+.cart .Stmate-shoping-and-cart form button:hover{
     background: #f06262;
 }
 /*-------------------------------
@@ -4213,13 +4213,13 @@ body.cart .Stmate-shoping-and-cart form button:hover{
     margin-top: 25px;
     padding: 20px;
 }
-body.cart .shippingTitle p {
+.cart .shippingTitle p {
     color: #000;
     font-size: 12px;
     font-weight: 500;
     margin-bottom: 14px;
 }
-body.cart .selectParent > select {
+.cart .selectParent > select {
     -moz-appearance: none;
     background: rgba(0, 0, 0, 0) url("../img/select.png") no-repeat scroll 99% 47% / 10px auto;
     border: 1px solid #e1e1e1;
@@ -4232,12 +4232,12 @@ body.cart .selectParent > select {
 .ie9 .selectParent select{
     padding: 0px!important;
 }
-body.cart .selectParent > select {
+.cart .selectParent > select {
     font-family: Arial;
     font-size: 14px;
     line-height: 34px;
 }
-body.cart input.coupon-input, .selectOption input {
+.cart input.coupon-input, .selectOption input {
     border: 1px solid #e1e1e1;
     display: block;
     font-family: Arial;
@@ -4246,7 +4246,7 @@ body.cart input.coupon-input, .selectOption input {
     padding: 7px;
     width: 100%;
 }
-body.cart .Stmate-shoping-and-cart form button {
+.cart .Stmate-shoping-and-cart form button {
     background-color: #282828;
     border: medium none;
     color: #fff;
@@ -4433,12 +4433,12 @@ p.alrdyReg {
     margin-right: 10px;
     padding: 5px 16px;
 }
-body.checkout .billing-info {
+.checkout .billing-info {
     margin-bottom: 15px;
     margin-left: 30px;
     margin-top: 15px;
 }
-body.checkout .billing-info select{
+.checkout .billing-info select{
     background: rgba(0, 0, 0, 0) url("../img/select.png") no-repeat scroll 99% 53%;
     border: 1px solid #e4e4e4;
     height: 30px;
@@ -4446,7 +4446,7 @@ body.checkout .billing-info select{
     padding: 5px 10px;
     width: 54%;
 }
-body.checkout .billing-info select option{
+.checkout .billing-info select option{
     width: 290px;
 }
 .method-input-box{
@@ -4455,10 +4455,10 @@ body.checkout .billing-info select option{
 .method-input-box p{
     margin: 0;
 }
-body.checkout .method-input-box p input{
+.checkout .method-input-box p input{
     margin-right: 10px;
 }
-body.checkout .block-area-button button{
+.checkout .block-area-button button{
     background: #363636;
     border: medium none;
     border-radius: 0;
@@ -4466,28 +4466,28 @@ body.checkout .block-area-button button{
     margin-top: 25px;
     transition: all 0.3s ease 0s;
 }
-body.checkout .block-area-button button:hover{
+.checkout .block-area-button button:hover{
     background: #FF5B5A;
     color: #fff;
 }
-body.checkout .shiping-method{
+.checkout .shiping-method{
     margin-bottom: 15px;
     margin-left: 30px;
     margin-top: 15px;
 }
-body.checkout .checkout-option{
+.checkout .checkout-option{
     margin: 15px;
 }
-body.checkout .cardtype select {
+.checkout .cardtype select {
     background: rgba(0, 0, 0, 0) url("../img/select.png") no-repeat scroll 99% 53%;
     border-radius: 0;
 }
-body.checkout .expirationdate select{
+.checkout .expirationdate select{
     background: rgba(0, 0, 0, 0) url("../img/select.png") no-repeat scroll 99% 53%;
     border-radius: 0;
     margin-bottom: 20px;
 }
-body.checkout .review-bar{
+.checkout .review-bar{
     margin-bottom: 15px;
     margin-left: 30px;
     margin-top: 15px;

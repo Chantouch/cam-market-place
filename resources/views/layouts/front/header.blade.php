@@ -70,12 +70,12 @@
                             <div class="search-categori">
                                 <form id="select-categoris" method="post" class="form-horizontal">
                                     <div class="categori">
-                                            <select name="language">
-                                                <option value="">Categories</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{!! $category->id !!}">{!! $category->name !!}</option>
-                                                @endforeach
-                                            </select>
+                                        <select name="language">
+                                            <option value="">Categories</option>
+                                            @foreach($categories as $category)
+                                                <option value="{!! $category->id !!}">{!! $category->name !!}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="search-box">
                                         <input type="text" class="form-control input-sm" maxlength="64"
@@ -85,39 +85,51 @@
                                 </form>
                             </div>
                             <div class="shoping-cart">
-                                <a href="{!! url('cart') !!}"><span>My Cart (3)</span></a>
-                                <div class="add-to-cart-product">
-                                    @for($i=1;$i<=3;$i++)
-                                    <div class="cart-product product-item11">
-                                        <div class="cart-product-image">
-                                            <a href="{!! url('single-product') !!}">
-                                                <img src="{!! asset('img/cart/faded-short-sleeves-tshirt.jpg') !!}" alt="Product">
+                                <a href="{!! url('carts') !!}"><span>My Cart ({!! count(Cart::content()) !!})</span></a>
+                                @if (sizeof(Cart::content()) > 0)
+                                    <div class="add-to-cart-product">
+                                        @foreach (Cart::content() as $item)
+                                            <div class="cart-product product-item11">
+                                                <div class="cart-product-image">
+                                                    <a href="{!! route('products.details', [$item->model->slug]) !!}">
+                                                        @foreach($item->model->images->take(1) as $image)
+                                                            <img src="{!! asset($item->model->img_path.'thumb/'.$image->img_name) !!}"
+                                                                 title="{!! $item->name !!}">
+                                                        @endforeach
+                                                    </a>
+                                                </div>
+                                                <div class="cart-product-info">
+                                                    <p>
+                                                        <span>{!! $item->qty !!}</span>x
+                                                        <a href="{!! route('products.details', [$item->model->slug]) !!}">
+                                                            {!! str_limit($item->name,10) !!}
+                                                        </a>
+                                                    </p>
+                                                    <a href="{!! url('single-product') !!}">S, Orange</a>
+                                                    <span class="price">{!! $item->price !!}</span>
+                                                </div>
+                                                <div class="cart-product-remove">
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="cart-price">
+                                            <div class="cart-product-line fast-line">
+                                                <span>Shipping</span>
+                                                <span class="free-shiping">$10.50</span>
+                                            </div>
+                                            <div class="cart-product-line">
+                                                <span>Total</span>
+                                                <span class="total">{{ Cart::instance('default')->subtotal() }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-checkout">
+                                            <a href="{!! url('checkout') !!}">Check out
+                                                <i class="fa fa-chevron-right"></i>
                                             </a>
                                         </div>
-                                        <div class="cart-product-info">
-                                            <p><span>1</span>x<a href="{!! url('single-product') !!}">Faded...</a></p>
-                                            <a href="{!! url('single-product') !!}">S, Orange</a>
-                                            <span class="price">� 19.81</span>
-                                        </div>
-                                        <div class="cart-product-remove">
-                                            <i class="fa fa-times"></i>
-                                        </div>
                                     </div>
-                                    @endfor;
-                                    <div class="cart-price">
-                                        <div class="cart-product-line fast-line">
-                                            <span>Shipping</span>
-                                            <span class="free-shiping">$10.50</span>
-                                        </div>
-                                        <div class="cart-product-line">
-                                            <span>Total</span>
-                                            <span class="total">� 88.81</span>
-                                        </div>
-                                    </div>
-                                    <div class="cart-checkout">
-                                        <a href="{!! url('checkout') !!}">Check out<i class="fa fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

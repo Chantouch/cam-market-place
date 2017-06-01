@@ -37,7 +37,14 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('single_product', 'SingleController@index');
 
-
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('details/{slug}', 'Frontend\ProductController@show')->name('details');
 });
+
+Route::resource('carts', 'Frontend\CartController');
+Route::delete('emptyCart', 'Frontend\CartController@emptyCart');
+Route::post('switchToWishlist/{id}', 'Frontend\CartController@switchToWishlist');
+
+Route::resource('wishlists', 'Frontend\WishlistController');
+Route::delete('emptyWishlist', 'Frontend\WishlistController@emptyWishlist');
+Route::post('switchToCart/{id}', 'Frontend\WishlistController@switchToCart');
