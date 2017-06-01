@@ -95,16 +95,26 @@ class ProductController extends Controller
                 if (isset($request->img_name)) {
                     if ($request->hasFile('img_name')) {
                         $destinationPath = public_path($path);
+                        $path_large = public_path($path . 'large/');
+                        $path_small = public_path($path . 'small/');
+                        $path_thumb = public_path($path . 'thumb/');
                         if (!file_exists($destinationPath)) {
                             mkdir($destinationPath, 0777, true);
+                            mkdir($path_large, 0777, true);
+                            mkdir($path_small, 0777, true);
+                            mkdir($path_thumb, 0777, true);
                         }
                         $files = $request->file('img_name');
                         foreach ($files as $file) {
-                            $image = Images::make($file)->resize(500, 500);
+                            $image_large = Images::make($file)->resize(1024, 1024);
+                            $image_small = Images::make($file)->resize(500, 500);
+                            $image_thumb = Images::make($file)->resize(100, 100);
                             //to remove space from string
                             $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
                             $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                            $image->save($destinationPath . '/' . $fileName, 100);
+                            $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                            $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                            $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
                             $images = new Image();
                             $images->img_name = $fileName;
                             $create->images()->save($images);
@@ -218,17 +228,27 @@ class ProductController extends Controller
             if ($request->hasFile('img_name')) {
                 $path = 'uploads/product/img/';
                 $destinationPath = public_path($path);
-                if (!file_exists($destinationPath)) {
+                $path_large = public_path($path . 'large/');
+                $path_small = public_path($path . 'small/');
+                $path_thumb = public_path($path . 'thumb/');
+                if (!file_exists($destinationPath) || !file_exists($path_large)) {
                     mkdir($destinationPath, 0777, true);
+                    mkdir($path_large, 0777, true);
+                    mkdir($path_small, 0777, true);
+                    mkdir($path_thumb, 0777, true);
                 }
                 $picture = '';
                 $files = $request->file('img_name');
                 foreach ($files as $file) {
-                    $image = Images::make($file)->resize(500, 500);
+                    $image_large = Images::make($file)->resize(1024, 1024);
+                    $image_small = Images::make($file)->resize(500, 500);
+                    $image_thumb = Images::make($file)->resize(100, 100);
                     //to remove space from string
                     $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
                     $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $image->save($destinationPath . '/' . $fileName, 100);
+                    $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                    $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                    $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
                     $data['img_path'] = $path;
                     $images = Image::FirstOrNew(['img_name' => $fileName]);
                     $product->images()->save($images);
@@ -305,12 +325,16 @@ class ProductController extends Controller
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
         } else {
             $ids = array();
-            foreach ($product->images as $photo) {
-                $old_file = [$product->img_path . $photo->img_name];
+            foreach ($product->images as $image) {
+                $old_file = [
+                    $product->img_path . 'large/' . $image->img_name,
+                    $product->img_path . 'small/' . $image->img_name,
+                    $product->img_path . 'thumb/' . $image->img_name
+                ];
                 if (File::exists($product->img_path)) {
                     File::delete($old_file);
                 }
-                $ids[] = $photo->id;
+                $ids[] = $image->id;
             }
             $product->categories()->detach();
             $product->languages()->detach();
@@ -333,7 +357,11 @@ class ProductController extends Controller
             }
             $image = Image::with('imageable')->find($id);
             $product = $image->imageable->first();
-            $old_file = [$product->img_path . $image->img_name];
+            $old_file = [
+                $product->img_path . 'large/' . $image->img_name,
+                $product->img_path . 'small/' . $image->img_name,
+                $product->img_path . 'thumb/' . $image->img_name
+            ];
             if (File::exists($product->img_path)) {
                 File::delete($old_file);
             }

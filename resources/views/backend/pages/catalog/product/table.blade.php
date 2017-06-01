@@ -21,7 +21,7 @@
                     <td width="60">
                         @if(count($product->images))
                             @foreach($product->images->take(1) as $image)
-                                <img src="{!! asset($product->img_path.$image->img_name) !!}"
+                                <img src="{!! asset($product->img_path.'thumb/'.$image->img_name) !!}"
                                      alt="{!! $product->name !!}" class="img-thumbnail">
                             @endforeach
                         @endif

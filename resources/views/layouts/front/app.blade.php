@@ -55,16 +55,6 @@
     <!-- Start header -->
 @include('layouts.front.header')
 <!-- End header -->
-    <!-- Start categori and slider -->
-    <div class="categori-and-slider">
-        <div class="container">
-            <div class="row">
-            @include('layouts.front.menu-left')
-            @yield('slideshow-area')
-            </div>
-        </div>
-    </div>
-    <!-- End categori and slider -->
     <!-- Yield content -->
 @yield('content-area')
 <!-- Start brand and client -->
@@ -88,9 +78,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#zoom_03').ezPlus({
-        gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
-        imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
-    });
+            gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+            imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+        });
 
         //pass the images to Fancybox
         $('#zoom_03').bind('click', function (e) {
@@ -98,7 +88,7 @@
             $.fancyboxPlus(ez.getGalleryList());
             return false;
         });
-                        
+
     });
 </script>
 <!-- bootstrap js============================================ -->

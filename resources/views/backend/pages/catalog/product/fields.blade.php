@@ -1,6 +1,5 @@
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
         {!! Form::label('name', 'Image:') !!}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
             <div class="form-line">
@@ -8,8 +7,8 @@
                 @if(isset($product))
                     @foreach($product->images as $image)
                         <span class="img">
-                        <img src="{!! asset($product->img_path.$image->img_name) !!}" alt="{!! $product->name !!}"
-                             class="imageThumb">
+                        <img src="{!! asset($product->img_path.'thumb/'.$image->img_name) !!}" alt="{!! $product->name !!}"
+                             class="img-thumbnail">
                         <span class="remove" onclick="deleteArticle('{{ $image->hashid }}')">Remove image</span>
                     </span>
                     @endforeach

@@ -3421,7 +3421,8 @@ body.single-product .tab-content {
     overflow: hidden;
     position: absolute;
     text-align: center;
-    top: -4px;
+    top: 14px;
+    left: 9px;
     width: 85px;
     z-index: 0;
 }

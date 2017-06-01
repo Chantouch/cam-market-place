@@ -1,164 +1,182 @@
 @extends('layouts.front.app')
-@section('slideshow-area')
-    <!-- Start slider -->
-    <div class="col-xs-12 col-sm-5 col-md-7">
-        <div class="slider-area">
-            @if(isset($sliders))
-                @if(!empty($sliders))
-                    @if(count($sliders->image_slider))
-                        <div id="slider-home" class="nivoSlider">
-                            <?php $i = 1;?>
-                            @foreach($sliders->image_slider as $slider)
-                                <img style="display:none" src="{!! asset($slider->img_path.$slider->img_name) !!}"
-                                     data-thumb="{!! $slider->img_path.$slider->img_name !!}"
-                                     alt="{!! $slider->name !!}"
-                                     title="#htmlcaption<?php echo $i;?>"/>
-                                <?php
-                                $i++;
-                                ?>
-                            @endforeach
-                        </div>
-                        <?php $j = 1;?>
-                        @foreach($sliders->image_slider as $slider)
-                            <div id="htmlcaption<?php echo $j;?>"
-                                 class="pos-slideshow-caption nivo-html-caption nivo-caption">
+
+@section('content-area')
+    <div class="categori-and-slider">
+        <div class="container">
+            <div class="row">
+                <!-- Start category -->
+                <div class="col-xs-12 col-sm-4 col-md-3">
+                    @include('layouts.front.menu-left')
+                </div>
+                <!-- End category -->
+
+                <!-- Start slider -->
+                <div class="col-xs-12 col-sm-5 col-md-7">
+                    <div class="slider-area">
+                        @if(isset($sliders))
+                            @if(!empty($sliders))
+                                @if(count($sliders->image_slider))
+                                    <div id="slider-home" class="nivoSlider">
+                                        <?php $i = 1;?>
+                                        @foreach($sliders->image_slider as $slider)
+                                            <img style="display:none"
+                                                 src="{!! asset($slider->img_path.$slider->img_name) !!}"
+                                                 data-thumb="{!! $slider->img_path.$slider->img_name !!}"
+                                                 alt="{!! $slider->name !!}"
+                                                 title="#htmlcaption<?php echo $i;?>"/>
+                                            <?php
+                                            $i++;
+                                            ?>
+                                        @endforeach
+                                    </div>
+                                    <?php $j = 1;?>
+                                    @foreach($sliders->image_slider as $slider)
+                                        <div id="htmlcaption<?php echo $j;?>"
+                                             class="pos-slideshow-caption nivo-html-caption nivo-caption">
+                                            <div class="pos-slideshow-info pos-slideshow-info7">
+                                                <div class="container">
+                                                    <div class="pos_description hidden-xs hidden-sm">
+                                                        {!! $slider->description!!}
+                                                        <div class="pos-slideshow-readmore">
+                                                            <a href="{!! $slider->url !!}"
+                                                               title="{!! $slider->caption !!}">{!! $slider->caption !!}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php $j++;?>
+                                    @endforeach
+                                @else
+                                    <div id="slider-home" class="nivoSlider">
+                                        <img style="display:none" src="img/home-4/slider/7.jpg"
+                                             data-thumb="img/home-4/slider/7.jpg"
+                                             alt="" title="#htmlcaption7"/>
+                                    </div>
+                                    <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
+                                        <div class="pos-slideshow-info pos-slideshow-info7">
+                                            <div class="container">
+                                                <div class="pos_description hidden-xs hidden-sm">
+                                                    <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
+                                                    </div>
+                                                    <div class="title2"><span
+                                                                class="txt">For every type of sleeper</span></div>
+                                                    <div class="pos-slideshow-readmore">
+                                                        <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @else
+                            <div id="slider-home" class="nivoSlider">
+                                <img style="display:none" src="img/home-4/slider/7.jpg"
+                                     data-thumb="img/home-4/slider/7.jpg"
+                                     alt="" title="#htmlcaption7"/>
+                            </div>
+                            <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
                                 <div class="pos-slideshow-info pos-slideshow-info7">
                                     <div class="container">
                                         <div class="pos_description hidden-xs hidden-sm">
-                                            {!! $slider->description!!}
+                                            <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
+                                            </div>
+                                            <div class="title2"><span class="txt">For every type of sleeper</span></div>
                                             <div class="pos-slideshow-readmore">
-                                                <a href="{!! $slider->url !!}"
-                                                   title="{!! $slider->caption !!}">{!! $slider->caption !!}</a>
+                                                <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php $j++;?>
-                        @endforeach
-                    @else
-                        <div id="slider-home" class="nivoSlider">
-                            <img style="display:none" src="img/home-4/slider/7.jpg" data-thumb="img/home-4/slider/7.jpg"
-                                 alt="" title="#htmlcaption7"/>
+                        @endif
+                    </div>
+                </div>
+                <!-- End slider -->
+
+                <!-- Start categori slide product -->
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <div class="categori-slide-product home-slide">
+                        <div class="slide-product-title">
+                            <h5>SALE OFF</h5>
                         </div>
-                        <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
-                            <div class="pos-slideshow-info pos-slideshow-info7">
-                                <div class="container">
-                                    <div class="pos_description hidden-xs hidden-sm">
-                                        <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span>
-                                        </div>
-                                        <div class="title2"><span class="txt">For every type of sleeper</span></div>
-                                        <div class="pos-slideshow-readmore">
-                                            <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
-                                        </div>
+                        <div class="slide-product">
+                            <!-- Start slide product item -->
+                            <div class="slide-product-item">
+                                <?php for($i = 1;$i <= 3;$i++){?>
+                                <div class="item3">
+                                    <div class="product-image">
+                                        <a href="{!! url('single-product') !!}">
+                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                        </a>
+                                        <span class="price-percent-reduction">-5%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
                                     </div>
                                 </div>
+                                <?php }?>
                             </div>
-                        </div>
-                    @endif
-                @endif
-            @else
-                <div id="slider-home" class="nivoSlider">
-                    <img style="display:none" src="img/home-4/slider/7.jpg" data-thumb="img/home-4/slider/7.jpg"
-                         alt="" title="#htmlcaption7"/>
-                </div>
-                <div id="htmlcaption7" class="pos-slideshow-caption nivo-html-caption nivo-caption">
-                    <div class="pos-slideshow-info pos-slideshow-info7">
-                        <div class="container">
-                            <div class="pos_description hidden-xs hidden-sm">
-                                <div class="title1"><span class="txt"><strong>Dream</strong> soluton</span></div>
-                                <div class="title2"><span class="txt">For every type of sleeper</span></div>
-                                <div class="pos-slideshow-readmore">
-                                    <a href="http://bootexperts.com/" title="Shop now">Shop now</a>
+                            <!-- End slide product item -->
+                            <!-- Start slide product item -->
+                            <div class="slide-product-item">
+                                <?php for($i = 4;$i <= 6;$i++){?>
+                                <div class="item3">
+                                    <div class="product-image">
+                                        <a href="{!! url('single-product') !!}">
+                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                        </a>
+                                        <span class="price-percent-reduction">-5%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                    </div>
                                 </div>
+                                <?php }?>
+                            </div>
+                            <!-- End slide product item -->
+                            <!-- Start slide product item -->
+                            <div class="slide-product-item">
+                                <?php for($i = 7;$i <= 9;$i++){?>
+                                <div class="item3">
+                                    <div class="product-image">
+                                        <a href="{!! url('single-product') !!}">
+                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                        </a>
+                                        <span class="price-percent-reduction">-5%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                            <!-- End slide product item -->
+                            <!-- Start slide product item -->
+                            <div class="slide-product-item">
+                                <?php for($i = 10;$i <= 12;$i++){?>
+                                <div class="item3">
+                                    <div class="product-image">
+                                        <a href="{!! url('single-product') !!}">
+                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
+                                        </a>
+                                        <span class="price-percent-reduction">-5%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                    </div>
+                                </div>
+                                <?php }?>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
-        </div>
-    </div>
-    <!-- End slider -->
-    <div class="col-xs-12 col-sm-3 col-md-2">
-        <!-- Start categori slide product -->
-        <div class="categori-slide-product home-slide">
-            <div class="slide-product-title">
-                <h5>SALE OFF</h5>
-            </div>
-            <div class="slide-product">
-                <!-- Start slide product item -->
-                <div class="slide-product-item">
-                    <?php for($i = 1;$i <= 3;$i++){?>
-                    <div class="item3">
-                        <div class="product-image">
-                            <a href="{!! url('single-product') !!}">
-                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                            </a>
-                            <span class="price-percent-reduction">-5%</span>
-                        </div>
-                        <div class="product-info">
-                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                        </div>
-                    </div>
-                    <?php }?>
-                </div>
-                <!-- End slide product item -->
-                <!-- Start slide product item -->
-                <div class="slide-product-item">
-                    <?php for($i = 4;$i <= 6;$i++){?>
-                    <div class="item3">
-                        <div class="product-image">
-                            <a href="{!! url('single-product') !!}">
-                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                            </a>
-                            <span class="price-percent-reduction">-5%</span>
-                        </div>
-                        <div class="product-info">
-                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                        </div>
-                    </div>
-                    <?php }?>
-                </div>
-                <!-- End slide product item -->
-                <!-- Start slide product item -->
-                <div class="slide-product-item">
-                    <?php for($i = 7;$i <= 9;$i++){?>
-                    <div class="item3">
-                        <div class="product-image">
-                            <a href="{!! url('single-product') !!}">
-                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                            </a>
-                            <span class="price-percent-reduction">-5%</span>
-                        </div>
-                        <div class="product-info">
-                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                        </div>
-                    </div>
-                    <?php }?>
-                </div>
-                <!-- End slide product item -->
-                <!-- Start slide product item -->
-                <div class="slide-product-item">
-                    <?php for($i = 10;$i <= 12;$i++){?>
-                    <div class="item3">
-                        <div class="product-image">
-                            <a href="{!! url('single-product') !!}">
-                                <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                            </a>
-                            <span class="price-percent-reduction">-5%</span>
-                        </div>
-                        <div class="product-info">
-                            <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                        </div>
-                    </div>
-                    <?php }?>
-                </div>
+                <!-- End categori slide product -->
             </div>
         </div>
-        <!-- End categori slide product -->
     </div>
-@stop
-@section('content-area')
+
     <!-- Start two banner area -->
     <div class="two-banner-area">
         <div class="container">
@@ -193,10 +211,10 @@
                             <div class="col-sm-3">
                                 <div class="featured-inner">
                                     <div class="featured-image">
-                                        <a href="{!! url('single_product')!!}">
+                                        <a href="{!! route('products.details', [$product->slug]) !!}">
                                             @if(count($product->images))
                                                 @foreach($product->images->take(1) as $image)
-                                                    <img src="{!! asset($product->img_path.$image->img_name) !!}"
+                                                    <img src="{!! asset($product->img_path.'small/'.$image->img_name) !!}"
                                                          alt="{!! $product->name !!}" class="img-thumbnail">
                                                 @endforeach
                                             @endif
@@ -338,7 +356,8 @@
                                     <div id="my-tab-content" class="tab-content row">
                                         @if(isset($products))
                                             @foreach($categories as $index => $category)
-                                                <div class="tab-pane @if($index == 0) {{ 'active' }} @endif" id="{!! $category->hashid !!}">
+                                                <div class="tab-pane @if($index == 0) {{ 'active' }} @endif"
+                                                     id="{!! $category->hashid !!}">
                                                     <div class="popular-tab-product-4 featured-product-area">
                                                     @foreach($category->products as $product)
                                                         <!-- Start featured item -->
@@ -348,7 +367,7 @@
                                                                         <a href="{!! route('products.details', [$product->slug]) !!}">
                                                                             @if(count($product->images))
                                                                                 @foreach($product->images->take(1) as $image)
-                                                                                    <img src="{!! asset($product->img_path.$image->img_name) !!}"
+                                                                                    <img src="{!! asset($product->img_path.'large/'.$image->img_name) !!}"
                                                                                          alt="{!! $product->name !!}"
                                                                                          class="img-thumbnail">
                                                                                 @endforeach
