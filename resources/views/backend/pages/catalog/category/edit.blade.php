@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::model($category, ['route' => ['admin.catalogs.categories.update', $category->hashid], 'method' => 'patch']) !!}
+                    {!! Form::model($category, ['route' => ['admin.catalogs.categories.update', $category->hashid], 'method' => 'patch', 'files'=> true]) !!}
                     @include('backend.pages.catalog.category.fields')
                     {!! Form::close() !!}
                 </div>

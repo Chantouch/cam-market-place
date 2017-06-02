@@ -2,25 +2,45 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Vinkla\Hashids\Facades\Hashids;
+use Request;
 
 class SubCategory extends Model
 {
     use SoftDeletes;
+    use Sluggable;
     protected $table = 'categories';
     protected $appends = ['hashid'];
     protected $fillable = [
-        'name', 'description', 'status', 'category_id'
+        'name', 'description', 'status', 'category_id', 'slug', 'path'
     ];
 
     //===============Validation===============//
-    public static function rules()
+    public static function rules($id = null)
     {
-        return [
-            'name' => 'required|unique:countries|max:255',
-        ];
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required|unique:categories|max:255',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|unique:categories,name,' . $id . ',id',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
     }
 
     public static function messages()
@@ -46,5 +66,19 @@ class SubCategory extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

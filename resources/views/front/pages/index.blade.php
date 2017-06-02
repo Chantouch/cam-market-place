@@ -232,22 +232,23 @@
                                         </span>
                                         </p>
                                         <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                        {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                         <div class="featured-button">
-                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                             <input type="hidden" name="name" value="{{ $product->name }}">
                                             <input type="hidden" name="price" value="{{ $product->price }}">
-                                            <button class="btn wishlist" name="wishlist" type="button">
+                                            <input type="hidden" name="qty" value="1">
+                                            <button class="btn wishlist" name="submit" type="submit" value="wishlist">
                                                 <i class="fa fa-heart"></i>
                                             </button>
                                             <button class="btn fetu-comment" name="comment" type="button">
                                                 <i class="fa fa-signal"></i>
                                             </button>
-                                            <button class="btn add-to-card" name="submit" type="submit">
+                                            <button class="btn add-to-card" name="submit" type="submit" value="cart">
                                                 <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
                                             </button>
-                                            {!! Form::close() !!}
                                         </div>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>
@@ -395,22 +396,23 @@
                                                                     </span>
                                                                         </p>
                                                                         <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                                                        {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                                                         <div class="featured-button">
-                                                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                                                             <input type="hidden" name="name" value="{{ $product->name }}">
                                                                             <input type="hidden" name="price" value="{{ $product->price }}">
-                                                                            <button class="btn wishlist" name="wishlist" type="button">
+                                                                            <input type="hidden" name="qty" value="1">
+                                                                            <button class="btn wishlist" name="submit" type="submit" value="wishlist">
                                                                                 <i class="fa fa-heart"></i>
                                                                             </button>
                                                                             <button class="btn fetu-comment" name="comment" type="button">
                                                                                 <i class="fa fa-signal"></i>
                                                                             </button>
-                                                                            <button class="btn add-to-card" name="submit" type="submit">
+                                                                            <button class="btn add-to-card" name="submit" type="submit" value="cart">
                                                                                 <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
                                                                             </button>
-                                                                            {!! Form::close() !!}
                                                                         </div>
+                                                                        {!! Form::close() !!}
                                                                     </div>
                                                                 </div>
                                                             </div>

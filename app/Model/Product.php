@@ -116,7 +116,6 @@ class Product extends Model
         ];
     }
 
-
     //-------GetAttributes--------//
 
     /**
@@ -134,6 +133,4 @@ class Product extends Model
     {
         return Hashids::encode($this->attributes['id']);
     }
-
-
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 use Validator;
@@ -30,16 +31,33 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
-
-        if (!$duplicates->isEmpty()) {
-            return redirect()->route('carts.index')->with('error', 'Item is already in your cart!');
+        switch ($request->submit) {
+            case "wishlist":
+                $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($request) {
+                    return $cartItem->id === $request->id;
+                });
+                if (!$duplicates->isEmpty()) {
+                    return redirect()->back()->withSuccessMessage('Item is already in your wishlist!');
+                }
+                Cart::instance('wishlist')
+                    ->add($request->id, $request->name, $request->qty, $request->price)
+                    ->associate(Product::class);
+                return redirect()->back()->withSuccessMessage('Item was added to your wishlist!');
+                break;
+            case "cart":
+                $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
+                    return $cartItem->id === $request->id;
+                });
+                if (!$duplicates->isEmpty()) {
+                    return redirect()->route('products.carts.index')->with('error', 'Item is already in your cart!');
+                }
+                Cart::add($request->id, $request->name, $request->qty, $request->price)->associate(Product::class);
+                return redirect()->back()->with('success', 'Item was added to your cart!');
+                break;
+            default:
+                break;
         }
-
-        Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Model\Product');
-        return redirect()->back()->with('success', 'Item was added to your cart!');
+        return redirect()->route('products.carts.index')->with('error', 'Item is already in your cart!');
     }
 
     /**
@@ -77,7 +95,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         Cart::remove($id);
-        return redirect('carts')->withSuccessMessage('Item has been removed!');
+        return redirect('products/carts')->withSuccessMessage('Item has been removed!');
     }
 
     /**
@@ -88,7 +106,7 @@ class CartController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
-        return redirect('carts')->withSuccessMessage('Your cart has been cleared!');
+        return redirect('products/carts')->withSuccessMessage('Your cart has been cleared!');
     }
 
     /**
@@ -108,13 +126,13 @@ class CartController extends Controller
         });
 
         if (!$duplicates->isEmpty()) {
-            return redirect('carts')->withSuccessMessage('Item is already in your Wishlist!');
+            return redirect('products/carts')->withSuccessMessage('Item is already in your Wishlist!');
         }
 
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)
-            ->associate('App\Model\Product');
+        Cart::instance('wishlist')->add($item->id, $item->name, $item->qty, $item->price)
+            ->associate(Product::class);
 
-        return redirect('carts')->withSuccessMessage('Item has been moved to your Wishlist!');
+        return redirect('products/carts')->withSuccessMessage('Item has been moved to your Wishlist!');
 
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.front.app')
 @section('style')
-    <link rel="stylesheet" type="text/css" href="{!! asset('plugins/xZoom/xzoom.css') !!}" media="all"/>
-    <link type="text/css" rel="stylesheet" media="all" href="{!! asset('plugins/xZoom/magnific-popup.css') !!}"/>
+
 @stop
 @section('content-area')
     <!-- Start breadcume area -->
@@ -63,27 +62,28 @@
                                         </td>
                                         <td>
                                             <form>
-                                                <select class="quantity" data-id="{{ $item->rowId }}">
-                                                    <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
-                                                    <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
-                                                    <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
-                                                    <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
-                                                    <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
-                                                </select>
+                                                <div class="selectOption">
+                                                    <div class="selectParent">
+                                                        <select class="quantity" data-id="{{ $item->rowId }}">
+                                                            <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
+                                                            <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
+                                                            <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
+                                                            <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
+                                                            <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </td>
                                         <td>
                                             <div class="cart-subtotal">{{ Cart::instance('default')->subtotal() }}</div>
                                         </td>
                                         <td>
-                                            <form action="{{ url('carts', [$item->rowId]) }}" method="POST"
-                                                  class="side-by-side">
-                                                {!! csrf_field() !!}
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            {!! Form::open(['route' => ['products.carts.destroy',$item->rowId], 'method' => 'delete']) !!}
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                            {!! Form::close() !!}
                                             {!! Form::open(['route' => ['products.switch.wishlist',$item->rowId], 'method' => 'POST']) !!}
                                             <button type="submit" class="btn btn-success btn-sm">
                                                 <i class="fa fa-heart"></i>
@@ -134,7 +134,7 @@
                             <a href="#" class="btn btn-success btn-lg">Proceed to Checkout</a>
 
                             <div style="float:right">
-                                <form action="{{ route('products.empty.wishlist') }}" method="POST">
+                                <form action="{{ route('products.empty.carts') }}" method="POST">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
@@ -215,10 +215,6 @@
     <!-- End page content -->
 @stop
 @section('scripts')
-    <!-- XZOOM JQUERY PLUGIN  -->
-    <script type="text/javascript" src="{!! asset('plugins/xZoom/xzoom.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('plugins/xZoom/magnific-popup.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('plugins/xZoom/setup.js') !!}"></script>
     <script>
         (function () {
             $.ajaxSetup({

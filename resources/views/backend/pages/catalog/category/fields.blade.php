@@ -1,3 +1,10 @@
+{!! Form::label('img_name', 'Image Of Category:') !!}
+<div class="form-group">
+    <div class="form-line">
+        {!! Form::file('img_name', ['class' => 'form-control']) !!}
+    </div>
+</div>
+
 {!! Form::label('category_id', 'Category Level:') !!}
 <div class="form-group">
     <div class="form-line">

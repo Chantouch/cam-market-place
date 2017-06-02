@@ -7,33 +7,11 @@
         </div>
         <div class="col-sm-12">
             <div class="brand-logo featured-product-area home4-d">
+                <?php for($i = 1;$i <= 6;$i++){?>
                 <div class="clients">
-                    <a href="#"><img src="img/brand-logo/1.jpg" alt=""></a>
+                    <a href="#"><img src="{!! asset('img/brand-logo/'.$i.'.jpg') !!}" alt=""></a>
                 </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/2.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/3.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/4.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/5.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/6.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/1.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/3.jpg" alt=""></a>
-                </div>
-                <div class="clients">
-                    <a href="#"><img src="img/brand-logo/4.jpg" alt=""></a>
-                </div>
+                <?php }?>
             </div>
         </div>
     </div>

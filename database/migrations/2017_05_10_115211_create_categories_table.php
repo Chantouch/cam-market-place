@@ -17,6 +17,8 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('category_id', false, true)->nullable();
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('path')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

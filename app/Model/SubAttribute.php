@@ -14,11 +14,28 @@ class SubAttribute extends Model
     ];
 
     //===============Validation===============//
-    public static function rules()
+    public static function rules($id = null)
     {
-        return [
-            'name' => 'required|max:255',
-        ];
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required|unique:attributes|max:255',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|unique:attributes,name,' . $id . ',id',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
     }
 
     public static function messages()

@@ -78,9 +78,9 @@
                         </div>
                     </form>
                     <div class="hiring">
-                        <div class="img_in"><img alt="icon" src="img/hire_logo.jpg"></div>
+                        <div class="img_in"><img alt="icon" src="{!! asset('img/hire_logo.jpg') !!}"></div>
                         <div class="info">
-                            <h4>we�re hiring!</h4>
+                            <h4>we're hiring!</h4>
                             <p>Click <a href="#">here</a> for more information</p>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="footer-card pull-right">
-                    <img src="img/payment.png" alt="">
+                    <img src="{!! asset('img/payment.png') !!}" alt="">
                 </div>
             </div>
         </div>

@@ -10,12 +10,25 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="breadcrumb">
-                        <a title="Return to Home" href="index.html" class="home"><i class="fa fa-home"></i></a>
+                        <a title="Return to Home" href="{!! route('home') !!}" class="home">
+                            <i class="fa fa-home"></i>
+                        </a>
                         <span class="navigation-pipe">&gt;</span>
-                        <a class="hidden-xs" title="Automotive & Motorcycle" href="index.html">Automotive &
-                            Motorcycle</a>
-                        <span class="hidden-xs navigation-pipe">&gt;</span>
-                        Electronics
+                        @foreach($product->categories as $category)
+                            <a title="{!! $category->name !!}"
+                               href="{!! route('products.category.slug', [$category->slug]) !!}" class="next"
+                               target="_blank">
+                                {!! $category->name !!}
+                            </a>
+                            <span class="navigation-pipe">&gt;</span>
+                            @if(!empty($category->sub_category))
+                                @foreach($category->sub_category as $category)
+                                    {{ $loop->first ? '' : ', ' }}
+                                    {!! $category->name !!}
+                                @endforeach
+                            @endif
+                        @endforeach
+                        {{--Electronics--}}
                     </div>
                 </div>
             </div>
@@ -63,8 +76,8 @@
                                 <a class="btn btn-default twitter" href="#"><i class="fa fa-twitter"></i>Tweet</a>
                                 <a class="btn btn-default facebook" href="#"><i class="fa fa-facebook"></i>Share</a>
                                 <a class="btn btn-default google-plus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
-                                <a class="btn btn-default pinterest" href="#"><i
-                                            class="fa fa-pinterest"></i>Pinterest</a>
+                                <a class="btn btn-default pinterest" href="#">
+                                    <i class="fa fa-pinterest"></i>Pinterest</a>
                             </p>
                         </div>
                         <p class="rating-and-review">
@@ -84,45 +97,52 @@
                             @endif
                         </p>
                         <p>{!! $product->short_description !!}</p>
-                        <p class="sin-item"><span class="sin-item-text"> 292 Items </span>
+                        <p class="sin-item"><span class="sin-item-text"> {!! $product->qty !!} Items </span>
                             <span class="sin-item-btn">In stock</span></p>
-                        <form method="post" action="#">
-                            <div class="numbers-row">
-                                <label for="qty">Quantity</label>
-                                <input type="number" name="french-hens" id="qty">
-                                <div class="inc button">+</div>
-                                <div class="dec button">-</div>
-                            </div>
-                        </form>
-                        <p class="selector1">
-                            <label>Size</label>
-                            <select id="selectProductSort1" class="selectProductSort form-control">
-                                <option value="position:asc" selected="selected">S</option>
-                                <option value="price:asc">M</option>
-                                <option value="price:desc">L</option>
-                            </select>
-                        </p>
-                        <p class="selector1">
-                            <label>Color</label>
-                            <a href="#" title="Orange" class="color orange"></a>
-                            <a href="#" title="Blue" class="color blue"></a>
-                        </p>
+                        <div class="numbers-row">
+                            <label for="qty">Quantity</label>
+                            <input type="number" name="french-hens" id="qty" value="1" minlength="1">
+                            <div class="inc button">+</div>
+                            <div class="dec button">-</div>
+                        </div>
+                        {{--<p class="selector1">--}}
+                        {{--<label for="size">Size</label>--}}
+                        {{--<select id="size" class="selectProductSort form-control">--}}
+                        {{--<option value="position:asc" selected="selected">S</option>--}}
+                        {{--<option value="price:asc">M</option>--}}
+                        {{--<option value="price:desc">L</option>--}}
+                        {{--</select>--}}
+                        {{--</p>--}}
+                        {{--<p class="selector1">--}}
+                        {{--<label>Color</label>--}}
+                        {{--<a href="#" title="Orange" class="color orange"></a>--}}
+                        {{--<a href="#" title="Blue" class="color blue"></a>--}}
+                        {{--</p>--}}
                         <p class="buttons_bottom_block no-print" id="add_to_cart">
                             {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <input type="hidden" name="name" value="{{ $product->name }}">
                             <input type="hidden" name="price" value="{{ $product->price }}">
+                            <input type="hidden" name="qty" value="" id="sub_qty">
                             <button class="exclusive" name="submit" type="submit">
                                 <span>Add to cart</span>
                             </button>
                             {!! Form::close() !!}
-
                         </p>
+                        {!! Form::open(['route' => ['products.wish-lists.store'], 'method' => 'POST']) !!}
                         <p class="sin-adto-cart-bottom">
-                            <a href="#"><i class="fa fa-envelope-o"></i>Send to a friend</a>
-                            <a href="#"><i class="fa fa-print"></i>Print</a>
-                            <a href="#"><i class="fa fa-heart"></i>Add to wishlist</a>
+                            <a href="#" class="wishilist-print-send-friend"><i class="fa fa-envelope-o"></i>Send to a
+                                friend</a>
+                            <button class="wishilist-print-send-friend"><i class="fa fa-print"></i>Print</button>
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                            <input type="hidden" name="name" value="{{ $product->name }}">
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+                            <input type="hidden" name="qty" value="" id="wishlist_qty">
+                            <button class="wishilist-print-send-friend" name="submit" type="submit">
+                                <i class="fa fa-heart"></i>Add to wishlist
+                            </button>
                         </p>
+                        {!! Form::close() !!}
                     </div>
                 </div>
                 <!-- End single product details -->
@@ -174,7 +194,8 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/faded-short-sleeves-tshirt.jpg" alt="">
+                                                <img src="{!! asset('img/product/faded-short-sleeves-tshirt.jpg') !!}"
+                                                     alt="">
                                             </a>
                                         </div>
                                         <div class="featured-info">
@@ -187,7 +208,7 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/blouse.jpg" alt="">
+                                                <img src="{!! asset('img/product/blouse.jpg') !!}" alt="">
                                             </a>
                                         </div>
                                         <div class="featured-info">
@@ -200,7 +221,7 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/printed-dress1.jpg" alt="">
+                                                <img src="{!! asset('img/product/printed-dress1.jpg') !!}" alt="">
                                             </a>
                                             <span class="price-percent-reduction">-20%</span>
                                         </div>
@@ -214,7 +235,7 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/printed-dress2.jpg" alt="">
+                                                <img src="{!! asset('img/product/printed-dress2.jpg') !!}" alt="">
                                             </a>
                                         </div>
                                         <div class="featured-info">
@@ -227,7 +248,8 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/printed-summer-dress4.jpg" alt="">
+                                                <img src="{!! asset('img/product/printed-summer-dress4.jpg') !!}"
+                                                     alt="">
                                             </a>
                                             <span class="price-percent-reduction">-20%</span>
                                         </div>
@@ -241,7 +263,7 @@
                                     <div class="featured-inner">
                                         <div class="featured-image">
                                             <a href="single-product.html">
-                                                <img src="img/product/printed-summer-dress.jpg" alt="">
+                                                <img src="{!! asset('img/product/printed-summer-dress.jpg') !!}" alt="">
                                             </a>
                                         </div>
                                         <div class="featured-info">
@@ -303,23 +325,34 @@
                                         <div class="featured-info">
                                             <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
                                             <p class="reating">
-                                                    <span class="rate">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </span>
+                                                <span class="rate">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
                                             </p>
                                             <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                             <div class="featured-button">
-                                                <a href="wishlists.html" class="wishlist">
-                                                    <i class="fa fa-heart"></i></a>
-                                                <a href="#" class="fetu-comment"><i class="fa fa-signal"></i></a>
-                                                <a href="cart.html" class="add-to-card">
-                                                    <i class="fa fa-shopping-cart"></i>Add
-                                                    to cart</a>
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                                <input type="hidden" name="price" value="{{ $product->price }}">
+                                                <input type="hidden" name="qty" value="1">
+                                                <button class="btn wishlist" name="submit" type="submit"
+                                                        value="wishlist">
+                                                    <i class="fa fa-heart"></i>
+                                                </button>
+                                                <button class="btn fetu-comment" name="comment" type="button">
+                                                    <i class="fa fa-signal"></i>
+                                                </button>
+                                                <button class="btn add-to-card" name="submit" type="submit"
+                                                        value="cart">
+                                                    <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                                </button>
                                             </div>
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -338,4 +371,5 @@
     <script type="text/javascript" src="{!! asset('plugins/xZoom/xzoom.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('plugins/xZoom/magnific-popup.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('plugins/xZoom/setup.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/quantity.js') !!}"></script>
 @stop

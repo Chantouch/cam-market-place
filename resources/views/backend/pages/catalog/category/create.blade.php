@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.catalogs.categories.store'], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['admin.catalogs.categories.store'], 'method' => 'POST', 'files'=> true]) !!}
                     @include('backend.pages.catalog.category.fields')
                     {!! Form::close() !!}
                 </div>
