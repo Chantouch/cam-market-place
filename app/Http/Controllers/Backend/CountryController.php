@@ -24,7 +24,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::where('status', 1)->whereNull('country_id')->whereNull('city_id')->paginate(10);
+        $countries = Country::whereNull('country_id')->whereNull('city_id')->paginate(10);
         return view('backend.pages.country.index', compact('countries'));
     }
 

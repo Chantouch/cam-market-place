@@ -72,13 +72,7 @@
                     <div class="single-product-details">
                         <h1>{!! $product->name !!}</h1>
                         <div class="sin-social">
-                            <p>
-                                <a class="btn btn-default twitter" href="#"><i class="fa fa-twitter"></i>Tweet</a>
-                                <a class="btn btn-default facebook" href="#"><i class="fa fa-facebook"></i>Share</a>
-                                <a class="btn btn-default google-plus" href="#"><i class="fa fa-google-plus"></i>Google+</a>
-                                <a class="btn btn-default pinterest" href="#">
-                                    <i class="fa fa-pinterest"></i>Pinterest</a>
-                            </p>
+                            @include('front.pages.product.share', ['url' =>  route('products.details', [$product->slug])])
                         </div>
                         <p class="rating-and-review">
                                 <span>

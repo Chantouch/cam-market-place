@@ -245,7 +245,11 @@
                 <div class="col-xs-12 col-sm-8 col-md-9">
                     <div id="content-shop" class="categori-content">
                         <div class="categori-baner">
-                            <img src="{!! asset('img/shop/sports-outdoors.jpg') !!}" alt="">
+                            @if(count($category->images))
+                                @foreach($category->images->take(1) as $image)
+                                    <img src="{!! asset($category->path.$image->img_name) !!}" alt="{!! $category->name !!}" class="img-thumbnail">
+                                @endforeach
+                            @endif
                         </div>
                         <h1 class="page-heading product-listing"><span class="cat-name">{!! $category->name !!}</span>
                             <span class="heading-counter">

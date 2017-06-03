@@ -87,8 +87,8 @@
                                 </form>
                             </div>
                             <div class="shoping-cart">
-                                <a href="{!! route('products.carts.index') !!}"><span>My Cart ({!! count(Cart::content()) !!}
-                                        )</span></a>
+                                <a href="{!! route('products.carts.index') !!}"><span>
+                                        My Cart ({!! count(Cart::content()) !!})</span></a>
                                 @if (sizeof(Cart::content()) > 0)
                                     <div class="add-to-cart-product">
                                         @foreach (Cart::content() as $item)

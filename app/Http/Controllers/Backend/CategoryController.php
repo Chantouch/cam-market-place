@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('status', 1)->paginate(10);
+        $categories = Category::with('children')->paginate(10);
         return view('backend.pages.catalog.category.index', compact('categories'));
     }
 
@@ -185,14 +185,18 @@ class CategoryController extends Controller
                         File::delete($old_file);
                     }
                     $ids[] = $image->id;
+                    $image_large->save($destinationPath . $fileName, 100);
+                    $img = Image::whereIn('id', $ids)->update(array('img_name' => $fileName));
+                    if (!$img)
+                        throw new ModelNotFoundException();
                 }
-                Image::whereIn('id', $ids)->delete();
-                $image_large->save($destinationPath . $fileName, 100);
+                //$img = Image::whereIn('id', $ids)->delete();
+                //$image_large->save($destinationPath . $fileName, 100);
                 $data['path'] = $path;
-                $image = Image::FirstOrNew(['img_name' => $fileName]);
-                $category->images()->save($image);
-                if (!$category->images()->save($image))
-                    throw new ModelNotFoundException();
+                //$image = Image::FirstOrNew(['img_name' => $fileName]);
+                //$category->images()->save($image);
+                //if (!$category->images()->save($image))
+                //    throw new ModelNotFoundException();
             }
             $update = $category->update($data);
             if (!$update) {

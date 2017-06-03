@@ -125,7 +125,7 @@ class CityController extends Controller
             if (!$update) {
                 return back()->with('error', 'Your country can not add to your system right now. Plz try again later.');
             }
-            return redirect()->route('admin.cities.index')->with('success', 'Country added successfully.');
+            return redirect()->route('admin.cities.index')->with('success', 'Country updated successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your country can not add to your system right now. Plz try again later.');
         }
@@ -134,7 +134,7 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\City $city
+     * @param  \App\Model\City $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

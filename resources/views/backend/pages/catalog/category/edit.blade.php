@@ -5,7 +5,7 @@
 @stop
 @section('content')
     {{--<div class="block-header">--}}
-        {{--<h2>CATEGORY</h2>--}}
+    {{--<h2>CATEGORY</h2>--}}
     {{--</div>--}}
     <!-- Vertical Layout -->
     <div class="row clearfix">
@@ -42,4 +42,12 @@
 @section('plugins')
     <!-- Select Plugin Js -->
     <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
+@stop
+
+@section('script')
+    <script>
+        $('#img_name').change(function () {
+            uploadPreview(this, 'img_preview');
+        });
+    </script>
 @stop

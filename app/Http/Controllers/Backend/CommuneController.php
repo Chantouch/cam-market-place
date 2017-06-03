@@ -27,7 +27,7 @@ class CommuneController extends Controller
      */
     public function index()
     {
-        $communes = Commune::with('city')->where('status', 1)->whereNotNull('country_id')->whereNotNull('city_id')->paginate(10);
+        $communes = Commune::with('city')->whereNotNull('country_id')->whereNotNull('city_id')->paginate(10);
         return view('backend.pages.commune.index', compact('communes'));
     }
 

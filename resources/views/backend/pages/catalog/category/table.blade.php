@@ -4,6 +4,7 @@
             <thead>
             <tr>
                 <th>#</th>
+                <th width="120">Thumbnail</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -11,9 +12,19 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($categories as $category)
+            @foreach($categories as $index => $category)
                 <tr>
-                    <th scope="row">{!! $category->id !!}</th>
+                    <th scope="row">{!! $loop->index+1 !!}</th>
+                    <td>
+                        @if(count($category->images))
+                            @foreach($category->images->take(1) as $image)
+                                <img src="{!! asset($category->path.$image->img_name) !!}" alt="{!! $category->name !!}"
+                                     class="img-thumbnail">
+                            @endforeach
+                        @else
+                            <img src="{!! asset('img/slider-870x323.jpg') !!}" alt="Thumbnail of category" class="img-thumbnail">
+                        @endif
+                    </td>
                     <td>{!! $category->name !!}</td>
                     <td>{!! str_limit($category->description, 70) !!}</td>
                     <td>{!! Helper::status($category->status) !!}</td>
