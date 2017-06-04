@@ -67,11 +67,13 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      * Get all of the tags for the post.
      */
+
     public function tags()
     {
-        return $this->morphMany(Tag::class, 'taggable');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     //----------PivotTable-----------//
@@ -132,5 +134,15 @@ class Product extends Model
     public function getHashidAttribute()
     {
         return Hashids::encode($this->attributes['id']);
+    }
+
+    public function tagList()
+    {
+        $tag = $this->tags;
+        $tags = array();
+        foreach ($tag as $tg) {
+            $tags[$tg->tags] = $tg->tags;
+        }
+        return implode(', ', $tags);
     }
 }

@@ -195,16 +195,17 @@ class ProductController extends Controller
             $categories[$cat->id] = $cat->name;
         }
 
-//        $tag = Tag::all();
-//        $tags = array();
-//        foreach ($tag as $tg) {
-//            $tags[$tg->tags] = $tg->tags;
-//        }
+        $tag = Tag::all();
+        $tags = array();
+        foreach ($tag as $tg) {
+            $tags[$tg->tags] = $tg->tags;
+            //dd($tags);
+        }
 
         $discount_types = \Helper::discount_types();
         $product = Product::with('city')->with('currency')->with('languages')->find($id);
         return view('backend.pages.catalog.product.edit',
-            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
+            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'tags')
         );
     }
 
@@ -268,17 +269,27 @@ class ProductController extends Controller
                     unset($product->images['img_name']);
                 }
             }
-//            if ($request->has('tags')) {
-//                //$tags = explode(',', $request->tags[0]);
-//                $tags = $request->tags;
-//                foreach ($tags as $tag) {
-//                    $data['tags'] = $tag;
-//                    $tgs = Tag::firstOrNew(array('tags' => $tag));
-//                    $product->tags()->save($tgs);
-//                    if (!$product->tags()->save($tgs))
-//                        throw new ModelNotFoundException();
-//                }
-//            }
+
+            if ($request->has('tags')) {
+                //$trim = trim($request->tags, " ");
+                $trimmed_array = explode(',', $request->tags);
+                $tags = array_map('trim', $trimmed_array);
+                //$tags = $request->tags;
+                $ids = array();
+                foreach ($tags as $tag) {
+                    $data['tags'] = $tag;
+                    $tgs = Tag::firstOrNew(array('tags' => $tag));
+//                    $tgs = Tag::firstOrCreate(['tags'=> $tag]);
+                    $ids[] = $tag->id;
+                    $product->tags()->saveMany([$tgs]);
+                    if (!$product->tags()->saveMany([$tgs]))
+                        throw new ModelNotFoundException();
+                }
+                $tag_id = DB::table('taggables')
+                    ->whereIn('tag_id', $ids)
+                    ->get();
+            }
+
             if (empty($product->code) || $product->code == null) {
                 $records = Product::count();
                 $current_id = 1;
@@ -306,6 +317,22 @@ class ProductController extends Controller
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your product can not add to your system right now. Plz try again later.');
         }
+    }
+
+    public function tags_to_array($string)
+    {
+        $trimmed_array = explode(',', $string);
+        $tags = array_map('trim', $trimmed_array);
+
+        // Create an empty array
+        $result = array();
+
+        foreach ($tags as $tag) {
+            // Create a new tag if it doesn't exist and push it to the collection
+            $result[] = Tag::firstOrCreate(['name' => trim($tag)]);
+        }
+
+        return $result;
     }
 
     /**
@@ -364,6 +391,11 @@ class ProductController extends Controller
         return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy_image(Request $request, $id)
     {
         if ($request->ajax()) {

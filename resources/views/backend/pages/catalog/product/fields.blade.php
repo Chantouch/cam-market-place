@@ -124,19 +124,20 @@
                     @endif
                 </div>
 
-                {{--{!! Form::label('tags', 'Tags:') !!}--}}
-                {{--<div class="form-group tagsinput-area">--}}
-                    {{--<div class="form-line">--}}
-                        {{--{!! Form::text('tags[]', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinputs', 'id'=>'tags']) !!}--}}
+                {!! Form::label('tags', 'Tags:') !!}
+                <div class="form-group tagsinput-area">
+                    <div class="form-line">
+                        {!! Form::text('tags', $product->tagList(), ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
                         {{--{!! Form::select('tags[]',$tags , null, ['data-role' => 'tagsinput', 'id'=>'tags' , 'multiple']) !!}--}}
                         {{--<input type="text" value="" data-role="tagsinput" id="tags"/>--}}
-                    {{--</div>--}}
-                    {{--@if ($errors->has('tags'))--}}
-                        {{--<span class="help-block">--}}
-                            {{--<strong>{{ $errors->first('tags') }}</strong>--}}
-                        {{--</span>--}}
-                    {{--@endif--}}
-                {{--</div>--}}
+                        {{--{{ Form::text('tags', $product->tagList()) }}--}}
+                    </div>
+                    @if ($errors->has('tags'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
+                </div>
 
             </div>
 

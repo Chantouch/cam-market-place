@@ -107,9 +107,9 @@
         $("#category_id").selectpicker({
             allowClear: true
         }).val({!! $product->categories()->pluck('categories.id') !!}).trigger('change');
-        $('#tags').tagsinput({
-            source: {!! $product->tags()->pluck('tags.tags') !!}
-        });
+        {{--$('#tags').tagsinput({--}}
+            {{--source: {!! $product->tags()->pluck('tags.tags') !!}--}}
+        {{--});--}}
         $(document).ready(function () {
             $(".remove").click(function () {
                 $(this).parent(".img").remove();

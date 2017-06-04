@@ -220,6 +220,11 @@
                                                 @endforeach
                                             @endif
                                         </a>
+                                        @if(!empty($product->discount_type !=null))
+                                            <span class="price-percent-reduction">
+                                                Save {!! $product->discount.Helper::discount($product->discount_type, $product->currency) !!}
+                                            </span>
+                                        @endif
                                     </div>
                                     <div class="featured-info">
                                         <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
@@ -232,7 +237,25 @@
                                             <i class="fa fa-star"></i>
                                         </span>
                                         </p>
-                                        <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                        @if(!empty($product->discount_type !=null))
+                                            @if($product->discount_type == 2)
+                                                <span class="price">
+                                                    {!! Helper::currency($product->currency).($product->price-($product->discount/100)*$product->price) !!}
+                                                </span>
+                                                <span class="price" style="text-decoration: line-through;">
+                                                    {!! Helper::currency($product->currency).$product->price !!}
+                                                </span>
+                                            @else
+                                                <span class="price">
+                                                    {!! Helper::currency($product->currency).($product->price-$product->discount) !!}
+                                                </span>
+                                                <span class="price" style="text-decoration: line-through;">
+                                                    {!! Helper::currency($product->currency).$product->price !!}
+                                                </span>
+                                            @endif
+                                        @else
+                                            <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                        @endif
                                         {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
                                         <div class="featured-button">
                                             <input type="hidden" name="id" value="{{ $product->id }}">

@@ -138,4 +138,15 @@ class Helper
             return $model->symbol;
         }
     }
+
+    public static function discount($type, $model)
+    {
+        if ($type == 1) {
+            return self::currency($model);
+        }
+        if ($type == 2) {
+            return "%";
+        }
+        return "Default";
+    }
 }

@@ -40,4 +40,25 @@ class Tag extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function products()
+    {
+        return $this->morphedByMany(Product::class, 'taggable');
+    }
+
+    function tags_to_array($string)
+    {
+        $trimmed_array = explode(',', $string);
+        $tags = array_map('trim', $trimmed_array);
+        // Create an empty collection
+        $result = collect();
+        foreach ($tags as $tag) {
+            // Create a new tag if it doesn't exist and push it to the collection
+            $result->push(Tag::firstOrCreate(['tags' => $tag]));
+        }
+        return $result;
+    }
 }
