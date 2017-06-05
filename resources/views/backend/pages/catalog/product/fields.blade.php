@@ -7,7 +7,8 @@
                 @if(isset($product))
                     @foreach($product->images as $image)
                         <span class="img">
-                        <img src="{!! asset($product->img_path.'thumb/'.$image->img_name) !!}" alt="{!! $product->name !!}"
+                        <img src="{!! asset($product->img_path.'thumb/'.$image->img_name) !!}"
+                             alt="{!! $product->name !!}"
                              class="img-thumbnail">
                         <span class="remove" onclick="deleteArticle('{{ $image->hashid }}')">Remove image</span>
                     </span>
@@ -127,7 +128,11 @@
                 {!! Form::label('tags', 'Tags:') !!}
                 <div class="form-group tagsinput-area">
                     <div class="form-line">
-                        {!! Form::text('tags', $product->tagList(), ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
+                        @if(isset($product))
+                            {!! Form::text('tags', $product->tagList(), ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
+                            @else
+                            {!! Form::text('tags', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
+                        @endif
                         {{--{!! Form::select('tags[]',$tags , null, ['data-role' => 'tagsinput', 'id'=>'tags' , 'multiple']) !!}--}}
                         {{--<input type="text" value="" data-role="tagsinput" id="tags"/>--}}
                         {{--{{ Form::text('tags', $product->tagList()) }}--}}

@@ -16,9 +16,16 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tags')->nullable();
+            $table->string('slug')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('taggables', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tag_id', false, true);
             $table->integer('taggable_id');
             $table->string('taggable_type');
             $table->timestamps();
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

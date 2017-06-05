@@ -296,14 +296,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <div class="area-title">
-                        @foreach($product->categories->take(1) as $category)
+                        @foreach($product->categories->random(1) as $category)
                             <h3>{!! count($category->products) !!} other products in the same category: </h3>
                         @endforeach
                     </div>
                 </div>
                 <div class="featured-product">
                     <div class="featured-item">
-                        @foreach($product->categories->take(1) as $category)
+                        @foreach($product->categories->random(1) as $category)
                             @foreach($category->products as $product)
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="featured-inner">

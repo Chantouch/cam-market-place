@@ -113,34 +113,40 @@ class ProductController extends Controller
                         }
                         $files = $request->file('img_name');
                         foreach ($files as $file) {
-                            $image_large = Images::make($file)->resize(1024, 1024);
-                            $image_small = Images::make($file)->resize(500, 500);
-                            $image_thumb = Images::make($file)->resize(100, 100);
-                            //to remove space from string
-                            $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                            $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                            $image_large->save($destinationPath . '/large/' . $fileName, 100);
-                            $image_small->save($destinationPath . '/small/' . $fileName, 100);
-                            $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
-                            $images = new Image();
-                            $images->img_name = $fileName;
-                            $create->images()->save($images);
-                            if (!$create->images()->save($images))
-                                throw new ModelNotFoundException();
+                            if ($file->isValid()) {
+                                $validator = Validator::make($data, Image::rules(), Image::messages());
+                                if ($validator->fails()) {
+                                    return back()->withInput()->withErrors($validator);
+                                }
+                                $image_large = Images::make($file)->resize(1024, 1024);
+                                $image_small = Images::make($file)->resize(500, 500);
+                                $image_thumb = Images::make($file)->resize(100, 100);
+                                //to remove space from string
+                                $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                                $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                                $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                                $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                                $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                                $images = new Image();
+                                $images->img_name = $fileName;
+                                $create->images()->save($images);
+                                if (!$create->images()->save($images))
+                                    throw new ModelNotFoundException();
+                            }
                         }
                     }
                 }
-//                if (isset($request->tags)) {
-//                    //$tags = explode(',', $request->tags[0]);
-//                    $tags = $request->tags;
-//                    foreach ($tags as $tag) {
-//                        $data['tags'] = $tag;
-//                        $tgs = new Tag($data);
-//                        $create->tags()->save($tgs);
-//                        if (!$create->tags()->save($tgs))
-//                            throw new ModelNotFoundException();
-//                    }
-//                }
+                if (isset($request->tags)) {
+                    $trimmed_array = explode(',', $request->tags);
+                    $tags = array_map('trim', $trimmed_array);
+                    foreach ($tags as $tag) {
+                        $data['tags'] = $tag;
+                        $tgs = Tag::firstOrNew(array('tags' => $tag));;
+                        $create->tags()->save($tgs);
+                        //if (!$create->tags()->save($tgs))
+                        //    throw new ModelNotFoundException();
+                    }
+                }
             } else {
                 DB::rollback();
                 return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
@@ -194,18 +200,10 @@ class ProductController extends Controller
         foreach ($category as $cat) {
             $categories[$cat->id] = $cat->name;
         }
-
-        $tag = Tag::all();
-        $tags = array();
-        foreach ($tag as $tg) {
-            $tags[$tg->tags] = $tg->tags;
-            //dd($tags);
-        }
-
         $discount_types = \Helper::discount_types();
         $product = Product::with('city')->with('currency')->with('languages')->find($id);
         return view('backend.pages.catalog.product.edit',
-            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'tags')
+            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
         );
     }
 
@@ -248,20 +246,26 @@ class ProductController extends Controller
                 $picture = '';
                 $files = $request->file('img_name');
                 foreach ($files as $file) {
-                    $image_large = Images::make($file)->resize(1024, 1024);
-                    $image_small = Images::make($file)->resize(500, 500);
-                    $image_thumb = Images::make($file)->resize(100, 100);
-                    //to remove space from string
-                    $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                    $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $image_large->save($destinationPath . '/large/' . $fileName, 100);
-                    $image_small->save($destinationPath . '/small/' . $fileName, 100);
-                    $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
-                    $data['img_path'] = $path;
-                    $images = Image::FirstOrNew(['img_name' => $fileName]);
-                    $product->images()->save($images);
-                    if (!$product->images()->save($images))
-                        throw new ModelNotFoundException();
+                    if ($file->isValid()) {
+                        $validator = Validator::make($data, Image::rules(), Image::messages());
+                        if ($validator->fails()) {
+                            return back()->withInput()->withErrors($validator);
+                        }
+                        $image_large = Images::make($file)->resize(1024, 1024);
+                        $image_small = Images::make($file)->resize(500, 500);
+                        $image_thumb = Images::make($file)->resize(100, 100);
+                        //to remove space from string
+                        $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
+                        $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                        $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                        $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                        $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                        $data['img_path'] = $path;
+                        $images = Image::FirstOrNew(['img_name' => $fileName]);
+                        $product->images()->save($images);
+                        if (!$product->images()->save($images))
+                            throw new ModelNotFoundException();
+                    }
                 }
                 if (!empty($product->images['img_name'])) {
                     $product->images['img_name'] = $picture;
@@ -276,20 +280,21 @@ class ProductController extends Controller
                 $tags = array_map('trim', $trimmed_array);
                 //$tags = $request->tags;
                 $ids = array();
+                foreach ($product->tags as $tg) {
+                    $ids[] = $tg->id;
+                }
+                DB::table('taggables')
+                    ->whereIn('tag_id', $ids)
+                    ->delete();
                 foreach ($tags as $tag) {
                     $data['tags'] = $tag;
                     $tgs = Tag::firstOrNew(array('tags' => $tag));
-//                    $tgs = Tag::firstOrCreate(['tags'=> $tag]);
-                    $ids[] = $tag->id;
-                    $product->tags()->saveMany([$tgs]);
-                    if (!$product->tags()->saveMany([$tgs]))
-                        throw new ModelNotFoundException();
+                    //$tgs = Tag::firstOrCreate(['tags'=> $tag]);
+                    $product->tags()->save($tgs);
+                    //if (!$product->tags()->saveMany([$tgs]))
+                    //    throw new ModelNotFoundException();
                 }
-                $tag_id = DB::table('taggables')
-                    ->whereIn('tag_id', $ids)
-                    ->get();
             }
-
             if (empty($product->code) || $product->code == null) {
                 $records = Product::count();
                 $current_id = 1;

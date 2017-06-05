@@ -2,11 +2,14 @@
 
 namespace App\Model;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Tag extends Model
 {
+
+    use Sluggable;
     protected $appends = ['hashid'];
     protected $fillable = ['tags', 'taggable_id', 'taggable_type'];
 
@@ -60,5 +63,31 @@ class Tag extends Model
             $result->push(Tag::firstOrCreate(['tags' => $tag]));
         }
         return $result;
+    }
+
+    //----------Sluggable---------//
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'tags'
+            ]
+        ];
+    }
+
+    //-------GetAttributes--------//
+
+    /**
+     * @return string
+     */
+    public function getSeoUrlAttribute()
+    {
+        return $this->tags;
     }
 }
