@@ -32,8 +32,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-Auth::routes();
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('single_product', 'SingleController@index');
 
@@ -46,4 +44,13 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::resource('wish-lists', 'Frontend\WishlistController');
     Route::delete('empty-wish-list', 'Frontend\WishlistController@emptyWishlist')->name('empty.wishlist');
     Route::post('switch-to-cart/{id}', 'Frontend\WishlistController@switchToCart')->name('switch.cart');
+});
+
+Auth::routes();
+
+Route::prefix('customers')->name('customers.')->group(function () {
+    Route::get('login', 'Customer\Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Customer\Auth\LoginController@login')->name('login.post');
+    Route::post('logout', 'Customer\Auth\LoginController@logout')->name('logout');
+    Route::get('dashboard', 'Customer\HomeController@index');
 });

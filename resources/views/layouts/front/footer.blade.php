@@ -6,7 +6,7 @@
             <div class="col-sm-3">
                 <div class="footer-top-box">
                     <i class="fa fa-phone-square"></i>
-                    <a href="tel:+-0123-456-789">+ 0(123) 456 789</a>
+                    <a href="tel:+-070-375-783">+ 0(70) 375 783</a>
                     <p>Order by phone</p>
                 </div>
             </div>
@@ -51,15 +51,9 @@
                 <div class="footer-categori">
                     <h4>Categories</h4>
                     <ul>
-                        <li><a href="#"><i class="fa fa-star"></i> Automotive & Motorcycle</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Electronics</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Sports & Outdoors</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Smartphone & Tablets</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Health & Beauty</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Bags, Shoes & Accessories</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Computers & Networking</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Laptops & Accessories</a></li>
-                        <li><a href="#"><i class="fa fa-star"></i> Entertainment</a></li>
+                        @foreach($categories as $category)
+                            <li><a href="#"><i class="fa fa-star"></i> {!! $category->name !!}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -128,7 +122,7 @@
                     <div class="info-box">
                         <h4>extra link</h4>
                         <ul>
-                            <li class="item"><a title="Specials" href="">gift cards</a></li>
+                            <li class="item"><a title="Specials" href="">Partner</a></li>
                             <li class="item"><a title="New products" href="">e- gift cards</a></li>
                             <li class="item"><a title="Best sellers" href="">corporate gift cards</a></li>
                             <li class="item"><a title="Contact us" href="">check balance</a></li>
