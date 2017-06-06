@@ -52,5 +52,7 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::get('login', 'Customer\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Customer\Auth\LoginController@login')->name('login.post');
     Route::post('logout', 'Customer\Auth\LoginController@logout')->name('logout');
-    Route::get('dashboard', 'Customer\HomeController@index');
+    Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
+
+    Route::resource('carts', 'Frontend\CartController');
 });

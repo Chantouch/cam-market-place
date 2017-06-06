@@ -13,7 +13,8 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        factory(\App\Model\Admin::class, 2)->create();
+        //factory(\App\Model\Admin::class, 2)->create();
+        factory(\App\Model\Customer::class, 2)->create();
         Model::reguard();
     }
 }

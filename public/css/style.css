@@ -3660,6 +3660,7 @@ span.cat-title {
 .categoris ul li {
     padding: 2px 0;
 }
+
 .categoris ul li ul li {
     padding: 2px 20px;
 }
@@ -5000,7 +5001,7 @@ table.cart-table {
     margin-right: 9px;
 }
 
-.cart .cartPage-btn li a.cbtn {
+.cart .cartPage-btn li a.cbtn, .cart .cartPage-btn li input.cbtn {
     background: #282828 none repeat scroll 0 0;
     color: #fff;
     display: block;
@@ -5016,7 +5017,11 @@ table.cart-table {
     transition: all 0.3s ease 0s;
 }
 
-.cart .cartPage-btn li a.cbtn:hover {
+.cartPage-btn li input.cbtn {
+    padding: 0 !important;
+}
+
+.cart .cartPage-btn li a.cbtn:hover, .cart .cartPage-btn li input.cbtn:hover {
     background: #ED4F50;
 }
 
@@ -6708,4 +6713,7 @@ input.custom-form {
 
 /* 6d6d6d */
 
-
+.right-left-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}

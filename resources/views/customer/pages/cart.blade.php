@@ -78,7 +78,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <div class="cart-subtotal">{{ ($item->qty*$item->price) }}</div>
+                                            <div class="cart-subtotal">{{ Helper::currency($item->model->currency).($item->qty*$item->price) }}</div>
                                         </td>
                                         <td>
                                             <div class="row">
@@ -104,7 +104,7 @@
                                     <td class="table-image"></td>
                                     <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Subtotal</td>
-                                    <td>${{ Cart::instance('default')->subtotal() }}</td>
+                                    <td>{{ Helper::currency($item->model->currency).Cart::instance('default')->subtotal() }}</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -112,7 +112,7 @@
                                     <td class="table-image"></td>
                                     <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Tax</td>
-                                    <td>${{ Cart::instance('default')->tax() }}</td>
+                                    <td>{{ Helper::currency($item->model->currency).Cart::instance('default')->tax() }}</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -121,7 +121,7 @@
                                     <td class="table-image"></td>
                                     <td style="padding: 40px;"></td>
                                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
-                                    <td class="table-bg">${{ Cart::total() }}</td>
+                                    <td class="table-bg">{{ Helper::currency($item->model->currency).Cart::total() }}</td>
                                     <td class="column-spacer"></td>
                                     <td></td>
                                 </tr>
@@ -132,11 +132,11 @@
                                                 <li><a href="{!! route('home') !!}" class="cbtn">Continue Shopping</a>
                                                 </li>
                                                 <li>
-                                                    <form action="{{ route('products.empty.carts') }}" method="POST">
-                                                        {!! csrf_field() !!}
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="submit" class="cbtn" value="CLEAR SHOPPING CART">
-                                                    </form>
+                                                    {!! Form::open(['route' => ['products.empty.carts'], 'method' => 'delete']) !!}
+                                                    {!! csrf_field() !!}
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="submit" class="cbtn" value="CLEAR SHOPPING CART">
+                                                    {!! Form::close() !!}
                                                 </li>
                                                 <li><a href="#" class="cbtn">CHECK OUT</a></li>
                                             </ul>

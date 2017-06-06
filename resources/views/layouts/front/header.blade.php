@@ -59,9 +59,22 @@
                     <!-- Start user info adn search -->
                     <div class="user-info-adn-search">
                         <div class="user-info">
+                            @if (Auth::guard('customer')->check())
+                                <form id="logout-form" action="{{ route('customers.logout') }}" method="POST"
+                                      style="display: none; visibility: hidden">
+                                    {{ csrf_field() }}
+                                </form>
+                            @endif
                             <p>
-                                <a href="{!! url('register') !!}"><i class="fa fa-user"></i> My Account</a>
-                                <a href="{!! url('login') !!}"><i class="fa fa-key"></i> Sign In</a>
+                                <a href="{!! route('customers.dashboard') !!}"><i class="fa fa-user"></i> My Account</a>
+                                @if (Auth::guard('customer')->check())
+                                    <a href="{!! route('customers.logout') !!}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-key"></i> Logout
+                                    </a>
+                                @else
+                                    <a href="{!! route('customers.login') !!}"><i class="fa fa-key"></i> Sign In</a>
+                                @endif
                                 <a href="{!! route('products.wish-lists.index') !!}">
                                     <i class="fa fa-heart-o"></i> Wishlist
                                 </a>

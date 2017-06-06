@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\Category;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class LoginController extends Controller
         $this->middleware('guest:customer', ['except' => 'logout']);
     }
 
-    protected $redirectTo = "customer/dashboard";
+    protected $redirectTo = "customers/dashboard";
 
     /**
      * Get the post register / login redirect path.
@@ -44,7 +45,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('customer.auth.login');
+        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
+        return view('customer.auth.login', compact('categories'));
     }
 
     /**
