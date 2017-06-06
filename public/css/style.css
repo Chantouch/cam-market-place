@@ -4953,7 +4953,7 @@ table.cart-table {
 }
 
 .cart-table tbody tr td:last-child {
-    padding: 15px 20px;
+    /*padding: 15px 20px;*/
 }
 
 .cart .cart-table h6 {
