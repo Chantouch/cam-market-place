@@ -2,6 +2,11 @@
 @section('style')
     <link rel="stylesheet" type="text/css" href="{!! asset('plugins/xZoom/xzoom.css') !!}" media="all"/>
     <link type="text/css" rel="stylesheet" media="all" href="{!! asset('plugins/xZoom/magnific-popup.css') !!}"/>
+    <style type="text/css">
+        .table-bordered,.center th,td{
+            text-align: center;
+        }
+    </style>
 @stop
 @section('content-area')
     <!-- Start breadcume area -->
@@ -14,16 +19,13 @@
                         <span class="navigation-pipe">&gt;</span>
                         <a title="Automotive & Motorcycle" href="index.html">My account</a>
                         <span class="navigation-pipe">&gt;</span>
-                        Shopping cart
+                        Wishlist
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <p><a href="{{ route('home') }}">Home</a> / Wishlist</p>
-        <h1>Your Wishlist</h1>
-        <hr>
         @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -35,10 +37,11 @@
             </div>
         @endif
         @if (sizeof(Cart::instance('wishlist')->content()) > 0)
-            <table class="table">
+            <table class="table table-bordered center">
                 <thead>
                 <tr>
-                    <th class="table-image"></th>
+                    <th>N<sup>0</sup></th>
+                    <th class="table-image">Picture</th>
                     <th>Product</th>
                     <th>Price</th>
                     <th class="column-spacer"></th>
@@ -46,8 +49,10 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i=1;?>
                 @foreach (Cart::instance('wishlist')->content() as $item)
                     <tr>
+                        <td>{!! $i !!}</td>
                         <td class="table-image">
                             <a href="{!! route('products.details', [$item->model->slug]) !!}">
                                 @foreach($item->model->images->take(1) as $image)
@@ -61,26 +66,30 @@
                         <td>${{ $item->subtotal }}</td>
                         <td class=""></td>
                         <td>
-                            {{--<form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side">--}}
-                            {{--{!! csrf_field() !!}--}}
-                            {{--<input type="hidden" name="_method" value="DELETE">--}}
-                            {{--<input type="submit" class="btn btn-danger btn-sm" value="Remove">--}}
-                            {{--</form>--}}
+                            <label>
+                                {{--<form action="{{ url('wishlist', [$item->rowId]) }}" method="POST" class="side-by-side">--}}
+                                {{--{!! csrf_field() !!}--}}
+                                {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                {{--<input type="submit" class="btn btn-danger btn-sm" value="Remove">--}}
+                                {{--</form>--}}
 
-                            {!! Form::open(['route' => ['products.wish-lists.destroy', $item->rowId], 'method' => 'DELETE']) !!}
-                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                            {!! Form::close() !!}
+                                {!! Form::open(['route' => ['products.wish-lists.destroy', $item->rowId], 'method' => 'DELETE']) !!}
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                {!! Form::close() !!}
+                            </label>
+                            <label>
+                                {{--<form action="{{ url('switchToCart', [$item->rowId]) }}" method="POST" class="side-by-side">--}}
+                                {{--{!! csrf_field() !!}--}}
+                                {{--<input type="submit" class="btn btn-success btn-sm" value="To Cart">--}}
+                                {{--</form>--}}
 
-                            {{--<form action="{{ url('switchToCart', [$item->rowId]) }}" method="POST" class="side-by-side">--}}
-                            {{--{!! csrf_field() !!}--}}
-                            {{--<input type="submit" class="btn btn-success btn-sm" value="To Cart">--}}
-                            {{--</form>--}}
-
-                            {!! Form::open(['route' => ['products.switch.cart', $item->rowId], 'method' => 'POST']) !!}
-                            <button type="submit" class="btn btn-danger btn-sm">To Cart</button>
-                            {!! Form::close() !!}
+                                {!! Form::open(['route' => ['products.switch.cart', $item->rowId], 'method' => 'POST']) !!}
+                                <button type="submit" class="btn btn-sm add-to-card"><i class="fa fa-shopping-cart"></i><span>Add to cart</span></button>
+                                {!! Form::close() !!}
+                            </label>
                         </td>
                     </tr>
+                    <?php $i++;?>
                 @endforeach
                 </tbody>
             </table>
