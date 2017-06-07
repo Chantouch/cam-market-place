@@ -94,22 +94,28 @@
                 </tbody>
             </table>
             <div class="spacer"></div>
-            <a href="{!! route('home') !!}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
+            
             <div style="float:right">
+            <label>
                 {{--<form action="{{ url('/emptyWishlist') }}" method="POST">--}}
                 {{--{!! csrf_field() !!}--}}
                 {{--<input type="hidden" name="_method" value="DELETE">--}}
                 {{--<input type="submit" class="btn btn-danger btn-lg" value="Empty Wishlist">--}}
                 {{--</form>--}}
                 {!! Form::open(['route' => ['products.empty.wishlist', $item->rowId], 'method' => 'POST']) !!}
-                <button type="submit" class="btn btn-danger btn-sm">Empty Wishlist</button>
+                <button type="submit" class="btn btn-danger btn-md">Empty Wishlist</button>
                 {!! Form::close() !!}
+                </label>
+                <label><a href="{!! route('home') !!}" class="btn btn-primary btn-md">Continue Shopping</a> &nbsp;</label>
+
             </div>
         @else
             <h3>You have no items in your Wishlist</h3>
             <a href="{!! route('home') !!}" class="btn btn-primary btn-lg">Continue Shopping</a>
         @endif
         <div class="spacer"></div>
+        <br/>
+        <br/>
     </div> <!-- end container -->
 @stop
 @section('scripts')
