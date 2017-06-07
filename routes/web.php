@@ -49,10 +49,15 @@ Route::prefix('products')->name('products.')->group(function () {
 Auth::routes();
 
 Route::prefix('customers')->name('customers.')->group(function () {
+    //===========Customer Login and Register===========//
+    Route::get('register', 'Customer\Auth\RegisterController@showRegisterForm')->name('register');
+    Route::post('register', 'Customer\Auth\RegisterController@saveCustomerRegister')->name('register.account');
+    Route::get('verify/{token}', 'Customer\Auth\RegisterController@verify')->name('verify.account');
+    //------------Login and logout------------//
     Route::get('login', 'Customer\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Customer\Auth\LoginController@login')->name('login.post');
     Route::post('logout', 'Customer\Auth\LoginController@logout')->name('logout');
+    //------------Customer frontend-----------//
     Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
-
     Route::resource('carts', 'Frontend\CartController');
 });

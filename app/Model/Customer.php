@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -38,8 +39,39 @@ class Customer extends Authenticatable
     {
         return [
             'username' => [
-                'source' => 'name'
+                'source' => 'first_name' . 'last_name'
             ]
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getVerificationStatusAttribute()
+    {
+        $name = "";
+        if ($this->verified_by === null) {
+            return "Need Verified";
+        } else {
+            try {
+                $verified = Admin::find($this->verified_by);
+                $name = $verified->name;
+            } catch (ModelNotFoundException $exception) {
+
+            }
+            return $name;
+        }
+    }
+
+    //Verified employee after register
+
+    /**
+     * verified employer
+     */
+    public function verified()
+    {
+        $this->status = 1;
+        $this->verified_code = null;
+        $this->save();
     }
 }

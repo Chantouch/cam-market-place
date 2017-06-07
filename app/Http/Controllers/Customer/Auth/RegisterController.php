@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Customer\Auth;
 
-use App\User;
+use App\Mail\CustomerAccountActivation;
+use App\Model\Customer;
+use DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -39,33 +44,129 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    //===========For user register===========//
+
     /**
-     * Get a validator for an incoming registration request.
+     * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  array $data
+     * @return Customer
      */
-    protected function validator(array $data)
+    protected function create(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+        //Generate Temp enrollment ID Job id
+        $records = Customer::all()->count();
+        $current_id = 1;
+        if (!$records == 0) {
+            $current_id = Customer::all()->last()->id + 1;
+        }
+        $enroll_id = 'TMP_CM' . date('Y') . str_pad($current_id, 5, '0', STR_PAD_LEFT);
+
+        return Customer::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone_number' => $data['phone_number'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'verified_code' => str_random(50),
+            'temp_enroll' => $enroll_id
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return User
+     * @param  request $request
+     * @return string
      */
-    protected function create(array $data)
+    protected function saveCustomerRegister(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $data = $request->all();
+        $messages = array(
+            'first_name.required' => 'Please enter first name',
+            'last_name.required' => 'Please enter last name',
+            'phone_number.required' => 'Please enter mobile phone',
+            'email.required' => 'Please enter email',
+            'email.unique' => 'This email is already taken. Please input a another email',
+            'password.required' => 'Please enter password',
+            //'terms.required' => 'Please accept to our term and condition',
+        );
+
+        $rules = array(
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'phone_number' => 'required',
+            'email' => 'required|email|max:255|unique:customers',
+            'password' => 'required|min:6|confirmed',
+            //'terms' => 'required',
+        );
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        $validator = Validator::make($data, $rules, $messages);
+        if ($validator->fails()) {
+            $this->throwValidationException($request, $validator);
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        DB::beginTransaction();
+        try {
+            $customer = $this->create($data);
+            $email = new CustomerAccountActivation(new Customer([
+                'first_name' . ' ' . 'last_name' => $customer->first_name . ' ' . $customer->last_name,
+                'verified_code' => $customer->verified_code,
+            ]));
+            Mail::to($customer->email)->send($email);
+            DB::commit();
+            if ($customer->id) {
+                if ($this->guard()->attempt($credentials)) {
+                    return redirect()->route('customers.dashboard')
+                        ->with('success', 'Please check your email to activate your account.');
+                } else {
+                    DB::rollback();
+                    return back()
+                        ->withInput()
+                        ->with('error', 'Error while registering in our website, Please contact to our Teach Support');
+                }
+            } else {
+                return redirect('customers/register')
+                    ->withInput()
+                    ->with('error', 'Employer not register. Please try again');
+            }
+        } catch (ModelNotFoundException $e) {
+            DB::rollback();
+            return back()
+                ->withInput()
+                ->with('error', 'Error while registering in our website, Please contact to our Teach Support');
+        }
+    }
+
+
+    /**
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verify($token)
+    {
+        try {
+            Customer::where('verified_code', $token)->firstOrFail()->verified();
+        } catch (ModelNotFoundException $exception) {
+            return back()->with('status', 'The token already used, or broken.');
+        }
+        return redirect()->route('customers.login')
+            ->withInput()
+            ->with('success', 'Your account is activated successfully, Plz login to post your job.');
+    }
+
+    /**
+     * @return mixed
+     *
+     * Get customer guard
+     */
+    public function guard()
+    {
+        return auth()->guard('customer');
     }
 }
