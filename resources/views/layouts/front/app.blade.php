@@ -145,13 +145,16 @@
 <!-- jquery.scrollUp.min js============================================ -->
 <script src="{!! asset('js/jquery.scrollUp.min.js') !!}"></script>
 <!-- wow js============================================ -->
-<script src="{!! asset('js/wow.js') !!}"></script>
+<script src="{!! asset('js/wow.min.js') !!}"></script>
 <!-- jquery.meanmenu js============================================ -->
 <script src="{!! asset('js/jquery.meanmenu.js') !!}"></script>
 <!-- plugins js============================================ -->
 <script src="{!! asset('js/plugins.js') !!}"></script>
 <!-- main js============================================ -->
 <script src="{!! asset('js/main.js') !!}"></script>
+<script>
+    new WOW().init();
+</script>
 @yield('scripts')
 </body>
 </html>

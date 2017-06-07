@@ -28,9 +28,22 @@
                     <h4 class="cart-title">Login</h4>
                 </div>
             </div>
-            <div class="row">
+            <div class="row m-b-20">
                 <!-- Registered-Customers Start -->
-                <div class="col-md-12">
+                <div class="col-sm-7 text">
+                    <h1 class="wow fadeInLeftBig">Learn to Code in <strong>1 Month</strong></h1>
+                    <div class="description wow fadeInLeftBig">
+                        <p>
+                            We have been working very hard to create the new version of our course.
+                            It comes with a lot of new features, easy to follow videos and images. Check it out now!
+                        </p>
+                    </div>
+                    <div class="top-big-link wow fadeInUp">
+                        <a class="btn btn-link-1 scroll-link" href="#pricing">Our prices</a>
+                        <a class="btn btn-link-2 scroll-link" href="#features">Learn more</a>
+                    </div>
+                </div>
+                <div class="col-md-5">
                     {!! Form::open(['route' => ['customers.login.post'], 'method' => 'POST']) !!}
                     <div class="registered-customers">
                         <h3>REGISTERED CUSTOMERS</h3>
@@ -70,6 +83,7 @@
                                             </label>
                                         </p>
                                         <button class="btn btnContact" type="submit">login</button>
+                                        <a href="{{ route('customers.register') }}" class="btn btnContact">Register?</a>
                                     </div>
                                 </div>
                             </div>
@@ -82,4 +96,16 @@
         </div>
     </div>
     <!-- LOGIN-AREA END -->
+@stop
+
+@section('scripts')
+    {{--<script src="{!! asset('js/countUp.js') !!}"></script>--}}
+    {{--<script type="text/javascript">--}}
+    {{--"use strict";--}}
+    {{--var count = new countUp("error", 0, 404, 0, 3);--}}
+    {{--window.onload = function () {--}}
+    {{--// fire animation--}}
+    {{--count.start();--}}
+    {{--};--}}
+    {{--</script>--}}
 @stop

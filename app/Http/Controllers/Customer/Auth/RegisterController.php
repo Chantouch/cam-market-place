@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Customer\Auth;
 
 use App\Mail\CustomerAccountActivation;
+use App\Model\Category;
+use App\Model\City;
+use App\Model\Commune;
+use App\Model\Country;
 use App\Model\Customer;
 use DB;
 use App\Http\Controllers\Controller;
@@ -46,6 +50,21 @@ class RegisterController extends Controller
 
     //===========For user register===========//
 
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegisterForm()
+    {
+        $countries = Country::where('status', 1)->whereNull('country_id')->pluck('name', 'id');
+        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->pluck('name', 'id');
+        $communes = Commune::where('status', 1)->whereNotNull('country_id')->whereNotNull('city_id')->pluck('name', 'id');
+        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
+        return view('customer.auth.register', compact('categories', 'countries', 'cities', 'communes'));
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -61,16 +80,22 @@ class RegisterController extends Controller
             $current_id = Customer::all()->last()->id + 1;
         }
         $enroll_id = 'TMP_CM' . date('Y') . str_pad($current_id, 5, '0', STR_PAD_LEFT);
-
-        return Customer::create([
+        $cus_code = 'C' . date('mY') . str_pad($current_id, 5, '0', STR_PAD_LEFT);
+        $array_data = [
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone_number' => $data['phone_number'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'verified_code' => str_random(50),
-            'temp_enroll' => $enroll_id
-        ]);
+            'temp_enroll' => $enroll_id,
+            'cus_code' => $cus_code,
+            'country_id' => $data['country_id'],
+            'city_id' => $data['city_id'],
+            'commune_id' => $data['commune_id'],
+
+        ];
+        return Customer::create($array_data);
     }
 
     /**

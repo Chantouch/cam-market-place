@@ -28,8 +28,21 @@
                     <h4 class="cart-title">Login</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row m-b-20">
+                <div class="col-md-4">
+                    <h1 class="wow fadeInLeftBig">Learn to Code in <strong>1 Month</strong></h1>
+                    <div class="description wow fadeInLeftBig">
+                        <p>
+                            We have been working very hard to create the new version of our course.
+                            It comes with a lot of new features, easy to follow videos and images. Check it out now!
+                        </p>
+                    </div>
+                    <div class="top-big-link wow fadeInUp">
+                        <a class="btn btn-link-1 scroll-link" href="#pricing">Our prices</a>
+                        <a class="btn btn-link-2 scroll-link" href="#features">Learn more</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
                     {!! Form::open(['route' => ['customers.register.account'], 'method' => 'POST']) !!}
                     <div class="new-customers">
                         <h3>NEW CUSTOMERS</h3>
@@ -64,25 +77,37 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <select class="custom-select custom-form">
-                                    <option>Country</option>
-                                    <option>Bangladesh</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                    <option>Australia</option>
-                                </select>
+                                <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
+                                {!! Form::select('country_id', $countries, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Country---']) !!}
+                                    @if ($errors->has('country_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('country_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-sm-6">
-                                <select class="custom-select custom-form">
-                                    <option>City</option>
-                                    <option>Dhaka</option>
-                                    <option>New York</option>
-                                    <option>London</option>
-                                    <option>Melbourne</option>
-                                </select>
+                                <div class="form-group{{ $errors->has('city_id') ? ' has-error' : '' }}">
+                                {!! Form::select('city_id', $cities, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select City---']) !!}
+                                    @if ($errors->has('city_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('city_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group{{ $errors->has('commune_id') ? ' has-error' : '' }}">
+                                {!! Form::select('commune_id', $communes, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Commune---']) !!}
+                                    @if ($errors->has('phone_number'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('commune_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                     {{--<label for="phone_number" class="control-label"></label>--}}
@@ -93,15 +118,6 @@
                                     </span>
                                     @endif
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <select class="custom-select custom-form">
-                                    <option>Post Code</option>
-                                    <option>012345</option>
-                                    <option>0123456</option>
-                                    <option>01234567</option>
-                                    <option>012345678</option>
-                                </select>
                             </div>
                         </div>
                         <div class="row">

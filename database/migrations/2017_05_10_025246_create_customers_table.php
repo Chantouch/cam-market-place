@@ -25,6 +25,7 @@ class CreateCustomersTable extends Migration
             $table->string('password');
             $table->integer('city_id', false,true)->nullable();
             $table->integer('country_id',false,true)->nullable();
+            $table->integer('commune_id',false,true)->nullable();
             $table->string('verified_code')->nullable();
             $table->string('temp_enroll')->nullable();
             $table->string('enrollment_id')->nullable();
@@ -36,8 +37,9 @@ class CreateCustomersTable extends Migration
             $table->softDeletes();
 
             $table->foreign('verified_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->foreign('commune_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
 
