@@ -100,8 +100,19 @@
                                 </form>
                             </div>
                             <div class="shoping-cart">
-                                <a href="{!! route('products.carts.index') !!}"><span>
-                                        My Cart ({!! count(Cart::content()) !!})</span></a>
+                                @if (Auth::guard('customer')->check())
+                                    <a href="{!! route('customers.dashboard') !!}">
+                                        <span>
+                                            My Cart ({!! count(Cart::content()) !!})
+                                        </span>
+                                    </a>
+                                @else
+                                    <a href="{!! route('products.carts.index') !!}">
+                                        <span>
+                                            My Cart ({!! count(Cart::content()) !!})
+                                        </span>
+                                    </a>
+                                @endif
                                 @if (sizeof(Cart::content()) > 0)
                                     <div class="add-to-cart-product">
                                         @foreach (Cart::content() as $item)

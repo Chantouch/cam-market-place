@@ -25,12 +25,12 @@ class RedirectIfAuthenticated
                 break;
             case 'partner':
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('partner.home');
+                    return redirect()->route('partners.dashboard');
                 }
                 break;
             default:
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('customer.home');
+                    return redirect()->route('customers.dashboard');
                 }
                 break;
         }

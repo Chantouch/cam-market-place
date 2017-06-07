@@ -12,7 +12,7 @@ class CustomerAccountActivation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $customer;
+    public $customer;
 
     /**
      * Create a new message instance.
