@@ -29,12 +29,11 @@
                     <h4 class="cart-title">Shopping cart</h4>
                     <div class="table-responsive">
                         @if (sizeof(Cart::content()) > 0)
-                            <table class="cart-table">
+                            <table class="cart-table table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Product</th>
                                     <th>Product name</th>
-                                    <th></th>
                                     <th>Unit Price</th>
                                     <th>Qty</th>
                                     <th>Subtotal</th>
@@ -58,15 +57,14 @@
                                                 <a href="{!! route('products.details', [$item->model->slug]) !!}">{!! $item->name !!}</a>
                                             </h6>
                                         </td>
-                                        <td><a href="#">Edit</a></td>
                                         <td>
                                             <div class="cart-price">{!! Helper::currency($item->model->currency).$item->price !!}</div>
                                         </td>
                                         <td>
                                             <form>
                                                 <div class="selectOption">
-                                                    <div class="selectParent">
-                                                        <select class="quantity" data-id="{{ $item->rowId }}">
+                                                    <div class="selectParent form-group">
+                                                        <select class="quantity form-control" data-id="{{ $item->rowId }}">
                                                             <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
                                                             <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
                                                             <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
@@ -82,48 +80,38 @@
                                         </td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-md-6 right-left-0">
+                                                <label>
                                                     {!! Form::open(['route' => ['products.carts.destroy',$item->rowId], 'method' => 'delete']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                     {!! Form::close() !!}
-                                                </div>
-                                                <div class="col-md-6 right-left-0">
+                                                </label>
+                                                <label>
                                                     {!! Form::open(['route' => ['products.switch.wishlist',$item->rowId], 'method' => 'POST']) !!}
                                                     <button type="submit" class="btn btn-success btn-sm">
                                                         <i class="fa fa-heart"></i>
                                                     </button>
                                                     {!! Form::close() !!}
-                                                </div>
+                                                </label>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td class="table-image"></td>
-                                    <td></td>
+                                    <td class="table-image" colspan="3" rowspan="3"></td>
                                     <td class="small-caps table-bg" style="text-align: right">Subtotal</td>
                                     <td>${{ Cart::instance('default')->subtotal() }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td colspan="1" rowspan="3"></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-image"></td>
-                                    <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Tax</td>
                                     <td>${{ Cart::instance('default')->tax() }}</td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
 
                                 <tr class="border-bottom">
-                                    <td class="table-image"></td>
-                                    <td style="padding: 40px;"></td>
                                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
                                     <td class="table-bg">${{ Cart::total() }}</td>
-                                    <td class="column-spacer"></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="actions">
