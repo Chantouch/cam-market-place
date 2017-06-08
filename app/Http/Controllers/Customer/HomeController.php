@@ -14,6 +14,17 @@ class HomeController extends Controller
         $this->middleware('auth:customer');
     }
 
+    /**
+     * @return mixed
+     */
+    public function auth()
+    {
+        return auth()->guard('customer');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $user = $this->auth()->user();
@@ -21,8 +32,10 @@ class HomeController extends Controller
         return view('customer.pages.cart', compact('categories', 'user'));
     }
 
-    public function auth()
+    public function checkout()
     {
-        return auth()->guard('customer');
+        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
+        return view('customer.pages.checkout',compact('categories'));
     }
+
 }

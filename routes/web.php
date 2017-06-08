@@ -60,4 +60,5 @@ Route::prefix('customers')->name('customers.')->group(function () {
     //------------Customer frontend-----------//
     Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
     Route::resource('carts', 'Frontend\CartController');
+    Route::get('checkout', 'Customer\HomeController@checkout')->name('checkout');
 });

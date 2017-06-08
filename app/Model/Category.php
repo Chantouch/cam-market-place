@@ -89,7 +89,7 @@ class Category extends Model
      */
     public function children()
     {
-        return $this->hasMany(Category::class, 'category_id')->whereNotNull('category_id');
+        return $this->hasMany(Category::class, 'category_id', 'id')->whereNotNull('category_id');
     }
 
     /**

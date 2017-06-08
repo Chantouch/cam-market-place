@@ -138,7 +138,7 @@
                                                     <input type="submit" class="cbtn" value="CLEAR SHOPPING CART">
                                                     {!! Form::close() !!}
                                                 </li>
-                                                <li><a href="#" class="cbtn">CHECK OUT</a></li>
+                                                <li><a href="{!! route('customers.checkout') !!}" class="cbtn">CHECK OUT</a></li>
                                             </ul>
                                         </div>
                                     </td>

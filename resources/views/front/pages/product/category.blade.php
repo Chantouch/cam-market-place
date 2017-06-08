@@ -37,8 +37,17 @@
                                     <span class="cat-title">Categories</span>
                                     <ul>
                                         @if(isset($categories))
-                                            @foreach($categories as $cat)
-                                                @include('front.pages.product.catalog-category')
+                                            @foreach($categories as $category)
+                                                <li>
+                                                    <span><input type="checkbox" class="checkbox"></span>
+                                                    <label>
+                                                        <a href="{!! route('products.category.slug', [$category->slug]) !!}">{!! str_limit($category->name,25) !!}
+                                                            <span> ({!! count($category->products) !!})</span></a>
+                                                    </label>
+                                                    @if(count($category->children))
+                                                        @include('front.pages.product.catalog-category',['children' => $category->children])
+                                                    @endif
+                                                </li>
                                             @endforeach
                                         @endif
                                     </ul>
@@ -64,7 +73,8 @@
                                         <li>
                                             <span><input type="checkbox" class="checkbox"></span>
                                             <label>
-                                                <a href="">In stock<span> ({!! count($products->where('qty',!null)) !!})</span></a>
+                                                <a href="">In stock<span> ({!! count($products->where('qty',!null)) !!}
+                                                        )</span></a>
                                             </label>
                                         </li>
                                     </ul>
@@ -247,7 +257,8 @@
                         <div class="categori-baner">
                             @if(count($category->images))
                                 @foreach($category->images->take(1) as $image)
-                                    <img src="{!! asset($category->path.$image->img_name) !!}" alt="{!! $category->name !!}" class="img-thumbnail">
+                                    <img src="{!! asset($category->path.$image->img_name) !!}"
+                                         alt="{!! $category->name !!}" class="img-thumbnail">
                                 @endforeach
                             @endif
                         </div>
