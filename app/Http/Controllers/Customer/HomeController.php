@@ -6,6 +6,7 @@ use App\Model\Category;
 use App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 
 class HomeController extends Controller
 {
@@ -36,6 +37,11 @@ class HomeController extends Controller
     {
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
         return view('customer.pages.checkout',compact('categories'));
+    }
+
+    public function post_checkout()
+    {
+
     }
 
 }

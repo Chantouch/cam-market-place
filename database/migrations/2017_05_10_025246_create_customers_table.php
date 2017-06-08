@@ -29,6 +29,7 @@ class CreateCustomersTable extends Migration
             $table->string('verified_code')->nullable();
             $table->string('temp_enroll')->nullable();
             $table->string('enrollment_id')->nullable();
+            $table->longText('addresses')->nullable();
             $table->integer('verified_by', false, true)->nullable();
             $table->dateTime('verified_at')->nullable();
             $table->tinyInteger('status')->default(0);

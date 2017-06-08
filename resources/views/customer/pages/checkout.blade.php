@@ -26,6 +26,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <h4 class="cart-title">CHECKOUT</h4>
                 </div>
+                {!! Form::open(['route' => ['customers.post-checkout'], 'method' => 'POST']) !!}
                 <div class="checkout-content">
                     <div class="col-xs-12 col-sm-3 col-md-3">
                         <div class="checkout-sidebar">
@@ -33,7 +34,7 @@
                             <ul>
                                 <li><a href="#">Billing Address</a></li>
                                 <li><a href="#">Sipping Address</a></li>
-                                <li><a href="#">Shiping Method</a></li>
+                                <li><a href="#">Shipping Method</a></li>
                                 <li><a href="#">Payment Method</a></li>
                             </ul>
                         </div>
@@ -383,6 +384,7 @@
                         </section>
                     </div>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

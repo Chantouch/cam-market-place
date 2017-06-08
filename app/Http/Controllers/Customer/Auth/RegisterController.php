@@ -93,6 +93,7 @@ class RegisterController extends Controller
             'country_id' => $data['country_id'],
             'city_id' => $data['city_id'],
             'commune_id' => $data['commune_id'],
+            'addresses' => $data['addresses'],
 
         ];
         return Customer::create($array_data);
@@ -115,15 +116,21 @@ class RegisterController extends Controller
             'email.unique' => 'This email is already taken. Please input a another email',
             'password.required' => 'Please enter password',
             //'terms.required' => 'Please accept to our term and condition',
+            'country_id.required' => 'Please select your country',
+            'city_id.required' => 'Please select your city',
+            'commune_id.required' => 'Please share us your commune location',
         );
 
         $rules = array(
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'phone_number' => 'required',
+            'phone_number' => 'required|max:14',
             'email' => 'required|email|max:255|unique:customers',
             'password' => 'required|min:6|confirmed',
-            //'terms' => 'required',
+            'country_id' => 'required|integer',
+            'city_id' => 'required|integer',
+            'commune_id' => 'required|integer',
+            'addresses' => 'required|string',
         );
         $credentials = [
             'email' => $request->email,

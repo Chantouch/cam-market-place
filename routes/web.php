@@ -61,4 +61,11 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
     Route::resource('carts', 'Frontend\CartController');
     Route::get('checkout', 'Customer\HomeController@checkout')->name('checkout');
+    Route::post('checkout', 'Customer\HomeController@post_checkout')->name('post-checkout');
+});
+
+//-----------REST API CALL----------//
+Route::prefix('api')->name('api.')->group(function () {
+    Route::get('cities/{country}', 'REST\APIController@get_city')->name('cities');
+    Route::get('communes/{city}', 'REST\APIController@get_commune')->name('communes');
 });

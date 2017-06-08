@@ -68,17 +68,26 @@
                                     </span>
                                     @endif
                                 </div>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="text" class="custom-form" placeholder="Address"/>
+                                <div class="form-group{{ $errors->has('addresses') ? ' has-error' : '' }}">
+                                    {{--<label for="last_name" class="control-label"></label>--}}
+                                    {!! Form::text('addresses', null, ['class' => 'form-control custom-form','placeholder'=>'Address']) !!}
+                                    @if ($errors->has('addresses'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('addresses') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('country_id') ? ' has-error' : '' }}">
-                                {!! Form::select('country_id', $countries, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Country---']) !!}
+                                    {!! Form::select('country_id', $countries, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Country---']) !!}
                                     @if ($errors->has('country_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('country_id') }}</strong>
@@ -88,7 +97,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('city_id') ? ' has-error' : '' }}">
-                                {!! Form::select('city_id', $cities, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select City---']) !!}
+                                    {!! Form::select('city_id', [], null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select City---']) !!}
                                     @if ($errors->has('city_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('city_id') }}</strong>
@@ -100,8 +109,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('commune_id') ? ' has-error' : '' }}">
-                                {!! Form::select('commune_id', $communes, null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Commune---']) !!}
-                                    @if ($errors->has('phone_number'))
+                                    {!! Form::select('commune_id', [], null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Commune---']) !!}
+                                    @if ($errors->has('commune_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('commune_id') }}</strong>
                                     </span>
@@ -134,7 +143,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     {{--<label for="password" class="control-label"></label>--}}
                                     {!! Form::password('password', ['class' => 'form-control custom-form','placeholder'=>'Password']) !!}
@@ -145,9 +154,7 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                                     {{--<label for="password_confirmation" class="control-label"></label>--}}
                                     {!! Form::password('password_confirmation', ['class' => 'form-control custom-form','placeholder'=>'Password confirmation']) !!}
@@ -186,4 +193,13 @@
         </div>
     </div>
     <!-- LOGIN-AREA END -->
+@stop
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            get_child("country_id", "city_id", "/api/cities/");
+            get_child("city_id", "commune_id", "/api/communes/");
+        });
+    </script>
 @stop
