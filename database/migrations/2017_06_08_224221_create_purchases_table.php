@@ -18,7 +18,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('customer_id', false, true);
             $table->float('total_paid_kh')->nullable();
             $table->float('total_paid_foreign')->nullable();
-            $table->string('contact_name', 191)->nullabe();
+            $table->string('contact_name', 191)->nullable();
             $table->string('contact_phone', 18)->nullable();
             $table->string('shipping_address', 255)->nullable();
             $table->timestamps();

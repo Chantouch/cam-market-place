@@ -383,6 +383,7 @@
                             </div>
                         </section>
                     </div>
+                    <button type="submit">Submit</button>
                 </div>
                 {!! Form::close() !!}
             </div>

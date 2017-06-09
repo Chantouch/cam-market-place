@@ -14,7 +14,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', 'Backend\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Backend\Auth\LoginController@login')->name('login.post');
     Route::post('logout', 'Backend\Auth\LoginController@logout')->name('logout');
-    Route::get('/dashboard', 'Backend\AdminController@index')->name('dashboard');
+    Route::get('dashboard', 'Backend\AdminController@index')->name('dashboard');
     Route::resource('countries', 'Backend\CountryController');
     Route::resource('cities', 'Backend\CityController');
     Route::resource('communes', 'Backend\CommuneController');
