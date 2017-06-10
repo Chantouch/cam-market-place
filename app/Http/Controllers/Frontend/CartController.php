@@ -57,7 +57,7 @@ class CartController extends Controller
             default:
                 break;
         }
-        return redirect()->route('products.carts.index')->with('error', 'Item is already in your cart!');
+        return redirect()->route('products.carts.index')->with('error', 'Item is already added!');
     }
 
     /**

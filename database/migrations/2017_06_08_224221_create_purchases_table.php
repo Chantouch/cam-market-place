@@ -21,6 +21,8 @@ class CreatePurchasesTable extends Migration
             $table->string('contact_name', 191)->nullable();
             $table->string('contact_phone', 18)->nullable();
             $table->string('shipping_address', 255)->nullable();
+            $table->string('shipping_method', 255)->nullable();
+            $table->string('payment_method', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

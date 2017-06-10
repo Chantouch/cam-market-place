@@ -128,7 +128,7 @@
                             <input type="hidden" name="name" value="{{ $product->name }}">
                             <input type="hidden" name="price" value="{{ $product->price }}">
                             <input type="hidden" name="qty" value="" id="sub_qty">
-                            <button class="exclusive" name="submit" type="submit">
+                            <button class="exclusive" name="submit" type="submit" value="cart">
                                 <span>Add to cart</span>
                             </button>
                             {!! Form::close() !!}

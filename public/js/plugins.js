@@ -44,3 +44,55 @@ function get_child(parent_id, child_id, url) {
         }
     });
 }
+
+function moveTab(nextOrPrev) {
+    alert(nextOrPrev);
+    var currentTab = "";
+    $('.panel-group div.panel > .collapse').each(function () {
+        if ($(this).hasClass('in')) {
+            currentTab = $(this);
+            //currentTab.removeClass('active');
+            //alert($(this).text());
+        }
+    });
+
+    if (nextOrPrev === "Continue") {
+        alert(currentTab.next().length);
+        if (currentTab.next().length) {
+            alert(currentTab.text());
+            currentTab.removeClass('in');
+            currentTab.next().addClass('in');
+        }
+        else {
+        } // do nothing for now
+
+    } else {
+        alert("inside previous");
+
+        if (currentTab.prev().length) {
+            // currentTab.removeClass('active');
+            currentTab.removeClass('in');
+            currentTab.prev().addClass('in');
+        }
+        else {
+        } //do nothing for now
+
+    }
+}
+
+function nextQuestion(currentQuestion) {
+    let parentEle = currentQuestion.parents(".accordion_main");
+    if (parentEle.next()) {
+        parentEle.find(".question-mark").addClass("fa fa-check check-mark").removeClass("question-mark").text("");
+        if (currentQuestion.attr('type') !== 'checkbox') {
+            if (parentEle.next().find(".accordion_head").length > 0) {
+                parentEle.next().find(".accordion_head").click();
+            } else {
+                //there is no next--> try to go to the next colum
+                parentEle.parent("div").next("div").find(".accordion_head").first().click();
+            }
+        }
+
+    }
+
+}
