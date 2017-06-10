@@ -168,32 +168,32 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="area-title">
-                        <h3>Purchase progress</h3>
+                        <h3>Order progress</h3>
                     </div>
                 </div>
                 <div class="progress-area">
                     <div class="col-sm-3">
                         <div class="progrtee-box icon">
                             <h4>step 1</h4>
-                            <p>select your items</p>
+                            <p>Add item into Cart</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="progrtee-box icon1">
-                            <h4>step 1</h4>
-                            <p>select your items</p>
+                            <h4>step 2</h4>
+                            <p>Check Out</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="progrtee-box icon2">
-                            <h4>step 1</h4>
-                            <p>select your items</p>
+                            <h4>step 3</h4>
+                            <p>Verify acount</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="progrtee-box icon3">
-                            <h4>step 1</h4>
-                            <p>select your items</p>
+                            <h4>step 4</h4>
+                            <p>Complete Order</p>
                         </div>
                     </div>
                 </div>

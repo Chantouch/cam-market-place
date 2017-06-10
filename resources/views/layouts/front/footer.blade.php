@@ -16,7 +16,7 @@
                 <div class="footer-top-box">
                     <i class="fa fa-clock-o"></i>
                     <span>Working time</span>
-                    <p>Mon - sun: 8.00 - 18.00</p>
+                    <p>Mon - sun: 24h/7 days</p>
                 </div>
             </div>
             <!-- End footer top box -->
@@ -89,10 +89,10 @@
                     <div class="info-box">
                         <h4>Store Information</h4>
                         <ul>
-                            <li>My Company</li>
-                            <li>Paris - France</li>
+                            <li>CAMMARKET</li>
+                            <li>Phnom Penh - Cambodia</li>
                             <li>0123-456-789</li>
-                            <li><a href="mailto:admin@bootexperts.com">admin@bootexperts.com</a></li>
+                            <li><a href="mailto:admin@bootexperts.com">cam.market@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -141,14 +141,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="copyright-text">
-                    <p>Copyright &copy; 2015 <a href="http://bootexperts.com">BootExperts</a>. All rights
+                    <p>Copyright &copy; 2017 <a href="http://bootexperts.com">CAMMARKET</a>. All rights
                         reserved.</p>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="footer-card pull-right">
+                <!-- <div class="footer-card pull-right">
                     <img src="{!! asset('img/payment.png') !!}" alt="">
-                </div>
+                </di -->v>
             </div>
         </div>
     </div>
