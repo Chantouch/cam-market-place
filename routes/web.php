@@ -44,6 +44,8 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::resource('wish-lists', 'Frontend\WishlistController');
     Route::delete('empty-wish-list', 'Frontend\WishlistController@emptyWishlist')->name('empty.wishlist');
     Route::post('switch-to-cart/{id}', 'Frontend\WishlistController@switchToCart')->name('switch.cart');
+
+    Route::get('search', 'HomeController@search_product')->name('search');
 });
 
 Auth::routes();

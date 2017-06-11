@@ -83,21 +83,21 @@
                         </div>
                         <div class="search-and-cart">
                             <div class="search-categori">
-                                <form id="select-categoris" method="post" class="form-horizontal">
-                                    <div class="categori">
-                                        <select name="language">
-                                            <option value="">Categories</option>
-                                            @foreach($categories as $category)
-                                                <option value="{!! $category->id !!}">{!! $category->name !!}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="search-box">
-                                        <input type="text" class="form-control input-sm" maxlength="64"
-                                               placeholder="Enter your search key ... "/>
-                                        <button type="submit">Search</button>
-                                    </div>
-                                </form>
+                                {!! Form::open(array('route' => 'products.search', 'role'=>'form', 'method' => 'GET', 'id'=>'select-categoris', 'class'=>'form-horizontal')) !!}
+                                <div class="categori">
+                                    {{--<select name="category">--}}
+                                        {{--<option value="">Categories</option>--}}
+                                        {{--@foreach($categories as $category)--}}
+                                            {{--<option value="{!! $category->id !!}">{!! $category->name !!}</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+                                    {!! Form::select('category', $category_list, null, ['placeholder' => 'CATEGORIES']) !!}
+                                </div>
+                                <div class="search-box">
+                                    {!! Form::text('name', null, ['class' => 'form-control input-sm', 'placeholder'=>'Enter your search key ... ']) !!}
+                                    <button type="submit">Search</button>
+                                </div>
+                                {!! Form::close() !!}
                             </div>
                             <div class="shoping-cart">
                                 @if (Auth::guard('customer')->check())

@@ -19,8 +19,11 @@ class CartController extends Controller
      */
     public function index()
     {
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('front.pages.product.cart', compact('categories'));
+        return view('front.pages.product.cart', compact('categories', 'category_list'));
     }
 
     /**

@@ -33,17 +33,23 @@ class HomeController extends Controller
     {
         $user = $this->auth()->user();
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('customer.pages.cart', compact('categories', 'user'));
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
+        return view('customer.pages.cart', compact('categories', 'user', 'category_list'));
     }
 
     public function checkout()
     {
         $user = $this->auth()->user();
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
         $product = Cart::content();
         if (!count($product))
             return redirect()->route('customers.dashboard')->with('error', 'Your card was clear cause by timeout');
-        return view('customer.pages.checkout', compact('categories', 'user'));
+        return view('customer.pages.checkout', compact('categories', 'user', 'category_list'));
     }
 
     public function post_checkout(Request $request)

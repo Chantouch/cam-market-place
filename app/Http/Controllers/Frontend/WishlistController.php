@@ -20,8 +20,11 @@ class WishlistController extends Controller
      */
     public function index()
     {
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('front.pages.product.wishlist', compact('categories'));
+        return view('front.pages.product.wishlist', compact('categories', 'category_list'));
     }
 
     /**
@@ -101,20 +104,15 @@ class WishlistController extends Controller
     public function switchToCart($id)
     {
         $item = Cart::instance('wishlist')->get($id);
-
         Cart::instance('wishlist')->remove($id);
-
         $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
         });
-
         if (!$duplicates->isEmpty()) {
             return redirect('carts')->withSuccessMessage('Item is already in your shopping cart!');
         }
-
         Cart::instance('default')->add($item->id, $item->name, $item->qty, $item->price)
             ->associate(Product::class);
-
         return redirect('products/wish-lists')->withSuccessMessage('Item has been moved to your shopping cart!');
 
     }
