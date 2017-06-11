@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('city_id') ? ' has-error' : '' }}">
-                                    {!! Form::select('city_id', [], null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select City---']) !!}
+                                    {!! Form::select('city_id', [], null, ['class'=>'custom-select custom-form']) !!}
                                     @if ($errors->has('city_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('city_id') }}</strong>
@@ -109,7 +109,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group{{ $errors->has('commune_id') ? ' has-error' : '' }}">
-                                    {!! Form::select('commune_id', [], null, ['class'=>'custom-select custom-form', 'placeholder'=>'---Select Commune---']) !!}
+                                    {!! Form::select('commune_id', [], null, ['class'=>'custom-select custom-form']) !!}
                                     @if ($errors->has('commune_id'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('commune_id') }}</strong>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <!--  <input type="submit" class="custom-form custom-submit no-margin" value="clear" /> -->
-                                <button class="btn btnContact" type="submit">clear</button>
+                                <button class="btn btnContact clear_form" type="button">clear</button>
                             </div>
                         </div>
                     </div>
@@ -200,6 +200,13 @@
         $(document).ready(function () {
             get_child("country_id", "city_id", "/api/cities/");
             get_child("city_id", "commune_id", "/api/communes/");
+        });
+        $(".clear_form").click(function () {
+            $(this).closest('form').find("input[type=text], textarea, select").val("");
+            $('select[name="city_id"]').empty();
+            $('select[name="city_id"]').append('<option value="">---Please choose country first---</option>');
+            $('select[name="commune_id"]').empty();
+            $('select[name="commune_id"]').append('<option value="">---Please choose city first---</option>');
         });
     </script>
 @stop

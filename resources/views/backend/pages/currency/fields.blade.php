@@ -73,7 +73,7 @@
 {!! Form::label('name_plural', 'Currency name plural:') !!}
 <div class="form-group">
     <div class="form-line">
-        {!! Form::textarea('name_plural', null, ['class' => 'form-control', 'placeholder' => 'Enter your currency name plural']) !!}
+        {!! Form::text('name_plural', null, ['class' => 'form-control', 'placeholder' => 'Enter your currency name plural']) !!}
     </div>
     @if ($errors->has('name_plural'))
         <span class="help-block">

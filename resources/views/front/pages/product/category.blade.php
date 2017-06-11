@@ -51,19 +51,6 @@
                                             @endforeach
                                         @endif
                                     </ul>
-                                    {{--<ul class="list-group">--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://fb.com/moinakbarali">Articles</a>--}}
-                                    {{--<ul class="list-group">--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://fb.com/moinakbarali">Articles</a></li>--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="http://fb.com/moinakbarali">News</a></li>--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-file text-info"></span><a href="http://fb.com/moinakbarali">Newsletters</a></li>--}}
-                                    {{--<li class="list-group-item"> <span class="glyphicon glyphicon-comment text-success"></span><a href="http://fb.com/moinakbarali">Comments</a><span class="badge">42</span></li>--}}
-                                    {{--</ul>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="http://fb.com/moinakbarali">News</a></li>--}}
-                                    {{--<li class="list-group-item"><span class="glyphicon glyphicon-file text-info"></span><a href="http://fb.com/moinakbarali">Newsletters</a></li>--}}
-                                    {{--<li class="list-group-item"> <span class="glyphicon glyphicon-comment text-success"></span><a href="http://fb.com/moinakbarali">Comments</a><span class="badge">42</span></li>--}}
-                                    {{--</ul>--}}
                                 </div>
                                 <!-- End Categori -->
                                 <!-- Start Categori -->
@@ -73,8 +60,9 @@
                                         <li>
                                             <span><input type="checkbox" class="checkbox"></span>
                                             <label>
-                                                <a href="">In stock<span> ({!! count($products->where('qty',!null)) !!}
-                                                        )</span></a>
+                                                <a href="">
+                                                    In stock<span> ({!! count($products->where('qty',!null)) !!})</span>
+                                                </a>
                                             </label>
                                         </li>
                                     </ul>

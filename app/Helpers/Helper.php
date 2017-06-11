@@ -135,10 +135,15 @@ class Helper
         if ($model == null) {
             return "Not Selected";
         } else {
-            return $model->symbol;
+            return $model->symbol_native;
         }
     }
 
+    /**
+     * @param $type
+     * @param $model
+     * @return string
+     */
     public static function discount($type, $model)
     {
         if ($type == 1) {

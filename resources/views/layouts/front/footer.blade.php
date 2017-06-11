@@ -52,7 +52,8 @@
                     <h4>Categories</h4>
                     <ul>
                         @foreach($categories as $category)
-                            <li><a href="#"><i class="fa fa-star"></i> {!! $category->name !!}</a></li>
+                            <li><a href="{!! route('products.category.slug', [$category->slug]) !!}"><i
+                                            class="fa fa-star"></i> {!! $category->name !!}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -92,7 +93,7 @@
                             <li>CAMMARKET</li>
                             <li>Phnom Penh - Cambodia</li>
                             <li>0123-456-789</li>
-                            <li><a href="mailto:admin@bootexperts.com">cam.market@gmail.com</a></li>
+                            <li><a href="mailto:admin@camarket.com">cam.market@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -146,9 +147,9 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <!-- <div class="footer-card pull-right">
+                <div class="footer-card pull-right">
                     <img src="{!! asset('img/payment.png') !!}" alt="">
-                </di -->v>
+                </div>
             </div>
         </div>
     </div>

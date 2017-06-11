@@ -5,20 +5,33 @@
     <div class="sidebar-menu">
         <ul>
             @foreach($categories as $category)
-                <li><a href="shop-grid.html">{!! $category->name !!}</a>
-                    <div class="megamenudown-sub">
-                        <div class="mega-top">
-                            @foreach($category->sub_category as $category)
-                                <div class="mega-item-menu">
-                                    <a href="shop-grid.html" class="title"><span>{!! $category->name !!}</span></a>
-                                    <a href="shop-grid.html"><span>{!! $category->name !!}</span></a>
-                                </div>
-                            @endforeach
+                <li>
+                    <a href="{!! route('products.category.slug', [$category->slug]) !!}" class="{!! count($category->children) ? "" : "single-menu" !!}">
+                        {!! $category->name !!}
+                    </a>
+                    @if(count($category->children))
+                        <div class="megamenudown-sub">
+                            <div class="mega-top">
+                                @foreach($category->children as $category)
+                                    <div class="mega-item-menu">
+                                        <a href="{!! route('products.category.slug', [$category->slug]) !!}"
+                                           class="{!! count($category->children) ? "title" : "title" !!}">
+                                            <span>{!! $category->name !!}</span>
+                                        </a>
+                                        @if(count($category->children))
+                                            @foreach($category->children as $child)
+                                                <a href="{!! route('products.category.slug', [$child->slug]) !!}">
+                                                    <span>{!! $child->name !!}</span>
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </li>
             @endforeach
-            <li><a href="shop-grid.html" class="single-menu">Bags, Shoes & Accessories</a></li>
         </ul>
     </div>
 </div>

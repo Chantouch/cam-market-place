@@ -29,12 +29,11 @@
                     <h4 class="cart-title">Shopping cart</h4>
                     <div class="table-responsive">
                         @if (sizeof(Cart::content()) > 0)
-                            <table class="cart-table">
+                            <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Product</th>
+                                    <th width="150">Product Image</th>
                                     <th>Product name</th>
-                                    <th></th>
                                     <th>Unit Price</th>
                                     <th>Qty</th>
                                     <th>Subtotal</th>
@@ -47,7 +46,7 @@
                                         <td>
                                             <a href="{!! route('products.details', [$item->model->slug]) !!}">
                                                 @foreach($item->model->images->take(1) as $image)
-                                                    <img class="img-responsive"
+                                                    <img class="img-thumbnail"
                                                          src="{!! asset($item->model->img_path.'large/'.$image->img_name) !!}"
                                                          title="{!! $item->name !!}">
                                                 @endforeach
@@ -58,7 +57,6 @@
                                                 <a href="{!! route('products.details', [$item->model->slug]) !!}">{!! $item->name !!}</a>
                                             </h6>
                                         </td>
-                                        <td><a href="#">Edit</a></td>
                                         <td>
                                             <div class="cart-price">{!! Helper::currency($item->model->currency).$item->price !!}</div>
                                         </td>
@@ -78,19 +76,20 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <div class="cart-subtotal">{{ Helper::currency($item->model->currency).($item->qty*$item->price) }}</div>
+                                            <div class="cart-subtotal">
+                                                {{ Helper::currency($item->model->currency).($item->qty*$item->price) }}
+                                                <input type="hidden" value="{!! $item->qty*$item->price !!}" name="pro_qty">
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-md-6 right-left-0">
-                                                    {!! Form::open(['route' => ['products.carts.destroy',$item->rowId], 'method' => 'delete']) !!}
+                                                    {!! Form::open(['route' => ['products.carts.destroy',$item->rowId], 'method' => 'delete', 'class'=>'cart-action']) !!}
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                     {!! Form::close() !!}
-                                                </div>
-                                                <div class="col-md-6 right-left-0">
-                                                    {!! Form::open(['route' => ['products.switch.wishlist',$item->rowId], 'method' => 'POST']) !!}
+                                                    {!! Form::open(['route' => ['products.switch.wishlist',$item->rowId], 'method' => 'POST', 'class'=>'cart-action']) !!}
                                                     <button type="submit" class="btn btn-success btn-sm">
                                                         <i class="fa fa-heart"></i>
                                                     </button>
@@ -119,14 +118,14 @@
 
                                 <tr class="border-bottom">
                                     <td class="table-image"></td>
-                                    <td style="padding: 40px;"></td>
+                                    <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
                                     <td class="table-bg">{{ Helper::currency($item->model->currency).Cart::total() }}</td>
                                     <td class="column-spacer"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="actions">
+                                    <td colspan="6" class="actions">
                                         <div class="cartPage-btn">
                                             <ul>
                                                 <li><a href="{!! route('home') !!}" class="cbtn">Continue Shopping</a>
@@ -138,7 +137,8 @@
                                                     <input type="submit" class="cbtn" value="CLEAR SHOPPING CART">
                                                     {!! Form::close() !!}
                                                 </li>
-                                                <li><a href="{!! route('customers.checkout') !!}" class="cbtn">CHECK OUT</a></li>
+                                                <li><a href="{!! route('customers.checkout') !!}" class="cbtn">CHECK
+                                                        OUT</a></li>
                                             </ul>
                                         </div>
                                     </td>

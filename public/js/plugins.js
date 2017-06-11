@@ -34,6 +34,7 @@ function get_child(parent_id, child_id, url) {
                 dataType: "json",
                 success: function (data) {
                     $('select[name="' + child_id + '"]').empty();
+                    $('select[name="' + child_id + '"]').append('<option value="">---Select ' + child_id.slice(0, -3) + '---</option>');
                     $.each(data, function (key, value) {
                         $('select[name="' + child_id + '"]').append('<option value="' + key + '">' + value + '</option>');
                     });
@@ -41,6 +42,7 @@ function get_child(parent_id, child_id, url) {
             });
         } else {
             $('select[name="' + child_id + '"]').empty();
+            $('select[name="' + child_id + '"]').append('<option value="">---Select ' + child_id.slice(0, -3) + '---</option>');
         }
     });
 }
