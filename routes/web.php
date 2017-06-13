@@ -21,6 +21,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('currencies', 'Backend\CurrencyController');
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::resource('languages', 'Backend\LanguageController');
+        Route::resource('rates', 'Backend\FXRateController', [
+            'except' => ['edit', 'show']
+        ]);
     });
     Route::resource('home-sliders', 'Backend\HomeSliderController');
     Route::prefix('catalogs')->name('catalogs.')->group(function () {
@@ -71,3 +74,11 @@ Route::prefix('api')->name('api.')->group(function () {
     Route::get('cities/{country}', 'REST\APIController@get_city')->name('cities');
     Route::get('communes/{city}', 'REST\APIController@get_commune')->name('communes');
 });
+
+//Route::resource('users', 'UsersController', [
+//    'only' => ['index', 'show']
+//]);
+//
+//Route::resource('monkeys', 'MonkeysController', [
+//    'except' => ['edit', 'create']
+//]);

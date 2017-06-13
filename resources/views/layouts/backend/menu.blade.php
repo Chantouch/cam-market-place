@@ -25,12 +25,21 @@
             <span>Communes</span>
         </a>
     </li>
+
     <li class="{!! Request::is('admin/currencies*') ? 'active' : '' !!}">
         <a href="{!! route('admin.currencies.index') !!}">
             <i class="material-icons">layers</i>
             <span>Currencies</span>
         </a>
     </li>
+
+    <li class="{!! Request::is('admin/settings/rates*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.settings.rates.index') !!}">
+            <i class="material-icons">layers</i>
+            <span>Rates</span>
+        </a>
+    </li>
+
     <li class="header">Settings</li>
     <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
         <a href="{!! route('admin.home-sliders.index') !!}">
