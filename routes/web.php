@@ -21,9 +21,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('currencies', 'Backend\CurrencyController');
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::resource('languages', 'Backend\LanguageController');
-        Route::resource('rates', 'Backend\FXRateController', [
-            'except' => ['edit', 'show']
-        ]);
     });
     Route::resource('home-sliders', 'Backend\HomeSliderController');
     Route::prefix('catalogs')->name('catalogs.')->group(function () {
