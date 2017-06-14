@@ -24,7 +24,7 @@ class Product extends Model
             'name' => 'required|max:255',
             'qty' => 'required|integer',
             'short_description' => 'required',
-            'currency_id' => 'required|integer',
+            'currency_id' => 'required|string',
             'category_id' => 'required',
         ];
     }

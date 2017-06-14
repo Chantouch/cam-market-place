@@ -35,8 +35,8 @@
                             @endforeach
                         @endif
                     </td>
-                    <td>{!! $product->price !!} ({!! $product->currency->symbol !!})</td>
-                    <td>{!! $product->cost !!} ({!! $product->currency->symbol !!})</td>
+                    <td>{!! $product->price !!} ({!! isset($product->currency)? $product->currency->symbol : "" !!})</td>
+                    <td>{!! $product->cost !!} ({!! isset($product->currency)? $product->currency->symbol: "" !!})</td>
                     <td>{!! $product->qty !!}</td>
                     <td>{!! Helper::status($product->status) !!}</td>
                     <td>

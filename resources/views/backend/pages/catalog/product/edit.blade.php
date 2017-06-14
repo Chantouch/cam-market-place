@@ -84,6 +84,7 @@
     <script src="{!! asset('plugins/summernote/summernote.min.js') !!}"></script>
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') !!}"></script>
+    <script src="{!! asset('js/quantity.js') !!}"></script>
     <script>
         $(document).ready(function () {
             $('#description').summernote({
@@ -145,7 +146,9 @@
             } else {
                 alert("Your browser doesn't support to File API")
             }
+
         });
+
         function deleteArticle(id) {
             let $con = confirm('Are you sure to delete this image');
             if ($con) {
@@ -159,5 +162,6 @@
                 });
             }
         }
+
     </script>
 @stop

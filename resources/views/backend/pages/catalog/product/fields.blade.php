@@ -130,7 +130,7 @@
                     <div class="form-line">
                         @if(isset($product))
                             {!! Form::text('tags', $product->tagList(), ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
-                            @else
+                        @else
                             {!! Form::text('tags', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
                         @endif
                         {{--{!! Form::select('tags[]',$tags , null, ['data-role' => 'tagsinput', 'id'=>'tags' , 'multiple']) !!}--}}
@@ -183,8 +183,9 @@
                 {!! Form::label('currency_id', 'Currency:') !!}
                 <div class="form-group">
                     <div class="form-line">
-                        {!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--']) !!}
+                        {!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--', 'id'=>'currency_id']) !!}
                     </div>
+                    {!! Form::hidden('currency_code', '', ['id'=> 'currency_code']) !!}
                     @if ($errors->has('currency_id'))
                         <span class="help-block">
                             <strong>{{ $errors->first('currency_id') }}</strong>

@@ -135,7 +135,7 @@ class Helper
         if ($model == null) {
             return "Not Selected";
         } else {
-            return $model->symbol_native;
+            return $model->name;
         }
     }
 
@@ -153,5 +153,49 @@ class Helper
             return "%";
         }
         return "Default";
+    }
+
+    /**
+     * @param $from_Currency
+     * @param $to_Currency
+     * @param $amount
+     * @return string
+     */
+    public static function currencyConverter($from_Currency, $to_Currency, $amount)
+    {
+        $encode_amount = 1;
+        $from_Currency = urlencode($from_Currency);
+        $to_Currency = urlencode($to_Currency);
+        $get = file_get_contents("https://www.google.com/finance/converter?a=$encode_amount&from=$from_Currency&to=$to_Currency");
+        return $get;
+        die();
+        $get = explode("<span class=bld>", $get);
+        $get = explode("</span>", $get[1]);
+        $rate = preg_replace("/[^0-9\.]/", null, $get[0]);
+        $rate = (float)$rate;
+        $converted_amount = $amount * $rate;
+        $data = array('rate' => $rate, 'converted_amount' => $converted_amount, 'from_Currency' => strtoupper($from_Currency), 'to_Currency' => strtoupper($to_Currency));
+        return response()->json($data);
+    }
+
+    /**
+     * @param $from_Currency
+     * @param $to_Currency
+     * @param $amount
+     * @return string
+     */
+    public static function currencyConverterXe($from_Currency, $to_Currency, $amount)
+    {
+        $encode_amount = 1;
+        $from_Currency = urlencode($from_Currency);
+        $to_Currency = urlencode($to_Currency);
+        $get = file_get_contents("http://www.xe.com/currencyconverter/convert/?Amount=$encode_amount&From=$from_Currency&To=$to_Currency");
+        $get = explode("<span class='uccResultAmount'>", $get);
+        $get = explode("</span>", $get[1]);
+        $rate = preg_replace("/[^0-9\.]/", null, $get[0]);
+        $rate = (float)$rate;
+        $converted_amount = $amount * $rate;
+        //$data = array('rate' => $rate, 'converted_amount' => $converted_amount, 'from_Currency' => strtoupper($from_Currency), 'to_Currency' => strtoupper($to_Currency));
+        return json_encode($converted_amount, true);
     }
 }

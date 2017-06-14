@@ -73,6 +73,8 @@
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') !!}"></script>
 
+    <script src="{!! asset('js/quantity.js') !!}"></script>
+
     <script>
         $(document).ready(function () {
             $('#description').summernote({

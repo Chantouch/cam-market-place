@@ -27,4 +27,22 @@ $(function () {
         $("#sub_qty, #wishlist_qty").val(value);
     });
     $("#sub_qty, #wishlist_qty").val($("#qty").val());
+
+
+    //------------Currency Exchange Code-------------//
+    $(function () {
+        let $currency_id = $("#currency_id");
+        let $currency_code = $("#currency_code");
+        $currency_id.on('change', function () {
+            let $input = $(this);
+            let value = $input.find(":selected").text();
+            let str = value.replace(/\s+/g, '');
+            if (str !== '') {
+                $currency_code.val(str);
+            }
+        });
+        let value = $currency_id.find(":selected").text();
+        let str = value.replace(/\s+/g, '');
+        $currency_code.val(str);
+    })
 });

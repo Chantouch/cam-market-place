@@ -7,6 +7,7 @@ use App\Model\Category;
 use App\Model\City;
 use App\Model\Currency;
 use App\Model\Language;
+use App\Model\PriceConverter;
 use App\Model\Product;
 use App\Model\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -57,7 +58,7 @@ class ProductController extends Controller
     public function create()
     {
         $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'code');
         $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
@@ -188,7 +189,7 @@ class ProductController extends Controller
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
         $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
         $language = Language::all();
         $languages = array();
         foreach ($language as $lg) {
@@ -231,6 +232,19 @@ class ProductController extends Controller
             if ($product->user_id == null || empty($product->user_id)) {
                 $data['user_id'] = $this->auth()->id;
             }
+
+            if (isset($request->currency_id)) {
+                $target_currencies = Currency::all();
+                foreach ($target_currencies as $target_currency) {
+                    $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
+                    PriceConverter::firstOrNew([
+                        'product_id' => $product->id,
+                        'currency_id' => $target_currency->id,
+                        'amount' => $converter,
+                    ]);
+                }
+            }
+
             if ($request->hasFile('img_name')) {
                 $path = 'uploads/product/img/';
                 $destinationPath = public_path($path);
