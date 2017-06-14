@@ -33,73 +33,44 @@
                             <h5>SALE OFF</h5>
                         </div>
                         <div class="slide-product">
-                            <!-- Start slide product item -->
-                            <div class="slide-product-item">
-                                <?php for($i = 1;$i <= 3;$i++){?>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single-product') !!}">
-                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-5%</span>
+                            <?php
+                                $count = 1;
+                            ?>
+                            @foreach( $products->random(12) as $product) 
+                                @if ($count%3 == 1)
+                                
+                                     <div class="slide-product-item">
+                                @endif
+                                    <div class="item3">
+                                        <div class="product-image">
+                                            <a href="{!! route('products.details', [$product->slug]) !!}">
+                                                 @if(count($product->images))
+                                                    @foreach($product->images->take(1) as $image)
+                                                        <img src="{!! asset($product->img_path.'small/'.$image->img_name) !!}"
+                                                             alt="{!! $product->name !!}" class="img-thumbnail" title="{!! $product->name !!}">
+                                                    @endforeach
+                                                @endif
+                                            </a>
+                                             @if(!empty($product->discount_type !=null))
+                                                <span class="price-percent-reduction">
+                                                     Save {!! $product->discount.Helper::discount($product->discount_type, $product->currency) !!}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
+                                @if ($count%3 == 0)
                                     </div>
+                                @endif
+                                <?php
+                                    $count++;
+                                ?>
+                            @endforeach
+                            @if($count%3 != 1)  
                                 </div>
-                                <?php }?>
-                            </div>
-                            <!-- End slide product item -->
-                            <!-- Start slide product item -->
-                            <div class="slide-product-item">
-                                <?php for($i = 4;$i <= 6;$i++){?>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single-product') !!}">
-                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-5%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <?php }?>
-                            </div>
-                            <!-- End slide product item -->
-                            <!-- Start slide product item -->
-                            <div class="slide-product-item">
-                                <?php for($i = 7;$i <= 9;$i++){?>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single-product') !!}">
-                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-5%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <?php }?>
-                            </div>
-                            <!-- End slide product item -->
-                            <!-- Start slide product item -->
-                            <div class="slide-product-item">
-                                <?php for($i = 10;$i <= 12;$i++){?>
-                                <div class="item3">
-                                    <div class="product-image">
-                                        <a href="{!! url('single-product') !!}">
-                                            <img src="{!! asset('img/product/'.$i.'.jpg') !!}" alt="">
-                                        </a>
-                                        <span class="price-percent-reduction">-5%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="{!! url('single-product') !!}">Printed Summer Dress</a>
-                                    </div>
-                                </div>
-                                <?php }?>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -191,7 +162,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="progrtee-box icon3">
+                     <div class="progrtee-box icon3">
                             <h4>step 4</h4>
                             <p>Complete Order</p>
                         </div>
