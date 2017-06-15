@@ -33,13 +33,6 @@
         </a>
     </li>
 
-    <li class="{!! Request::is('admin/settings/rates*') ? 'active' : '' !!}">
-        <a href="{!! route('admin.settings.rates.index') !!}">
-            <i class="material-icons">layers</i>
-            <span>Rates</span>
-        </a>
-    </li>
-
     <li class="header">Settings</li>
     <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
         <a href="{!! route('admin.home-sliders.index') !!}">

@@ -61,6 +61,9 @@ class Product extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -100,6 +103,14 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function price_converter()
+    {
+        return $this->belongsTo(PriceConverter::class);
     }
 
     //----------Sluggable---------//
