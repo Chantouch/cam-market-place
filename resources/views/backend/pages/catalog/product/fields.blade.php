@@ -188,7 +188,9 @@
                                 data-live-search="true" data-show-subtext="true">
                             <option value="">--Please choose currency--</option>
                             @foreach($currencies as $currency)
-                                <option value="{!! $currency->id !!}" data-subtext="{!! $currency->code !!}">
+                                <option value="{!! $currency->id !!}"
+                                        @if(old('currency_id') == $currency->id) {{ 'selected' }} @endif
+                                        data-subtext="{!! $currency->code !!}" {!! isset($product->currency->id)? 'selected' : '' !!}>
                                     {!! $currency->name !!}
                                 </option>
                             @endforeach

@@ -256,10 +256,17 @@ class ProductController extends Controller
             if (isset($request->currency_id)) {
                 $currency_id = PriceConverter::pluck('currency_id')->toArray();
                 $product_id = PriceConverter::pluck('product_id')->toArray();
-                $target_currencies = Currency::take(2)->get();
+                $target_currencies = Currency::all();
                 $array_inserts = [];
-                if (count($product->price_converter) > 0) {
-                    foreach ($target_currencies as $target_currency) {
+                foreach ($target_currencies as $target_currency) {
+                    if (!count($product->price_converter)) {
+//                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
+//                        PriceConverter::create([
+//                            'product_id' => $product->id,
+//                            'currency_id' => $target_currency->id,
+//                            'amount' => $converter,
+//                        ]);
+                    } else {
                         $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
                         if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
                             $price_converter = PriceConverter::where('product_id', $_unique_product)
@@ -285,11 +292,11 @@ class ProductController extends Controller
                         $currency_id[] = $target_currency['currency_id'];
                         $product_id[] = $product->id;
                     }
-                    if (!empty($array_inserts)) {
-                        $insert_success = PriceConverter::insert($array_inserts);
-                        if (!$insert_success) {
-                            return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
-                        }
+                }
+                if (!empty($array_inserts)) {
+                    $insert_success = PriceConverter::insert($array_inserts);
+                    if (!$insert_success) {
+                        return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
                     }
                 }
             }

@@ -35,13 +35,13 @@ $(function () {
         let $currency_code = $("#currency_code");
         $currency_id.on('change', function () {
             let $input = $(this);
-            let value = $input.find(":selected").text();
+            let value = $input.find(":selected").attr('data-subtext');
             let str = value.replace(/\s+/g, '');
             if (str !== '') {
                 $currency_code.val(str);
             }
         });
-        let value = $currency_id.find(":selected").text();
+        let value = $currency_id.find(":selected").attr('data-subtext');
         let str = value.replace(/\s+/g, '');
         $currency_code.val(str);
     })
