@@ -23,8 +23,8 @@ class Product extends Model
         return [
             'name' => 'required|max:255',
             'qty' => 'required|integer',
-            'short_description' => 'required',
-            'currency_id' => 'required|string',
+            'short_description' => 'required|max:255',
+            'currency_id' => 'required|integer',
             'category_id' => 'required',
         ];
     }

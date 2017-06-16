@@ -183,7 +183,16 @@
                 {!! Form::label('currency_id', 'Currency:') !!}
                 <div class="form-group">
                     <div class="form-line">
-                        {!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--', 'id'=>'currency_id']) !!}
+                        {{--{!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--', 'id'=>'currency_id']) !!}--}}
+                        <select name="currency_id" id="currency_id" class="form-control show-tick"
+                                data-live-search="true" data-show-subtext="true">
+                            <option value="">--Please choose currency--</option>
+                            @foreach($currencies as $currency)
+                                <option value="{!! $currency->id !!}" data-subtext="{!! $currency->code !!}">
+                                    {!! $currency->name !!}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     {!! Form::hidden('currency_code', '', ['id'=> 'currency_code']) !!}
                     @if ($errors->has('currency_id'))

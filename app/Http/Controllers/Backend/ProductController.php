@@ -59,7 +59,7 @@ class ProductController extends Controller
     public function create()
     {
         $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'code');
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name','code', 'id'])->get();
         $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
@@ -95,6 +95,20 @@ class ProductController extends Controller
             $data['code'] = $product_code;
             $create = Product::create($data);
             if ($create) {
+                if (isset($request->currency_id)) {
+                    $target_currencies = Currency::all();
+                    foreach ($target_currencies as $target_currency) {
+                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $create->price);
+                        if (!count($create->price_converter)) {
+                            PriceConverter::create([
+                                'product_id' => $create->id,
+                                'currency_id' => $target_currency->id,
+                                'amount' => $converter,
+                            ]);
+                        }
+                    }
+                }
+
                 if (isset($request->language_id)) {
                     $create->languages()->attach($request->language_id);
                 }
@@ -125,7 +139,7 @@ class ProductController extends Controller
                                 $image_thumb = Images::make($file)->resize(100, 100);
                                 //to remove space from string
                                 $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                                $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                                $fileName = time() . '.' . $file->getClientOriginalExtension();
                                 $image_large->save($destinationPath . '/large/' . $fileName, 100);
                                 $image_small->save($destinationPath . '/small/' . $fileName, 100);
                                 $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
@@ -184,29 +198,33 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $decoded = $this->hashid->decode($id);
-        $id = @$decoded[0];
-        if ($id === null) {
+        try {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+            }
+            $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
+            $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
+            $language = Language::all();
+            $languages = array();
+            foreach ($language as $lg) {
+                $languages[$lg->id] = $lg->name;
+            }
+
+            $category = Category::all();
+            $categories = array();
+            foreach ($category as $cat) {
+                $categories[$cat->id] = $cat->name;
+            }
+            $discount_types = \Helper::discount_types();
+            $product = Product::with('city')->with('currency')->with('languages')->find($id);
+            return view('backend.pages.catalog.product.edit',
+                compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
+            );
+        } catch (ModelNotFoundException $exception) {
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
-        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
-        $language = Language::all();
-        $languages = array();
-        foreach ($language as $lg) {
-            $languages[$lg->id] = $lg->name;
-        }
-
-        $category = Category::all();
-        $categories = array();
-        foreach ($category as $cat) {
-            $categories[$cat->id] = $cat->name;
-        }
-        $discount_types = \Helper::discount_types();
-        $product = Product::with('city')->with('currency')->with('languages')->find($id);
-        return view('backend.pages.catalog.product.edit',
-            compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
-        );
     }
 
     /**
@@ -241,14 +259,7 @@ class ProductController extends Controller
                 $array_inserts = [];
                 foreach ($target_currencies as $target_currency) {
                     $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
-                    if (!count($product->price_converter)) {
-                        $delete_old_price = PriceConverter::whereIn('currency_id', Currency::pluck('id')->toArray())->where('product_id', $product->id)->delete();
-                        PriceConverter::create([
-                            'product_id' => $product->id,
-                            'currency_id' => $target_currency->id,
-                            'amount' => $converter,
-                        ]);
-                    } else {
+                    if (count($product->price_converter)) {
                         if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
                             $price_converter = PriceConverter::where('product_id', $_unique_product)
                                 ->where('currency_id', $_unique_currency)->first();
@@ -307,7 +318,7 @@ class ProductController extends Controller
                         $image_thumb = Images::make($file)->resize(100, 100);
                         //to remove space from string
                         $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                        $fileName = uniqid($product_name . '_') . '_' . time() . '.' . $file->getClientOriginalExtension();
+                        $fileName = time() . '.' . $file->getClientOriginalExtension();
                         $image_large->save($destinationPath . '/large/' . $fileName, 100);
                         $image_small->save($destinationPath . '/small/' . $fileName, 100);
                         $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
