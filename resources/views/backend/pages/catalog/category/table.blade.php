@@ -7,6 +7,7 @@
                 <th width="120">Thumbnail</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Tags</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -22,11 +23,17 @@
                                      class="img-thumbnail">
                             @endforeach
                         @else
-                            <img src="{!! asset('img/slider-870x323.jpg') !!}" alt="Thumbnail of category" class="img-thumbnail">
+                            <img src="{!! asset('img/slider-870x323.jpg') !!}" alt="Thumbnail of category"
+                                 class="img-thumbnail">
                         @endif
                     </td>
                     <td>{!! $category->name !!}</td>
                     <td>{!! str_limit($category->description, 70) !!}</td>
+                    <td>
+                        @foreach($category->tags as $tag)
+                            <span class="label label-info">{!! $tag->tags !!}</span>
+                        @endforeach
+                    </td>
                     <td>{!! Helper::status($category->status) !!}</td>
                     <td>
                         {!! Form::open(['route' => ['admin.catalogs.categories.destroy', $category->hashid], 'method' => 'delete']) !!}

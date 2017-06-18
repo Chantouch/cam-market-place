@@ -70,6 +70,7 @@ Route::prefix('customers')->name('customers.')->group(function () {
 Route::prefix('api')->name('api.')->group(function () {
     Route::get('cities/{country}', 'REST\APIController@get_city')->name('cities');
     Route::get('communes/{city}', 'REST\APIController@get_commune')->name('communes');
+    Route::patch('currency/set-default', 'REST\APIController@set_default')->name('currency.set_default');
 });
 
 //Route::resource('users', 'UsersController', [

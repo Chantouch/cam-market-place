@@ -19,12 +19,12 @@
     <link href="{!! asset('backend/plugins/node-waves/waves.css') !!}" rel="stylesheet"/>
     <!-- Animation Css -->
     <link href="{!! asset('backend/plugins/animate-css/animate.css') !!}" rel="stylesheet"/>
-    @yield('style')
-    <!-- Custom Css -->
+@yield('style')
+<!-- Custom Css -->
     <link href="{!! asset('backend/css/style.css') !!}" rel="stylesheet">
     <link href="{!! asset('backend/css/themes/all-themes.min.css') !!}" rel="stylesheet"/>
-    @yield('style-plugins')
-    <!-- Scripts -->
+@yield('style-plugins')
+<!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -428,9 +428,13 @@
                     <p>GENERAL SETTINGS</p>
                     <ul class="setting-list">
                         <li>
-                            <span>Report Panel Usage</span>
-                            <div class="switch">
-                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            <label for="currency">Currency</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    @if(isset($category_list))
+                                        {!! Form::select('category_id',$category_list , null, ['class' => 'form-control show-tick', 'data-live-search' => 'true', 'placeholder' => 'Select category']) !!}
+                                    @endif
+                                </div>
                             </div>
                         </li>
                         <li>
@@ -485,13 +489,13 @@
                 <p>{{ $message }}</p>
             </div>
         @endif
-            @if ($message = Session::get('error'))
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <p>{{ $message }}</p>
+            </div>
+        @endif
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">

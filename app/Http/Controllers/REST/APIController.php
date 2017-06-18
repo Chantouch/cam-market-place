@@ -39,4 +39,16 @@ class APIController extends Controller
             ->pluck('name', 'id');
         return response()->json($cities);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function set_default(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['data' => 'Yes it work']);
+        }
+        //return;
+    }
 }

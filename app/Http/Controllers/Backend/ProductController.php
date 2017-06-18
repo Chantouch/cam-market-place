@@ -59,7 +59,8 @@ class ProductController extends Controller
     public function create()
     {
         $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+        //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
         $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
@@ -205,8 +206,8 @@ class ProductController extends Controller
                 return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
             }
             $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-            //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
-            $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+            $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
+            //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
             $language = Language::all();
             $languages = array();
             foreach ($language as $lg) {
@@ -256,9 +257,9 @@ class ProductController extends Controller
             if (isset($request->currency_id)) {
                 $currency_id = PriceConverter::pluck('currency_id')->toArray();
                 $product_id = PriceConverter::pluck('product_id')->toArray();
-                $target_currencies = Currency::take(2)->get();
+                $target_currencies = Currency::get();
                 $array_inserts = [];
-                if (count($product->price_converter) > 0) {
+                if (count($product->price_converter) >= 1) {
                     foreach ($target_currencies as $target_currency) {
                         $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
                         if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
@@ -290,6 +291,20 @@ class ProductController extends Controller
                         if (!$insert_success) {
                             return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
                         }
+                    }
+                } else {
+                    $ids = array();
+                    foreach ($target_currencies as $currency) {
+                        $ids[] = $currency->id;
+                    }
+                    PriceConverter::whereIn('currency_id', $ids)->update(['active' => 0]);
+                    foreach ($target_currencies as $target_currency) {
+                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
+                        PriceConverter::create([
+                            'product_id' => $product->id,
+                            'currency_id' => $target_currency->id,
+                            'amount' => $converter,
+                        ]);
                     }
                 }
             }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Image;
 use App\Model\SubCategory;
+use App\Model\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
@@ -30,8 +31,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
         $categories = Category::with('children')->paginate(10);
-        return view('backend.pages.catalog.category.index', compact('categories'));
+        return view('backend.pages.catalog.category.index', compact('categories', 'category_list'));
     }
 
     /**
@@ -54,26 +58,55 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            DB::beginTransaction();
             $data = $request->all();
             $validator = Validator::make($data, Category::rules(), Category::messages());
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
             if ($request->has('category_id')) {
+                $path = 'uploads/img/category/';
+                $data['path'] = $path;
                 $sub_category = SubCategory::create($data);
-                $this->upload_image($request, $sub_category);
-                if (!$sub_category) {
+                if ($sub_category) {
+                    $this->upload_image($request, $sub_category);
+                    if (isset($request->tags)) {
+                        $trimmed_array = explode(',', $request->tags);
+                        $tags = array_map('trim', $trimmed_array);
+                        foreach ($tags as $tag) {
+                            $data['tags'] = $tag;
+                            $tgs = Tag::firstOrNew(array('tags' => $tag));;
+                            $sub_category->tags()->save($tgs);
+                        }
+                    }
+                } else {
+                    DB::rollback();
                     return back()->with('error', 'Your category can not add to our system right now. Plz try again later.');
                 }
             } else {
+                $path = 'uploads/img/category/';
+                $data['path'] = $path;
                 $create = Category::create($data);
-                $this->upload_image($request, $create);
-                if (!$create) {
+                if ($create) {
+                    $this->upload_image($request, $create);
+                    if (isset($request->tags)) {
+                        $trimmed_array = explode(',', $request->tags);
+                        $tags = array_map('trim', $trimmed_array);
+                        foreach ($tags as $tag) {
+                            $data['tags'] = $tag;
+                            $tgs = Tag::firstOrNew(array('tags' => $tag));;
+                            $create->tags()->save($tgs);
+                        }
+                    }
+                } else {
+                    DB::rollback();
                     return back()->with('error', 'Your category can not add to our system right now. Plz try again later.');
                 }
             }
+            DB::commit();
             return redirect()->route('admin.catalogs.categories.index')->with('success', 'Category added successfully.');
         } catch (ModelNotFoundException $exception) {
+            DB::rollback();
             return back()->with('error', 'Your category can not add to our system right now. Plz try again later.');
         }
     }
@@ -198,6 +231,29 @@ class CategoryController extends Controller
                 //if (!$category->images()->save($image))
                 //    throw new ModelNotFoundException();
             }
+
+            if ($request->has('tags')) {
+                //$trim = trim($request->tags, " ");
+                $trimmed_array = explode(',', $request->tags);
+                $tags = array_map('trim', $trimmed_array);
+                //$tags = $request->tags;
+                $ids = array();
+                foreach ($category->tags as $tg) {
+                    $ids[] = $tg->id;
+                }
+                DB::table('taggables')
+                    ->whereIn('tag_id', $ids)
+                    ->delete();
+                foreach ($tags as $tag) {
+                    $data['tags'] = $tag;
+                    $tgs = Tag::firstOrNew(array('tags' => $tag));
+                    //$tgs = Tag::firstOrCreate(['tags'=> $tag]);
+                    $category->tags()->save($tgs);
+                    //if (!$product->tags()->saveMany([$tgs]))
+                    //    throw new ModelNotFoundException();
+                }
+            }
+
             $update = $category->update($data);
             if (!$update) {
                 DB::rollBack();

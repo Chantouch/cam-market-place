@@ -101,6 +101,16 @@ class Category extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     * Get all of the tags for the post.
+     */
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
@@ -112,5 +122,18 @@ class Category extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function tagList()
+    {
+        $tag = $this->tags;
+        $tags = array();
+        foreach ($tag as $tg) {
+            $tags[$tg->tags] = $tg->tags;
+        }
+        return implode(', ', $tags);
     }
 }

@@ -179,22 +179,20 @@
 
             </div>
             <div role="tabpanel" class="tab-pane fade" id="messages_with_icon_title">
-
                 {!! Form::label('currency_id', 'Currency:') !!}
                 <div class="form-group">
                     <div class="form-line">
-                        {{--{!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--', 'id'=>'currency_id']) !!}--}}
-                        <select name="currency_id" id="currency_id" class="form-control show-tick"
-                                data-live-search="true" data-show-subtext="true">
-                            <option value="">--Please choose currency--</option>
-                            @foreach($currencies as $currency)
-                                <option value="{!! $currency->id !!}"
-                                        @if(old('currency_id') == $currency->id) {{ 'selected' }} @endif
-                                        data-subtext="{!! $currency->code !!}" {!! isset($product->currency->id)? 'selected' : '' !!}>
-                                    {!! $currency->name !!}
-                                </option>
-                            @endforeach
-                        </select>
+                        {!! Form::select('currency_id', $currencies, null, ['class' => 'form-control', 'data-live-search' => 'true', 'placeholder' => '--Please choose currency--', 'id'=>'currency_id']) !!}
+                        {{--<select name="currency_id" id="currency_id" class="form-control show-tick"--}}
+                        {{--data-live-search="true" data-show-subtext="true">--}}
+                        {{--<option value="">--Please choose currency--</option>--}}
+                        {{--@foreach($currencies as $currency)--}}
+                        {{--<option value="{!! $currency->id !!}"--}}
+                        {{--data-subtext="{!! $currency->code !!}" {!! isset($product->currency->id)? 'selected' : '' !!}>--}}
+                        {{--{!! $currency->name !!}--}}
+                        {{--</option>--}}
+                        {{--@endforeach--}}
+                        {{--</select>--}}
                     </div>
                     {!! Form::hidden('currency_code', '', ['id'=> 'currency_code']) !!}
                     @if ($errors->has('currency_id'))
@@ -204,34 +202,21 @@
                     @endif
                 </div>
 
-                <h4>Retail price</h4>
-                {!! Form::label('price', 'Price:') !!}
-                <div class="form-group">
-                    <div class="form-line">
-                        {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter your product price']) !!}
-                    </div>
-                    @if ($errors->has('price'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <h4>Cost price</h4>
-                {!! Form::label('cost', 'Price:') !!}
-                <div class="form-group">
-                    <div class="form-line">
-                        {!! Form::text('cost', null, ['class' => 'form-control', 'placeholder' => 'Enter your product cost']) !!}
-                    </div>
-                    @if ($errors->has('cost'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('cost') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
                 <div class="row">
                     <div class="col-md-6">
+                        <h4>Retail price</h4>
+                        {!! Form::label('price', 'Price:') !!}
+                        <div class="form-group">
+                            <div class="form-line">
+                                {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Enter your product price']) !!}
+                            </div>
+                            @if ($errors->has('price'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('price') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
                         {!! Form::label('discount', 'Discount:') !!}
                         <div class="form-group">
                             <div class="form-line">
@@ -246,6 +231,19 @@
                     </div>
 
                     <div class="col-md-6">
+                        <h4>Cost price</h4>
+                        {!! Form::label('cost', 'Price:') !!}
+                        <div class="form-group">
+                            <div class="form-line">
+                                {!! Form::text('cost', null, ['class' => 'form-control', 'placeholder' => 'Enter your product cost']) !!}
+                            </div>
+                            @if ($errors->has('cost'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('cost') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
                         {!! Form::label('discount_type', 'Discount Type:') !!}
                         <div class="form-group">
                             <div class="form-line">

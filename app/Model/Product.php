@@ -26,6 +26,8 @@ class Product extends Model
             'short_description' => 'required|max:255',
             'currency_id' => 'required|integer',
             'category_id' => 'required',
+            'cost' => 'required',
+            'price' => 'required',
         ];
     }
 
@@ -106,11 +108,11 @@ class Product extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function price_converter()
     {
-        return $this->belongsTo(PriceConverter::class);
+        return $this->hasMany(PriceConverter::class, 'product_id', 'id');
     }
 
     //----------Sluggable---------//
@@ -147,6 +149,9 @@ class Product extends Model
         return Hashids::encode($this->attributes['id']);
     }
 
+    /**
+     * @return string
+     */
     public function tagList()
     {
         $tag = $this->tags;

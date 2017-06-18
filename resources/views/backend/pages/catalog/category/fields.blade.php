@@ -61,6 +61,22 @@
     @endif
 </div>
 
+{!! Form::label('tags', 'Tags:') !!}
+<div class="form-group tagsinput-area">
+    <div class="form-line">
+        @if(isset($category))
+            {!! Form::text('tags', $category->tagList(), ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
+        @else
+            {!! Form::text('tags', null, ['class' => 'form-control', 'placeholder' => 'Enter your product tag', 'data-role'=>'tagsinput', 'id'=>'tags']) !!}
+        @endif
+    </div>
+    @if ($errors->has('tags'))
+        <span class="help-block">
+            <strong>{{ $errors->first('tags') }}</strong>
+        </span>
+    @endif
+</div>
+
 {{ Form::hidden('status', '0') }}
 {!! Form::checkbox('status', '1', null, ['class' => 'filled-in', 'id'=> 'status']) !!}
 <label for="status">Active</label>

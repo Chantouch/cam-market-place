@@ -2,6 +2,8 @@
 @section('style')
     <!-- Bootstrap Select Css -->
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+    <!-- Bootstrap Tagsinput Css -->
+    <link href="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') !!}" rel="stylesheet">
 @stop
 @section('content')
     {{--<div class="block-header">--}}
@@ -43,4 +45,15 @@
 @section('plugins')
     <!-- Select Plugin Js -->
     <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
+    <!-- Bootstrap Tags Input Plugin Js -->
+    <script src="{!! asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') !!}"></script>
+@stop
+
+
+@section('script')
+    <script>
+        $('#img_name').change(function () {
+            uploadPreview(this, 'img_preview');
+        });
+    </script>
 @stop

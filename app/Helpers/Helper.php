@@ -38,8 +38,8 @@ class Helper
     public static function discount_types()
     {
         return [
-            '1' => '$',
-            '2' => '%'
+            '1' => 'Amount',
+            '2' => 'Percentage'
         ];
     }
 
@@ -135,7 +135,7 @@ class Helper
         if ($model == null) {
             return "Not Selected";
         } else {
-            return $model->name;
+            return $model->code;
         }
     }
 
@@ -150,7 +150,7 @@ class Helper
             return self::currency($model);
         }
         if ($type == 2) {
-            return "%";
+            return "Percentage";
         }
         return "Default";
     }

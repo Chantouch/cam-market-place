@@ -225,14 +225,11 @@
                         <div class="tag-area">
                             <h2 class="tag-title">Tags</h2>
                             <div class="tags">
-                                <a href="#">camera</a>
-                                <a href="#">mobile</a>
-                                <a href="#">electronic</a>
-                                <a href="#">destop</a>
-                                <a href="#">tablet</a>
-                                <a href="#">accessories</a>
-                                <a href="#">camcorder</a>
-                                <a href="#">laptop</a>
+                                @if(isset($category->tags))
+                                    @foreach($category->tags as $tag)
+                                        <a href="#">{!! $tag->tags !!}</a>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
