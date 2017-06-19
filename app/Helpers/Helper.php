@@ -38,6 +38,7 @@ class Helper
     public static function discount_types()
     {
         return [
+            '' => '--Discount type--',
             '1' => 'Amount',
             '2' => 'Percentage'
         ];
@@ -136,6 +137,15 @@ class Helper
             return "Not Selected";
         } else {
             return $model->code;
+        }
+    }
+
+    public static function price_converter($ex)
+    {
+        if ($ex == null) {
+            return "There is price exchanged";
+        } else {
+            return self::currency($ex);
         }
     }
 

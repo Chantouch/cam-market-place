@@ -58,18 +58,18 @@
                                             </h6>
                                         </td>
                                         <td>
-                                            <div class="cart-price">{!! Helper::currency($item->model->currency).$item->price !!}</div>
+                                            <div class="cart-price">${!! $item->price !!}</div>
                                         </td>
                                         <td>
                                             <form>
                                                 <div class="selectOption">
                                                     <div class="selectParent">
-                                                        <select class="quantity" data-id="{{ $item->rowId }}">
-                                                            <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
-                                                            <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
-                                                            <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
-                                                            <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
-                                                            <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
+                                                        <select class="quantity" data-id="{!! $item->rowId !!}">
+                                                            <option {!! $item->qty == 1 ? 'selected' : '' !!}>1</option>
+                                                            <option {!! $item->qty == 2 ? 'selected' : '' !!}>2</option>
+                                                            <option {!! $item->qty == 3 ? 'selected' : '' !!}>3</option>
+                                                            <option {!! $item->qty == 4 ? 'selected' : '' !!}>4</option>
+                                                            <option {!! $item->qty == 5 ? 'selected' : '' !!}>5</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -77,7 +77,7 @@
                                         </td>
                                         <td>
                                             <div class="cart-subtotal">
-                                                {{ Helper::currency($item->model->currency).($item->qty*$item->price) }}
+                                                ${!! ($item->qty*$item->price) !!}
                                                 <input type="hidden" value="{!! $item->qty*$item->price !!}" name="pro_qty">
                                             </div>
                                         </td>
@@ -103,7 +103,7 @@
                                     <td class="table-image"></td>
                                     <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Subtotal</td>
-                                    <td>{{ Helper::currency($item->model->currency).Cart::instance('default')->subtotal() }}</td>
+                                    <td>${!! Cart::instance('default')->subtotal() !!}</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -111,7 +111,7 @@
                                     <td class="table-image"></td>
                                     <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Tax</td>
-                                    <td>{{ Helper::currency($item->model->currency).Cart::instance('default')->tax() }}</td>
+                                    <td>${!! Cart::instance('default')->tax() !!}</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -120,7 +120,7 @@
                                     <td class="table-image"></td>
                                     <td></td>
                                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
-                                    <td class="table-bg">{{ Helper::currency($item->model->currency).Cart::total() }}</td>
+                                    <td class="table-bg">${!! Cart::total() !!}</td>
                                     <td class="column-spacer"></td>
                                     <td></td>
                                 </tr>
@@ -147,7 +147,7 @@
                             </table>
                         @else
                             <h3>You have no items in your shopping cart</h3>
-                            <a href="{{ route('home') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
+                            <a href="{!! route('home') !!}" class="btn btn-primary btn-lg">Continue Shopping</a>
                         @endif
                     </div>
                 </div>
@@ -168,12 +168,12 @@
                 var id = $(this).attr('data-id');
                 $.ajax({
                     type: "PATCH",
-                    url: '{{ url("/products/carts") }}' + '/' + id,
+                    url: '{!! url("/products/carts") !!}' + '/' + id,
                     data: {
                         'quantity': this.value,
                     },
                     success: function (data) {
-                        window.location.href = '{{ url('/products/carts') }}';
+                        window.location.href = '{!! url('/products/carts') !!}';
                     }
                 });
             });

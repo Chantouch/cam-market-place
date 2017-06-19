@@ -97,13 +97,14 @@ class ProductController extends Controller
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->currency_id)) {
-                    $target_currencies = Currency::all();
+                    $target_currencies = Currency::where('status', 1)->all();
                     foreach ($target_currencies as $target_currency) {
-                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $create->price);
+                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $request->get('price'));
                         if (!count($create->price_converter)) {
                             PriceConverter::create([
                                 'product_id' => $create->id,
                                 'currency_id' => $target_currency->id,
+                                'code' => $target_currency->code,
                                 'amount' => $converter,
                             ]);
                         }
@@ -257,55 +258,18 @@ class ProductController extends Controller
             if (isset($request->currency_id)) {
                 $currency_id = PriceConverter::pluck('currency_id')->toArray();
                 $product_id = PriceConverter::pluck('product_id')->toArray();
-                $target_currencies = Currency::get();
-                $array_inserts = [];
-                if (count($product->price_converter) >= 1) {
-                    foreach ($target_currencies as $target_currency) {
-                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
-                        if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
-                            $price_converter = PriceConverter::where('product_id', $_unique_product)
-                                ->where('currency_id', $_unique_currency)->first();
-                            if (is_null($price_converter)) {
-                                return false;
-                            }
-                            $array_insert = [
-                                'product_id' => $product->id,
-                                'currency_id' => $target_currency->id,
-                                'amount' => $converter,
-                                'updated_at' => Carbon::now(),
-                            ];
-                            $price_converter->update($array_insert);
-                            continue;
-                        }
-                        $array_inserts = [
-                            'product_id' => $product->id,
-                            'currency_id' => $target_currency['currency_id'],
-                            'amount' => $converter,
-                            'updated_at' => Carbon::now(),
-                        ];
-                        $currency_id[] = $target_currency['currency_id'];
-                        $product_id[] = $product->id;
-                    }
-                    if (!empty($array_inserts)) {
-                        $insert_success = PriceConverter::insert($array_inserts);
-                        if (!$insert_success) {
-                            return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
-                        }
+                $target_currencies = Currency::where('status', 1)->get();
+                if (isset($request->discount_type) && isset($request->discount)) {
+                    if ($request->discount_type == "2") {
+                        $discounted_amount = $request->price - (($request->discount / 100) * $request->price);
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
+                    } else {
+                        $discounted_amount = $request->price - $request->discount;
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
                     }
                 } else {
-                    $ids = array();
-                    foreach ($target_currencies as $currency) {
-                        $ids[] = $currency->id;
-                    }
-                    PriceConverter::whereIn('currency_id', $ids)->update(['active' => 0]);
-                    foreach ($target_currencies as $target_currency) {
-                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
-                        PriceConverter::create([
-                            'product_id' => $product->id,
-                            'currency_id' => $target_currency->id,
-                            'amount' => $converter,
-                        ]);
-                    }
+                    $discounted_amount = $request->price - $request->discount;
+                    $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
                 }
             }
 
@@ -402,20 +366,64 @@ class ProductController extends Controller
         }
     }
 
-    public function tags_to_array($string)
+    /**
+     * @param $product
+     * @param $target_currencies
+     * @param $request
+     * @param $discounted_amount
+     * @param $currency_id
+     * @param $product_id
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    public function convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id)
     {
-        $trimmed_array = explode(',', $string);
-        $tags = array_map('trim', $trimmed_array);
-
-        // Create an empty array
-        $result = array();
-
-        foreach ($tags as $tag) {
-            // Create a new tag if it doesn't exist and push it to the collection
-            $result[] = Tag::firstOrCreate(['name' => trim($tag)]);
+        $array_inserts = [];
+        if (count($product->price_converter) >= 1) {
+            foreach ($target_currencies as $target_currency) {
+                $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $discounted_amount);
+                if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
+                    $price_converter = PriceConverter::where('product_id', $_unique_product)
+                        ->where('currency_id', $_unique_currency)->first();
+                    if (is_null($price_converter)) {
+                        return false;
+                    }
+                    $array_insert = [
+                        'product_id' => $product->id,
+                        'currency_id' => $target_currency->id,
+                        'amount' => $converter,
+                        'code' => $target_currency->code,
+                        'updated_at' => Carbon::now(),
+                    ];
+                    $price_converter->update($array_insert);
+                    continue;
+                }
+                $array_inserts = [
+                    'product_id' => $product->id,
+                    'currency_id' => $target_currency['currency_id'],
+                    'amount' => $converter,
+                    'code' => $target_currency->code,
+                    'updated_at' => Carbon::now(),
+                ];
+                $currency_id[] = $target_currency['currency_id'];
+                $product_id[] = $product->id;
+            }
+            if (!empty($array_inserts)) {
+                $insert_success = PriceConverter::insert($array_inserts);
+                if (!$insert_success) {
+                    return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
+                }
+            }
+        } else {
+            foreach ($target_currencies as $target_currency) {
+                $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $discounted_amount);
+                PriceConverter::create([
+                    'product_id' => $product->id,
+                    'currency_id' => $target_currency->id,
+                    'amount' => $converter,
+                    'code' => $target_currency->code,
+                ]);
+            }
         }
-
-        return $result;
     }
 
     /**

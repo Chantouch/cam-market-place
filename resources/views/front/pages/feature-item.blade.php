@@ -13,36 +13,36 @@
                     </a>
                     @if(!empty($product->discount_type !=null))
                         <span class="price-percent-reduction">
-                                                Save {!! $product->discount.Helper::discount($product->discount_type, $product->currency) !!}
-                                            </span>
+                            Save {!! $product->discount.Helper::discount($product->discount_type, $product->currency) !!}
+                        </span>
                     @endif
                 </div>
                 <div class="featured-info">
                     <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
                     <p class="reating">
-                                        <span class="rate">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
+                        <span class="rate">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </span>
                     </p>
                     @if(!empty($product->discount_type !=null))
                         @if($product->discount_type == 2)
                             <span class="price">
-                                                    {!! Helper::currency($product->currency).($product->price-($product->discount/100)*$product->price) !!}
-                                                </span>
+                                {!! Helper::currency($product->currency).($product->price-($product->discount/100)*$product->price) !!}
+                            </span>
                             <span class="price" style="text-decoration: line-through;">
-                                                    {!! Helper::currency($product->currency).$product->price !!}
-                                                </span>
+                                {!! Helper::currency($product->currency).$product->price !!}
+                            </span>
                         @else
                             <span class="price">
-                                                    {!! Helper::currency($product->currency).($product->price-$product->discount) !!}
-                                                </span>
+                                {!! Helper::currency($product->currency).($product->price-$product->discount) !!}
+                            </span>
                             <span class="price" style="text-decoration: line-through;">
-                                                    {!! Helper::currency($product->currency).$product->price !!}
-                                                </span>
+                                {!! Helper::currency($product->currency).$product->price !!}
+                            </span>
                         @endif
                     @else
                         <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
@@ -51,7 +51,13 @@
                     <div class="featured-button">
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="hidden" name="name" value="{{ $product->name }}">
-                        <input type="hidden" name="price" value="{{ $product->price }}">
+                        @if(count($product->price_converter))
+                            @foreach($product->price_converter->where('code','USD') as $price)
+                                <input type="hidden" name="price" value="{{ $price->amount }}">
+                            @endforeach
+                        @else
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+                        @endif
                         <input type="hidden" name="qty" value="1">
                         <button class="btn wishlist" name="submit" type="submit" value="wishlist">
                             <i class="fa fa-heart"></i>

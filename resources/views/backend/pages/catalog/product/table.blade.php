@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
+                <th>Price (USD)</th>
                 <th>Cost</th>
                 <th>Qty</th>
                 <th>Status</th>
@@ -35,7 +36,15 @@
                             @endforeach
                         @endif
                     </td>
-                    <td>{!! $product->price !!} ({!! isset($product->currency)? $product->currency->symbol : "" !!})</td>
+                    <td>{!! $product->price !!} ({!! isset($product->currency)? $product->currency->symbol : "" !!})
+                    </td>
+                    <td>
+                        @if(count($product->price_converter))
+                            @foreach($product->price_converter->where('code','USD') as $price)
+                                {!! $price->amount !!}
+                            @endforeach
+                        @endif
+                    </td>
                     <td>{!! $product->cost !!} ({!! isset($product->currency)? $product->currency->symbol: "" !!})</td>
                     <td>{!! $product->qty !!}</td>
                     <td>{!! Helper::status($product->status) !!}</td>

@@ -17,7 +17,8 @@ class CreatePriceConvertersTable extends Migration
             $table->increments('id');
             $table->integer('product_id', false, true);
             $table->integer('currency_id', false, true);
-            $table->decimal('amount', 20, 4);
+            $table->decimal('amount', 20, 2);
+            $table->string('code', 20);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
@@ -34,5 +35,6 @@ class CreatePriceConvertersTable extends Migration
     {
         Schema::dropIfExists('price_converters');
         Schema::dropIfExists('f_x_rates');
+        Schema::dropIfExists('product_price_backups');
     }
 }
