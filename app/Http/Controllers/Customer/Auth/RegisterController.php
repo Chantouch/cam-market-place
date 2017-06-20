@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer\Auth;
 
+use App\Http\Controllers\BaseController;
 use App\Mail\CustomerAccountActivation;
 use App\Model\Category;
 use App\Model\City;
@@ -9,14 +10,13 @@ use App\Model\Commune;
 use App\Model\Country;
 use App\Model\Customer;
 use DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +45,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('guest');
     }
 

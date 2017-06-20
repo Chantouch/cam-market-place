@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Model\HomeSlider;
-use App\Model\Category;
 use App\Model\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use DB;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -19,6 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('web');
     }
 
@@ -31,12 +31,8 @@ class HomeController extends Controller
     {
         try {
             $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->first();
-            $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-            $category_list = Category::with('sub_category')->where('status', 1)
-                ->whereNull('category_id')->orderByDesc('name')
-                ->pluck('name', 'id');
             $products = Product::with('categories')->where('status', 1)->get();
-            return view('front.pages.index', compact('sliders'), compact('categories', 'products', 'category_list'));
+            return view('front.pages.index', compact('sliders'), compact('products'));
         } catch (ModelNotFoundException $exception) {
             return response()->json(['error' => 'can not get sliders']);
         }
@@ -44,12 +40,6 @@ class HomeController extends Controller
 
     public function search_product(Request $request)
     {
-        $categories = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->get();
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
         $products = Product::with('categories', 'city')->get();
         $category = $request->get('category');
         $product_name = $request->get('name');

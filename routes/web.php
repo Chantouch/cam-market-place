@@ -73,6 +73,8 @@ Route::prefix('api')->name('api.')->group(function () {
     Route::patch('currency/set-default', 'REST\APIController@set_default')->name('currency.set_default');
 });
 
+Route::get('notification', 'Customer\HomeController@notification');
+
 //Route::resource('users', 'UsersController', [
 //    'only' => ['index', 'show']
 //]);

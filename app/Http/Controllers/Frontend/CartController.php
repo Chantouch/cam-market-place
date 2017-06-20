@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Model\Category;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 use Validator;
 
-class CartController extends Controller
+class CartController extends BaseController
 {
+
+    /**
+     * CartController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Display a listing of the resource.
@@ -19,11 +27,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
-        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('front.pages.product.cart', compact('categories', 'category_list'));
+        return view('front.pages.product.cart');
     }
 
     /**
@@ -40,22 +44,38 @@ class CartController extends Controller
                     return $cartItem->id === $request->id;
                 });
                 if (!$duplicates->isEmpty()) {
-                    return redirect()->back()->withSuccessMessage('Item is already in your wishlist!');
+                    $notification = [
+                        'message' => 'Thanks! Item is already in your wishlist!',
+                        'alert-type' => 'warning'
+                    ];
+                    return redirect()->back()->with($notification);
                 }
                 Cart::instance('wishlist')
                     ->add($request->id, $request->name, $request->qty, $request->price)
                     ->associate(Product::class);
-                return redirect()->back()->withSuccessMessage('Item was added to your wishlist!');
+                $notification = [
+                    'message' => 'Thanks! Item was added to your wishlist!',
+                    'alert-type' => 'success'
+                ];
+                return redirect()->back()->with($notification);
                 break;
             case "cart":
                 $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
                     return $cartItem->id === $request->id;
                 });
                 if (!$duplicates->isEmpty()) {
-                    return redirect()->route('products.carts.index')->with('error', 'Item is already in your cart!');
+                    $notification = [
+                        'message' => 'Thanks! Item is already in your cart!',
+                        'alert-type' => 'warning'
+                    ];
+                    return redirect()->route('products.carts.index')->with($notification);
                 }
                 Cart::add($request->id, $request->name, $request->qty, $request->price)->associate(Product::class);
-                return redirect()->back()->with('success', 'Item was added to your cart!');
+                $notification = [
+                    'message' => 'Thanks! Item was added to your cart!',
+                    'alert-type' => 'success'
+                ];
+                return redirect()->back()->with($notification);
                 break;
             default:
                 break;

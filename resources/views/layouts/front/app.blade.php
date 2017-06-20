@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="{!! asset('css/nivo-slider.css') !!}">
     <link rel="stylesheet" href="{!! asset('css/style.css') !!}">
     <link rel="stylesheet" href="{!! asset('css/responsive.css') !!}">
+    <link rel="stylesheet" type="text/css" href="{!! asset('plugins/toastr/toastr.min.css') !!}">
     @yield('style')
     <script src="{!! asset('js/vendor/modernizr-2.8.3.min.js') !!}"></script>
 </head>
@@ -152,9 +153,27 @@
 <script src="{!! asset('js/plugins.js') !!}"></script>
 <!-- main js============================================ -->
 <script src="{!! asset('js/main.js') !!}"></script>
+<script src="{!! asset('plugins/toastr/toastr.min.js') !!}"></script>
+@yield('scripts')
 <script>
     new WOW().init();
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+    @endif
 </script>
-@yield('scripts')
 </body>
 </html>

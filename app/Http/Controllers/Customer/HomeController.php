@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Customer;
 
 use App\Model\Category;
 use App\Model\Customer;
+use App\Model\Product;
 use App\Model\Purchase;
 use App\Model\PurchaseOrder;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Validator;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth:customer');
     }
 
@@ -32,24 +34,16 @@ class HomeController extends Controller
     public function index()
     {
         $user = $this->auth()->user();
-        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
-        return view('customer.pages.cart', compact('categories', 'user', 'category_list'));
+        return view('customer.pages.cart', compact('user'));
     }
 
     public function checkout()
     {
         $user = $this->auth()->user();
-        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
         $product = Cart::content();
         if (!count($product))
             return redirect()->route('customers.dashboard')->with('error', 'Your card was clear cause by timeout');
-        return view('customer.pages.checkout', compact('categories', 'user', 'category_list'));
+        return view('customer.pages.checkout', compact('user'));
     }
 
     public function post_checkout(Request $request)
@@ -78,18 +72,21 @@ class HomeController extends Controller
         $products = Cart::content();
         $array_data = [
             'customer_id' => $user_id,
-            'total_paid_foreign' => $total,
+            'total_paid_foreign' => str_replace(',', '', $total),
             'shipping_address' => isset($data['shipping_address']) ? $data['shipping_address'] : null,
         ];
         $purchase = Purchase::create($array_data);
         if ($purchase) {
             $purchase_id = $purchase->id;
+            $ids = [];
             foreach ($products as $product) {
                 $purchase = PurchaseOrder::create([
                     'purchase_id' => $purchase_id,
                     'product_id' => $product->id,
                     'qty' => $product->qty,
                 ]);
+                $ids[] = $product->id;
+                Product::whereIn('id', $ids)->decrement('qty', $product->qty);
                 if (!$purchase) {
                     return response()->json(['error' => 'Can not order now']);
                 }

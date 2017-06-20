@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Customer\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Model\Category;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
     use  ThrottlesLogins;
 
@@ -19,6 +19,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('guest:customer', ['except' => 'logout']);
     }
 

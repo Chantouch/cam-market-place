@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Model\Category;
 use App\Model\Product;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 use Validator;
 
 
-class WishlistController extends Controller
+class WishlistController extends BaseController
 {
 
     /**
@@ -20,11 +20,7 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
-        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('front.pages.product.wishlist', compact('categories', 'category_list'));
+        return view('front.pages.product.wishlist');
     }
 
     /**

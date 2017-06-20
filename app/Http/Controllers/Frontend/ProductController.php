@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Model\Category;
 use App\Model\Product;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('web');
     }
 
@@ -20,12 +20,8 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
-        $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
         $product = Product::with('categories', 'city')->where('slug', $slug)->first();
-        return view('front.pages.product.view', compact('product', 'categories', 'category_list'));
+        return view('front.pages.product.view', compact('product'));
     }
 
     /**
