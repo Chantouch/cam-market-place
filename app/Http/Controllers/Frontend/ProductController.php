@@ -21,6 +21,7 @@ class ProductController extends BaseController
     public function show($slug)
     {
         $product = Product::with('categories', 'city')->where('slug', $slug)->first();
+        //dd($product);
         return view('front.pages.product.view', compact('product'));
     }
 

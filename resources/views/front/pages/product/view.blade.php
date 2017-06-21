@@ -306,29 +306,32 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
                     <div class="area-title">
-                        @foreach($product->categories->random(1) as $category)
-                            <h3>{!! count($category->products) !!} other products in the same category: </h3>
-                        @endforeach
+                        @if(!$product->categories->isEmpty())
+                            @foreach($product->categories->random(1) as $category)
+                                <h3>{!! count($category->products) !!} other products in the same category: </h3>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="featured-product">
                     <div class="featured-item">
-                        @foreach($product->categories->random(1) as $category)
-                            @foreach($category->products as $product)
-                                <div class="col-xs-12 col-sm-3">
-                                    <div class="featured-inner">
-                                        <div class="featured-image">
-                                            <a href="{!! route('products.details', [$product->slug]) !!}">
-                                                @foreach($product->images->take(1) as $image)
-                                                    <img class="img-thumbnail"
-                                                         src="{!! asset($product->img_path.'small/'.$image->img_name) !!}"
-                                                         title="{!! $product->name !!}">
-                                                @endforeach
-                                            </a>
-                                        </div>
-                                        <div class="featured-info">
-                                            <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
-                                            <p class="reating">
+                        @if(!$product->categories->isEmpty())
+                            @foreach($product->categories->random(1) as $category)
+                                @foreach($category->products as $product)
+                                    <div class="col-xs-12 col-sm-3">
+                                        <div class="featured-inner">
+                                            <div class="featured-image">
+                                                <a href="{!! route('products.details', [$product->slug]) !!}">
+                                                    @foreach($product->images->take(1) as $image)
+                                                        <img class="img-thumbnail"
+                                                             src="{!! asset($product->img_path.'small/'.$image->img_name) !!}"
+                                                             title="{!! $product->name !!}">
+                                                    @endforeach
+                                                </a>
+                                            </div>
+                                            <div class="featured-info">
+                                                <a href="{!! route('products.details', [$product->slug]) !!}">{!! $product->name !!}</a>
+                                                <p class="reating">
                                                 <span class="rate">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -336,32 +339,33 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </span>
-                                            </p>
-                                            <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
-                                            {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
-                                            <div class="featured-button">
-                                                <input type="hidden" name="id" value="{{ $product->id }}">
-                                                <input type="hidden" name="name" value="{{ $product->name }}">
-                                                <input type="hidden" name="price" value="{{ $product->price }}">
-                                                <input type="hidden" name="qty" value="1">
-                                                <button class="btn wishlist" name="submit" type="submit"
-                                                        value="wishlist">
-                                                    <i class="fa fa-heart"></i>
-                                                </button>
-                                                <button class="btn fetu-comment" name="comment" type="button">
-                                                    <i class="fa fa-signal"></i>
-                                                </button>
-                                                <button class="btn add-to-card" name="submit" type="submit"
-                                                        value="cart">
-                                                    <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
-                                                </button>
+                                                </p>
+                                                <span class="price">{!! Helper::currency($product->currency).$product->price !!}</span>
+                                                {!! Form::open(['route' => ['products.carts.store'], 'method' => 'POST']) !!}
+                                                <div class="featured-button">
+                                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                                    <input type="hidden" name="price" value="{{ $product->price }}">
+                                                    <input type="hidden" name="qty" value="1">
+                                                    <button class="btn wishlist" name="submit" type="submit"
+                                                            value="wishlist">
+                                                        <i class="fa fa-heart"></i>
+                                                    </button>
+                                                    <button class="btn fetu-comment" name="comment" type="button">
+                                                        <i class="fa fa-signal"></i>
+                                                    </button>
+                                                    <button class="btn add-to-card" name="submit" type="submit"
+                                                            value="cart">
+                                                        <i class="fa fa-shopping-cart"></i> <span>Add to cart</span>
+                                                    </button>
+                                                </div>
+                                                {!! Form::close() !!}
                                             </div>
-                                            {!! Form::close() !!}
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             @endforeach
-                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
