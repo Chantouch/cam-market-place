@@ -94,16 +94,28 @@ class HomeController extends BaseController
                 }
             }
             $content = [
-                'title'=> 'Itsolutionstuff.com mail',
-                'body'=> 'The body of your message.',
+                'title' => 'Your order is completed',
+                'body' => 'Hi ' . $this->auth()->user()->first_name . '. Your recent order on ' . config('app.name') . ' has been completed. Your order details are shown below for your reference:',
+                'url' => 'www.google.com',
                 'button' => 'Click Here'
             ];
+            $customer_info = $this->auth()->user();
+            $customer = new Customer();
+            $customer->first_name = $customer_info->first_name;
+            $customer->last_name = $customer_info->last_name;
+            $customer->email = $customer_info->email;
+            $customer->phone = $customer_info->phone;
+            $customer->addresses = $customer_info->addresses;
 
-            $receiverAddress = 'chantouchsek.cs83@gmail.com';
-            Mail::to($receiverAddress)->send(new OrderCompleted($content));
+            $receiverAddress = $customer_info->email;
+
+            Mail::to($receiverAddress)->send(new OrderCompleted($content, $customer));
             Cart::destroy();
         }
-        return redirect()->route('customers.dashboard')->with('success', 'Your order is successfully');
+        $notification = [
+            'message' => 'Thanks! Your order is completed!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('customers.dashboard')->with($notification);
     }
-
 }

@@ -1,18 +1,24 @@
 @component('mail::message')
     # {{ $content['title'] }}
-
     {{ $content['body'] }}
-
     @component('mail::table')
-        | Laravel       | Table         | Example  |
-        | ------------- |:-------------:| --------:|
-        | PHP           | Centered      | $100     |
-        | Laravel       | Right-Aligned | $200     |
+        | Product                | Quantity      | Price         |
+        | ---------------------- |:-------------:| -------------:|
+        <?php for ($i = 0; $i <= 2; $i++){?>
+        | Col {!! $i !!} is      | Centered      | $1{!! $i !!}  |
+        <?php } ?>
     @endcomponent
 
-    @component('mail::button', ['url' => ''])
-        {{ $content['button'] }}
-    @endcomponent
+    # Customer details
+    Email: {!! $customer->email !!}
+
+    Tel: {!! $customer->phone !!}
+
+    # Billing Address
+    John Q. Customer
+    123 Fake Street
+    Indianapolis, Indiana
+    90210
 
     Thanks,
     {{ config('app.name') }}

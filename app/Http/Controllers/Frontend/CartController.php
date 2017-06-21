@@ -118,7 +118,12 @@ class CartController extends BaseController
     public function destroy($id)
     {
         Cart::remove($id);
-        return redirect('products/carts')->withSuccessMessage('Item has been removed!');
+        $notification = [
+            'message' => 'Thanks! Item has been removed!',
+            'alert-type' => 'success'
+        ];
+        return redirect('products/carts')->with($notification);
+        //return redirect('products/carts')->withSuccessMessage('Item has been removed!');
     }
 
     /**
@@ -129,7 +134,12 @@ class CartController extends BaseController
     public function emptyCart()
     {
         Cart::destroy();
-        return redirect('products/carts')->withSuccessMessage('Your cart has been cleared!');
+        $notification = [
+            'message' => 'Thanks! Item was cleared from cart!',
+            'alert-type' => 'success'
+        ];
+        return redirect('products/carts')->with($notification);
+        //return redirect('products/carts')->withSuccessMessage('Your cart has been cleared!');
     }
 
     /**
@@ -149,13 +159,23 @@ class CartController extends BaseController
         });
 
         if (!$duplicates->isEmpty()) {
-            return redirect('products/carts')->withSuccessMessage('Item is already in your Wishlist!');
+            //return redirect('products/carts')->withSuccessMessage('Item is already in your Wishlist!');
+            $notification = [
+                'message' => 'Thanks! Item is already in your Wishlist!',
+                'alert-type' => 'success'
+            ];
+            return redirect('products/carts')->with($notification);
         }
 
         Cart::instance('wishlist')->add($item->id, $item->name, $item->qty, $item->price)
             ->associate(Product::class);
 
-        return redirect('products/carts')->withSuccessMessage('Item has been moved to your Wishlist!');
+        //return redirect('products/carts')->withSuccessMessage('Item has been moved to your Wishlist!');
+        $notification = [
+            'message' => 'Thanks! Item was removed from your Wishlist!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->with($notification);
 
     }
 }

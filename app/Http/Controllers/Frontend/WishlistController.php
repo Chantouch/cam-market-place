@@ -35,12 +35,20 @@ class WishlistController extends BaseController
             return $cartItem->id === $request->id;
         });
         if (!$duplicates->isEmpty()) {
-            return redirect()->back()->withSuccessMessage('Item is already in your wishlist!');
+            $notification = [
+                'message' => 'Thanks! Item was already in your wishlist!',
+                'alert-type' => 'warning'
+            ];
+            return redirect()->back()->with($notification);
         }
         Cart::instance('wishlist')
             ->add($request->id, $request->name, $request->qty, $request->price)
             ->associate(Product::class);
-        return redirect()->back()->withSuccessMessage('Item was added to your wishlist!');
+        $notification = [
+            'message' => 'Thanks! Item was added to your wishlist!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -77,7 +85,12 @@ class WishlistController extends BaseController
     public function destroy($id)
     {
         Cart::instance('wishlist')->remove($id);
-        return redirect('products/wish-lists')->withSuccessMessage('Item has been removed!');
+        //return redirect('products/wish-lists')->withSuccessMessage('Item has been removed!');
+        $notification = [
+            'message' => 'Thanks! Item was cleared from your wishlist!',
+            'alert-type' => 'error'
+        ];
+        return redirect('products/wish-lists')->with($notification);
     }
 
     /**
@@ -88,7 +101,12 @@ class WishlistController extends BaseController
     public function emptyWishlist()
     {
         Cart::instance('wishlist')->destroy();
-        return redirect('products/wish-lists')->withSuccessMessage('Your wishlist has been cleared!');
+        //return redirect('products/wish-lists')->withSuccessMessage('Your wishlist has been cleared!');
+        $notification = [
+            'message' => 'Thanks! Item was cleared from your wishlist!',
+            'alert-type' => 'error'
+        ];
+        return redirect('products/wish-lists')->with($notification);
     }
 
     /**
@@ -105,11 +123,20 @@ class WishlistController extends BaseController
             return $cartItem->id === $id;
         });
         if (!$duplicates->isEmpty()) {
-            return redirect('carts')->withSuccessMessage('Item is already in your shopping cart!');
+            //return redirect('carts')->withSuccessMessage('Item is already in your shopping cart!');
+            $notification = [
+                'message' => 'Thanks! Item was was already in your shopping cart!',
+                'alert-type' => 'warning'
+            ];
+            return redirect('carts')->with($notification);
         }
         Cart::instance('default')->add($item->id, $item->name, $item->qty, $item->price)
             ->associate(Product::class);
-        return redirect('products/wish-lists')->withSuccessMessage('Item has been moved to your shopping cart!');
-
+        //return redirect('products/wish-lists')->withSuccessMessage('Item has been moved to your shopping cart!');
+        $notification = [
+            'message' => 'Thanks! Item has been moved to your shopping cart!',
+            'alert-type' => 'success'
+        ];
+        return redirect('products/wish-lists')->with($notification);
     }
 }
