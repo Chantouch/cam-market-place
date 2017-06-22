@@ -148,7 +148,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="footer-card pull-right">
-                    <img src="{!! asset('img/payment.png') !!}" alt="">
+                    <!-- <img src="{!! asset('img/payment.png') !!}" alt=""> -->
                 </div>
             </div>
         </div>
