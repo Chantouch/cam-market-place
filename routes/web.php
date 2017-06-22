@@ -30,6 +30,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
         Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
     });
+    Route::name('config.')->group(function () {
+        Route::get('config-cache', 'ConfigController@cache_config')->name('cache');
+        Route::get('clear-cache', 'ConfigController@cache_clear')->name('clear');
+        Route::get('view-clear', 'ConfigController@clear_view')->name('view_clear');
+    });
 });
 
 Route::get('/', 'HomeController@index')->name('home');
