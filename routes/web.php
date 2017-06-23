@@ -80,6 +80,8 @@ Route::prefix('api')->name('api.')->group(function () {
 
 Route::get('notification', 'Customer\HomeController@notification');
 Route::get('contact-us', 'Frontend\ContactController@index');
+Route::get('about-us', 'Frontend\AboutController@index');
+Route::get('invoice', 'Frontend\AboutController@invoice');
 //Route::resource('users', 'UsersController', [
 //    'only' => ['index', 'show']
 //]);
