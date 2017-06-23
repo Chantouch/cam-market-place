@@ -54,10 +54,12 @@ class HomeController extends BaseController
             $product_id = DB::table('products_categories')->where('category_id', $category)->select('product_id')->pluck('product_id');
             $items->whereIn('id', $product_id);
         }
-
-        $items = $items->orderBy('created_at', 'ASC')->get();
-        //$products->paginate(10);
+        $count_items = $items->count();
+        $items = $items->orderBy('created_at', 'ASC')->paginate(10);
+        $items->appends([
+            'name' => $product_name, 'category' => $category
+        ]);
         Session::flash('_old_input', [$request->name, $request->category_id]);
-        return view('front.pages.product.content-search', compact('categories', 'items', 'products', 'category_list'));
+        return view('front.pages.product.content-search', compact('count_items', 'items', 'products'));
     }
 }

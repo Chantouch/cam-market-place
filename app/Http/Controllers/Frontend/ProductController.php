@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Model\Category;
 use App\Model\Product;
 use App\Http\Controllers\BaseController;
+use DB;
 
 class ProductController extends BaseController
 {
@@ -21,7 +22,6 @@ class ProductController extends BaseController
     public function show($slug)
     {
         $product = Product::with('categories', 'city')->where('slug', $slug)->first();
-        //dd($product);
         return view('front.pages.product.view', compact('product'));
     }
 
@@ -31,12 +31,14 @@ class ProductController extends BaseController
      */
     public function category($slug)
     {
-        $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
-        $category = Category::with('sub_category', 'products')->where('slug', $slug)->first();
+        $category = Category::with('sub_category', 'products')->where('slug', $slug)->firstOrFail();
         $products = Product::with('categories', 'city')->get();
-        $category_list = Category::with('sub_category')->where('status', 1)
-            ->whereNull('category_id')->orderByDesc('name')
-            ->pluck('name', 'id');
-        return view('front.pages.product.category', compact('category', 'categories', 'products', 'category_list'));
+        $items = Product::with('categories', 'city');
+        if ($category) {
+            $product_id = DB::table('products_categories')->where('category_id', $category->id)->select('product_id')->pluck('product_id');
+            $items->whereIn('id', $product_id);
+        }
+        $items = $items->orderBy('created_at', 'ASC')->paginate(15);
+        return view('front.pages.product.category', compact('category', 'products', 'items'));
     }
 }

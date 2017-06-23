@@ -24,7 +24,7 @@
     <div class="shop-area shop">
         <div class="container">
             <div class="row">
-                <!-- Start shop categori area -->
+                <!-- Start shop categories area -->
                 <div class="col-xs-12 col-sm-4 col-md-3">
                     <div class="shop-categori-area">
                         <div class="sidebar-menu-title">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="shop-categori">
                             <div class="shop-categori-inner">
-                                <!-- Start Categori -->
+                                <!-- Start Categories -->
                                 <div class="categoris categori-border">
                                     <span class="cat-title">Categories</span>
                                     <ul>
@@ -252,7 +252,7 @@
                         {{--</div>--}}
                         <h1 class="page-heading product-listing">
                             <span class="heading-counter">
-                                There are {!! count($items) !!} products.
+                                There are {!! $count_items !!} products.
                             </span>
                         </h1>
                         <!-- Start catagori short -->
@@ -398,6 +398,7 @@
                         <!-- Start categori show item -->
                         <div class="categori-show-item">
                             <div class="cat-show-item">
+                                {!! $items->render() !!}
                                 <p>Showing 1 - 8 of 8 items</p>
                             </div>
                             <div class="cat-show-button">

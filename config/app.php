@@ -239,6 +239,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'Helper' => Helper::class,
 
     ],
 
