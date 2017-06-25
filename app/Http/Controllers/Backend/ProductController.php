@@ -44,10 +44,10 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::paginate(10);
+            $products = Product::orderBy('created_at', 'DESC')->paginate(10);
             return view('backend.pages.catalog.product.index', compact('products'));
         } catch (ModelNotFoundException $exception) {
-            return redirect()->route('admin.home')->with('error', 'There is something wrong with your request.');
+            return redirect()->route('admin.dashboard')->with('error', 'There is something wrong with your request.');
         }
     }
 
@@ -97,7 +97,7 @@ class ProductController extends Controller
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->currency_id)) {
-                    $target_currencies = Currency::where('status', 1)->all();
+                    $target_currencies = Currency::where('status', 1)->get();
                     foreach ($target_currencies as $target_currency) {
                         $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $request->get('price'));
                         if (!count($create->price_converter)) {

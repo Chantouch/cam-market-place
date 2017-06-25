@@ -25,7 +25,7 @@ $(function () {
             if (input.length) {
                 input.val(log);
             } else {
-                if (log) console(log);
+                if (log) console.log(log);
             }
         });
     });

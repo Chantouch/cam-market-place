@@ -78,10 +78,29 @@ Route::prefix('api')->name('api.')->group(function () {
     Route::patch('currency/set-default', 'REST\APIController@set_default')->name('currency.set_default');
 });
 
-Route::get('notification', 'Customer\HomeController@notification');
 Route::get('contact-us', 'Frontend\ContactController@index');
 Route::get('about-us', 'Frontend\AboutController@index');
 Route::get('invoice', 'Frontend\AboutController@invoice');
+
+
+Route::prefix('partners')->name('partners.')->group(function () {
+    //===========Partner Login and Register===========//
+    Route::get('register', 'Partner\Auth\RegisterController@showRegisterForm')->name('register');
+    Route::post('register', 'Partner\Auth\RegisterController@saveCustomerRegister')->name('register.account');
+    Route::get('verify/{token}', 'Partner\Auth\RegisterController@verify')->name('verify.account');
+    //------------Login and logout------------//
+    Route::get('login', 'Partner\Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Partner\Auth\LoginController@login')->name('login.post');
+    Route::post('logout', 'Partner\Auth\LoginController@logout')->name('logout');
+    //------------Partner frontend-----------//
+    Route::get('dashboard', 'Partner\HomeController@index')->name('dashboard');
+    Route::prefix('catalogs')->name('catalogs.')->group(function () {
+        Route::resource('products', 'Partner\ProductController');
+        Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
+        Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
+    });
+});
+
 //Route::resource('users', 'UsersController', [
 //    'only' => ['index', 'show']
 //]);

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Partner;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Model\Category;
 use App\Model\City;
 use App\Model\Currency;
@@ -13,7 +13,6 @@ use App\Model\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Vinkla\Hashids\HashidsManager;
 use Validator;
 use DB;
@@ -21,14 +20,15 @@ use Intervention\Image\ImageManagerStatic as Images;
 use App\Model\Image;
 use File;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     public $hashid;
 
     public function __construct(HashidsManager $hashid)
     {
+        parent::__construct();
         $this->hashid = $hashid;
-        $this->middleware('auth:admin');
+        $this->middleware('auth:partner');
     }
 
     public function auth()
@@ -44,10 +44,10 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::paginate(10);
-            return view('backend.pages.catalog.product.index', compact('products'));
+            $products = Product::with('city')->where('user_id', $this->auth()->id)->paginate(10);
+            return view('partner.catalog.product.index', compact('products'));
         } catch (ModelNotFoundException $exception) {
-            return redirect()->route('admin.home')->with('error', 'There is something wrong with your request.');
+            return redirect()->route('partners.dashboard')->with('error', 'There is something wrong with your request.');
         }
     }
 
@@ -59,12 +59,13 @@ class ProductController extends Controller
     public function create()
     {
         $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+        //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
         $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
         $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
         $discount_types = \Helper::discount_types();
-        return view('backend.pages.catalog.product.create',
+        return view('partner.catalog.product.create',
             compact('cities', 'languages', 'currencies', 'categories', 'discount_types', 'tags')
         );
     }
@@ -96,13 +97,14 @@ class ProductController extends Controller
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->currency_id)) {
-                    $target_currencies = Currency::all();
+                    $target_currencies = Currency::where('status', 1)->get();
                     foreach ($target_currencies as $target_currency) {
-                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $create->price);
+                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $request->get('price'));
                         if (!count($create->price_converter)) {
                             PriceConverter::create([
                                 'product_id' => $create->id,
                                 'currency_id' => $target_currency->id,
+                                'code' => $target_currency->code,
                                 'amount' => $converter,
                             ]);
                         }
@@ -167,7 +169,7 @@ class ProductController extends Controller
                 DB::rollback();
                 return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
             }
-            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added successfully.');
+            return redirect()->route('partners.catalogs.products.index')->with('success', 'Product added successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your product can not add to our system right now. Plz try again later.');
         }
@@ -184,10 +186,10 @@ class ProductController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+            return redirect()->route('partners.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
         $product = Product::find($id);
-        return view('backend.pages.catalog.product.show', compact('product'));
+        return view('partner.catalog.product.show', compact('product'));
     }
 
     /**
@@ -202,29 +204,29 @@ class ProductController extends Controller
             $decoded = $this->hashid->decode($id);
             $id = @$decoded[0];
             if ($id === null) {
-                return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+                return redirect()->route('partners.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
             }
             $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-            //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
-            $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
-            $language = Language::all();
+            $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
+            //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+            $language = Language::where('status')->get();
             $languages = array();
             foreach ($language as $lg) {
                 $languages[$lg->id] = $lg->name;
             }
 
-            $category = Category::all();
+            $category = Category::where('status')->get();
             $categories = array();
             foreach ($category as $cat) {
                 $categories[$cat->id] = $cat->name;
             }
             $discount_types = \Helper::discount_types();
             $product = Product::with('city')->with('currency')->with('languages')->find($id);
-            return view('backend.pages.catalog.product.edit',
+            return view('partner.catalog.product.edit',
                 compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
             );
         } catch (ModelNotFoundException $exception) {
-            return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+            return redirect()->route('partners.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
     }
 
@@ -242,7 +244,7 @@ class ProductController extends Controller
             $decoded = $this->hashid->decode($id);
             $id = @$decoded[0];
             if ($id === null) {
-                return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+                return redirect()->route('partners.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
             }
             $validator = Validator::make($data, Product::rules(), Product::messages());
             if ($validator->fails()) {
@@ -256,48 +258,18 @@ class ProductController extends Controller
             if (isset($request->currency_id)) {
                 $currency_id = PriceConverter::pluck('currency_id')->toArray();
                 $product_id = PriceConverter::pluck('product_id')->toArray();
-                $target_currencies = Currency::all();
-                $array_inserts = [];
-                foreach ($target_currencies as $target_currency) {
-                    if (!count($product->price_converter)) {
-//                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
-//                        PriceConverter::create([
-//                            'product_id' => $product->id,
-//                            'currency_id' => $target_currency->id,
-//                            'amount' => $converter,
-//                        ]);
+                $target_currencies = Currency::where('status', 1)->get();
+                if (isset($request->discount_type) && isset($request->discount)) {
+                    if ($request->discount_type == "2") {
+                        $discounted_amount = $request->price - (($request->discount / 100) * $request->price);
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
                     } else {
-                        $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $product->price);
-                        if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
-                            $price_converter = PriceConverter::where('product_id', $_unique_product)
-                                ->where('currency_id', $_unique_currency)->first();
-                            if (is_null($price_converter)) {
-                                return false;
-                            }
-                            $array_insert = [
-                                'product_id' => $product->id,
-                                'currency_id' => $target_currency->id,
-                                'amount' => $converter,
-                                'updated_at' => Carbon::now(),
-                            ];
-                            $price_converter->update($array_insert);
-                            continue;
-                        }
-                        $array_inserts = [
-                            'product_id' => $product->id,
-                            'currency_id' => $target_currency['currency_id'],
-                            'amount' => $converter,
-                            'updated_at' => Carbon::now(),
-                        ];
-                        $currency_id[] = $target_currency['currency_id'];
-                        $product_id[] = $product->id;
+                        $discounted_amount = $request->price - $request->discount;
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
                     }
-                }
-                if (!empty($array_inserts)) {
-                    $insert_success = PriceConverter::insert($array_inserts);
-                    if (!$insert_success) {
-                        return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
-                    }
+                } else {
+                    $discounted_amount = $request->price - $request->discount;
+                    $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
                 }
             }
 
@@ -388,26 +360,70 @@ class ProductController extends Controller
                     $product->categories()->sync(array());
                 }
             }
-            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product updated successfully.');
+            return redirect()->route('partners.catalogs.products.index')->with('success', 'Product updated successfully.');
         } catch (ModelNotFoundException $exception) {
             return back()->with('error', 'Your product can not add to your system right now. Plz try again later.');
         }
     }
 
-    public function tags_to_array($string)
+    /**
+     * @param $product
+     * @param $target_currencies
+     * @param $request
+     * @param $discounted_amount
+     * @param $currency_id
+     * @param $product_id
+     * @return bool|\Illuminate\Http\RedirectResponse
+     */
+    public function convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id)
     {
-        $trimmed_array = explode(',', $string);
-        $tags = array_map('trim', $trimmed_array);
-
-        // Create an empty array
-        $result = array();
-
-        foreach ($tags as $tag) {
-            // Create a new tag if it doesn't exist and push it to the collection
-            $result[] = Tag::firstOrCreate(['name' => trim($tag)]);
+        $array_inserts = [];
+        if (count($product->price_converter) >= 1) {
+            foreach ($target_currencies as $target_currency) {
+                $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $discounted_amount);
+                if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
+                    $price_converter = PriceConverter::where('product_id', $_unique_product)
+                        ->where('currency_id', $_unique_currency)->first();
+                    if (is_null($price_converter)) {
+                        return false;
+                    }
+                    $array_insert = [
+                        'product_id' => $product->id,
+                        'currency_id' => $target_currency->id,
+                        'amount' => $converter,
+                        'code' => $target_currency->code,
+                        'updated_at' => Carbon::now(),
+                    ];
+                    $price_converter->update($array_insert);
+                    continue;
+                }
+                $array_inserts = [
+                    'product_id' => $product->id,
+                    'currency_id' => $target_currency['currency_id'],
+                    'amount' => $converter,
+                    'code' => $target_currency->code,
+                    'updated_at' => Carbon::now(),
+                ];
+                $currency_id[] = $target_currency['currency_id'];
+                $product_id[] = $product->id;
+            }
+            if (!empty($array_inserts)) {
+                $insert_success = PriceConverter::insert($array_inserts);
+                if (!$insert_success) {
+                    return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
+                }
+            }
+        } else {
+            foreach ($target_currencies as $target_currency) {
+                $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $discounted_amount);
+                PriceConverter::create([
+                    'product_id' => $product->id,
+                    'currency_id' => $target_currency->id,
+                    'amount' => $converter,
+                    'code' => $target_currency->code,
+                ]);
+            }
         }
-
-        return $result;
     }
 
     /**
@@ -422,7 +438,7 @@ class ProductController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
+            return redirect()->route('partners.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
         }
         $product = Product::find($id);
         if ($request->ajax()) {
@@ -441,7 +457,7 @@ class ProductController extends Controller
             if (!$delete) {
                 return response()->json(['error', 'Your product can not delete from your system right now. Plz try again later.']);
             }
-            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
+            return redirect()->route('partners.catalogs.products.index')->with('success', 'Product deleted successfully');
         } else {
             $ids = array();
             foreach ($product->images as $image) {
@@ -463,7 +479,7 @@ class ProductController extends Controller
                 return back()->with('error', 'Your product can not delete from your system right now. Plz try again later.');
             }
         }
-        return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
+        return redirect()->route('partners.catalogs.products.index')->with('success', 'Product deleted successfully');
     }
 
     /**
@@ -510,6 +526,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $new_product = $product->replicate();
         $new_product->save();
-        return redirect()->route('admin.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
+        return redirect()->route('partners.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
     }
 }

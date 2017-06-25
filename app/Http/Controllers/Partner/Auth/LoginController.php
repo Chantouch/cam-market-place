@@ -23,7 +23,7 @@ class LoginController extends BaseController
         $this->middleware('guest:partner', ['except' => 'logout']);
     }
 
-    protected $redirectTo = "customers/dashboard";
+    protected $redirectTo = "partners/dashboard";
 
     /**
      * Get the post register / login redirect path.
@@ -36,7 +36,7 @@ class LoginController extends BaseController
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/partner/dashboard';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/partners/dashboard';
     }
 
     /**
@@ -46,8 +46,7 @@ class LoginController extends BaseController
      */
     public function showLoginForm()
     {
-        $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        return view('partner.auth.login', compact('categories'));
+        return view('partner.auth.login');
     }
 
     /**
@@ -114,9 +113,17 @@ class LoginController extends BaseController
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
+    //protected function credentials(Request $request)
+    //{
+    //    return $request->only($this->username(), 'password');
+    //$credentials = $request->only($this->username(), 'password');
+    //$credentials['role'] = "2";
+    //return $credentials;
+    //}
+
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password');
+        return array_merge($request->only($this->username(), 'password'), ['role' => "2"]);
     }
 
     /**

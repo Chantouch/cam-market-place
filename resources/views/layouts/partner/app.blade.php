@@ -281,7 +281,7 @@
 <section>
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
-    @if (Auth::guard('admin')->check())
+    @if (Auth::guard('partner')->check())
         <!-- User Info -->
             <div class="user-info">
                 <div class="image">
@@ -289,8 +289,8 @@
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true"
-                         aria-expanded="false">{{ Auth::guard('admin')->user()->username }}</div>
-                    <div class="email">{{ Auth::guard('admin')->user()->email }}</div>
+                         aria-expanded="false">{{ Auth::guard('partner')->user()->username }}</div>
+                    <div class="email">{{ Auth::guard('partner')->user()->email }}</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -300,11 +300,11 @@
                             <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="{{ route('admin.logout') }}"
+                            <li><a href="{{ route('partners.logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     <i class="material-icons">input</i>Sign Out</a>
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('partners.logout') }}" method="POST"
                                       style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
@@ -317,7 +317,7 @@
     <!-- #User Info -->
         <!-- Menu -->
         <div class="menu">
-            @include('layouts.backend.menu')
+            @include('layouts.partner.menu')
         </div>
         <!-- #Menu -->
         <!-- Footer -->
@@ -325,9 +325,9 @@
             <div class="copyright">
                 &copy; 2017 <a href="javascript:void(0);">Cam Market - Place</a>.
             </div>
-            {{--<div class="version">--}}
-            {{--<b>Version: </b> 1.0.0--}}
-            {{--</div>--}}
+            <div class="version">
+                <b>Version: </b> 1.0.0
+            </div>
         </div>
         <!-- #Footer -->
     </aside>
