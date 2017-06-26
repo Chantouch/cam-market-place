@@ -132,7 +132,7 @@ class LoginController extends BaseController
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+            ? : redirect()->intended($this->redirectPath());
     }
 
     /**
@@ -189,8 +189,11 @@ class LoginController extends BaseController
         $request->session()->flush();
 
         $request->session()->regenerate();
-
-        return redirect('/');
+        $notification = [
+            'message' => 'Thanks! Item was removed from your Wishlist!',
+            'alert-type' => 'success'
+        ];
+        return redirect('/')->with($notification);
     }
 
     /**

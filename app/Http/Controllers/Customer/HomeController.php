@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Mail\OrderCompleted;
-use App\Model\Category;
 use App\Model\Customer;
 use App\Model\Product;
 use App\Model\Purchase;
 use App\Model\PurchaseOrder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends BaseController
@@ -36,7 +37,7 @@ class HomeController extends BaseController
     public function index()
     {
         $user = $this->auth()->user();
-        return view('customer.pages.cart', compact('user'));
+        return view('customer.dashboard', compact('user'));
     }
 
     public function checkout()
@@ -48,6 +49,10 @@ class HomeController extends BaseController
         return view('customer.pages.checkout', compact('user'));
     }
 
+    /**
+     * @param Request $request
+     * @return HomeController|\Illuminate\Http\RedirectResponse
+     */
     public function post_checkout(Request $request)
     {
         $data = $request->all();
@@ -117,5 +122,59 @@ class HomeController extends BaseController
             'alert-type' => 'success'
         ];
         return redirect()->route('customers.dashboard')->with($notification);
+    }
+
+    public function information()
+    {
+        $id = auth()->user()->id;
+        $profile = Customer::find($id);
+        if (empty($profile)) {
+            $notification = [
+                'message' => 'Thanks! Your information not found.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->route('customers.dashboard')->with($notification);
+        }
+        return view('customer.pages.information', compact('profile'));
+    }
+
+    public function post_information(Request $request)
+    {
+        $notification_error = [
+            'message' => 'Thanks! Your information not found.',
+            'alert-type' => 'error'
+        ];
+        $notification_success = [
+            'message' => 'Thanks! Your information was updated successfully.',
+            'alert-type' => 'success'
+        ];
+        try {
+            $data = $request->all();
+            DB::beginTransaction();
+            $id = auth()->user()->id;
+            $profile = Customer::find($id);
+            if (empty($profile)) {
+                return redirect()->route('customers.dashboard')->with($notification_error);
+            }
+            $validator = Validator::make($data, Customer::rules($id), Customer::messages());
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+            if (!empty($data['password'])) {
+                $password = $profile->password = bcrypt($data['password']);
+                $data['password'] = $password;
+            } else {
+                $data = array_except($data, array('password'));
+            }
+            $data['dob'] = date('Y-m-d', isset($request->dob) ? strtotime($request->dob) : null);
+            $update = $profile->update($data);
+            if (!$update) {
+                return redirect()->back()->with($notification_error);
+            }
+            return redirect()->route('customers.dashboard')->with($notification_success);
+
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('customers.dashboard')->with($notification_error);
+        }
     }
 }

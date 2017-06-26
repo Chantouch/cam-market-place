@@ -2,15 +2,21 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Request;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Customer extends Authenticatable
 {
     use Notifiable;
     use Sluggable;
+
+    protected $dates = ['dob'];
+    protected $appends = ['hashid'];
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +26,7 @@ class Customer extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password', 'phone_number', 'status', 'username',
         'verified_by', 'verified_code', 'mobile', 'temp_enroll', 'enrollment_id', 'verified_at',
-        'city_id', 'commune_id', 'country_id', 'cus_code','addresses'
+        'city_id', 'commune_id', 'country_id', 'cus_code', 'dob'
     ];
 
     /**
@@ -46,6 +52,7 @@ class Customer extends Authenticatable
         ];
     }
 
+    //-----------get and set attribute-----------/
     /**
      * @return string
      */
@@ -65,6 +72,23 @@ class Customer extends Authenticatable
         }
     }
 
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function getDobAttribute($value)
+    {
+        return ($value !== null ? Carbon::parse($this->attributes['dob'])->format('d-m-Y') : null);
+    }
+
     //Verified employee after register
 
     /**
@@ -76,4 +100,49 @@ class Customer extends Authenticatable
         $this->verified_code = null;
         $this->save();
     }
+
+    //-------------Validation----------------//
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public static function rules($id)
+    {
+
+        switch (Request::method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'first_name' => 'required',
+                    'email' => 'required|email|unique:customers,email',
+                    'password' => 'required|same:confirm_password|min:6',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'first_name' => 'required|string',
+                    'last_name' => 'required|string',
+                    'email' => 'required|email|unique:customers,email,' . $id,
+                    'password' => 'sometimes|same:confirm_password',
+                    'confirm_password' => 'sometimes|same:password',
+                ];
+            }
+            default:
+                break;
+        }
+        return self::rules($id);
+    }
+
+    public static function messages()
+    {
+        return [
+
+        ];
+    }
+
 }

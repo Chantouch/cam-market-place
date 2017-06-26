@@ -69,6 +69,9 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::resource('carts', 'Frontend\CartController');
     Route::get('checkout', 'Customer\HomeController@checkout')->name('checkout');
     Route::post('checkout', 'Customer\HomeController@post_checkout')->name('post-checkout');
+    //-----------------Customer Information----------------//
+    Route::get('identity', 'Customer\HomeController@information')->name('identity');
+    Route::patch('identity', 'Customer\HomeController@post_information')->name('identity.patch');
 });
 
 //-----------REST API CALL----------//
