@@ -40,4 +40,5 @@
         </table>
     @else
         <p>There is no data here.</p>
-    @endif</div>
+    @endif
+</div>

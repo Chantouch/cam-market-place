@@ -17,6 +17,7 @@ class AttributeController extends Controller
 
     public function __construct(HashidsManager $hashid)
     {
+        $this->middleware('auth:admin');
         $this->hashid = $hashid;
     }
 

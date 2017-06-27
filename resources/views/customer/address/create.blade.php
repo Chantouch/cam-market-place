@@ -1,46 +1,34 @@
-@extends('layouts.backend.app')
-@section('style')
-    <!-- Bootstrap Select Css -->
-    <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
-@stop
-@section('content')
-    <div class="block-header">
-        <h2>CITY</h2>
-    </div>
-    <!-- Vertical Layout -->
-    <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="header">
-                    <h2>
-                        ADD CITY
-                    </h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+@extends('layouts.front.app')
+@section('content-area')
+    <!-- Start breadcume area -->
+    <div class="breadcume-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="breadcrumb">
+                        <a title="Return to Home" href="{!! route('home') !!}" class="home">
+                            <i class="fa fa-home"></i>
+                        </a>
+                        <span class="navigation-pipe">&gt;</span>
+                        <a title="My Account" href="{!! route('customers.dashboard') !!}">My account</a>
+                        <span class="navigation-pipe">&gt;</span>
+                        Address
+                    </div>
                 </div>
-                <div class="body">
-                    {!! Form::open(['route' => ['admin.cities.store'], 'method' => 'POST']) !!}
-                    @include('backend.pages.city.fields')
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <div class="cart-page-content">
+        <div class="container">
+            <div class="row m-b-30">
+                <div class="col-md-12">
+                    {{--<h2 class="text-center">Your Dashboard</h2>--}}
+                    {!! Form::open(['route' => ['customers.addresses.store'], 'method' => 'POST']) !!}
+                    @include('customer.address.fields')
                     {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-    <!-- #END# Vertical Layout -->
-@stop
-
-@section('plugins')
-    <!-- Select Plugin Js -->
-    <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
 @stop

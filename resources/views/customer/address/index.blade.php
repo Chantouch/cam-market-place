@@ -28,28 +28,38 @@
                         <div class="col-md-4 text-center">
                             <div class="box">
                                 <div class="box-content">
-                                    <h1 class="tag-title">Information</h1>
+                                    <h1 class="tag-title">
+                                        @if($address->alias != null){!! $address->alias !!}@else My address @endif
+                                    </h1>
                                     <hr/>
-                                    <p>Your information we will not share to others and keep it privately.</p>
+                                    <p>{!! $address->first_name. ' ' .$address->last_name !!}</p>
+                                    <p>{!! $address->company !!}</p>
+                                    <p>{!! $address->vat_number !!}</p>
+                                    <p>{!! $address->address_complement !!}</p>
+                                    <p>{!! $address->zip_postal_code. ' ' .Helper::relationship($address->city) !!}</p>
+                                    <p>{!! Helper::relationship($address->country) !!}</p>
+                                    <p>{!! $address->phone !!}</p>
                                     <br/>
                                     <div class="row">
+                                        {!! Form::open(['route' => ['customers.addresses.destroy', $address->hashid], 'method' => 'delete']) !!}
                                         <div class="col-md-6">
-                                            <a href="{!! route('customers.identity') !!}"
+                                            <a href="{!! route('customers.addresses.edit', [$address->hashid]) !!}"
                                                class="btn btn-block btn-primary">Update</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{!! route('customers.identity') !!}"
-                                               class="btn btn-block btn-primary">Delete</a>
+                                            <button class="btn btn-block btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
                                         </div>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                @else
-                    <a href="{!! route('customers.identity') !!}"
-                       class="btn btn-block btn-primary">Delete</a>
                 @endif
+                <div class="col-md-12 m-t-20">
+                    <a href="{!! route('customers.addresses.create') !!}"
+                       class="btn btn-block btn-primary">Create new address</a>
+                </div>
             </div>
         </div>
     </div>
