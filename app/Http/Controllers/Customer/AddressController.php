@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\BaseController;
 use App\Model\Address;
+use App\Model\City;
 use Illuminate\Http\Request;
 
 class AddressController extends BaseController
@@ -30,8 +31,8 @@ class AddressController extends BaseController
      */
     public function index()
     {
-        $address = Address::where('customer_id', $this->auth()->id());
-        return view('customer.address.index', compact('address'));
+        $addresses = Address::where('customer_id', $this->auth()->id());
+        return view('customer.address.index', compact('addresses'));
     }
 
     /**
@@ -41,7 +42,8 @@ class AddressController extends BaseController
      */
     public function create()
     {
-        //
+
+        return view('customer.address.create');
     }
 
     /**

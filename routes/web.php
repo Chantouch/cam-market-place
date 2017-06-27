@@ -72,6 +72,8 @@ Route::prefix('customers')->name('customers.')->group(function () {
     //-----------------Customer Information----------------//
     Route::get('identity', 'Customer\HomeController@information')->name('identity');
     Route::patch('identity', 'Customer\HomeController@post_information')->name('identity.patch');
+
+    Route::resource('addresses', 'Customer\AddressController');
 });
 
 //-----------REST API CALL----------//

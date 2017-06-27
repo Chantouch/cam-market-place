@@ -145,4 +145,14 @@ class Customer extends Authenticatable
         ];
     }
 
+
+    //------------Relationship-------------//
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
 }

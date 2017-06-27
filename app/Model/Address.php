@@ -11,4 +11,12 @@ class Address extends Model
         'address', 'address_complement', 'zip_postal_code', 'city_id', 'country_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }
