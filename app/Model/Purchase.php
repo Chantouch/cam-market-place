@@ -3,12 +3,14 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Purchase extends Model
 {
 
+    protected $appends = ['hashid'];
     protected $fillable = [
-        'customer_id', 'address_id', 'total_paid_kh', 'total_paid_foreign', 'payment_method',
+        'customer_id', 'address_id', 'total', 'payment_method',
         'shipping_method', 'status', 'order_reference'
     ];
 
@@ -28,6 +30,18 @@ class Purchase extends Model
      */
     public function purchase_items()
     {
-        return $this->hasMany(Purchase::class);
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
+
+
+    //-----------Get and Set attribute----------//
+
+    /**
+     * @return mixed
+     */
+    public function getHashidAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
     }
 }

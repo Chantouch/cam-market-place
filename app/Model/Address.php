@@ -61,6 +61,14 @@ class Address extends Model
         return $this->belongsTo(Country::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function purchases()
+    {
+        return $this->belongsTo(Purchase::class, 'address_id', 'id');
+    }
+
     //---------Get and Set Attributes----------//
 
     /**

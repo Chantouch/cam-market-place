@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderHistoryController extends BaseController
 {
+    /**
+     * OrderHistoryController constructor.
+     */
     public function __construct()
     {
         parent::__construct();

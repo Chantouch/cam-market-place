@@ -17,8 +17,8 @@
                 <tr>
                     <th>{!! $history->order_reference !!}</th>
                     <td>{!! $history->created_at !!}</td>
-                    <td>{!! $history->total_paid_foreign !!}</td>
-                    <td>{!! $history->payment_method !!}</td>
+                    <td>{!! $history->total !!}</td>
+                    <td>{!! Helper::payment($history->payment_method) !!}</td>
                     <td>{!! $history->status !!}</td>
                     <th>
                         <a href="#"
@@ -31,7 +31,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="fa fa-info"></i> Details
                         </a>
-                        <a href="#"
+                        <a href="{!! route('home') !!}"
                            class='btn btn-default btn-xs'>
                             <i class="fa fa-hand-peace-o"></i> Reorder
                         </a>

@@ -187,9 +187,12 @@
                                                         <div class="col-md-6 text-center">
                                                             <div class="box">
                                                                 <div class="box-content">
-                                                                    <input type="radio" name="address_id" value="{!! $address->id !!}">
+                                                                    <label for="address_id">
+                                                                        {!! Form::radio('address_id', $address->id, null, ['class' => 'filled-in', 'id'=> 'address_id']) !!}
+                                                                    </label>
                                                                     <h1 class="tag-title">
-                                                                        @if($address->alias != null){!! $address->alias !!}@else My address @endif
+                                                                        @if($address->alias != null){!! $address->alias !!}@else
+                                                                            My address @endif
                                                                     </h1>
                                                                     <hr/>
                                                                     <p>{!! $address->first_name. ' ' .$address->last_name !!}</p>
@@ -207,7 +210,10 @@
                                                                                class="btn btn-block btn-primary">Update</a>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <button class="btn btn-block btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                                                                            <button class="btn btn-block btn-danger"
+                                                                                    onclick="return confirm('Are you sure to delete?')">
+                                                                                Delete
+                                                                            </button>
                                                                         </div>
                                                                         {!! Form::close() !!}
                                                                     </div>
@@ -227,13 +233,14 @@
                                 </div>
                                 <div class="accordion_main">
                                     <div class="accordion_head"><span class="updown">&#9660;</span> SHIPPING METHOD
-                                        <span
-                                                class="question-mark" aria-hidden="true">?</span>
+                                        <span class="question-mark" aria-hidden="true">?</span>
                                     </div>
                                     <div class="accordion_body" style="display: none;">
                                         {{--{{ Form::hidden('shipping_method', '0') }}--}}
-                                        {!! Form::radio('shipping_method', '1', null, ['class' => 'filled-in', 'id'=> 'shipping_method']) !!}
-                                        STORE DELIVERY
+                                        <label for="shipping_method">
+                                            {!! Form::radio('shipping_method', '1', null, ['class' => 'filled-in', 'id'=> 'shipping_method']) !!}
+                                            STORE DELIVERY
+                                        </label>
                                         <p>Free of Charged!</p>
                                         <br>
                                         <div class="block-area-button">
@@ -245,13 +252,14 @@
                                 </div>
                                 <div class="accordion_main">
                                     <div class="accordion_head"><span class="updown">&#9660;</span> PAYMENT INFORMATION
-                                        <span
-                                                class="question-mark" aria-hidden="true">?</span>
+                                        <span class="question-mark" aria-hidden="true">?</span>
                                     </div>
                                     <div class="accordion_body" style="display: none;">
                                         {{--{{ Form::hidden('payment_method', '0') }}--}}
-                                        {!! Form::radio('payment_method', '1', null, ['class' => 'filled-in', 'id'=> 'payment_method']) !!}
-                                        CASH ON DELIVERY (COD)
+                                        <label for="payment_method">
+                                            {!! Form::radio('payment_method', '1', null, ['class' => 'filled-in', 'id'=> 'payment_method']) !!}
+                                            CASH ON DELIVERY (COD)
+                                        </label>
                                         <div class="block-area-button">
                                             <button class="btn btn-default add-tag-btn next-button"
                                                     data-toggle="dropdown" aria-expanded="false">Continue
@@ -326,7 +334,7 @@
                                                             <div class="media-body">
                                                                 <span class="product-name">{!! $item->name !!}</span>
                                                                 <span class="product-quantity">x{!! $item->qty !!}</span>
-                                                                <span class="product-price pull-xs-right">{!! Helper::currency($item->model->currency).$item->price !!}</span>
+                                                                <span class="product-price pull-xs-right">$ {!! $item->price !!}</span>
                                                             </div>
                                                         </li>
                                                     @endforeach
@@ -336,7 +344,7 @@
                                         <div class="cart-summary-line cart-summary-subtotals"
                                              id="cart-subtotal-products">
                                             <span class="label">Subtotal</span>
-                                            <span class="value">{{ Helper::currency($item->model->currency).Cart::subtotal() }}</span>
+                                            <span class="value">$ {!! Cart::subtotal() !!}</span>
                                         </div>
                                         <div class="cart-summary-line cart-summary-subtotals"
                                              id="cart-subtotal-shipping">
@@ -348,7 +356,7 @@
                                     <div class="card-block cart-summary-totals">
                                         <div class="cart-summary-line cart-total">
                                             <span class="label">Total (tax excl.)</span>
-                                            <span class="value">{{ Helper::currency($item->model->currency).Cart::total() }}</span>
+                                            <span class="value">$ {!! Cart::total() !!}</span>
                                         </div>
                                         <div class="cart-summary-line">
                                             <span class="label sub"></span>

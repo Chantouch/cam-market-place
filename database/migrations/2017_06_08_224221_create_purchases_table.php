@@ -16,8 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id', false, true);
-            $table->decimal('total_paid_kh', 20, 2)->nullable();
-            $table->decimal('total_paid_foreign', 20, 2)->nullable();
+            $table->decimal('total', 20, 2)->nullable();
             $table->integer('address_id', false,true);
             $table->string('shipping_method', 255)->nullable();
             $table->string('payment_method', 255)->nullable();

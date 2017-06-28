@@ -35,6 +35,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('clear-cache', 'ConfigController@cache_clear')->name('clear');
         Route::get('view-clear', 'ConfigController@clear_view')->name('view_clear');
     });
+    Route::prefix('sells')->name('sells.')->group(function () {
+        Route::get('orders', 'Backend\Sell\OrderController@index')->name('orders.index');
+        Route::get('orders/{id}/show', 'Backend\Sell\OrderController@show')->name('orders.show');
+    });
 });
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -65,6 +69,7 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::post('login', 'Customer\Auth\LoginController@login')->name('login.post');
     Route::post('logout', 'Customer\Auth\LoginController@logout')->name('logout');
     //------------Customer frontend-----------//
+    Route::resource('carts', 'Frontend\CartController');
     Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
     Route::resource('carts', 'Frontend\CartController');
     Route::get('checkout', 'Customer\HomeController@checkout')->name('checkout');

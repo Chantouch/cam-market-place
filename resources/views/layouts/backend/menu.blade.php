@@ -46,7 +46,22 @@
             <span>Languages</span>
         </a>
     </li>
-    <li class="header">Products</li>
+    <li class="header">Sells</li>
+
+    <li class="{!! Request::is('admin/sells/*') ? 'active' : '' !!}">
+        <a href="javascript:void(0);" class="menu-toggle">
+            <i class="material-icons">perm_media</i>
+            <span>ORDERS</span>
+        </a>
+        <ul class="ml-menu">
+            <li class="{!! Request::is('admin/sells/orders*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.sells.orders.index') !!}">
+                    Orders
+                </a>
+            </li>
+        </ul>
+    </li>
+
     <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">perm_media</i>

@@ -101,7 +101,7 @@
                             </div>
                             <div class="shoping-cart">
                                 @if (Auth::guard('customer')->check())
-                                    <a href="{!! route('customers.dashboard') !!}">
+                                    <a href="{!! route('customers.carts.index') !!}">
                                         <span>
                                             My Cart ({!! count(Cart::content()) !!})
                                         </span>
@@ -151,7 +151,7 @@
                                             </div>
                                         </div>
                                         <div class="cart-checkout">
-                                            <a href="{!! url('checkout') !!}">Check out
+                                            <a href="{!! route('customers.checkout') !!}">Check out
                                                 <i class="fa fa-chevron-right"></i>
                                             </a>
                                         </div>

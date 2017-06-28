@@ -42,11 +42,27 @@ class HomeController extends BaseController
 
     public function checkout()
     {
-        $user = $this->auth()->user();
-        $product = Cart::content();
-        if (!count($product))
-            return redirect()->route('customers.dashboard')->with('error', 'Your card was clear cause by timeout');
-        return view('customer.pages.checkout', compact('user'));
+        $notification_error = [
+            'message' => 'Thanks! Your card was clear cause by timeout!',
+            'alert-type' => 'error'
+        ];
+        $notification_warning = [
+            'message' => 'Thanks! Please add your address before start shopping!',
+            'alert-type' => 'warning'
+        ];
+        try {
+            $user = $this->auth()->user();
+            if (count($user->addresses)) {
+                $product = Cart::content();
+                if (!count($product))
+                    return redirect()->route('customers.dashboard')->with($notification_error);
+                return view('customer.pages.checkout', compact('user'));
+            } else {
+                return redirect()->route('customers.addresses.create')->with($notification_warning);
+            }
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('customers.dashboard')->with($notification_error);
+        }
     }
 
     /**
@@ -81,7 +97,7 @@ class HomeController extends BaseController
         $products = Cart::content();
         $array_data = [
             'customer_id' => $user_id,
-            'total_paid_foreign' => str_replace(',', '', $total),
+            'total' => str_replace(',', '', $total),
             'shipping_address' => isset($data['shipping_address']) ? $data['shipping_address'] : null,
             'shipping_method' => $data['shipping_method'],
             'payment_method' => $data['payment_method'],

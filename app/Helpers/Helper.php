@@ -185,4 +185,36 @@ class Helper
         //$data = array('rate' => $rate, 'converted_amount' => $converted_amount, 'from_Currency' => strtoupper($from_Currency), 'to_Currency' => strtoupper($to_Currency));
         return json_encode($converted_amount, true);
     }
+
+    public static function payment($type)
+    {
+        $payment = "";
+        switch ($type) {
+            case 0:
+                $payment = "Others";
+                break;
+            case 1:
+                $payment = "Cash on delivery (COD)";
+                break;
+            case 2:
+                $payment = "Wing";
+                break;
+            default:
+                break;
+        }
+        return $payment;
+    }
+
+    public static function payment_status($status)
+    {
+        $message = '';
+        switch ($status) {
+            case 0:
+                $message = 'Delay';
+                break;
+            default:
+                break;
+        }
+        return $message;
+    }
 }
