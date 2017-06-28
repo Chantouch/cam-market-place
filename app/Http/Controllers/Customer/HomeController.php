@@ -60,12 +60,14 @@ class HomeController extends BaseController
             //'shipping_address.required' => 'Please enter first name',
             //'shipping_method.required' => 'Please enter last name',
             //'payment_method.required' => 'Please enter mobile phone',
+            'address_id.required' => 'Please choose an address',
         );
 
         $rules = array(
             //'shipping_address' => 'sometime|max:255',
             'shipping_method' => 'required|integer',
             'payment_method' => 'required|integer',
+            'address_id' => 'required|integer',
         );
         $validator = Validator::make($data, $rules, $messages);
         if ($validator->fails()) {
@@ -81,6 +83,11 @@ class HomeController extends BaseController
             'customer_id' => $user_id,
             'total_paid_foreign' => str_replace(',', '', $total),
             'shipping_address' => isset($data['shipping_address']) ? $data['shipping_address'] : null,
+            'shipping_method' => $data['shipping_method'],
+            'payment_method' => $data['payment_method'],
+            'order_reference' => $this->randomId(),
+            'address_id' => $data['address_id']
+
         ];
         $purchase = Purchase::create($array_data);
         if ($purchase) {
@@ -176,5 +183,19 @@ class HomeController extends BaseController
         } catch (ModelNotFoundException $exception) {
             return redirect()->route('customers.dashboard')->with($notification_error);
         }
+    }
+
+    public function randomId()
+    {
+
+        $id = str_random(10);
+
+        $validator = Validator::make(['order_reference' => $id], ['order_reference' => 'unique:purchases,order_reference']);
+
+        if ($validator->fails()) {
+            $this->randomId();
+        }
+
+        return $id;
     }
 }

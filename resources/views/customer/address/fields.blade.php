@@ -130,7 +130,7 @@
 </div>
 
 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
-<a href="{!! route('admin.cities.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>
+<a href="{!! route('customers.addresses.index') !!}" class="btn btn-primary m-t-15 waves-effect">CANCEL</a>
 
 @section('scripts')
     <script type="text/javascript">

@@ -45,6 +45,12 @@
     <link rel="stylesheet" type="text/css" href="{!! asset('plugins/toastr/toastr.min.css') !!}">
     @yield('style')
     <script src="{!! asset('js/vendor/modernizr-2.8.3.min.js') !!}"></script>
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 </head>
 <body class="home-4">
 <!--[if lt IE 8]>

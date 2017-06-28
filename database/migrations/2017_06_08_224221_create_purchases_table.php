@@ -18,14 +18,15 @@ class CreatePurchasesTable extends Migration
             $table->integer('customer_id', false, true);
             $table->decimal('total_paid_kh', 20, 2)->nullable();
             $table->decimal('total_paid_foreign', 20, 2)->nullable();
-            $table->string('contact_name', 191)->nullable();
-            $table->string('contact_phone', 18)->nullable();
-            $table->string('shipping_address', 255)->nullable();
+            $table->integer('address_id', false,true);
             $table->string('shipping_method', 255)->nullable();
             $table->string('payment_method', 255)->nullable();
+            $table->string('order_reference', 255)->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
         });
     }
 

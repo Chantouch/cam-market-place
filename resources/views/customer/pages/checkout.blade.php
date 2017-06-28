@@ -71,8 +71,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="breadcrumb">
-                        <a title="Return to Home" href="{!! route('home') !!}" class="home"><i
-                                    class="fa fa-home"></i></a>
+                        <a title="Return to Home" href="{!! route('home') !!}" class="home">
+                            <i class="fa fa-home"></i></a>
                         <span class="navigation-pipe">&gt;</span>
                         Checkout
                     </div>
@@ -178,14 +178,44 @@
                                     <div class="accordion_body" style="display: none;">
                                         <div class="content-info">
                                             <div class="billing-info" style="margin: 0;">
-                                                <p>Select a billing address from your address book or enter a new
-                                                    address.</p>
-                                                <select>
-                                                    <option value="exist">
-                                                        {!! isset($user->addresses)==null ? $user->addresses : "You don't have address" !!}
-                                                    </option>
-                                                    <option value="new">Add New Address</option>
-                                                </select>
+                                                <p>
+                                                    Select a billing address from your address book or enter a new
+                                                    address.
+                                                </p>
+                                                @if(count($user->addresses))
+                                                    @foreach($user->addresses as $address)
+                                                        <div class="col-md-6 text-center">
+                                                            <div class="box">
+                                                                <div class="box-content">
+                                                                    <input type="radio" name="address_id" value="{!! $address->id !!}">
+                                                                    <h1 class="tag-title">
+                                                                        @if($address->alias != null){!! $address->alias !!}@else My address @endif
+                                                                    </h1>
+                                                                    <hr/>
+                                                                    <p>{!! $address->first_name. ' ' .$address->last_name !!}</p>
+                                                                    <p>{!! $address->company !!}</p>
+                                                                    <p>{!! $address->vat_number !!}</p>
+                                                                    <p>{!! $address->address_complement !!}</p>
+                                                                    <p>{!! $address->zip_postal_code. ' ' .Helper::relationship($address->city) !!}</p>
+                                                                    <p>{!! Helper::relationship($address->country) !!}</p>
+                                                                    <p>{!! $address->phone !!}</p>
+                                                                    <br/>
+                                                                    <div class="row">
+                                                                        {!! Form::open(['route' => ['customers.addresses.destroy', $address->hashid], 'method' => 'delete']) !!}
+                                                                        <div class="col-md-6">
+                                                                            <a href="{!! route('customers.addresses.edit', [$address->hashid]) !!}"
+                                                                               class="btn btn-block btn-primary">Update</a>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <button class="btn btn-block btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                                                                        </div>
+                                                                        {!! Form::close() !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                             <div class="block-area-button">
                                                 <button class="btn btn-default add-tag-btn next-button"
@@ -201,8 +231,8 @@
                                                 class="question-mark" aria-hidden="true">?</span>
                                     </div>
                                     <div class="accordion_body" style="display: none;">
-                                        {{ Form::hidden('shipping_method', '0') }}
-                                        {!! Form::checkbox('shipping_method', '1', null, ['class' => 'filled-in', 'id'=> 'shipping_method', 'checked', 'disabled']) !!}
+                                        {{--{{ Form::hidden('shipping_method', '0') }}--}}
+                                        {!! Form::radio('shipping_method', '1', null, ['class' => 'filled-in', 'id'=> 'shipping_method']) !!}
                                         STORE DELIVERY
                                         <p>Free of Charged!</p>
                                         <br>
@@ -219,8 +249,8 @@
                                                 class="question-mark" aria-hidden="true">?</span>
                                     </div>
                                     <div class="accordion_body" style="display: none;">
-                                        {{ Form::hidden('payment_method', '0') }}
-                                        {!! Form::checkbox('payment_method', '1', null, ['class' => 'filled-in', 'id'=> 'payment_method', 'checked', 'disabled']) !!}
+                                        {{--{{ Form::hidden('payment_method', '0') }}--}}
+                                        {!! Form::radio('payment_method', '1', null, ['class' => 'filled-in', 'id'=> 'payment_method']) !!}
                                         CASH ON DELIVERY (COD)
                                         <div class="block-area-button">
                                             <button class="btn btn-default add-tag-btn next-button"
@@ -303,11 +333,13 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="cart-summary-line cart-summary-subtotals" id="cart-subtotal-products">
+                                        <div class="cart-summary-line cart-summary-subtotals"
+                                             id="cart-subtotal-products">
                                             <span class="label">Subtotal</span>
                                             <span class="value">{{ Helper::currency($item->model->currency).Cart::subtotal() }}</span>
                                         </div>
-                                        <div class="cart-summary-line cart-summary-subtotals" id="cart-subtotal-shipping">
+                                        <div class="cart-summary-line cart-summary-subtotals"
+                                             id="cart-subtotal-shipping">
                                             <span class="label">Shipping</span>
                                             <span class="value">Free</span>
                                         </div>
@@ -358,9 +390,6 @@
                 });
             });
         })();
-        $('.next').on('click', function () {
-            moveTab("Continue");
-        });
 
         $(document).ready(function () {
             $(".accordion_head").click(function () {
@@ -378,32 +407,19 @@
             });
         });
 
-        $(".accordion_body select").change(function () {
-            let $this = $(this);
-            if ($this.val() === "new") {
-                $('.billing-info').empty();
-                $('.billing-info').append('<div class="form-group"> {!! Form::text('shipping_address', null, ['class'=> 'form-control', 'placeholder'=>'Enter your shipping address here', 'id'=>'address']) !!} </div>');
-            }
-        });
+        {{--$(".accordion_body select").change(function () {--}}
+            {{--let $this = $(this);--}}
+            {{--if ($this.val() === "new") {--}}
+                {{--$('.billing-info').empty();--}}
+                {{--$('.billing-info').append('<div class="form-group"> {!! Form::text('shipping_address', null, ['class'=> 'form-control', 'placeholder'=>'Enter your shipping address here', 'id'=>'address']) !!} </div>');--}}
+            {{--}--}}
+        {{--});--}}
+
         $(".accordion_body input").change(function () {
             nextQuestion($(this));
         });
         $(".next-button").click(function () {
-            if ($('input[name="shipping_address"]').length > 0) {
-                if ($('input[name="shipping_address"]').val().length > 0) {
-                    $(".form-group").removeClass('has-error');
-                    $(".form-group span").empty();
-                    nextQuestion($(this));
-                } else {
-                    $(".form-group").addClass('has-error');
-                    $(".form-group span").empty();
-                    $(".form-group input[name='shipping_address']").focus();
-                    $(".form-group").append('<span class="help-block">Please enter your shipping address</span>');
-                }
-            } else {
-                nextQuestion($(this));
-            }
-
+            nextQuestion($(this));
         });
 
     </script>

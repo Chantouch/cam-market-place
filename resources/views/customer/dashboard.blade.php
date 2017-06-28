@@ -43,7 +43,8 @@
                             <p>Multiple address that can make our delivery serve you when selected product and dedicate
                                 address to us.</p>
                             <br/>
-                            <a href="{!! route('customers.addresses.index') !!}" class="btn btn-block btn-primary">Add or Edit</a>
+                            <a href="{!! route('customers.addresses.index') !!}" class="btn btn-block btn-primary">Add
+                                or Edit</a>
                         </div>
                     </div>
                 </div>
@@ -54,12 +55,12 @@
                             <hr/>
                             <p>All of what you have ordered we will keep it for you to review and details.</p>
                             <br/>
-                            <a href="#" class="btn btn-block btn-primary">View</a>
+                            <a href="{!! route('customers.order.history') !!}"
+                               class="btn btn-block btn-primary">View</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @stop

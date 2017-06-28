@@ -74,6 +74,8 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::patch('identity', 'Customer\HomeController@post_information')->name('identity.patch');
 
     Route::resource('addresses', 'Customer\AddressController');
+
+    Route::get('order-history', 'Customer\OrderHistoryController@index')->name('order.history');
 });
 
 //-----------REST API CALL----------//

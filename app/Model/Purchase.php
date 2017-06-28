@@ -8,7 +8,8 @@ class Purchase extends Model
 {
 
     protected $fillable = [
-        'customer_id', 'contact_name', 'contact_phone', 'shipping_address', 'total_paid_kh', 'total_paid_foreign'
+        'customer_id', 'address_id', 'total_paid_kh', 'total_paid_foreign', 'payment_method',
+        'shipping_method', 'status', 'order_reference'
     ];
 
 
