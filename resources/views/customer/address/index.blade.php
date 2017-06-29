@@ -1,5 +1,10 @@
 @extends('layouts.front.app')
 @section('content-area')
+<style type="text/css">
+    table.info p{
+        text-align: left;
+    }
+</style>
     <!-- Start breadcume area -->
     <div class="breadcume-area">
         <div class="container">
@@ -32,14 +37,16 @@
                                         @if($address->alias != null){!! $address->alias !!}@else My address @endif
                                     </h1>
                                     <hr/>
-                                    <p>{!! $address->first_name. ' ' .$address->last_name !!}</p>
-                                    <p>{!! $address->company !!}</p>
-                                    <p>{!! $address->vat_number !!}</p>
-                                    <p>{!! $address->address_complement !!}</p>
-                                    <p>{!! $address->zip_postal_code. ' ' .Helper::relationship($address->city) !!}</p>
-                                    <p>{!! Helper::relationship($address->country) !!}</p>
-                                    <p>{!! $address->phone !!}</p>
-                                    <br/>
+                                    <div class="info">
+                                        <p>Name: {!! $address->first_name. ' ' .$address->last_name !!}</p>
+                                        <p>Company: {!! $address->company !!}</p>
+                                        <p>Address 1: {!! $address->vat_number !!}</p>
+                                        <p>Address 2: {!! $address->address_complement !!}</p>
+                                        <p>Zip Code: {!! $address->zip_postal_code. ' ' .Helper::relationship($address->city) !!}</p>
+                                        <p>Country: {!! Helper::relationship($address->country) !!}</p>
+                                        <p>Mobile: {!! $address->phone !!}</p>
+                                        <br/>
+                                    </div>
                                     <div class="row">
                                         {!! Form::open(['route' => ['customers.addresses.destroy', $address->hashid], 'method' => 'delete']) !!}
                                         <div class="col-md-6">
