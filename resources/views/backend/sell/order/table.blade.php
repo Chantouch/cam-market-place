@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="row">{!! $order->id !!}</th>
                     <td>{!! $order->order_reference !!}</td>
-                    <td>{!! $order->customer->username !!}</td>
+                    <td>{!! $order->customer->first_name.' '.$order->customer->last_name !!}</td>
                     <td>$ {!! $order->total !!}</td>
                     <td>{!! Helper::payment($order->payment_method) !!}</td>
                     <td>{!! Helper::payment_status($order->status) !!}</td>

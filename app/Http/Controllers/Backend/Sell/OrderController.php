@@ -38,7 +38,7 @@ class OrderController extends Controller
         if ($id === null) {
             return redirect()->route('admin.sells.orders.index')->with('error', 'We can not find attribute with that id, please try the other');
         }
-        $order = Purchase::with('purchase_items','customer')->find($id);
-        return $order;
+        $order = Purchase::with('purchase_items', 'customer')->find($id);
+        return view('backend.sell.order.show', compact('order'));
     }
 }
