@@ -9,20 +9,34 @@
     <li class="header">Master</li>
     <li class="{!! Request::is('admin/countries*') ? 'active' : '' !!}">
         <a href="{!! route('admin.countries.index') !!}">
-            <i class="material-icons">text_fields</i>
+            <i class="material-icons">location_city</i>
             <span>Countries</span>
         </a>
     </li>
     <li class="{!! Request::is('admin/cities*') ? 'active' : '' !!}">
         <a href="{!! route('admin.cities.index') !!}">
-            <i class="material-icons">layers</i>
+            <i class="material-icons">location_city</i>
             <span>Cities</span>
         </a>
     </li>
     <li class="{!! Request::is('admin/communes*') ? 'active' : '' !!}">
         <a href="{!! route('admin.communes.index') !!}">
-            <i class="material-icons">layers</i>
+            <i class="material-icons">location_city</i>
             <span>Communes</span>
+        </a>
+    </li>
+
+    <li class="header">Settings</li>
+    <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.home-sliders.index') !!}">
+            <i class="material-icons">next_week</i>
+            <span>Home Slider</span>
+        </a>
+    </li>
+    <li class="{!! Request::is('admin/settings/languages*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.settings.languages.index') !!}">
+            <i class="material-icons">font_download</i>
+            <span>Languages</span>
         </a>
     </li>
 
@@ -33,24 +47,11 @@
         </a>
     </li>
 
-    <li class="header">Settings</li>
-    <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
-        <a href="{!! route('admin.home-sliders.index') !!}">
-            <i class="material-icons">layers</i>
-            <span>Home Slider</span>
-        </a>
-    </li>
-    <li class="{!! Request::is('admin/settings/languages*') ? 'active' : '' !!}">
-        <a href="{!! route('admin.settings.languages.index') !!}">
-            <i class="material-icons">layers</i>
-            <span>Languages</span>
-        </a>
-    </li>
     <li class="header">Sells</li>
 
-    <li class="{!! Request::is('admin/sells/*') ? 'active' : '' !!}">
+    <li class="{!! Request::is('admin/sells/orders*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">perm_media</i>
+            <i class="material-icons">shopping_cart</i>
             <span>ORDERS</span>
         </a>
         <ul class="ml-menu">
@@ -62,9 +63,16 @@
         </ul>
     </li>
 
+    <li class="{!! Request::is('admin/sells/customers*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.sells.customers.index') !!}">
+            <i class="material-icons">people_outline</i>
+            <span>Customers</span>
+        </a>
+    </li>
+
     <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">perm_media</i>
+            <i class="material-icons">business_center</i>
             <span>CATALOGS</span>
         </a>
         <ul class="ml-menu">
@@ -87,7 +95,7 @@
     <li class="header">Manages</li>
     <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">perm_media</i>
+            <i class="material-icons">dvr</i>
             <span>MANAGING</span>
         </a>
         <ul class="ml-menu">

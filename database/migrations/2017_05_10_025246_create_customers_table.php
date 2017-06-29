@@ -16,6 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cus_code')->nullable();
+            $table->tinyInteger('social_title')->default(0);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username')->nullable();
@@ -33,6 +34,8 @@ class CreateCustomersTable extends Migration
             $table->integer('verified_by', false, true)->nullable();
             $table->dateTime('verified_at')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('newsletter')->default(0);
+            $table->dateTime('last_visit')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

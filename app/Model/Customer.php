@@ -53,6 +53,7 @@ class Customer extends Authenticatable
     }
 
     //-----------get and set attribute-----------/
+
     /**
      * @return string
      */
@@ -154,5 +155,13 @@ class Customer extends Authenticatable
     public function addresses()
     {
         return $this->hasMany(Address::class, 'customer_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'customer_id', 'id');
     }
 }

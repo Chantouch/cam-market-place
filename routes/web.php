@@ -38,6 +38,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('sells')->name('sells.')->group(function () {
         Route::get('orders', 'Backend\Sell\OrderController@index')->name('orders.index');
         Route::get('orders/{id}/show', 'Backend\Sell\OrderController@show')->name('orders.show');
+        Route::resource('customers', 'Backend\Sell\CustomerController');
     });
 });
 

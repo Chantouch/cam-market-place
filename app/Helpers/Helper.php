@@ -44,6 +44,18 @@ class Helper
         ];
     }
 
+    public static function status_payment()
+    {
+        return [
+            '1' => 'Awaiting payment',
+            '2' => 'Canceled',
+            '3' => 'Delivered',
+            '4' => 'Payment accepted',
+            '5' => 'Processing in progress',
+            '6' => 'Shipped',
+        ];
+    }
+
     //-------Show at the front end of user-----------------//
 
     /**
@@ -207,10 +219,25 @@ class Helper
 
     public static function payment_status($status)
     {
-        $message = '';
+        $message = 'Others';
         switch ($status) {
-            case 0:
-                $message = 'Delay';
+            case 1:
+                $message = 'Awaiting payment';
+                break;
+            case 2:
+                $message = 'Canceled';
+                break;
+            case 3:
+                $message = 'Delivered';
+                break;
+            case 4:
+                $message = 'Payment accepted';
+                break;
+            case 5:
+                $message = 'Processing in progress';
+                break;
+            case 6:
+                $message = 'Shipped';
                 break;
             default:
                 break;
