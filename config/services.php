@@ -36,8 +36,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '1956057827965065',
-        'client_secret' => 'f199631da3d16169d99fcfb9625bad02',
+        'client_id' => '1278761865530383',
+        'client_secret' => '76b7d7dc2b97c41df485ad899685fc3a',
         'redirect' => 'https://market.bookingkh.com/callback',
     ],
 
