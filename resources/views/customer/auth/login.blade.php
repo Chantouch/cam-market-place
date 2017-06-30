@@ -84,6 +84,7 @@
                                         </p>
                                         <button class="btn btnContact" type="submit">login</button>
                                         <a href="{{ route('customers.register') }}" class="btn btnContact">Register?</a>
+                                        <a href="{{ route('customers.redirect') }}" class="btn btnContact">Login with FB?</a>
                                     </div>
                                 </div>
                             </div>

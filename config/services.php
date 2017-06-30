@@ -30,9 +30,33 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Model\Customer::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'facebook' => [
+        'client_id' => '1956057827965065',
+        'client_secret' => 'f199631da3d16169d99fcfb9625bad02',
+        'redirect' => 'https://market.bookingkh.com/callback',
+    ],
+
+    'twitter' => [
+        'client_id'     => env('TW_ID'),
+        'client_secret' => env('TW_SECRET'),
+        'redirect'      => env('TW_REDIRECT')
+    ],
+
+    'google' => [
+        'client_id'     => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT')
+    ],
+
+    'github' => [
+        'client_id'     => env('GITHUB_ID'),
+        'client_secret' => env('GITHUB_SECRET'),
+        'redirect'      => env('GITHUB_REDIRECT')
+    ]
 
 ];

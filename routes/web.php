@@ -69,6 +69,9 @@ Route::prefix('customers')->name('customers.')->group(function () {
     Route::get('login', 'Customer\Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Customer\Auth\LoginController@login')->name('login.post');
     Route::post('logout', 'Customer\Auth\LoginController@logout')->name('logout');
+    //-----------Login with socialite---------//
+    Route::get('redirect', 'Customer\Auth\SocialAuthController@redirect')->name('redirect');
+    Route::get('callback', 'Customer\Auth\SocialAuthController@callback')->name('callback');
     //------------Customer frontend-----------//
     Route::resource('carts', 'Frontend\CartController');
     Route::get('dashboard', 'Customer\HomeController@index')->name('dashboard');
