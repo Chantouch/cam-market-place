@@ -29,4 +29,14 @@ class ConfigController extends Controller
         Artisan::call('view:clear');
         return redirect()->back()->with('success', 'View successfully clear!');
     }
+
+    public function config_clear()
+    {
+        Artisan::call('config:clear');
+        $notification = [
+            'message' => 'Thanks! your config is cleared!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('home')->with($notification);
+    }
 }

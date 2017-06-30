@@ -17,7 +17,6 @@ class SocialAuthController extends Controller
     {
         // when facebook call us a with token
         $customer = $service->createOrGetUser(Socialite::driver('facebook')->customer());
-
         auth()->login($customer);
 
         return redirect()->route('customers.dashboard');

@@ -32,6 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     Route::name('config.')->group(function () {
         Route::get('config-cache', 'ConfigController@cache_config')->name('cache');
+        Route::get('config-clear', 'ConfigController@cache_config')->name('clear');
         Route::get('clear-cache', 'ConfigController@cache_clear')->name('clear');
         Route::get('view-clear', 'ConfigController@clear_view')->name('view_clear');
     });
