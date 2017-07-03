@@ -19,7 +19,7 @@
                     <td>{!! $history->created_at !!}</td>
                     <td>{!! $history->total !!}</td>
                     <td>{!! Helper::payment($history->payment_method) !!}</td>
-                    <td>{!! $history->status !!}</td>
+                    <td>{!! Helper::order_status($history->status) !!}</td>
                     <th>
                         <a href="#"
                            class='btn btn-default btn-xs'>

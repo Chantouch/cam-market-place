@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class SocialAccount extends Model
+class SocialAccount extends Authenticatable
 {
     protected $fillable = ['customer_id', 'provider_user_id', 'provider'];
 

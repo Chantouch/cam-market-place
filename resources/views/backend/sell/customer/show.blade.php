@@ -1,95 +1,89 @@
 @extends('layouts.backend.app')
 @section('content')
-    <div class="block-header">
-        <h2>COUNTRIES</h2>
-    </div>
     <!-- Basic Card -->
     <div class="row clearfix">
         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        ORDER {!! $order->order_reference !!}
-                        <small>#{!! $order->id !!}</small>
+                        {!! $customer->first_name.' '.$customer->last_name !!}
+                        #{!! $customer->id !!}
                     </h2>
                 </div>
                 <div class="body">
                     <div class="clearfix row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="card">
-                                <div class="body">
-                                    <button class="btn btn-default">Print order</button>
-                                    <button class="btn btn-default">Print order</button>
-                                    <button class="btn btn-default">Print order</button>
-                                    <button class="btn btn-default">Print order</button>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#order_status" data-toggle="tab">
-                                            <i class="material-icons">home</i> STATUS <span
-                                                    class="badge bg-green">1</span>
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#order_documents" data-toggle="tab">
-                                            <i class="material-icons">face</i> DOCUMENTS <span
-                                                    class="badge bg-info">1</span>
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#shipping" data-toggle="tab">
-                                            <i class="material-icons">face</i> SHIPPING <span
-                                                    class="badge bg-blue">1</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="order_status">
-                                        <b>Select status and update</b>
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <label for="status"></label>
-                                                        <select name="status" id="status" class="form-control">
-                                                            <option value="1">Shipping</option>
-                                                            <option value="2">Delivered</option>
-                                                            <option value="3">Payment accepted</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <button class="btn btn-default waves-effect m-t-20">Update status</button>
-                                            </div>
-                                        </div>
+                            <div class="form-horizontal">
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Social Title</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">Mr.</p>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="order_documents">
-                                        <b>Profile Content</b>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit
-                                            mediocritatem an. Pri ut tation electram moderatius.
-                                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                            aliquid
-                                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
-                                            gubergren
-                                            sadipscing mel.
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Age</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">
+                                            Unknown
                                         </p>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="shipping">
-                                        <b>Shipping Content</b>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit
-                                            mediocritatem an. Pri ut tation electram moderatius.
-                                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                            aliquid
-                                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
-                                            gubergren
-                                            sadipscing mel.
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Registration Date</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">05/03/2017 14:48:32</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Last Visit</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">05/04/2017 14:01:08</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Best Customer Rank</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">1</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Language</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">
+                                            English (English)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Registrations</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">
+																	<span class="label label-danger">
+										<i class="icon-remove"></i>
+										Newsletter
+									</span>
+                                            &nbsp;
+                                            <span class="label label-danger">
+										<i class="icon-remove"></i>
+										Partner offers
+									</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Latest Update</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">06/29/2017 06:43:31</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label col-lg-3">Status</label>
+                                    <div class="col-lg-9">
+                                        <p class="form-control-static">
+																	<span class="label label-success">
+										<i class="icon-check"></i>
+										Active
+									</span>
                                         </p>
                                     </div>
                                 </div>
@@ -104,8 +98,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        CUSTOMER {!! $order->order_reference !!}
-                        <small>#{!! $order->id !!}</small>
+                        CUSTOMER {!! $customer->order_reference !!}
+                        <small>#{!! $customer->id !!}</small>
                     </h2>
                 </div>
                 <div class="body">

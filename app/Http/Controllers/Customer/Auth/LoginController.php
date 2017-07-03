@@ -90,9 +90,23 @@ class LoginController extends BaseController
      */
     protected function validateLogin(Request $request)
     {
-        $this->validate($request, [
-            $this->username() => 'required|email', 'password' => 'required|min:6',
-        ]);
+        if (is_numeric($request->email)) {
+            //dd($request->email);
+            $this->validate($request, [
+                $this->username() => 'required', 'password' => 'required|min:6',
+            ], $this->messages());
+        } else {
+            $this->validate($request, [
+                $this->username() => 'required|email', 'password' => 'required|min:6',
+            ], $this->messages());
+        }
+    }
+
+    protected function messages()
+    {
+        return [
+            'email.regex' => 'Enter a valid phone number!',
+        ];
     }
 
     /**
@@ -116,7 +130,9 @@ class LoginController extends BaseController
      */
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password');
+        $field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? $this->username() : 'phone_number';
+        $request->merge([$field => $request->input('email')]);
+        return $request->only($field, 'password');
     }
 
     /**
@@ -132,7 +148,7 @@ class LoginController extends BaseController
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-            ? : redirect()->intended($this->redirectPath());
+            ?: redirect()->intended($this->redirectPath());
     }
 
     /**

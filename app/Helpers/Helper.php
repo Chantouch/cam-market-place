@@ -47,6 +47,7 @@ class Helper
     public static function status_payment()
     {
         return [
+            '' => '',
             '1' => 'Awaiting payment',
             '2' => 'Canceled',
             '3' => 'Delivered',
@@ -239,6 +240,38 @@ class Helper
             case 6:
                 $message = 'Shipped';
                 break;
+            default:
+                break;
+        }
+        return $message;
+    }
+
+    public static function order_status($status)
+    {
+        $message = '';
+        switch ($status) {
+            case '1':
+                $message = 'Awaiting payment';
+                break;
+            case '2':
+                $message = 'Canceled';
+                break;
+            case '3':
+                $message = 'Delivered';
+                break;
+            case '4':
+                $message = 'Payment accepted';
+                break;
+            case '5':
+                $message = 'Processing in progress';
+                break;
+            case '6':
+                $message = 'Shipped';
+                break;
+            case '7':
+                $message = 'Others';
+                break;
+
             default:
                 break;
         }

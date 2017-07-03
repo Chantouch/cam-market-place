@@ -164,4 +164,9 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Purchase::class, 'customer_id', 'id');
     }
+
+    public function social()
+    {
+        return $this->belongsTo(SocialAccount::class,'customer_id','id');
+    }
 }

@@ -12,6 +12,8 @@ class CustomerController extends Controller
 
     public $hashid;
 
+    public $route = 'admin.sells.customers.';
+
     function __construct(HashidsManager $hashid)
     {
         $this->middleware('auth:admin');
@@ -55,15 +57,17 @@ class CustomerController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return Customer|\Illuminate\Database\Eloquent\Builder|\Illuminate\Http\Response
      */
     public function show($id)
     {
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
-        if ($id === null){
-
+        if ($id === null) {
+            return redirect()->route($this->route . 'index')->with('error','Customer not found');
         }
+        $customer = Customer::with('purchases')->find($id);
+        return view('backend.sell.customer.show', compact('customer'));
     }
 
     /**
@@ -74,7 +78,13 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route($this->route . 'index')->with('error','Customer not found');
+        }
+        $customer = Customer::find($id);
+        return view('backend.sell.customer.show', compact('customer'));
     }
 
     /**

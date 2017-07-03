@@ -41,7 +41,7 @@
                         {!! Form::open(['route' => ['admin.sells.customers.destroy', $customer->hashid], 'method' => 'delete']) !!}
                         <a href="{!! route('admin.sells.customers.show', [$customer->hashid]) !!}"
                            class='btn btn-default btn-xs'>
-                            <i class="material-icons">remove_red_eye</i> View
+                            <i class="material-icons">remove_red_eye</i>
                         </a>
                         <a href="{!! route('admin.sells.customers.edit', [$customer->hashid]) !!}"
                            class='btn btn-default btn-xs'>
