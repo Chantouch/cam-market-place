@@ -2,7 +2,7 @@
 @section('content')
     <!-- Basic Card -->
     <div class="row clearfix">
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
@@ -58,15 +58,15 @@
                                     <label class="control-label col-lg-3">Registrations</label>
                                     <div class="col-lg-9">
                                         <p class="form-control-static">
-																	<span class="label label-danger">
-										<i class="icon-remove"></i>
-										Newsletter
-									</span>
+                                            <span class="label label-danger">
+                                                <i class="icon-remove"></i>
+                                                Newsletter
+                                            </span>
                                             &nbsp;
                                             <span class="label label-danger">
-										<i class="icon-remove"></i>
-										Partner offers
-									</span>
+                                                <i class="icon-remove"></i>
+                                                Partner offers
+                                            </span>
                                         </p>
                                     </div>
                                 </div>
@@ -80,10 +80,10 @@
                                     <label class="control-label col-lg-3">Status</label>
                                     <div class="col-lg-9">
                                         <p class="form-control-static">
-																	<span class="label label-success">
-										<i class="icon-check"></i>
-										Active
-									</span>
+                                            <span class="label label-success">
+                                                <i class="icon-check"></i>
+                                                Active
+                                            </span>
                                         </p>
                                     </div>
                                 </div>
@@ -92,9 +92,93 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        ORDERS <span class="badge bg-lime">{!! count($customer->purchases) !!}</span>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <i class="material-icons">check</i> Valid orders: <span
+                                            class="badge bg-green">9</span>
+                                    for a total amount of $1100.90
+                                </div>
+                                <div class="col-md-6">
+                                    <i class="material-icons">info</i> Invalid orders: <span
+                                            class="badge bg-red">2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Product</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($customer->purchases))
+                            @foreach($customer->purchases as $purchase)
+                                <tr>
+                                    <th>{!! $purchase->id !!}</th>
+                                    <th>{!! $purchase->created_at !!}</th>
+                                    <th>{!! Helper::payment($purchase->payment_method) !!}</th>
+                                    <th>{!! Helper::payment_status($purchase->status) !!}</th>
+                                    <th>{!! count($purchase->purchase_item) !!}</th>
+                                    <th>{!! $purchase->total !!}</th>
+                                    <th>
+                                        <a href="#"><i class="material-icons">visibility</i></a>
+                                    </th>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        PURCHASED PRODUCTS <span class="badge bg-lime">{!! count($customer->purchases) !!}</span>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($customer->purchases))
+                            @foreach($customer->purchases as $purchase)
+                                <tr>
+                                    <th>{!! $purchase->created_at !!}</th>
+                                    <th>New Product</th>
+                                    <th>12</th>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
@@ -203,29 +287,31 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        PRODUCTS <span class="badge bg-lime">11</span>
+                        ADDRESSES <span class="badge bg-lime">{!! count($customer->addresses) !!}</span>
                     </h2>
                 </div>
                 <div class="body table-responsive">
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Product</th>
-                            <th>Unit Price</th>
-                            <th>Qty</th>
-                            <th>Available qty</th>
-                            <th>Total</th>
+                            <th>Company</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Country</th>
+                            <th>Phone Number(s)</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th><img src="" alt="Product image"></th>
-                            <td>Test product</td>
-                            <td>$100.00</td>
-                            <td>10</td>
-                            <td>90</td>
-                            <td>$1000.00</td>
+                            <th>--</th>
+                            <td>Chantouch Sek</td>
+                            <td>Phnom Penh</td>
+                            <td>Cambodia</td>
+                            <td>070375783</td>
+                            <td>
+                                <a href="#"><i class="material-icons">mode_edit</i></a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

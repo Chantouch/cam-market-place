@@ -146,7 +146,6 @@ class Customer extends Authenticatable
         ];
     }
 
-
     //------------Relationship-------------//
 
     /**
@@ -165,8 +164,11 @@ class Customer extends Authenticatable
         return $this->hasMany(Purchase::class, 'customer_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function social()
     {
-        return $this->belongsTo(SocialAccount::class,'customer_id','id');
+        return $this->belongsTo(SocialAccount::class, 'customer_id', 'id');
     }
 }

@@ -66,8 +66,10 @@ class CustomerController extends Controller
         if ($id === null) {
             return redirect()->route($this->route . 'index')->with('error','Customer not found');
         }
-        $customer = Customer::with('purchases')->find($id);
-        return view('backend.sell.customer.show', compact('customer'));
+        $customer = Customer::with('purchases', 'purchases.purchase_items', 'addresses')->find($id);
+        $customer->purchases->groupBy('customer_id');
+        return $customer->purchases->groupBy('customer_id');
+        //return view('backend.sell.customer.show', compact('customer'));
     }
 
     /**
