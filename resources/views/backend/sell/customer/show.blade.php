@@ -31,7 +31,7 @@
                                 <div class="row">
                                     <label class="control-label col-lg-3">Registration Date</label>
                                     <div class="col-lg-9">
-                                        <p class="form-control-static">05/03/2017 14:48:32</p>
+                                        <p class="form-control-static">{!! $customer->created_at !!}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -73,18 +73,80 @@
                                 <div class="row">
                                     <label class="control-label col-lg-3">Latest Update</label>
                                     <div class="col-lg-9">
-                                        <p class="form-control-static">06/29/2017 06:43:31</p>
+                                        <p class="form-control-static">{!! $customer->updated_at !!}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="control-label col-lg-3">Status</label>
                                     <div class="col-lg-9">
                                         <p class="form-control-static">
-                                            <span class="label label-success">
-                                                <i class="icon-check"></i>
-                                                Active
-                                            </span>
+                                            {!! Helper::status($customer->status) !!}
                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        PURCHASED PRODUCTS <span class="badge bg-lime">{!! count($customer->purchases) !!}</span>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($customer->purchases))
+                            @foreach($customer->purchases as $purchase)
+                                <tr>
+                                    <th>{!! $purchase->created_at !!}</th>
+                                    <th>New Product</th>
+                                    <th>12</th>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        CUSTOMER {!! $customer->order_reference !!}
+                        <small>#{!! $customer->id !!}</small>
+                    </h2>
+                </div>
+                <div class="body">
+                    <div class="clearfix row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header" style="padding: 2px 10px;">
+                                    <h6>Add Private Note </h6>
+                                </div>
+                                <div class="body">
+                                    <div class="clearfix row">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <textarea name="private_note" id="private_note" rows="2"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="pull-right">
+                                            <button class="btn btn-default" type="submit" name="save">Save</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -146,141 +208,6 @@
                     </table>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="header">
-                    <h2>
-                        PURCHASED PRODUCTS <span class="badge bg-lime">{!! count($customer->purchases) !!}</span>
-                    </h2>
-                </div>
-                <div class="body table-responsive">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(count($customer->purchases))
-                            @foreach($customer->purchases as $purchase)
-                                <tr>
-                                    <th>{!! $purchase->created_at !!}</th>
-                                    <th>New Product</th>
-                                    <th>12</th>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="card">
-                <div class="header">
-                    <h2>
-                        CUSTOMER {!! $customer->order_reference !!}
-                        <small>#{!! $customer->id !!}</small>
-                    </h2>
-                </div>
-                <div class="body">
-                    <div class="clearfix row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="card">
-                                <div class="body">
-                                    <div class="clearfix row">
-                                        <div>
-                                            <span>Email</span><br>
-                                            <p>chantouchsek.cs83@gmail.com</p>
-                                        </div>
-                                        <div>
-                                            <span>Account registered</span>
-                                            <p>05/02/2017 11:58:24</p>
-                                        </div>
-                                        <div>
-                                            <span>Valid orders placed</span>
-                                            <br>
-                                            <p class="badge bg-pink">12</p>
-                                        </div>
-                                        <div>
-                                            <span>Total spent since registration</span>
-                                            <p class="badge bg-amber">$2353.23</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="m-b-10">
-                                <button class="btn btn-block btn-default waves-effect waves-yellow">
-                                    View full details
-                                </button>
-                            </div>
-                            <div class="card">
-                                <div class="header" style="padding: 2px 10px;">
-                                    <h6>Add Private Note </h6>
-                                </div>
-                                <div class="body">
-                                    <div class="clearfix row">
-                                        <div class="form-group">
-                                            <div class="form-line">
-                                                <textarea name="private_note" id="private_note" rows="2"
-                                                          class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="pull-right">
-                                            <button class="btn btn-default" type="submit" name="save">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#home_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">home</i> SHIPPING ADDRESS
-                                    </a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#profile_with_icon_title" data-toggle="tab">
-                                        <i class="material-icons">face</i> INVOICE ADDRESS
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
-                                    <b>Home Content</b>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit
-                                        mediocritatem an. Pri ut tation electram moderatius.
-                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                        aliquid
-                                        pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                        sadipscing mel.
-                                    </p>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                                    <b>Profile Content</b>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit
-                                        mediocritatem an. Pri ut tation electram moderatius.
-                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                        aliquid
-                                        pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                        sadipscing mel.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -303,16 +230,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th>--</th>
-                            <td>Chantouch Sek</td>
-                            <td>Phnom Penh</td>
-                            <td>Cambodia</td>
-                            <td>070375783</td>
-                            <td>
-                                <a href="#"><i class="material-icons">mode_edit</i></a>
-                            </td>
-                        </tr>
+                        @if(count($customer->addresses))
+                            @foreach($customer->addresses as $address)
+                                <tr>
+                                    <th>{!! $address->company !!}</th>
+                                    <td>{!! $address->customer->first_name.' '.$address->customer->last_name !!}</td>
+                                    <td>{!! $address->address !!}</td>
+                                    <td>{!! Helper::relationship($address->country) !!}</td>
+                                    <td>{!! $address->phone !!}</td>
+                                    <td>
+                                        <a href="#"><i class="material-icons">mode_edit</i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

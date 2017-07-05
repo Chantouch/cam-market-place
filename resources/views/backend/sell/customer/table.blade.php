@@ -25,11 +25,9 @@
                     <td>
                         <span class="badge bg-green">
                             @if(count($customer->purchases))
-                                @foreach($customer->purchases as $purchase)
-                                    ${!! $purchase->total !!}
-                                @endforeach
+                                {!! $customer->purchases->sum('total') !!}
                             @else
-                                -
+                                ---
                             @endif
                         </span>
                     </td>

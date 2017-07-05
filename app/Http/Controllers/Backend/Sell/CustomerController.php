@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Sell;
 use App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\HashidsManager;
 
 class CustomerController extends Controller
@@ -64,12 +65,12 @@ class CustomerController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route($this->route . 'index')->with('error','Customer not found');
+            return redirect()->route($this->route . 'index')->with('error', 'Customer not found');
         }
         $customer = Customer::with('purchases', 'purchases.purchase_items', 'addresses')->find($id);
-        $customer->purchases->groupBy('customer_id');
-        return $customer->purchases->groupBy('customer_id');
-        //return view('backend.sell.customer.show', compact('customer'));
+        $sale = $customer->purchases->groupBy('customer_id');
+        //return $sale;
+        return view('backend.sell.customer.show', compact('customer'));
     }
 
     /**
@@ -83,10 +84,11 @@ class CustomerController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route($this->route . 'index')->with('error','Customer not found');
+            return redirect()->route($this->route . 'index')->with('error', 'Customer not found');
         }
         $customer = Customer::find($id);
-        return view('backend.sell.customer.show', compact('customer'));
+        return $customer;
+        //return view('backend.sell.customer.show', compact('customer'));
     }
 
     /**
