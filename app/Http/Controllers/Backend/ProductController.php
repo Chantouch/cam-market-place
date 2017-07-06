@@ -528,4 +528,9 @@ class ProductController extends Controller
         $new_product->save();
         return redirect()->route('admin.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
     }
+
+    public function formImport()
+    {
+        return view('admin.catalogs.products.import');
+    }
 }
