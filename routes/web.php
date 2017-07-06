@@ -29,6 +29,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('products', 'Backend\ProductController');
         Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
         Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
+        Route::get('products/import/form', 'Backend\ProductController@formImport')->name('products.formImport');
+        Route::patch('products/import/form', 'Backend\ProductController@postImport')->name('products.postImport');
     });
     Route::name('config.')->group(function () {
         Route::get('config-cache', 'ConfigController@cache_config')->name('cache');

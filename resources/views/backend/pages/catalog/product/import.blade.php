@@ -51,7 +51,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.catalogs.products.store'], 'method' => 'POST', 'files'=> true]) !!}
+                    {!! Form::open(['route' => ['admin.catalogs.products.postImport'], 'method' => 'POST', 'files'=> true]) !!}
                     @include('backend.pages.catalog.product.fields')
                     {!! Form::close() !!}
                 </div>

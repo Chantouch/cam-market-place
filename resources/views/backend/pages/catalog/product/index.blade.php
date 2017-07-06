@@ -25,7 +25,7 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.catalogs.products.create') !!}">Add</a></li>
-                                <li><a href="javascript:void(0);">Import</a></li>
+                                <li><a href="{!! route('admin.catalogs.products.formImport') !!}">Import</a></li>
                                 <li><a href="javascript:void(0);">Something else here</a></li>
                             </ul>
                         </li>

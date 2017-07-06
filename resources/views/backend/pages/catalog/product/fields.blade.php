@@ -147,16 +147,42 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                {!! Form::label('qty', 'Quantity:') !!}
-                <div class="form-group{{ $errors->has('qty') ? ' has-error' : '' }}">
-                    <div class="form-line">
-                        {!! Form::text('qty', null, ['class' => 'form-control', 'placeholder' => 'Enter your product qty']) !!}
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! Form::label('qty', 'Quantity:') !!}
+                        <div class="form-group{{ $errors->has('qty') ? ' has-error' : '' }}">
+                            <div class="form-line">
+                                {!! Form::text('qty', null, ['class' => 'form-control', 'placeholder' => 'Enter your product qty']) !!}
+                            </div>
+                            @if ($errors->has('qty'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('qty') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
-                    @if ($errors->has('qty'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('qty') }}</strong>
-                        </span>
-                    @endif
+                    <div class="col-md-6 col-sm-6">
+                        {!! Form::label('unit_id', 'Unit:') !!}
+                        <div class="form-group">
+                            <div class="form-line">
+                                <select class="form-control" data-live-search="true" id="unit_id">
+                                    <option value=""></option>
+                                    @foreach ( $attributes as $key => $attr )
+                                        <optgroup label="{{$attr->name}}">
+                                            @foreach ( $attr->sub_attribute as $values )
+                                                <option value="{{$values->id}}">{{$values->name}}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if ($errors->has('unit_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('unit_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <h5>Availability preferences:</h5>
                 <span class="control-label">Behavior when out of stock</span>

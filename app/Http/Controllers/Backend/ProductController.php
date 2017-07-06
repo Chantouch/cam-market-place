@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Attribute;
 use App\Model\Category;
 use App\Model\City;
 use App\Model\Currency;
@@ -13,18 +14,22 @@ use App\Model\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Vinkla\Hashids\HashidsManager;
-use Validator;
-use DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Images;
 use App\Model\Image;
-use File;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+
     public $hashid;
 
+    /**
+     * ProductController constructor.
+     * @param HashidsManager $hashid
+     */
     public function __construct(HashidsManager $hashid)
     {
         $this->hashid = $hashid;
@@ -58,15 +63,20 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
-        //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
-        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
-        $languages = Language::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
-        $categories = Category::where('status', 1)->orderBy('name', 'desc')->pluck('name', 'id');
+        $cities = City::where('status', 1)->whereNotNull('country_id')
+            ->whereNull('city_id')->orderBy('name', 'desc')
+            ->pluck('name', 'id')->toArray();
+        $attributes = Attribute::where('parent_id', null)->orderBy('name', 'ASC')->get();
+        $currencies = Currency::where('status', 1)->orderBy('name', 'desc')
+            ->pluck('code', 'id')->toArray();
+        $languages = Language::where('status', 1)->orderBy('name', 'desc')
+            ->pluck('name', 'id')->toArray();
+        $categories = Category::where('status', 1)->orderBy('name', 'desc')
+            ->pluck('name', 'id')->toArray();
         $tags = Tag::orderBy('tags', 'desc')->pluck('tags', 'id');
         $discount_types = \Helper::discount_types();
         return view('backend.pages.catalog.product.create',
-            compact('cities', 'languages', 'currencies', 'categories', 'discount_types', 'tags')
+            compact('attributes', 'cities', 'languages', 'currencies', 'categories', 'discount_types', 'tags')
         );
     }
 
@@ -208,7 +218,8 @@ class ProductController extends Controller
             }
             $cities = City::where('status', 1)->whereNotNull('country_id')->whereNull('city_id')->orderBy('name', 'desc')->pluck('name', 'id');
             $currencies = Currency::where('status', 1)->orderBy('name', 'desc')->pluck('code', 'id');
-            //$currencies = Currency::where('status', 1)->orderBy('name', 'desc')->select(['name', 'code', 'id'])->get();
+            $unites = Attribute::where('status', 1)->orderBy('name', 'desc')
+                ->pluck('name', 'id')->toArray();
             $language = Language::all();
             $languages = array();
             foreach ($language as $lg) {
@@ -223,7 +234,7 @@ class ProductController extends Controller
             $discount_types = \Helper::discount_types();
             $product = Product::with('city')->with('currency')->with('languages')->find($id);
             return view('backend.pages.catalog.product.edit',
-                compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories')
+                compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'unites')
             );
         } catch (ModelNotFoundException $exception) {
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
@@ -529,8 +540,20 @@ class ProductController extends Controller
         return redirect()->route('admin.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function formImport()
     {
-        return view('admin.catalogs.products.import');
+        return view('backend.pages.catalog.product.import');
+    }
+
+    public function postImport(Request $request)
+    {
+        try {
+            $data = $request->all();
+        } catch (ModelNotFoundException $exception) {
+
+        }
     }
 }
