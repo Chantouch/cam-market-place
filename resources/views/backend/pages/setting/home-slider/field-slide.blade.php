@@ -72,6 +72,7 @@
             <strong>{{ $errors->first('description') }}</strong>
         </span>
     @endif
+    <button class="btn btn-default" id="default" type="button">Load Default</button>
 </div>
 
 {!! Form::label('status', 'Enabled:') !!}

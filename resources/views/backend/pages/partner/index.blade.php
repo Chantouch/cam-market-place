@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        MANAGE YOUR CUSTOMERS
+                        MANAGE YOUR PARTNERS
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                @include('backend.sell.customer.table')
+                @include('backend.pages.partner.table')
             </div>
         </div>
     </div>

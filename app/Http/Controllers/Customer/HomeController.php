@@ -102,7 +102,8 @@ class HomeController extends BaseController
             'shipping_method' => $data['shipping_method'],
             'payment_method' => $data['payment_method'],
             'order_reference' => $this->randomId(),
-            'address_id' => $data['address_id']
+            'address_id' => $data['address_id'],
+            'status' => 5
 
         ];
         $purchase = Purchase::create($array_data);
@@ -116,7 +117,7 @@ class HomeController extends BaseController
                     'qty' => $product->qty,
                 ]);
                 $ids[] = $product->id;
-                Product::whereIn('id', $ids)->decrement('qty', $product->qty);
+                //Product::whereIn('id', $ids)->decrement('qty', $product->qty);
                 if (!$purchase) {
                     return response()->json(['error' => 'Can not order now']);
                 }

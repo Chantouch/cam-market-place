@@ -7,7 +7,7 @@
         </a>
     </li>
     <li class="header">Data Management</li>
-    <li class="{!! Request::is('admin/sells/orders*') ? 'active' : '' !!}">
+    <li class="{!! Request::is('admin/db-management*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">shopping_cart</i>
             <span>Ref.Data Management</span>
@@ -80,6 +80,13 @@
         </ul>
     </li>
 
+    <li class="{!! Request::is('admin/partners*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.partners.index') !!}">
+            <i class="material-icons">people_outline</i>
+            <span>Partners</span>
+        </a>
+    </li>
+
     <li class="{!! Request::is('admin/sells/customers*') ? 'active' : '' !!}">
         <a href="{!! route('admin.sells.customers.index') !!}">
             <i class="material-icons">people_outline</i>
@@ -97,64 +104,6 @@
                 <a href="{!! route('admin.catalogs.products.index') !!}">
                     Products
                 </a>
-            </li>
-        </ul>
-    </li>
-
-    <li class="header">Manages</li>
-    <li class="{!! Request::is('admin/catalogs/*') ? 'active' : '' !!}">
-        <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">dvr</i>
-            <span>MANAGING</span>
-        </a>
-        <ul class="ml-menu">
-            <li class="{!! Request::is('admin/catalogs/products*') ? 'active' : '' !!}">
-                <a href="{!! route('admin.catalogs.products.index') !!}">
-                    Partners
-                </a>
-            </li>
-        </ul>
-    </li>
-
-    <li>
-        <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">trending_down</i>
-            <span>Multi Level Menu</span>
-        </a>
-        <ul class="ml-menu">
-            <li>
-                <a href="javascript:void(0);">
-                    <span>Menu Item</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">
-                    <span>Menu Item - 2</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <span>Level - 2</span>
-                </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="javascript:void(0);">
-                            <span>Menu Item</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Level - 3</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Level - 4</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </li>
         </ul>
     </li>

@@ -27,7 +27,7 @@
                         @endif
                     </td>
                     <td>{!! $slider->caption !!}</td>
-                    <td>{!! str_limit($slider->description, 50) !!}</td>
+                    <td>{!! str_limit($slider->description, 100) !!}</td>
                     <td>{!! Helper::status($slider->status) !!}</td>
                     <td>
                         <div class="col-md-2">

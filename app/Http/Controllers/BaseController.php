@@ -17,7 +17,6 @@ class BaseController extends Controller
             ->whereNull('category_id')->orderByDesc('name')
             ->pluck('name', 'id');
         $categories = Category::with('sub_category', 'products')->where('status', 1)->whereNull('category_id')->get();
-        View::share('category_list', $category_list);
-        View::share('categories', $categories);
+        View::share(['category_list' => $category_list, 'categories' => $categories]);
     }
 }

@@ -12,8 +12,12 @@ use App\Model\PriceConverter;
 use App\Model\Product;
 use App\Model\Tag;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Vinkla\Hashids\HashidsManager;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -44,12 +48,17 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $products = Product::orderBy('created_at', 'DESC')->paginate(10);
+            $products = Product::orderBy('id', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
+            if ($request->ajax()) {
+                $view = view('backend.pages.catalog.product.table', compact('products'))->render();
+                return response()->json(['html' => $view]);
+            }
             return view('backend.pages.catalog.product.index', compact('products'));
         } catch (ModelNotFoundException $exception) {
             return redirect()->route('admin.dashboard')->with('error', 'There is something wrong with your request.');
@@ -232,9 +241,10 @@ class ProductController extends Controller
                 $categories[$cat->id] = $cat->name;
             }
             $discount_types = \Helper::discount_types();
+            $attributes = Attribute::where('parent_id', null)->orderBy('name', 'ASC')->get();
             $product = Product::with('city')->with('currency')->with('languages')->find($id);
             return view('backend.pages.catalog.product.edit',
-                compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'unites')
+                compact('product', 'cities', 'currencies', 'discount_types', 'languages', 'categories', 'unites', 'attributes')
             );
         } catch (ModelNotFoundException $exception) {
             return redirect()->route('admin.catalogs.products.index')->with('error', 'We can not find product with that id, please try the other');
@@ -273,14 +283,14 @@ class ProductController extends Controller
                 if (isset($request->discount_type) && isset($request->discount)) {
                     if ($request->discount_type == "2") {
                         $discounted_amount = $request->price - (($request->discount / 100) * $request->price);
-                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id, $request->get('currency_code'));
                     } else {
                         $discounted_amount = $request->price - $request->discount;
-                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
+                        $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id, $request->get('currency_code'));
                     }
                 } else {
                     $discounted_amount = $request->price - $request->discount;
-                    $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id);
+                    $this->convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id, $request->get('currency_code'));
                 }
             }
 
@@ -386,12 +396,12 @@ class ProductController extends Controller
      * @param $product_id
      * @return bool|\Illuminate\Http\RedirectResponse
      */
-    public function convert_price($product, $target_currencies, $request, $discounted_amount, $currency_id, $product_id)
+    public function convert_price($product, $target_currencies, Request $request, $discounted_amount, $currency_id, $product_id, $currency_code)
     {
         $array_inserts = [];
         if (count($product->price_converter) >= 1) {
             foreach ($target_currencies as $target_currency) {
-                $converter = \Helper::currencyConverterXe($request->get('currency_code'), $target_currency->code, $discounted_amount);
+                $converter = \Helper::currencyConverterXe($currency_code, $target_currency->code, $discounted_amount);
                 if (in_array($_unique_currency = $target_currency['id'], $currency_id) && in_array($_unique_product = $product['id'], $product_id)) {
                     $price_converter = PriceConverter::where('product_id', $_unique_product)
                         ->where('currency_id', $_unique_currency)->first();
@@ -453,22 +463,26 @@ class ProductController extends Controller
         }
         $product = Product::find($id);
         if ($request->ajax()) {
-            $ids = array();
-            foreach ($product->images as $photo) {
-                $old_file = [$product->img_path . $photo->img_name];
+            $ids = [];
+            foreach ($product->images as $image) {
+                $old_file = [
+                    $product->img_path . 'large/' . $image->img_name,
+                    $product->img_path . 'small/' . $image->img_name,
+                    $product->img_path . 'thumb/' . $image->img_name
+                ];
                 if (File::exists($product->img_path)) {
                     File::delete($old_file);
                 }
-                $ids[] = $photo->id;
+                $ids[] = $image->id;
             }
             $product->categories()->detach();
             $product->languages()->detach();
             Image::whereIn('id', $ids)->delete();
             $delete = $product->forceDelete();
             if (!$delete) {
-                return response()->json(['error', 'Your product can not delete from your system right now. Plz try again later.']);
+                return response()->json('Your product can not delete from your system right now. Plz try again later.');
             }
-            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product deleted successfully');
+            return response()->json('Your product deleted successfully.');
         } else {
             $ids = array();
             foreach ($product->images as $image) {
@@ -548,12 +562,171 @@ class ProductController extends Controller
         return view('backend.pages.catalog.product.import');
     }
 
+    /**
+     * @param Request $request
+     * @return ProductController|bool|\Illuminate\Http\RedirectResponse
+     */
     public function postImport(Request $request)
     {
+        ini_set('max_execution_time', -1);
         try {
-            $data = $request->all();
-        } catch (ModelNotFoundException $exception) {
+            $rules = [
+                'file' => 'required|file|mimes:csv,xls,xlsx,|max:2048'
+            ];
+            $message = [
+                'file.required' => 'Please choose a file to import products!'
+            ];
+            $code = Product::pluck('code')->toArray();
+            $validator = Validator::make($request->all(), $rules, $message);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            if ($request->hasFile('file')) {
+                $path = $request->file('file')->getRealPath();
+                $data = Excel::load($path, function ($reader) {
 
+                })->get();
+                if (!empty($data) && $data->count()) {
+                    $inserts = [];
+                    foreach ($data->toArray() as $key => $value) {
+                        $trimmed_array = explode(',', $value['category']);
+                        $category = array_map('trim', $trimmed_array);
+                        $currency_id = Currency::whereStatus(1)
+                            ->whereCode(strtoupper($value['currency_code']))
+                            ->first()->id;
+                        $category_id = Category::whereStatus(1)
+                            ->whereIn('name', $category)
+                            ->pluck('id')->toArray();
+                        if (in_array($_code = $value['product_code'], $code)) {
+                            $product = Product::whereCode($_code)->firstOrFail();
+                            if (is_null($product)) {
+                                return false;
+                            }
+                            $insert = [
+                                'name' => $value['product_name'],
+                                'code' => $value['product_code'],
+                                'cost' => $value['cost'],
+                                'price' => $value['price'],
+                                'qty' => $value['qty'],
+                                'description' => $value['description'],
+                                'short_description' => $value['short_description'],
+                                'user_id' => $this->auth()->id,
+                                'img_path' => "uploads/product/img/",
+                                'updated_at' => Carbon::now(),
+                                'status' => 1,
+                                'currency_id' => $currency_id,
+                                'discount_type' => $value['discount_type'],
+                                'discount' => $value['discount']
+                            ];
+                            $update_product = $product->update($insert);
+                            if ($update_product) {
+                                if (isset($value['category'])) {
+                                    $product->categories()->sync($category_id);
+                                } else {
+                                    $product->categories()->sync(array());
+                                }
+                            }
+                            continue;
+                        }
+                        $inserts[] = [
+                            'name' => $value['product_name'],
+                            'code' => $value['product_code'],
+                            'cost' => $value['cost'],
+                            'price' => $value['price'],
+                            'qty' => $value['qty'],
+                            'slug' => str_slug($value['product_name'], '-'),
+                            'description' => $value['description'],
+                            'short_description' => $value['short_description'],
+                            'user_id' => $this->auth()->id,
+                            'img_path' => "uploads/product/img/",
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                            'status' => 1,
+                            'currency_id' => $currency_id,
+                            'discount_type' => $value['discount_type'],
+                            'discount' => $value['discount']
+                        ];
+                        $code[] = $value['product_code'];
+                    }
+                    if (!empty($inserts)) {
+                        $insert_success = Product::insert($inserts);
+                        if (!$insert_success) {
+                            redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
+                        }
+                        return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added/updated successfully');
+                    }
+                }
+            }
+            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added/updated successfully');
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getSample()
+    {
+        try {
+            $file = Storage::disk('public')->get('product-upload-sample.xlsx');
+            return (new Response($file, 200))
+                ->header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        } catch (Exception $ex) {
+            return 'Error while downloading file.';
+        }
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function formImg()
+    {
+        return view('backend.pages.catalog.product.import_img');
+    }
+
+    public function importImg(Request $request)
+    {
+        ini_set('max_execution_time', -1);
+        try {
+            $rules = [
+                'file' => 'required|file|mimes:csv,xls,xlsx,|max:2048'
+            ];
+            $message = [
+                'file.required' => 'Please choose a file to import products!'
+            ];
+            $code = Product::pluck('code')->toArray();
+            $validator = Validator::make($request->all(), $rules, $message);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            if ($request->hasFile('file')) {
+                $path = $request->file('file')->getRealPath();
+                $data = Excel::load($path, function ($reader) {
+
+                })->get();
+                if (!empty($data) && $data->count()) {
+                    foreach ($data->toArray() as $key => $value) {
+                        if (in_array($_code = $value['product_code'], $code)) {
+                            $product = Product::whereCode($_code)->firstOrFail();
+                            if (is_null($product)) {
+                                return false;
+                            }
+                            $insert = [
+                                'name' => $value['product_name'],
+                                'code' => $value['product_code'],
+                            ];
+                            $product->update($insert);
+                            continue;
+                        }
+
+                        $code[] = $value['product_code'];
+                    }
+                }
+            }
+            return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added/updated successfully');
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
         }
     }
 }

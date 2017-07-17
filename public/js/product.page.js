@@ -17,12 +17,12 @@ function loadMoreData(page) {
             $('.ajax-load').show();
         }
     }).done(function (data) {
-        if (data.html == " ") {
+        if (data.html === "") {
             $('.ajax-load').html("No more records found");
             return;
         }
         $('.ajax-load').hide();
-        $("#post-data").append(data.html);
+        $("#product-data").append(data.html);
     }).fail(function (jqXHR, ajaxOptions, thrownError) {
         alert('server not responding...');
     });

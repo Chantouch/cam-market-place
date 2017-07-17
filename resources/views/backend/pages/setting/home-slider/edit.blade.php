@@ -28,5 +28,12 @@
         $('#img_name').change(function () {
             uploadPreview(this, 'img_preview');
         });
+        let value = '<div class="title1"><span class="txt"><strong>Dream</strong> soluton</span></div><div class="title2"><span class="txt">For every type of sleeper</span></div>';
+        let description = $("#description");
+        $("#default").click(function () {
+            if (description.val() !== value) {
+                description.val(value);
+            }
+        })
     </script>
 @stop

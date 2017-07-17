@@ -14,7 +14,7 @@ class Product extends Model
     protected $fillable = [
         'name', 'code', 'cost', 'price', 'origin_place', 'city_id', 'currency_id', 'description',
         'discount', 'discount_type', 'author', 'can_order', 'new', 'qty', 'user_id', 'img_path',
-        'popular', 'status', 'short_description', 'city_id','attribute_id'
+        'popular', 'status', 'short_description', 'city_id', 'attribute_id'
     ];
 
     //===============Validation===============//
@@ -28,6 +28,7 @@ class Product extends Model
             'category_id' => 'required',
             'cost' => 'required',
             'price' => 'required',
+            'code' => 'required',
         ];
     }
 

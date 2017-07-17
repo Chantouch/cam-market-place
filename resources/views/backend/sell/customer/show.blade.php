@@ -137,17 +137,18 @@
                                     <h6>Add Private Note </h6>
                                 </div>
                                 <div class="body">
+                                    {!! Form::model($customer, ['route' => ['admin.sells.orders.add-update-note', $customer->hashid], 'method' => 'patch']) !!}
                                     <div class="clearfix row">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea name="private_note" id="private_note" rows="2"
-                                                          class="form-control"></textarea>
+                                                {!! Form::textarea('private_note', null, ['class'=>'form-control','rows'=>'4']) !!}
                                             </div>
                                         </div>
                                         <div class="pull-right">
                                             <button class="btn btn-default" type="submit" name="save">Save</button>
                                         </div>
                                     </div>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>

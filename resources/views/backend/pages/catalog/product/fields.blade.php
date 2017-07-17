@@ -1,6 +1,6 @@
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        {!! Form::label('name', 'Image:') !!}
+        {!! Form::label('img_name', 'Image:') !!}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
             <div class="form-line">
                 {!! Form::file('img_name[]', ['class' => 'form-control', 'multiple', 'id'=>'img_name']) !!}
@@ -15,13 +15,13 @@
                     @endforeach
                 @endif
             </div>
-            @if ($errors->has('name'))
+            @if ($errors->has('img_name'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
+                    <strong>{{ $errors->first('img_name') }}</strong>
                 </span>
             @endif
         </div>
-
+        <br>
         {!! Form::label('name', 'Product Name:') !!}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="margin-bottom: 0;">
             <div class="form-line">
@@ -60,7 +60,20 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
+                        {!! Form::label('code', 'Code:') !!}
+                        <div class="form-group">
+                            <div class="form-line">
+                                {!! Form::text('code', null, ['class'=>'form-control','placeholder'=>'Product code']) !!}
+                            </div>
+                            @if($errors->has('code'))
+                                <span class="help-block">
+                                    <strong>{!! $errors->first('code') !!}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
                         {!! Form::label('origin_place', 'Origin Place:') !!}
                         <div class="form-group">
                             <div class="form-line">
@@ -74,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         {!! Form::label('city_id', 'City:') !!}
                         <div class="form-group">
                             <div class="form-line">
