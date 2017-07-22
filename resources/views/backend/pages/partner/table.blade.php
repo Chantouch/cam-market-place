@@ -1,5 +1,5 @@
 <div class="body table-responsive">
-    @if(count($customers))
+    @if(count($partners))
         <table class="table table-hover">
             <thead>
             <tr>
@@ -16,32 +16,32 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($customers as $customer)
+            @foreach($partners as $partner)
                 <tr>
-                    <th scope="row">{!! $customer->id !!}</th>
-                    <td>{!! $customer->first_name !!}</td>
-                    <td>{!! $customer->last_name !!}</td>
-                    <td>{!! $customer->email !!}</td>
+                    <th scope="row">{!! $partner->id !!}</th>
+                    <td>{!! $partner->first_name !!}</td>
+                    <td>{!! $partner->last_name !!}</td>
+                    <td>{!! $partner->email !!}</td>
                     <td>
                         <span class="badge bg-green">
-                            @if(count($customer->purchases))
-                                {!! $customer->purchases->sum('total') !!}
+                            @if(count($partner->purchases))
+                                {!! $partner->purchases->sum('total') !!}
                             @else
                                 ---
                             @endif
                         </span>
                     </td>
-                    <td>{!! Helper::status($customer->status) !!}</td>
-                    <td>{!! $customer->newsletter !!}</td>
-                    <td>{!! $customer->created_at !!}</td>
-                    <td>{!! $customer->last_visit !!}</td>
+                    <td>{!! Helper::status($partner->status) !!}</td>
+                    <td>{!! $partner->newsletter !!}</td>
+                    <td>{!! $partner->created_at !!}</td>
+                    <td>{!! $partner->last_visit !!}</td>
                     <td>
-                        {!! Form::open(['route' => ['admin.sells.customers.destroy', $customer->hashid], 'method' => 'delete']) !!}
-                        <a href="{!! route('admin.sells.customers.show', [$customer->hashid]) !!}"
+                        {!! Form::open(['route' => ['admin.partners.destroy', $partner->hashid], 'method' => 'delete']) !!}
+                        <a href="{!! route('admin.partners.show', [$partner->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{!! route('admin.sells.customers.edit', [$customer->hashid]) !!}"
+                        <a href="{!! route('admin.partners.edit', [$partner->hashid]) !!}"
                            class='btn btn-default btn-xs'>
                             <i class="material-icons">mode_edit</i>
                         </a>
@@ -52,7 +52,7 @@
             @endforeach
             </tbody>
         </table>
-        {!! $customers->render() !!}
+        {!! $partners->render() !!}
     @else
         <p>There is no data here.</p>
     @endif

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Sell;
+namespace App\Http\Controllers\Backend;
 
-use App\Model\Customer;
+use App\Model\Partner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\HashidsManager;
 
-class CustomerController extends Controller
+class PartnerController extends Controller
 {
 
     public $hashid;
 
-    public $route = 'admin.sells.customers.';
+    public $route = 'admin.partners.';
 
     function __construct(HashidsManager $hashid)
     {
@@ -28,8 +28,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::orderBy('created_at')->paginate(20);
-        return view('backend.sell.customer.index', compact('customers'));
+        $partners = Partner::where('role', 2)->orderBy('created_at')->paginate(20);
+        return view('backend.pages.partner.index', compact('partners'));
     }
 
 
@@ -58,19 +58,18 @@ class CustomerController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return Customer|\Illuminate\Database\Eloquent\Builder|\Illuminate\Http\Response
+     * @return Partner|\Illuminate\Database\Eloquent\Builder|\Illuminate\Http\Response
      */
     public function show($id)
     {
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route($this->route . 'index')->with('error', 'Customer not found');
+            return redirect()->route($this->route . 'index')->with('error', 'Partner not found');
         }
-        $customer = Customer::with('purchases', 'purchases.purchase_items', 'addresses')->find($id);
-        $sale = $customer->purchases->groupBy('customer_id');
-        //return $sale;
-        return view('backend.sell.customer.show', compact('customer'));
+        $partner = Partner::find($id);
+        return $partner;
+        //return view('backend.partner.show', compact('partner'));
     }
 
     /**
@@ -84,9 +83,9 @@ class CustomerController extends Controller
         $decoded = $this->hashid->decode($id);
         $id = @$decoded[0];
         if ($id === null) {
-            return redirect()->route($this->route . 'index')->with('error', 'Customer not found');
+            return redirect()->route($this->route . 'index')->with('error', 'Partner not found');
         }
-        $customer = Customer::find($id);
+        $customer = Partner::find($id);
         return $customer;
         //return view('backend.sell.customer.show', compact('customer'));
     }

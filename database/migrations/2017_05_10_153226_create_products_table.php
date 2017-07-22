@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->nullable();
             $table->decimal('cost')->nullable();
             $table->integer('qty')->nullable();
+            $table->integer('attribute_id', false, true)->nullable();
             $table->decimal('price')->nullable();
             $table->double('discount')->nullable();
             $table->enum('discount_type', ['1', '2'])->nullable();
@@ -41,6 +42,7 @@ class CreateProductsTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }
 

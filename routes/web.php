@@ -23,12 +23,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('languages', 'Backend\LanguageController');
     });
     Route::resource('home-sliders', 'Backend\HomeSliderController');
+    Route::resource('partners', 'Backend\PartnerController');
     Route::prefix('catalogs')->name('catalogs.')->group(function () {
         Route::resource('categories', 'Backend\CategoryController');
         Route::resource('attributes', 'Backend\AttributeController');
         Route::resource('products', 'Backend\ProductController');
         Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
         Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
+        Route::get('products/import/form', 'Backend\ProductController@formImport')->name('products.formImport');
+        Route::get('products/import/img', 'Backend\ProductController@formImg')->name('products.formImg');
+        Route::post('products/import/form', 'Backend\ProductController@postImport')->name('products.postImport');
+        Route::get('products/get/product-upload-sample', 'Backend\ProductController@getSample')->name('products.get.sample');
     });
     Route::name('config.')->group(function () {
         Route::get('config-cache', 'ConfigController@cache_config')->name('cache');
@@ -40,6 +45,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('orders', 'Backend\Sell\OrderController@index')->name('orders.index');
         Route::get('orders/{id}/show', 'Backend\Sell\OrderController@show')->name('orders.show');
         Route::patch('orders/{id}', 'Backend\Sell\OrderController@orderStatus')->name('orders.status');
+        Route::patch('customers/add-update-note/{id}', 'Backend\Sell\OrderController@addUpdatePrivateNote')->name('orders.add-update-note');
         Route::resource('customers', 'Backend\Sell\CustomerController');
     });
 });

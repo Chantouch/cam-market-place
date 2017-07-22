@@ -33,8 +33,6 @@ class Purchase extends Model
         return $this->hasMany(PurchaseOrder::class);
     }
 
-
-
     //-----------Get and Set attribute----------//
 
     /**

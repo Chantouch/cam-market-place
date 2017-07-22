@@ -34,6 +34,7 @@ class CreateCustomersTable extends Migration
             $table->integer('verified_by', false, true)->nullable();
             $table->dateTime('verified_at')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->string('private_note', 255)->nullable();
             $table->tinyInteger('newsletter')->default(0);
             $table->dateTime('last_visit')->nullable();
             $table->rememberToken();

@@ -45,99 +45,102 @@
                                     <button class="btn btn-default">View delivery slip</button>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#order_status" data-toggle="tab">
-                                            <i class="material-icons">home</i> STATUS
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#order_documents" data-toggle="tab">
-                                            <i class="material-icons">face</i> DOCUMENTS
-                                        </a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="#shipping" data-toggle="tab">
-                                            <i class="material-icons">face</i> SHIPPING
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div class="clearfix row">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#order_status" data-toggle="tab">
+                                                <i class="material-icons">home</i> STATUS
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#order_documents" data-toggle="tab">
+                                                <i class="material-icons">face</i> DOCUMENTS
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#shipping" data-toggle="tab">
+                                                <i class="material-icons">face</i> SHIPPING
+                                            </a>
+                                        </li>
+                                    </ul>
 
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="order_status">
-                                        <b>Select status and update</b>
-                                        {!! Form::model($order, ['route' => ['admin.sells.orders.status', $order->hashid], 'method' => 'patch']) !!}
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <div class="form-line">
-                                                        <label for="status"></label>
-                                                        {!! Form::select('status', $order_status, null, ['class'=>'form-control']) !!}
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="order_status">
+                                            <b>Select status and update</b>
+                                            {!! Form::model($order, ['route' => ['admin.sells.orders.status', $order->hashid], 'method' => 'patch']) !!}
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <label for="status"></label>
+                                                            {!! Form::select('status', $order_status, null, ['class'=>'form-control']) !!}
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-default waves-effect m-t-20">
+                                                        Update status
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <button class="btn btn-default waves-effect m-t-20">Update status
-                                                </button>
-                                            </div>
+                                            {!! Form::close() !!}
                                         </div>
-                                        {!! Form::close() !!}
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="order_documents">
-                                        <table class="table table-hover table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Document</th>
-                                                <th>Number</th>
-                                                <th>Amount</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <th>05/04/2017</th>
-                                                <th>Invoice</th>
-                                                <th><a href="#">#IN000011</a></th>
-                                                <th>$14.00</th>
-                                                <th>
-                                                    <button class="btn btn-default">Add more</button>
-                                                </th>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="shipping">
-                                        <table class="table table-hover table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Carrier</th>
-                                                <th>Weight</th>
-                                                <th>Shipping cost</th>
-                                                <th>Tracking number</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <th>05/04/2017</th>
-                                                <th>My Carrier</th>
-                                                <th>0.00Kg</th>
-                                                <th>$0.00</th>
-                                                <th>282889SD</th>
-                                                <th>
-                                                    <button class="btn btn-default">Add more</button>
-                                                </th>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div role="tabpanel" class="tab-pane fade" id="order_documents">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>Document</th>
+                                                    <th>Number</th>
+                                                    <th>Amount</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <th>1</th>
+                                                    <th>05/04/2017</th>
+                                                    <th>Invoice</th>
+                                                    <th><a href="#">#IN000011</a></th>
+                                                    <th>$14.00</th>
+                                                    <th>
+                                                        <button class="btn btn-default">Add more</button>
+                                                    </th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="shipping">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Date</th>
+                                                    <th>Carrier</th>
+                                                    <th>Weight</th>
+                                                    <th>Shipping cost</th>
+                                                    <th>Tracking number</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <th>1</th>
+                                                    <th>05/04/2017</th>
+                                                    <th>My Carrier</th>
+                                                    <th>0.00Kg</th>
+                                                    <th>$0.00</th>
+                                                    <th>282889SD</th>
+                                                    <th>
+                                                        <button class="btn btn-default">Add more</button>
+                                                    </th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,26 +194,27 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="m-b-10">
-                                <button class="btn btn-block btn-default waves-effect waves-yellow">
+                                <a href="{!! route('admin.sells.customers.show', [$order->customer->hashid]) !!}" class="btn btn-block btn-default waves-effect waves-yellow">
                                     View full details
-                                </button>
+                                </a>
                             </div>
                             <div class="card">
                                 <div class="header" style="padding: 2px 10px;">
                                     <h6>Add Private Note </h6>
                                 </div>
                                 <div class="body">
+                                    {!! Form::model($order->customer, ['route' => ['admin.sells.orders.add-update-note', $order->hashid], 'method' => 'patch']) !!}
                                     <div class="clearfix row">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <textarea name="private_note" id="private_note" rows="2"
-                                                          class="form-control"></textarea>
+                                                {!! Form::textarea('private_note', null, ['class'=>'form-control','rows'=>'4']) !!}
                                             </div>
                                         </div>
                                         <div class="pull-right">
                                             <button class="btn btn-default" type="submit" name="save">Save</button>
                                         </div>
                                     </div>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         </div>

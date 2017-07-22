@@ -11,7 +11,7 @@
     <li class="{!! Request::is('partners/catalogs/products*') ? 'active' : '' !!}">
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">content_copy</i>
-            <span>Catalogs</span>
+            <span>CATALOGS</span>
         </a>
         <ul class="ml-menu">
             <li class="{!! Request::is('partners/catalogs/products*') ? 'active' : '' !!}">

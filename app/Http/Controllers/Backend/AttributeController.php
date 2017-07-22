@@ -7,8 +7,8 @@ use App\Model\Attribute;
 use App\Model\SubAttribute;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Validator;
-use DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\HashidsManager;
 
 class AttributeController extends Controller

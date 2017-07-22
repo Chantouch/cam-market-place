@@ -169,13 +169,18 @@ class Helper
      */
     public static function discount($type, $model)
     {
-        if ($type == 1) {
-            return self::currency($model);
+        $symbol = "";
+        switch ($type) {
+            case 1:
+                $symbol = self::currency($model);
+                break;
+            case 2:
+                $symbol = "%";
+                break;
+            default:
+                break;
         }
-        if ($type == 2) {
-            return "Percentage";
-        }
-        return "Default";
+        return $symbol;
     }
 
     /**
