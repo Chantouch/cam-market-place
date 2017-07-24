@@ -24,9 +24,14 @@ class SingleController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('status',1)->get();
-
-       return view('front.pages.view_product',compact('categories'));
+        $category_list = Category::with('sub_category')->where('status', 1)
+            ->whereNull('category_id')->orderByDesc('name')
+            ->pluck('name', 'id');
+        $categories = Category::with('sub_category')->where('status', 1)->whereNull('category_id')->get();
+        $product = Product::with('categories', 'city')->where('slug', $slug)->first();
+        return view('front.pages.product.view', compact('product', 'categories', 'category_list'));
+        //return view('front.pages.invoice_view');
+       // return view('front.pages.view_product',compact('categories'));
     }
 
     /**
