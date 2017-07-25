@@ -15,7 +15,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    {!! Form::open(['route' => ['admin.catalogs.products.postImport'], 'method' => 'POST', 'files'=> true]) !!}
+                    {!! Form::open(['route' => ['admin.catalogs.products.importImg'], 'method' => 'POST', 'files'=> true]) !!}
                     <div class="row clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             {!! Form::label('file', 'File:') !!}

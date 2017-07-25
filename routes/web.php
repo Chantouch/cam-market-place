@@ -33,6 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('products/import/form', 'Backend\ProductController@formImport')->name('products.formImport');
         Route::get('products/import/img', 'Backend\ProductController@formImg')->name('products.formImg');
         Route::post('products/import/form', 'Backend\ProductController@postImport')->name('products.postImport');
+        Route::post('products/import/img', 'Backend\ProductController@importImg')->name('products.importImg');
         Route::get('products/get/product-upload-sample', 'Backend\ProductController@getSample')->name('products.get.sample');
     });
     Route::name('config.')->group(function () {
