@@ -705,6 +705,7 @@ class ProductController extends Controller
                 $data = Excel::load($path, function ($reader) {
 
                 })->get();
+                dd($data);
                 if (!empty($data) && $data->count()) {
                     foreach ($data->toArray() as $key => $value) {
                         if (in_array($_code = $value['product_code'], $code)) {
