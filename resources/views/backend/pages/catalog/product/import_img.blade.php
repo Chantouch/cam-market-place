@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        ADD NEW PRODUCT
+                        ADD NEW IMAGES TO PRODUCTS
                     </h2>
                 </div>
                 <div class="body">
@@ -39,7 +39,7 @@
                                class="btn btn-primary waves-effect">
                                 CANCEL
                             </a>
-                            <a href="{!! route('admin.catalogs.products.get.sample') !!}"
+                            <a href="{!! route('admin.catalogs.products.get.upload-img') !!}"
                                class="btn btn-primary waves-effect">
                                 GET SAMPLE
                             </a>
@@ -47,7 +47,7 @@
                     </div>
 
                     {!! Form::close() !!}
-                    <img src="{!! asset('img/product-upload-sample.png') !!}" alt="Product upload sampel"
+                    <img src="{!! asset('img/product-upload-img-sample.png') !!}" alt="Product upload sampel"
                          class="img-responsive">
                 </div>
             </div>

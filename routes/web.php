@@ -30,11 +30,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('products', 'Backend\ProductController');
         Route::delete('products/images/{id}', 'Backend\ProductController@destroy_image')->name('delete.image');
         Route::get('products/duplicate/{id}', 'Backend\ProductController@duplicate')->name('products.duplicate');
-        Route::get('products/import/form', 'Backend\ProductController@formImport')->name('products.formImport');
-        Route::get('products/import/img', 'Backend\ProductController@formImg')->name('products.formImg');
-        Route::post('products/import/form', 'Backend\ProductController@postImport')->name('products.postImport');
-        Route::post('products/import/img', 'Backend\ProductController@importImg')->name('products.importImg');
-        Route::get('products/get/product-upload-sample', 'Backend\ProductController@getSample')->name('products.get.sample');
+        Route::get('products/import/form', 'Backend\ImportProductController@formImport')->name('products.formImport');
+        Route::get('products/import/img', 'Backend\ImportProductController@formImg')->name('products.formImg');
+        Route::post('products/import/form', 'Backend\ImportProductController@postImport')->name('products.postImport');
+        Route::post('products/import/img', 'Backend\ImportProductController@importImg')->name('products.importImg');
+        Route::get('products/get/product-upload-sample', 'Backend\ImportProductController@getSample')->name('products.get.sample');
+        Route::get('products/get/product-upload-img', 'Backend\ImportProductController@getImageUploadSample')->name('products.get.upload-img');
     });
     Route::name('config.')->group(function () {
         Route::get('config-cache', 'ConfigController@cache_config')->name('cache');
