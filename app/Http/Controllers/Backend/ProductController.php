@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         try {
-            $products = Product::orderBy('id', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
+            $products = Product::with('user')->orderBy('id', 'DESC')->orderBy('created_at', 'DESC')->paginate(25);
             if ($request->ajax()) {
                 $view = view('backend.pages.catalog.product.table', compact('products'))->render();
                 return response()->json(['html' => $view]);
@@ -717,12 +717,14 @@ class ProductController extends Controller
                 if ($validator->fails()) {
                     return redirect()->back()->withErrors($validator)->withInput();
                 }
-                $path = $request->file('file')->getRealPath();
-                $data = Excel::load($path, function ($reader) {
+                $path_file = $request->file('file')->getRealPath();
+                $data = Excel::load($path_file, function ($reader) {
 
                 });
                 $drawing = $data->getExcel()->getActiveSheet()->getDrawingCollection();
                 $i = 0;
+                $j = 1;
+                $k = 1;
                 foreach ($drawing as $value) {
                     $string = $value->getCoordinates();
                     $coordinate = PHPExcel_Cell::coordinateFromString($string);
@@ -748,13 +750,49 @@ class ProductController extends Controller
                         fclose($zipReader);
                         $extension = $value->getExtension();
                     }
-                    $getPath = fopen($value->getPath(), 'r');
-                    //$name_img = $name_of_img . "." . strtolower($extension);
+                    /* Check double image
+                     *
+                     * Just want to make this work first.
+                     * Will refactor it later.
+                     */
+                    if ($name_of_img != $code) {
+                        $code = $name_of_img;
+                        $image_name = $name_of_img;
+                        $product = Product::whereCode($code)->first();
+                        if (is_null($product)) {
+                            return false;
+                        }
+                        $fileName = time() . '_' . $image_name . "." . strtolower($extension);
+                        $insert = [
+                            'img_path' => $path,
+                        ];
+                        $product->update($insert);
+                        $images = Image::FirstOrNew(['img_name' => $fileName]);
+                        $product->images()->save($images);
+                        $j = 1;
+                    } else {
+                        $product = Product::whereCode($code)->first();
+                        if (is_null($product)) {
+                            return false;
+                        }
+                        $image_name = $name_of_img . "_" . $j;
+                        $fileName = time() . '_' . $image_name . "." . strtolower($extension);
+                        $insert = [
+                            'img_path' => $path,
+                        ];
+                        $product->update($insert);
+                        $images = Image::FirstOrNew(['img_name' => $fileName]);
+                        $product->images()->save($images);
+                        $j++;
+                    }
+
+                    //$name_img = $image_name . "." . $extension;
+                    //$path = "uploads/product/img/";
                     //$myFileName = public_path($path) . $name_img;
-                    $image_large = Images::make($getPath)->resize(1024, 1024);
-                    $image_small = Images::make($getPath)->resize(500, 500);
-                    $image_thumb = Images::make($getPath)->resize(100, 100);
-                    $fileName = time() . '_' . $name_of_img . "." . strtolower($extension);
+                    $image_large = Images::make(fopen($value->getPath(), 'r'))->resize(1024, 1024);
+                    $image_small = Images::make(fopen($value->getPath(), 'r'))->resize(500, 500);
+                    $image_thumb = Images::make(fopen($value->getPath(), 'r'))->resize(100, 100);
+                    $fileName = time() . '_' . $image_name . "." . strtolower($extension);
                     $image_large->save($destinationPath . '/large/' . $fileName, 100);
                     $image_small->save($destinationPath . '/small/' . $fileName, 100);
                     $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
