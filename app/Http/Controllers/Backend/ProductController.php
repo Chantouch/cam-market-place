@@ -724,7 +724,6 @@ class ProductController extends Controller
                 $drawing = $data->getExcel()->getActiveSheet()->getDrawingCollection();
                 $i = 0;
                 $j = 1;
-                $k = 1;
                 foreach ($drawing as $value) {
                     $string = $value->getCoordinates();
                     $coordinate = PHPExcel_Cell::coordinateFromString($string);
@@ -738,7 +737,6 @@ class ProductController extends Controller
                         call_user_func(
                             $value->getRenderingFunction(), $value->getImageResource()
                         );
-                        $imageContents = ob_get_contents();
                         ob_end_clean();
                         $extension = 'png';
                     } else {
@@ -758,37 +756,22 @@ class ProductController extends Controller
                     if ($name_of_img != $code) {
                         $code = $name_of_img;
                         $image_name = $name_of_img;
-                        $product = Product::whereCode($code)->first();
-                        if (is_null($product)) {
-                            return false;
-                        }
-                        $fileName = $image_name . "." . strtolower($extension);
-                        $insert = [
-                            'img_path' => $path,
-                        ];
-                        $product->update($insert);
-                        $images = Image::FirstOrNew(['img_name' => $fileName]);
-                        $product->images()->save($images);
                         $j = 1;
                     } else {
-                        $product = Product::whereCode($code)->first();
-                        if (is_null($product)) {
-                            return false;
-                        }
                         $image_name = $name_of_img . "_" . $j;
-                        $fileName = $image_name . "." . strtolower($extension);
-                        $insert = [
-                            'img_path' => $path,
-                        ];
-                        $product->update($insert);
-                        $images = Image::FirstOrNew(['img_name' => $fileName]);
-                        $product->images()->save($images);
                         $j++;
                     }
-
-                    //$name_img = $image_name . "." . $extension;
-                    //$path = "uploads/product/img/";
-                    //$myFileName = public_path($path) . $name_img;
+                    $product = Product::whereCode($name_of_img)->first();
+                    if (is_null($product)) {
+                        continue;
+                    }
+                    $fileName = $image_name . "." . strtolower($extension);
+                    $insert = [
+                        'img_path' => $path,
+                    ];
+                    $product->update($insert);
+                    $images = Image::FirstOrNew(['img_name' => $fileName]);
+                    $product->images()->save($images);
                     $image_large = Images::make(fopen($value->getPath(), 'r'))->resize(1024, 1024);
                     $image_small = Images::make(fopen($value->getPath(), 'r'))->resize(500, 500);
                     $image_thumb = Images::make(fopen($value->getPath(), 'r'))->resize(100, 100);
@@ -796,7 +779,6 @@ class ProductController extends Controller
                     $image_large->save($destinationPath . '/large/' . $fileName, 100);
                     $image_small->save($destinationPath . '/small/' . $fileName, 100);
                     $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
-                    //file_put_contents($myFileName, $imageContents);
                 }
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added/updated successfully');
