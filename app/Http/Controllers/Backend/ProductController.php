@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Images;
 use App\Model\Image;
 use Illuminate\Support\Facades\File;
+use PHPExcel_Worksheet_MemoryDrawing;
+use PHPExcel_Cell;
 
 class ProductController extends Controller
 {
@@ -689,40 +691,74 @@ class ProductController extends Controller
     {
         ini_set('max_execution_time', -1);
         try {
-            $rules = [
-                'file' => 'required|file|mimes:csv,xls,xlsx,|max:2048'
-            ];
-            $message = [
-                'file.required' => 'Please choose a file to import products!'
-            ];
-            $code = Product::pluck('code')->toArray();
-            $validator = Validator::make($request->all(), $rules, $message);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
             if ($request->hasFile('file')) {
+                //Check the validation for file
+                $rules = [
+                    'file' => 'required|file|mimes:csv,xls,xlsx,|max:2048'
+                ];
+                $message = [
+                    'file.required' => 'Please choose a file to import products!'
+                ];
+                //Create folder if not exist
+                $path = 'uploads/product/img/';
+                $destinationPath = public_path($path);
+                $path_large = public_path($path . 'large/');
+                $path_small = public_path($path . 'small/');
+                $path_thumb = public_path($path . 'thumb/');
+                if (!file_exists($destinationPath) || !file_exists($path_large)) {
+                    mkdir($destinationPath, 0777, true);
+                    mkdir($path_large, 0777, true);
+                    mkdir($path_small, 0777, true);
+                    mkdir($path_thumb, 0777, true);
+                }
+                //Get product code to compare
+                $code = Product::pluck('code')->toArray();
+                $validator = Validator::make($request->all(), $rules, $message);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
                 $path = $request->file('file')->getRealPath();
                 $data = Excel::load($path, function ($reader) {
 
-                })->get();
-                dd($data);
-                if (!empty($data) && $data->count()) {
-                    foreach ($data->toArray() as $key => $value) {
-                        if (in_array($_code = $value['product_code'], $code)) {
-                            $product = Product::whereCode($_code)->firstOrFail();
-                            if (is_null($product)) {
-                                return false;
-                            }
-                            $insert = [
-                                'name' => $value['product_name'],
-                                'code' => $value['product_code'],
-                            ];
-                            $product->update($insert);
-                            continue;
-                        }
-
-                        $code[] = $value['product_code'];
+                });
+                $drawing = $data->getExcel()->getActiveSheet()->getDrawingCollection();
+                $i = 0;
+                foreach ($drawing as $value) {
+                    $string = $value->getCoordinates();
+                    $coordinate = PHPExcel_Cell::coordinateFromString($string);
+                    $column_name = "A" . $coordinate[1];
+                    $name_of_img = $data->getExcel()->getActiveSheet()->getCell($column_name)->getValue();
+                    if (empty($name_of_img)) {
+                        $name_of_img = $i++;
                     }
+                    if ($value instanceof PHPExcel_Worksheet_MemoryDrawing) {
+                        ob_start();
+                        call_user_func(
+                            $value->getRenderingFunction(), $value->getImageResource()
+                        );
+                        $imageContents = ob_get_contents();
+                        ob_end_clean();
+                        $extension = 'png';
+                    } else {
+                        $zipReader = fopen($value->getPath(), 'r');
+                        $imageContents = '';
+                        while (!feof($zipReader)) {
+                            $imageContents .= fread($zipReader, 1024);
+                        }
+                        fclose($zipReader);
+                        $extension = $value->getExtension();
+                    }
+                    $getPath = fopen($value->getPath(), 'r');
+                    //$name_img = $name_of_img . "." . strtolower($extension);
+                    //$myFileName = public_path($path) . $name_img;
+                    $image_large = Images::make($getPath)->resize(1024, 1024);
+                    $image_small = Images::make($getPath)->resize(500, 500);
+                    $image_thumb = Images::make($getPath)->resize(100, 100);
+                    $fileName = time() . '_' . $name_of_img . "." . strtolower($extension);
+                    $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                    $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                    $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                    //file_put_contents($myFileName, $imageContents);
                 }
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product added/updated successfully');
