@@ -762,7 +762,7 @@ class ProductController extends Controller
                         if (is_null($product)) {
                             return false;
                         }
-                        $fileName = time() . '_' . $image_name . "." . strtolower($extension);
+                        $fileName = $image_name . "." . strtolower($extension);
                         $insert = [
                             'img_path' => $path,
                         ];
@@ -776,7 +776,7 @@ class ProductController extends Controller
                             return false;
                         }
                         $image_name = $name_of_img . "_" . $j;
-                        $fileName = time() . '_' . $image_name . "." . strtolower($extension);
+                        $fileName = $image_name . "." . strtolower($extension);
                         $insert = [
                             'img_path' => $path,
                         ];
@@ -792,7 +792,7 @@ class ProductController extends Controller
                     $image_large = Images::make(fopen($value->getPath(), 'r'))->resize(1024, 1024);
                     $image_small = Images::make(fopen($value->getPath(), 'r'))->resize(500, 500);
                     $image_thumb = Images::make(fopen($value->getPath(), 'r'))->resize(100, 100);
-                    $fileName = time() . '_' . $image_name . "." . strtolower($extension);
+                    $fileName = $image_name . "." . strtolower($extension);
                     $image_large->save($destinationPath . '/large/' . $fileName, 100);
                     $image_small->save($destinationPath . '/small/' . $fileName, 100);
                     $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
