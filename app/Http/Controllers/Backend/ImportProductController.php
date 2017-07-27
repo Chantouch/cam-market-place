@@ -303,4 +303,14 @@ class ImportProductController extends Controller
             return redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
         }
     }
+
+    public function codeOutProduct()
+    {
+        $product_temp = TempProduct::whereNotIn("product_code",function($query){
+            $query->select("code")
+            ->from("products")
+            ->where("user_id","=",$this->auth()->id);
+        })->where("user_id","=",$this->auth()->id)->select("product_code")->get();
+        return view('backend.pages.catalog.product.code_of_product',compact('product_temp'));
+    }
 }

@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        PRODUCTS LIST
+                        PRODUCT CODE FROM PICTURE EXCEL FILE NO ENOUGH INFORMATION
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -25,36 +25,31 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.catalogs.products.create') !!}">Add</a></li>
-                                <li><a href="{!! route('admin.catalogs.products.formImport') !!}">Import</a></li>
-                                <li><a href="{!! route('admin.catalogs.products.formImg') !!}">Import Image</a></li>
-                                <li><a href="{!! route('admin.catalogs.products.codeOutProduct') !!}">Code out of product</a></li>
+                                <li><a href="{!! route('admin.catalogs.products.index') !!}">Back to product</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="body table-responsive">
-                    @if(count($products))
-                        <table class="table table-hover" id="product-data">
-                            <thead>
+                    @if(count($product_temp))
+                   <table class="table table-hover" id="product-data">
+                        <thead>
                             <tr>
-                                <th>Img</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Price (USD)</th>
-                                <th>Cost</th>
-                                <th>Qty</th>
-                                <th>Status</th>
-                                <th width="60">Action</th>
+                                <th>N<sup>0</sup></th>
+                                <th>Product Code</th>
                             </tr>
-                            </thead>
-                            <tbody>
-                            @include('backend.pages.catalog.product.table')
-                            </tbody>
-                        </table>
-                    @else
-                        <p>There is no data here.</p>
+                        </thead>
+                        <tbody>
+                            <?php $i =1;?>
+                            @foreach($product_temp as $product)
+                            <tr>
+                                <td>{!! $i !!}</td>
+                                <td>{!! $product->product_code !!}</td>
+                            </tr>
+                            <?php $i++;?>
+                            @endforeach
+                        </tbody>
+                    </table>
                     @endif
                 </div>
             </div>
