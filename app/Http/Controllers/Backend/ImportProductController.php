@@ -227,64 +227,73 @@ class ImportProductController extends Controller
                     $coordinate = PHPExcel_Cell::coordinateFromString($string);
                     $column_name = "A" . $coordinate[1];
                     $name_of_img = $data->getExcel()->getActiveSheet()->getCell($column_name)->getValue();
-                    if (empty($name_of_img)) {
-                        $name_of_img = $i++;
-                    }
-                    if ($value instanceof PHPExcel_Worksheet_MemoryDrawing) {
-                        ob_start();
-                        call_user_func(
-                            $value->getRenderingFunction(), $value->getImageResource()
-                        );
-                        ob_end_clean();
-                        $extension = 'png';
-                    } else {
-                        $zipReader = fopen($value->getPath(), 'r');
-                        $imageContents = '';
-                        while (!feof($zipReader)) {
-                            $imageContents .= fread($zipReader, 1024);
+                    if (!empty($name_of_img)) {
+                        if ($value instanceof PHPExcel_Worksheet_MemoryDrawing) {
+                            ob_start();
+                            call_user_func(
+                                $value->getRenderingFunction(), $value->getImageResource()
+                            );
+                            ob_end_clean();
+                            $extension = 'png';
+                        } else {
+                            $zipReader = fopen($value->getPath(), 'r');
+                            $imageContents = '';
+                            while (!feof($zipReader)) {
+                                $imageContents .= fread($zipReader, 1024);
+                            }
+                            fclose($zipReader);
+                            $extension = $value->getExtension();
                         }
-                        fclose($zipReader);
-                        $extension = $value->getExtension();
-                    }
-                    /* Check double image
-                     *
-                     * Just want to make this work first.
-                     * Will refactor it later.
-                     */
-                    if ($name_of_img != $code) {
-                        $code = $name_of_img;
-                        $image_name = $name_of_img;
-                        $j = 1;
-                    } else {
-                        $image_name = $name_of_img . "_" . $j;
-                        $j++;
-                    }
-                    $product = Product::whereCode($name_of_img)->first();
-                    if (is_null($product)) {
-                        TempProduct::with('admin')
-                            ->firstOrCreate([
-                                'product_code' => $name_of_img,
-                                'user_id' => $this->auth()->id,
-                            ]);
-                        continue;
-                    } else {
-                        TempProduct::with('admin')->whereProductCode($name_of_img)->delete();
-                    }
+                        /* Check double image
+                         *
+                         * Just want to make this work first.
+                         * Will refactor it later.
+                         */
+                        if ($name_of_img != $code) {
+                            $code = $name_of_img;
+                            $image_name = $name_of_img;
+                            $j = 1;
+                        } else {
+                            $image_name = $name_of_img . "_" . $j;
+                            $j++;
+                        }
+                        
 
-                    $fileName = $image_name . "." . strtolower($extension);
-                    $insert = [
-                        'img_path' => $path,
-                    ];
-                    $product->update($insert);
-                    $images = Image::FirstOrNew(['img_name' => $fileName]);
-                    $product->images()->save($images);
-                    $image_large = Images::make(fopen($value->getPath(), 'r'))->resize(1024, 1024);
-                    $image_small = Images::make(fopen($value->getPath(), 'r'))->resize(500, 500);
-                    $image_thumb = Images::make(fopen($value->getPath(), 'r'))->resize(100, 100);
-                    $fileName = $image_name . "." . strtolower($extension);
-                    $image_large->save($destinationPath . '/large/' . $fileName, 100);
-                    $image_small->save($destinationPath . '/small/' . $fileName, 100);
-                    $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                        /***check exist image name***/
+                        $image_exist = Image::where("img_name","like","%".$name_of_img."%")->select("img_name")->get();
+                        $count_image = count($image_exist);
+                        if($count_image>0){
+                            $image_name = $name_of_img."_".$count_image;
+                        }
+
+                        $product = Product::whereCode($name_of_img)->first();
+                        if (is_null($product)) {
+                            TempProduct::with('admin')
+                                ->firstOrCreate([
+                                    'product_code' => $name_of_img,
+                                    'user_id' => $this->auth()->id,
+                                ]);
+                            continue;
+                        } else {
+                            TempProduct::with('admin')->whereProductCode($name_of_img)->delete();
+                        }
+
+                        $fileName = $image_name . "." . strtolower($extension);
+                        $insert = [
+                            'img_path' => $path,
+                        ];
+                        $product->update($insert);
+                        $images = Image::FirstOrNew(['img_name' => $fileName]);
+                        $product->images()->save($images);
+                        $image_large = Images::make(fopen($value->getPath(), 'r'))->resize(1024, 1024);
+                        $image_small = Images::make(fopen($value->getPath(), 'r'))->resize(500, 500);
+                        $image_thumb = Images::make(fopen($value->getPath(), 'r'))->resize(100, 100);
+                        $fileName = $image_name . "." . strtolower($extension);
+                        $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                        $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                        $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                    }
+                    
                 }
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product images added/updated successfully');
