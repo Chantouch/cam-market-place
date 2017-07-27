@@ -36,9 +36,12 @@ class ProductController extends Controller
         $this->middleware('auth:admin');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
     public function auth()
     {
-        return auth()->user();
+        return auth()->guard('admin')->user();
     }
 
     /**

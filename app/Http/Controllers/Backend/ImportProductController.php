@@ -23,6 +23,20 @@ use Intervention\Image\ImageManagerStatic as Images;
 
 class ImportProductController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function auth()
+    {
+        return auth()->guard('admin')->user();
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -45,7 +59,7 @@ class ImportProductController extends Controller
             $message = [
                 'file.required' => 'Please choose a file to import products!'
             ];
-            $code = Product::pluck('code')->toArray();
+            $code = Product::with('city')->pluck('code')->toArray();
             $validator = Validator::make($request->all(), $rules, $message);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -85,7 +99,8 @@ class ImportProductController extends Controller
                                 'status' => 1,
                                 'currency_id' => $currency_id,
                                 'discount_type' => $value['discount_type'],
-                                'discount' => $value['discount']
+                                'discount' => $value['discount'],
+                                'can_order' => true
                             ];
                             $update_product = $product->update($insert);
                             if ($update_product) {
@@ -113,12 +128,13 @@ class ImportProductController extends Controller
                             'status' => 1,
                             'currency_id' => $currency_id,
                             'discount_type' => $value['discount_type'],
-                            'discount' => $value['discount']
+                            'discount' => $value['discount'],
+                            'can_order' => true
                         ];
                         $code[] = $value['product_code'];
                     }
                     if (!empty($inserts)) {
-                        $insert_success = Product::insert($inserts);
+                        $insert_success = Product::with('city')->insert($inserts);
                         if (!$insert_success) {
                             redirect()->back()->with('error', 'Unable to process your request right now, Please contact to System admin @070375783');
                         }
@@ -248,10 +264,13 @@ class ImportProductController extends Controller
                         TempProduct::with('admin')
                             ->firstOrCreate([
                                 'product_code' => $name_of_img,
-                                'user_id' => auth()->guard('admin')->user()->id,
+                                'user_id' => $this->auth()->id,
                             ]);
                         continue;
+                    } else {
+                        TempProduct::with('admin')->whereProductCode($name_of_img)->delete();
                     }
+
                     $fileName = $image_name . "." . strtolower($extension);
                     $insert = [
                         'img_path' => $path,
