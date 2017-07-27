@@ -72,29 +72,59 @@ class ImportProductController extends Controller
                 if (!empty($data) && $data->count()) {
                     $inserts = [];
                     foreach ($data->toArray() as $key => $value) {
-                        $trimmed_array = explode(',', $value['category']);
-                        $category = array_map('trim', $trimmed_array);
-                        $currency_id = Currency::whereStatus(1)
-                            ->whereCode(strtoupper($value['currency_code']))
-                            ->first()->id;
-                        $category_id = Category::whereStatus(1)
-                            ->whereIn('name', $category)
-                            ->pluck('id')->toArray();
-                        if (in_array($_code = $value['product_code'], $code)) {
-                            $product = Product::whereCode($_code)->firstOrFail();
-                            if (is_null($product)) {
-                                return false;
+                       if(!empty($value['product_code'])){
+                            $trimmed_array = explode(',', $value['category']);
+                            $category = array_map('trim', $trimmed_array);
+                            $currency_id = Currency::whereStatus(1)
+                                ->whereCode(strtoupper($value['currency_code']))
+                                ->first()->id;
+                            $category_id = Category::whereStatus(1)
+                                ->whereIn('name', $category)
+                                ->pluck('id')->toArray();
+                            if (in_array($_code = $value['product_code'], $code)) {
+                                $product = Product::whereCode($_code)->firstOrFail();
+                                if (is_null($product)) {
+                                    return false;
+                                }
+                                $insert = [
+                                    'name' => $value['product_name'],
+                                    'code' => $value['product_code'],
+                                    'cost' => $value['cost'],
+                                    'price' => $value['price'],
+                                    'qty' => $value['qty'],
+                                    'description' => $value['description'],
+                                    'short_description' => $value['short_description'],
+                                    'user_id' => $this->auth()->id,
+                                    'img_path' => "uploads/product/img/",
+                                    'updated_at' => Carbon::now(),
+                                    'status' => 1,
+                                    'currency_id' => $currency_id,
+                                    'discount_type' => $value['discount_type'],
+                                    'discount' => $value['discount'],
+                                    'can_order' => true
+                                ];
+                                $update_product = $product->update($insert);
+                                if ($update_product) {
+                                    if (isset($value['category'])) {
+                                        $product->categories()->sync($category_id);
+                                    } else {
+                                        $product->categories()->sync(array());
+                                    }
+                                }
+                                continue;
                             }
-                            $insert = [
+                            $inserts[] = [
                                 'name' => $value['product_name'],
                                 'code' => $value['product_code'],
                                 'cost' => $value['cost'],
                                 'price' => $value['price'],
                                 'qty' => $value['qty'],
+                                'slug' => str_slug($value['product_name'], '-'),
                                 'description' => $value['description'],
                                 'short_description' => $value['short_description'],
                                 'user_id' => $this->auth()->id,
                                 'img_path' => "uploads/product/img/",
+                                'created_at' => Carbon::now(),
                                 'updated_at' => Carbon::now(),
                                 'status' => 1,
                                 'currency_id' => $currency_id,
@@ -102,36 +132,8 @@ class ImportProductController extends Controller
                                 'discount' => $value['discount'],
                                 'can_order' => true
                             ];
-                            $update_product = $product->update($insert);
-                            if ($update_product) {
-                                if (isset($value['category'])) {
-                                    $product->categories()->sync($category_id);
-                                } else {
-                                    $product->categories()->sync(array());
-                                }
-                            }
-                            continue;
-                        }
-                        $inserts[] = [
-                            'name' => $value['product_name'],
-                            'code' => $value['product_code'],
-                            'cost' => $value['cost'],
-                            'price' => $value['price'],
-                            'qty' => $value['qty'],
-                            'slug' => str_slug($value['product_name'], '-'),
-                            'description' => $value['description'],
-                            'short_description' => $value['short_description'],
-                            'user_id' => $this->auth()->id,
-                            'img_path' => "uploads/product/img/",
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now(),
-                            'status' => 1,
-                            'currency_id' => $currency_id,
-                            'discount_type' => $value['discount_type'],
-                            'discount' => $value['discount'],
-                            'can_order' => true
-                        ];
-                        $code[] = $value['product_code'];
+                            $code[] = $value['product_code'];
+                       }
                     }
                     if (!empty($inserts)) {
                         $insert_success = Product::with('city')->insert($inserts);
