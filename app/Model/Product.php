@@ -162,4 +162,24 @@ class Product extends Model
         }
         return implode(', ', $tags);
     }
+
+
+
+    //===========Scope Search ==========//
+
+    /**
+     * @param $query
+     * @param $search
+     * @return mixed
+     */
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search); // Clean up white space
+        return $query->where(function ($query) use ($search) {
+            $query->where('code', 'LIKE', "%$search%")
+                ->orWhere('name', 'LIKE', "%$search%")
+                ->orWhere('description', 'LIKE', "%$search%");
+
+        });
+    }
 }

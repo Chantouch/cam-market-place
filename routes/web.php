@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('products/import/img', 'Backend\ImportProductController@importImg')->name('products.importImg');
         Route::get('products/get/product-upload-sample', 'Backend\ImportProductController@getSample')->name('products.get.sample');
         Route::get('products/get/product-upload-img', 'Backend\ImportProductController@getImageUploadSample')->name('products.get.upload-img');
+        Route::get('products/search/item', 'Backend\ProductController@search')->name('products.search');
     });
     Route::name('config.')->group(function () {
         Route::get('config-cache', 'ConfigController@cache_config')->name('cache');

@@ -45,6 +45,23 @@ class ProductController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $query = $request->query('search');
+        $products = $query
+            ? Product::with(['city', 'user', 'categories'])->search($query)->paginate( $request->get('show', 25) )
+            : Product::with(['city', 'user', 'categories'])->paginate( $request->get('show', 25) );
+        if ($request->ajax()) {
+            $view = view('backend.pages.catalog.product.table', compact('products'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('backend.pages.catalog.product.index', compact('products', 'query'));
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param Request $request
