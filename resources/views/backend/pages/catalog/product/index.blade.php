@@ -28,6 +28,7 @@
                                 <li><a href="{!! route('admin.catalogs.products.create') !!}">Add</a></li>
                                 <li><a href="{!! route('admin.catalogs.products.formImport') !!}">Import</a></li>
                                 <li><a href="{!! route('admin.catalogs.products.formImg') !!}">Import Image</a></li>
+                                <li><a href="{!! route('admin.catalogs.products.codeOutProduct') !!}">Code out of product</a></li>
                             </ul>
                         </li>
                     </ul>
