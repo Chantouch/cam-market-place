@@ -72,7 +72,7 @@ class ImportProductController extends Controller
                 if (!empty($data) && $data->count()) {
                     $inserts = [];
                     foreach ($data->toArray() as $key => $value) {
-                       if(!empty($value['product_code'])){
+                        if (!empty($value['product_code'])) {
                             $trimmed_array = explode(',', $value['category']);
                             $category = array_map('trim', $trimmed_array);
                             $currency_id = Currency::whereStatus(1)
@@ -133,7 +133,7 @@ class ImportProductController extends Controller
                                 'can_order' => true
                             ];
                             $code[] = $value['product_code'];
-                       }
+                        }
                     }
                     if (!empty($inserts)) {
                         $insert_success = Product::with('city')->insert($inserts);
@@ -259,13 +259,13 @@ class ImportProductController extends Controller
                             $image_name = $name_of_img . "_" . $j;
                             $j++;
                         }
-                        
+
 
                         /***check exist image name***/
-                        $image_exist = Image::where("img_name","like","%".$name_of_img."%")->select("img_name")->get();
+                        $image_exist = Image::where("img_name", "like", "%" . $name_of_img . "%")->select("img_name")->get();
                         $count_image = count($image_exist);
-                        if($count_image>0){
-                            $image_name = $name_of_img."_".$count_image;
+                        if ($count_image > 0) {
+                            $image_name = $name_of_img . "_" . $count_image;
                         }
 
                         $product = Product::whereCode($name_of_img)->first();
@@ -295,7 +295,7 @@ class ImportProductController extends Controller
                         $image_small->save($destinationPath . '/small/' . $fileName, 100);
                         $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
                     }
-                    
+
                 }
             }
             return redirect()->route('admin.catalogs.products.index')->with('success', 'Product images added/updated successfully');
@@ -306,11 +306,11 @@ class ImportProductController extends Controller
 
     public function codeOutProduct()
     {
-        $product_temp = TempProduct::whereNotIn("product_code",function($query){
+        $product_temp = TempProduct::whereNotIn("product_code", function ($query) {
             $query->select("code")
-            ->from("products")
-            ->where("user_id","=",$this->auth()->id);
-        })->where("user_id","=",$this->auth()->id)->select("product_code")->get();
-        return view('backend.pages.catalog.product.code_of_product',compact('product_temp'));
+                ->from("products")
+                ->where("user_id", "=", $this->auth()->id);
+        })->where("user_id", "=", $this->auth()->id)->select("product_code")->get();
+        return view('backend.pages.catalog.product.code_of_product', compact('product_temp'));
     }
 }

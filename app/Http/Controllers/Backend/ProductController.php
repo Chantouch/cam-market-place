@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Events\ProductEvent;
 use App\Http\Controllers\Controller;
 use App\Model\Attribute;
 use App\Model\Category;
@@ -52,8 +53,8 @@ class ProductController extends Controller
     {
         $query = $request->query('search');
         $products = $query
-            ? Product::with(['city', 'user', 'categories'])->search($query)->paginate( $request->get('show', 25) )
-            : Product::with(['city', 'user', 'categories'])->paginate( $request->get('show', 25) );
+            ? Product::with(['city', 'user', 'categories'])->search($query)->paginate($request->get('show', 25))
+            : Product::with(['city', 'user', 'categories'])->paginate($request->get('show', 25));
         if ($request->ajax()) {
             $view = view('backend.pages.catalog.product.table', compact('products'))->render();
             return response()->json(['html' => $view]);
@@ -122,13 +123,6 @@ class ProductController extends Controller
             $data['user_id'] = $this->auth()->id;
             $path = 'uploads/product/img/';
             $data['img_path'] = $path;
-            $records = Product::count();
-            $current_id = 1;
-            if (!$records == 0) {
-                $current_id = Product::orderBy('id', 'DESC')->first()->id + 1;
-            }
-            $product_code = 'REF' . str_pad($current_id, 8, '0', STR_PAD_LEFT);
-            $data['code'] = $product_code;
             $create = Product::create($data);
             if ($create) {
                 if (isset($request->currency_id)) {
@@ -152,43 +146,9 @@ class ProductController extends Controller
                 if (isset($request->category_id)) {
                     $create->categories()->attach($request->category_id);
                 }
-                if (isset($request->img_name)) {
-                    if ($request->hasFile('img_name')) {
-                        $destinationPath = public_path($path);
-                        $path_large = public_path($path . 'large/');
-                        $path_small = public_path($path . 'small/');
-                        $path_thumb = public_path($path . 'thumb/');
-                        if (!file_exists($destinationPath)) {
-                            mkdir($destinationPath, 0777, true);
-                            mkdir($path_large, 0777, true);
-                            mkdir($path_small, 0777, true);
-                            mkdir($path_thumb, 0777, true);
-                        }
-                        $files = $request->file('img_name');
-                        foreach ($files as $file) {
-                            if ($file->isValid()) {
-                                $validator = Validator::make($data, Image::rules(), Image::messages());
-                                if ($validator->fails()) {
-                                    return back()->withInput()->withErrors($validator);
-                                }
-                                $image_large = Images::make($file)->resize(1024, 1024);
-                                $image_small = Images::make($file)->resize(500, 500);
-                                $image_thumb = Images::make($file)->resize(100, 100);
-                                //to remove space from string
-                                $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                                $image_large->save($destinationPath . '/large/' . $fileName, 100);
-                                $image_small->save($destinationPath . '/small/' . $fileName, 100);
-                                $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
-                                $images = new Image();
-                                $images->img_name = $fileName;
-                                $create->images()->save($images);
-                                if (!$create->images()->save($images))
-                                    throw new ModelNotFoundException();
-                            }
-                        }
-                    }
-                }
+
+                $this->uploadImage($request, $create);
+
                 if (isset($request->tags)) {
                     $trimmed_array = explode(',', $request->tags);
                     $tags = array_map('trim', $trimmed_array);
@@ -196,8 +156,6 @@ class ProductController extends Controller
                         $data['tags'] = $tag;
                         $tgs = Tag::firstOrNew(array('tags' => $tag));;
                         $create->tags()->save($tgs);
-                        //if (!$create->tags()->save($tgs))
-                        //    throw new ModelNotFoundException();
                     }
                 }
             } else {
@@ -287,7 +245,7 @@ class ProductController extends Controller
             if ($validator->fails()) {
                 return back()->withInput()->withErrors($validator);
             }
-            $product = Product::find($id);
+            $product = Product::with('city')->find($id);
             if ($product->user_id == null || empty($product->user_id)) {
                 $data['user_id'] = $this->auth()->id;
             }
@@ -310,54 +268,11 @@ class ProductController extends Controller
                 }
             }
 
-            if ($request->hasFile('img_name')) {
-                $path = 'uploads/product/img/';
-                $destinationPath = public_path($path);
-                $path_large = public_path($path . 'large/');
-                $path_small = public_path($path . 'small/');
-                $path_thumb = public_path($path . 'thumb/');
-                if (!file_exists($destinationPath) || !file_exists($path_large)) {
-                    mkdir($destinationPath, 0777, true);
-                    mkdir($path_large, 0777, true);
-                    mkdir($path_small, 0777, true);
-                    mkdir($path_thumb, 0777, true);
-                }
-                $picture = '';
-                $files = $request->file('img_name');
-                foreach ($files as $file) {
-                    if ($file->isValid()) {
-                        $validator = Validator::make($data, Image::rules(), Image::messages());
-                        if ($validator->fails()) {
-                            return back()->withInput()->withErrors($validator);
-                        }
-                        $image_large = Images::make($file)->resize(1024, 1024);
-                        $image_small = Images::make($file)->resize(500, 500);
-                        $image_thumb = Images::make($file)->resize(100, 100);
-                        //to remove space from string
-                        $product_name = preg_replace('/\s+/', '_', strtolower($request->name));
-                        $fileName = time() . '.' . $file->getClientOriginalExtension();
-                        $image_large->save($destinationPath . '/large/' . $fileName, 100);
-                        $image_small->save($destinationPath . '/small/' . $fileName, 100);
-                        $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
-                        $data['img_path'] = $path;
-                        $images = Image::FirstOrNew(['img_name' => $fileName]);
-                        $product->images()->save($images);
-                        if (!$product->images()->save($images))
-                            throw new ModelNotFoundException();
-                    }
-                }
-                if (!empty($product->images['img_name'])) {
-                    $product->images['img_name'] = $picture;
-                } else {
-                    unset($product->images['img_name']);
-                }
-            }
+            $this->uploadImage($request, $product);
 
             if ($request->has('tags')) {
-                //$trim = trim($request->tags, " ");
                 $trimmed_array = explode(',', $request->tags);
                 $tags = array_map('trim', $trimmed_array);
-                //$tags = $request->tags;
                 $ids = array();
                 foreach ($product->tags as $tg) {
                     $ids[] = $tg->id;
@@ -367,23 +282,10 @@ class ProductController extends Controller
                     ->delete();
                 foreach ($tags as $tag) {
                     $data['tags'] = $tag;
-                    $tgs = Tag::firstOrNew(array('tags' => $tag));
-                    //$tgs = Tag::firstOrCreate(['tags'=> $tag]);
+                    $tgs = Tag::with('products')->firstOrNew(array('tags' => $tag));
                     $product->tags()->save($tgs);
-                    //if (!$product->tags()->saveMany([$tgs]))
-                    //    throw new ModelNotFoundException();
                 }
             }
-            if (empty($product->code) || $product->code == null) {
-                $records = Product::count();
-                $current_id = 1;
-                if (!$records == 0) {
-                    $current_id = Product::orderBy('id', 'DESC')->first()->id + 1;
-                }
-                $product_code = 'REF' . str_pad($current_id, 8, '0', STR_PAD_LEFT);
-                $data['code'] = $product_code;
-            }
-            $data['currency_id'] = $request->currency_id;
             $product->update($data);
             if ($product) {
                 if (isset($request->language_id)) {
@@ -564,9 +466,75 @@ class ProductController extends Controller
         if ($id === null) {
             return response()->json(['error' => 'Can not find this image id']);
         }
-        $product = Product::find($id);
+        $product = Product::with('city')->find($id);
         $new_product = $product->replicate();
         $new_product->save();
         return redirect()->route('admin.catalogs.products.edit', $new_product->hashid)->with('success', 'Product copied successfully.');
+    }
+
+    public function uploadImage(Request $request, Product $product)
+    {
+        try {
+            $data = $request->all();
+            if ($request->hasFile('img_name')) {
+                $path = 'uploads/product/img/';
+                $destinationPath = public_path($path);
+                $path_large = public_path($path . 'large/');
+                $path_small = public_path($path . 'small/');
+                $path_thumb = public_path($path . 'thumb/');
+                if (!file_exists($destinationPath) || !file_exists($path_large)) {
+                    mkdir($destinationPath, 0777, true);
+                    mkdir($path_large, 0777, true);
+                    mkdir($path_small, 0777, true);
+                    mkdir($path_thumb, 0777, true);
+                }
+                $picture = '';
+                $files = $request->file('img_name');
+                $i = 1;
+                $code = '';
+                $pro_code = $request->code;
+                foreach ($files as $file) {
+                    if ($file->isValid()) {
+                        $validator = Validator::make($data, Image::rules(), Image::messages());
+                        if ($validator->fails()) {
+                            return back()->withInput()->withErrors($validator);
+                        }
+                        $image_large = Images::make($file)->resize(1024, 1024);
+                        $image_small = Images::make($file)->resize(500, 500);
+                        $image_thumb = Images::make($file)->resize(100, 100);
+
+                        /* Check double image
+                         *
+                         * Just want to make this work first.
+                         * Will refactor it later.
+                         */
+                        if ($pro_code != $code) {
+                            $code = $pro_code;
+                            $fileName = $pro_code;
+                            $i = 1;
+                        } else {
+                            $fileName = $pro_code . "_" . $i;
+                            $i++;
+                        }
+                        $fileName = $fileName . '.' . $file->getClientOriginalExtension();
+                        $image_large->save($destinationPath . '/large/' . $fileName, 100);
+                        $image_small->save($destinationPath . '/small/' . $fileName, 100);
+                        $image_thumb->save($destinationPath . '/thumb/' . $fileName, 100);
+                        $data['img_path'] = $path;
+                        $images = Image::with('imageable')->FirstOrNew(['img_name' => $fileName]);
+                        $product->images()->save($images);
+                        if (!$product->images()->save($images))
+                            throw new ModelNotFoundException();
+                    }
+                }
+                if (!empty($product->images['img_name'])) {
+                    $product->images['img_name'] = $picture;
+                } else {
+                    unset($product->images['img_name']);
+                }
+            }
+        } catch (ModelNotFoundException $exception) {
+            return back()->with('error', 'Error uploading image');
+        }
     }
 }

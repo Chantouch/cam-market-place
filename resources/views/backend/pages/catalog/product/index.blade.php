@@ -112,7 +112,7 @@
             let route = "/admin/catalogs/products/" + id;
             let token = {'X-CSRF-TOKEN': $("[name='_token']:first").val()};
             swal({
-                title: "Window Meeting Deletion",
+                title: "Window Delete Product",
                 text: "Are you absolutely sure you want to delete ? This action cannot be undone." +
                 "This will permanently delete, and remove all collections and materials associations.",
                 type: "warning",
@@ -126,7 +126,7 @@
                     url: route,
                     headers: token
                 }).done(function (data) {
-                    swal("Window Meeting Deleted!", data, "success");
+                    swal("Windows Deleted Product!", data, "success");
                     setTimeout(function () {
                         $('table#product-data').find('tr#' + id).fadeOut('slow');
                     }, 1500);

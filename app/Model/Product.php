@@ -24,7 +24,7 @@ class Product extends Model
             'name' => 'required|max:255',
             'qty' => 'required|integer',
             'short_description' => 'required|max:255',
-            'currency_id' => 'required|integer',
+            'currency_id' => 'required',
             'category_id' => 'required',
             'cost' => 'required',
             'price' => 'required',
