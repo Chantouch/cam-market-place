@@ -1,17 +1,12 @@
 @extends('layouts.backend.app')
 @section('content')
-    {{--<div class="block-header">--}}
-        {{--<h2>COUNTRIES</h2>--}}
-    {{--</div>--}}
     <!-- Hover Rows -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        COUNTRIES LIST
-                        {{--<small>Add <code>.table-hover</code> to enable a hover state on table rows within a <code>&lt;tbody&gt;</code>.--}}
-                        {{--</small>--}}
+                        CITIES LIST
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -21,8 +16,6 @@
                             </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="{!! route('admin.cities.create') !!}">Add</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
                             </ul>
                         </li>
                     </ul>

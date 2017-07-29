@@ -1,15 +1,12 @@
 @extends('layouts.backend.app')
 @section('content')
-    {{--<div class="block-header">--}}
-        {{--<h2>LANGUAGE</h2>--}}
-    {{--</div>--}}
     <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT {!! $language->name !!} LANGUAGE
+                        UPDATE {!! $language->name !!} LANGUAGE
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -18,9 +15,8 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                <li><a href="{!! route('admin.settings.languages.index') !!}">LIST</a></li>
+                                <li><a href="{!! route('admin.settings.languages.create') !!}">ADD</a></li>
                             </ul>
                         </li>
                     </ul>

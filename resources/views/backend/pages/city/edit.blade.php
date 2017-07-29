@@ -4,16 +4,13 @@
     <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
 @stop
 @section('content')
-    <div class="block-header">
-        <h2>CITY</h2>
-    </div>
     <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT <span>{!! $city->name !!}</span> CITY
+                        UPDATE <span>{!! $city->name !!}</span> CITY
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -22,9 +19,8 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                <li><a href="{!! route('admin.cities.index') !!}">CITY LIST</a></li>
+                                <li><a href="{!! route('admin.cities.create') !!}">ADD CITY</a></li>
                             </ul>
                         </li>
                     </ul>
