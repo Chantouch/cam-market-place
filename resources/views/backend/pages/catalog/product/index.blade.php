@@ -72,6 +72,7 @@
                             <tr>
                                 <th>Img</th>
                                 <th>Name</th>
+                                <th>Code</th>
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Price (USD)</th>

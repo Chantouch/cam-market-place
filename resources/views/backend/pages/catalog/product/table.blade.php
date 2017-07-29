@@ -9,6 +9,7 @@
             @endif
         </td>
         <td>{!! $product->name !!}</td>
+        <td>{!! $product->code !!}</td>
         <td>
             @if(count($product->categories))
                 @foreach($product->categories as $category)
