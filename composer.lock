@@ -736,7 +736,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2017-07-04 16:10:28"
+            "time": "2017-07-04T16:10:28+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

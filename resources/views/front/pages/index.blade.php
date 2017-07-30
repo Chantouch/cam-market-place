@@ -77,7 +77,6 @@
             <!-- End categori slide product -->
         </div>
     </div>
-    </div>
 
     <!-- Start two banner area -->
     <div class="two-banner-area">

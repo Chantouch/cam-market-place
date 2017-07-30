@@ -171,4 +171,20 @@ class Customer extends Authenticatable
     {
         return $this->belongsTo(SocialAccount::class, 'customer_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function avatar()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function tempDb()
+    {
+        return $this->hasOne(TempData::class);
+    }
 }

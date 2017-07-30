@@ -6645,7 +6645,7 @@ ul.links li a i {
 /*-------------------------------
 25. Login
 --------------------------------*/
-.registered-customers h3, .new-customers h3, {
+.registered-customers h3, .new-customers h3 {
     color: #282828;
     font-family: "Open Sans", sans-serif;
     font-size: 20px;

@@ -14,7 +14,7 @@
           type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Bootstrap Core Css -->
-    <link href="{!! asset('backend/plugins/bootstrap/css/bootstrap.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/app.css') !!}" rel="stylesheet">
     <!-- Waves Effect Css -->
     <link href="{!! asset('backend/plugins/node-waves/waves.css') !!}" rel="stylesheet"/>
     <!-- Animation Css -->
@@ -29,6 +29,7 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+        window.CamMarket = "{!! URL('/') !!}/";
     </script>
 </head>
 
@@ -480,7 +481,7 @@
     </aside>
     <!-- #END# Right Sidebar -->
 </section>
-<section class="content">
+<section class="content" id="app">
     <div class="container-fluid">
         @if ($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible" role="alert">
@@ -512,9 +513,10 @@
 </section>
 
 <!-- Jquery Core Js -->
-<script src="{!! asset('js/jquery.js') !!}"></script>
+{{--<script src="{!! asset('js/jquery.js') !!}"></script>--}}
+<script src="{!! asset('js/app.js') !!}"></script>
 <!-- Bootstrap Core Js -->
-<script src="{!! asset('js/bootstrap.min.js') !!}"></script>
+{{--<script src="{!! asset('js/bootstrap.min.js') !!}"></script>--}}
 
 @yield('plugins')
 <!-- Slimscroll Plugin Js -->

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Model\Product;
+use App\Model\Customer;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,30 +11,30 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ProductEvent
+class CustomerRegistered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-
-    public $product;
+    public $customer;
 
     /**
      * Create a new event instance.
      *
-     * @param Product $product
+     * @param Customer $customer
      */
-    public function __construct(Product $product)
+    public function __construct(Customer $customer)
     {
-        $this->product = $product;
+        $this->customer = $customer;
     }
 
-//    /**
-//     * Get the channels the event should broadcast on.
-//     *
-//     * @return Channel|array
-//     */
-//    public function broadcastOn()
-//    {
-//        return new PrivateChannel('channel-name');
-//    }
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return Channel|array
+     */
+    public function broadcastOn()
+    {
+        //return new PrivateChannel('channel-name');
+        return [];
+    }
 }

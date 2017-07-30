@@ -13,9 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ProductEvent' => [
-            'App\Listeners\CurrencyConverter',
-            'App\Listeners\UploadImage',
+        'App\Events\CustomerRegistered' => [
+            'App\Listeners\SendCustomerActivationCode',
+            'App\Listeners\UpdateCustomerProfile',
         ],
     ];
 
