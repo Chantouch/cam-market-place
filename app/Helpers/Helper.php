@@ -57,6 +57,15 @@ class Helper
         ];
     }
 
+    public static function ads_types()
+    {
+        return [
+            '' => '',
+            '1' => 'Home Top',
+            '2' => 'Home Button'
+        ];
+    }
+
     //-------Show at the front end of user-----------------//
 
     /**

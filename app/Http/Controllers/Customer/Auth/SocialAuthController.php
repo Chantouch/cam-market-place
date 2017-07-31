@@ -16,7 +16,7 @@ class SocialAuthController extends Controller
     public function redirect()
     {
         if (!config("services.facebook"))
-            abort('404');
+            abort('404','Error 404 not found!');
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -28,7 +28,11 @@ class SocialAuthController extends Controller
     {
         $customer = $service->createOrGetUser(Socialite::driver('facebook')->user());
         $this->guard()->login($customer, true);
-        return redirect()->route('customers.dashboard');
+        $notification = [
+            'message' => 'Success logged to your account!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('customers.dashboard')->with($notification);
     }
 
     /**

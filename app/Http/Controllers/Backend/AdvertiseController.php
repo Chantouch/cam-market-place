@@ -11,9 +11,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Images;
+use Vinkla\Hashids\HashidsManager;
 
 class AdvertiseController extends Controller
 {
+
+    public $hashid;
+
+    public function __construct(HashidsManager $hashid)
+    {
+        $this->middleware('auth:admin');
+        $this->hashid = $hashid;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +43,8 @@ class AdvertiseController extends Controller
     public function create()
     {
         $partners = Partner::with('products')->pluck('username', 'id')->toArray();
-        return view('backend.promotion.ads.create', compact('partners'));
+        $types = \Helper::ads_types();
+        return view('backend.promotion.ads.create', compact('partners', 'types'));
     }
 
     /**
@@ -91,45 +102,104 @@ class AdvertiseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Advertise $advertise
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Advertise $advertise)
+    public function show($id)
     {
-        //
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Advertise $advertise
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Advertise $advertise)
+    public function edit($id)
     {
-        //
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+        }
+        $partners = Partner::with('products')->pluck('username', 'id')->toArray();
+        $types = \Helper::ads_types();
+        $ad = Advertise::with('image')->find($id);
+        return view('backend.promotion.ads.edit', compact('ad', 'partners', 'types'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\Advertise $advertise
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advertise $advertise)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+            }
+            $ad = Advertise::with('image')->find($id);
+            $data = $request->all();
+            $validator = Validator::make($data, Advertise::rules(), Advertise::messages());
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            $path = 'uploads/img/promotion/ads/';
+            $data['expired_at'] = date('Y-m-d', strtotime($request->expired_at));
+            $data['path'] = $path;
+            $updated = $ad->update($data);
+            if ($updated) {
+                if ($request->hasFile('attachment')) {
+                    if ($request->file('attachment')->isValid()) {
+                        $destinationPath = public_path($path);
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0777, true);
+                        }
+                        $rule = ['attachment' => 'mimes:jpeg,bmp,png|max:10240'];
+                        $message = ['attachment.mimes' => 'The attachment must be type of jpeg, bmp, png only'];
+                        $this->validate($request, $rule, $message);
+                        $img = Images::make($request->file('attachment'))->resize(370, 221);
+                        $extension = $request->file('attachment')->getClientOriginalExtension();
+                        $file_name = uniqid() . '_' . time() . '.' . strtolower($extension);
+                        $img->save($destinationPath . $file_name, 100);
+                        $images = Image::with('imageable')
+                            ->FirstOrNew(['img_name' => $file_name]);
+                        $ad->image()->save($images);
+                        if (!$ad->image()->save($images))
+                            throw new ModelNotFoundException();
+                    }
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.promotions.ads.index')->with('success', 'Ads updated successfully!');
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->back()->with('error', 'You can not run your request now. Try again later.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Advertise $advertise
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Advertise $advertise)
+    public function destroy($id)
     {
-        //
+        $decoded = $this->hashid->decode($id);
+        $id = @$decoded[0];
+        if ($id === null) {
+            return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+        }
     }
 }

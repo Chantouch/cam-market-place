@@ -35,7 +35,7 @@ class Advertise extends Model
      */
     public function owner()
     {
-        return $this->belongsTo(Partner::class);
+        return $this->belongsTo(Partner::class, 'partner_id');
     }
 
     /**
@@ -54,8 +54,8 @@ class Advertise extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function getExpiredAtAttribute()
-    {
-        return Carbon::parse($this->attributes['expired_at'])->diffForHumans();
-    }
+//    public function getExpiredAtAttribute()
+//    {
+//        return Carbon::parse($this->attributes['expired_at']);
+//    }
 }

@@ -18,7 +18,7 @@
                     <th scope="row">{!! $ad->id !!}</th>
                     <td>{!! $ad->title !!}</td>
                     <td>{!! $ad->link !!}</td>
-                    <td>{!! isset($ad->owner)? $ad->owner->username : '' !!}</td>
+                    <td>{!! isset($ad->owner)? $ad->owner->first_name .' ' .$ad->owner->last_name : '' !!}</td>
                     <td>{!! $ad->expired_at !!}</td>
                     <td>{!! Helper::status($ad->active) !!}</td>
                     <td>
