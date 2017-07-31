@@ -90,7 +90,7 @@ class Customer extends Authenticatable
         return ($value !== null ? Carbon::parse($this->attributes['dob'])->format('d-m-Y') : null);
     }
 
-    //Verified employee after register
+    //Verified customer after register
 
     /**
      * verified employer

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Advertise;
 use App\Model\HomeSlider;
 use App\Model\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -32,7 +33,8 @@ class HomeController extends BaseController
         try {
             $sliders = HomeSlider::with('image_slider')->where('status', '1')->whereNull('parent_id')->first();
             $products = Product::with('categories')->where('status', 1)->get();
-            return view('front.pages.index', compact('sliders'), compact('products'));
+            $banners = Advertise::with('owner','image')->where('active', 1)->get();
+            return view('front.pages.index', compact('sliders','products','banners'));
         } catch (ModelNotFoundException $exception) {
             return response()->json(['error' => 'can not get sliders']);
         }

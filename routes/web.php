@@ -22,6 +22,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::resource('languages', 'Backend\LanguageController');
     });
+    Route::prefix('promotions')->name('promotions.')->group(function () {
+        Route::resource('ads', 'Backend\AdvertiseController');
+    });
     Route::resource('home-sliders', 'Backend\HomeSliderController');
     Route::resource('partners', 'Backend\PartnerController');
     Route::prefix('catalogs')->name('catalogs.')->group(function () {

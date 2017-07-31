@@ -57,6 +57,12 @@
             </li>
         </ul>
     </li>
+    <li class="{!! Request::is('admin/promotions/ads*') ? 'active' : '' !!}">
+        <a href="{!! route('admin.promotions.ads.index') !!}">
+            <i class="material-icons">home</i>
+            <span>Advertising</span>
+        </a>
+    </li>
 
     <li class="header">Settings</li>
     <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">

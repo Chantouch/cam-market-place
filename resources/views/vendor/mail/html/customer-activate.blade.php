@@ -109,7 +109,7 @@ $style = [
                                         If above button link is not work, please try to copy and paste below url in a
                                         new browser tab <br>
                                         <a href="{!! route('customers.verify.account', [$customer->verified_code]) !!}">
-                                            {!! $customer->verified_code !!}
+                                            {!! route('customers.verify.account', [$customer->verified_code]) !!}
                                         </a>
                                     </p>
 
