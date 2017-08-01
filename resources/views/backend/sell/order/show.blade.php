@@ -5,6 +5,7 @@
     </style>
 @stop
 @section('content')
+
     <!-- Basic Card -->
     <div class="row clearfix">
         <div class="col-lg-12">
@@ -320,8 +321,8 @@
                         </tbody>
                     </table>
                 </div>
+                <a href="{!! route('admin.sells.orders.index') !!}" class="btn btn-primary">Back</a>
             </div>
         </div>
-
     </div>
 @stop
