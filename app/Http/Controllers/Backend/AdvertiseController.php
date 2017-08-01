@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Images;
 use Vinkla\Hashids\HashidsManager;
@@ -67,32 +68,13 @@ class AdvertiseController extends Controller
             $data['path'] = $path;
             $ads = Advertise::with('owner')->create($data);
             if ($ads) {
-                if ($request->hasFile('attachment')) {
-                    if ($request->file('attachment')->isValid()) {
-                        $destinationPath = public_path($path);
-                        if (!file_exists($destinationPath)) {
-                            mkdir($destinationPath, 0777, true);
-                        }
-                        $rule = ['attachment' => 'mimes:jpeg,bmp,png|max:10240'];
-                        $message = ['attachment.mimes' => 'The attachment must be type of jpeg, bmp, png only'];
-                        $this->validate($request, $rule, $message);
-                        $img = Images::make($request->file('attachment'))->resize(370, 221);
-                        $extension = $request->file('attachment')->getClientOriginalExtension();
-                        $file_name = uniqid() . '_' . time() . '.' . strtolower($extension);
-                        $img->save($destinationPath . $file_name, 100);
-                        $images = Image::with('imageable')
-                            ->FirstOrNew(['img_name' => $file_name]);
-                        $ads->image()->save($images);
-                        if (!$ads->image()->save($images))
-                            throw new ModelNotFoundException();
-                    }
-                }
+                $this->uploadImage($request, $path, $ads);
             } else {
                 DB::rollBack();
                 return redirect()->back()->with('error', "Can run your request");
             }
             DB::commit();
-            return redirect()->route('admin.promotions.ads.index')->with('success', 'Ads created successfully');
+            return redirect()->route('admin.promotions.ads.index')->with('success', 'Ads created successfully!');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return redirect()->back()->with('error', "Can run your request");
@@ -160,26 +142,7 @@ class AdvertiseController extends Controller
             $data['path'] = $path;
             $updated = $ad->update($data);
             if ($updated) {
-                if ($request->hasFile('attachment')) {
-                    if ($request->file('attachment')->isValid()) {
-                        $destinationPath = public_path($path);
-                        if (!file_exists($destinationPath)) {
-                            mkdir($destinationPath, 0777, true);
-                        }
-                        $rule = ['attachment' => 'mimes:jpeg,bmp,png|max:10240'];
-                        $message = ['attachment.mimes' => 'The attachment must be type of jpeg, bmp, png only'];
-                        $this->validate($request, $rule, $message);
-                        $img = Images::make($request->file('attachment'))->resize(370, 221);
-                        $extension = $request->file('attachment')->getClientOriginalExtension();
-                        $file_name = uniqid() . '_' . time() . '.' . strtolower($extension);
-                        $img->save($destinationPath . $file_name, 100);
-                        $images = Image::with('imageable')
-                            ->FirstOrNew(['img_name' => $file_name]);
-                        $ad->image()->save($images);
-                        if (!$ad->image()->save($images))
-                            throw new ModelNotFoundException();
-                    }
-                }
+                $this->uploadImage($request, $path, $ad);
             }
             DB::commit();
             return redirect()->route('admin.promotions.ads.index')->with('success', 'Ads updated successfully!');
@@ -200,6 +163,40 @@ class AdvertiseController extends Controller
         $id = @$decoded[0];
         if ($id === null) {
             return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+        }
+    }
+
+    public function uploadImage(Request $request, $path, Advertise $advertise)
+    {
+        if ($request->hasFile('attachment')) {
+            if ($request->file('attachment')->isValid()) {
+                $destinationPath = public_path($path);
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true);
+                }
+                $rule = ['attachment' => 'mimes:jpeg,bmp,png|max:10240'];
+                $message = ['attachment.mimes' => 'The attachment must be type of jpeg, bmp, png only'];
+                $this->validate($request, $rule, $message);
+                $img = Images::make($request->file('attachment'))->resize(370, 221);
+                $extension = $request->file('attachment')->getClientOriginalExtension();
+                $file_name = uniqid() . '_' . time() . '.' . strtolower($extension);
+                $img->save($destinationPath . $file_name, 100);
+                if (!empty($advertise->image)) {
+                    $old_file = [$advertise->path . $advertise->image->img_name];
+                    if (File::exists($advertise->path)) {
+                        File::delete($old_file);
+                    }
+                    $advertise->image->update([
+                        'img_name' => $file_name
+                    ]);
+                } else {
+                    $images = Image::with('imageable')
+                        ->FirstOrNew(['img_name' => $file_name]);
+                    $advertise->image()->save($images);
+                    if (!$advertise->image()->save($images))
+                        throw new ModelNotFoundException();
+                }
+            }
         }
     }
 }
