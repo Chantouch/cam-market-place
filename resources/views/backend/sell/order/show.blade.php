@@ -42,7 +42,9 @@
                             <div class="card">
                                 <div class="body">
                                     <button class="btn btn-default">Print order</button>
-                                    <button class="btn btn-default">View invoice</button>
+                                        <button class="btn btn-default">
+                                            <a href="{!! route('admin.sells.orders.show_invoice',[$order->id]) !!}">View invoice</a>
+                                        </button>
                                     <button class="btn btn-default">View delivery slip</button>
                                 </div>
                             </div>
