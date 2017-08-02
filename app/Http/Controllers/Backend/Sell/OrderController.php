@@ -135,4 +135,7 @@ class OrderController extends Controller
             return redirect()->route('admin.sells.orders.index')->with('error', 'We can not find order with that id, please try the other');
         }
     }
+    public function show_invoice($id){
+       dd("hi please come here");
+    }
 }
