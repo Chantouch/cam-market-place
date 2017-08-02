@@ -46,6 +46,7 @@ class OrderController extends Controller
         $purchase = Purchase::where('status', 4);
         $count_order = $purchase->count();
         $order = Purchase::with('purchase_items.product', 'customer')->find($id);
+        //dd($order);
         $purchase_item = PurchaseOrder::wherePurchaseId($order->id)->get();
         $product_id = [];
         foreach ($purchase_item as $products) {
@@ -135,7 +136,5 @@ class OrderController extends Controller
             return redirect()->route('admin.sells.orders.index')->with('error', 'We can not find order with that id, please try the other');
         }
     }
-    public function show_invoice($id){
-       dd("hi please come here");
-    }
+
 }

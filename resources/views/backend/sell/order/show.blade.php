@@ -43,7 +43,7 @@
                                 <div class="body">
                                     <button class="btn btn-default">Print order</button>
                                         <button class="btn btn-default">
-                                            <a href="{!! route('admin.sells.orders.show_invoice',[$order->id]) !!}">View invoice</a>
+                                            View invoice
                                         </button>
                                     <button class="btn btn-default">View delivery slip</button>
                                 </div>
@@ -169,11 +169,11 @@
                                     <div class="clearfix row">
                                         <div>
                                             <span>Email</span><br>
-                                            <p>{!! $order->customer->email !!}</p>
+                                            <p>{!! $order->customer != null ? $order->customer->email : '' !!}</p>
                                         </div>
                                         <div>
                                             <span>Account registered</span>
-                                            <p>{!! $order->customer->created_at !!}</p>
+                                            <p>{!! $order->customer != null ? $order->customer->created_at : '' !!}</p>
                                         </div>
                                         <div>
                                             <span>Total Spent for this order:</span>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="m-b-10">
-                                <a href="{!! route('admin.sells.customers.show', [$order->customer->hashid]) !!}" class="btn btn-block btn-default waves-effect waves-yellow">
+                                <a href="{!! route('admin.sells.customers.show', [$order->customer!=null?$order->customer->hashid:$order->hashid]) !!}" class="btn btn-block btn-default waves-effect waves-yellow">
                                     View full details
                                 </a>
                             </div>
@@ -312,7 +312,7 @@
                                             @endforeach
                                         @endif
                                     </th>
-                                    <td>{!! $purchase_item->product->name !!}</td>
+                                    <td>{!! $purchase_item->product != null ? $purchase_item->product->name : '' !!}</td>
                                     <td>{!! $purchase_item->product->price !!}</td>
                                     <td>{!! $purchase_item->qty !!}</td>
                                     <td>{!! $purchase_item->product->qty !!}</td>
