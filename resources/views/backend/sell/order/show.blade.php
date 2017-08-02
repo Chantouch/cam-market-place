@@ -42,9 +42,9 @@
                             <div class="card">
                                 <div class="body">
                                     <button class="btn btn-default">Print order</button>
-                                        <button class="btn btn-default">
-                                            View invoice
-                                        </button>
+                                    <button class="btn btn-default">
+                                        View invoice
+                                    </button>
                                     <button class="btn btn-default">View delivery slip</button>
                                 </div>
                             </div>
@@ -197,7 +197,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="m-b-10">
-                                <a href="{!! route('admin.sells.customers.show', [$order->customer!=null?$order->customer->hashid:$order->hashid]) !!}" class="btn btn-block btn-default waves-effect waves-yellow">
+                                <a href="{!! route('admin.sells.customers.show', [$order->customer!=null?$order->customer->hashid:$order->hashid]) !!}"
+                                   class="btn btn-block btn-default waves-effect waves-yellow">
                                     View full details
                                 </a>
                             </div>
@@ -302,22 +303,30 @@
                         <tbody>
                         @if(count($order->purchase_items))
                             @foreach($order->purchase_items as $purchase_item)
-                                <tr>
-                                    <th>
-                                        @if(count($purchase_item->product->images))
-                                            @foreach($purchase_item->product->images->take(1) as $image)
-                                                <img src="{!! asset($purchase_item->product->img_path.'thumb/'.$image->img_name) !!}"
-                                                     alt="{!! $purchase_item->product->name !!}" class="img-thumbnail"
-                                                     width="60">
-                                            @endforeach
-                                        @endif
-                                    </th>
-                                    <td>{!! $purchase_item->product != null ? $purchase_item->product->name : '' !!}</td>
-                                    <td>{!! $purchase_item->product->price !!}</td>
-                                    <td>{!! $purchase_item->qty !!}</td>
-                                    <td>{!! $purchase_item->product->qty !!}</td>
-                                    <td>${!! ($purchase_item->qty*$purchase_item->product->price) !!}</td>
-                                </tr>
+                                @if($purchase_item->product != null)
+                                    <tr>
+                                        <th>
+
+                                            @if(count($purchase_item->product->images))
+                                                @foreach($purchase_item->product->images->take(1) as $image)
+                                                    <img src="{!! asset($purchase_item->product->img_path.'thumb/'.$image->img_name) !!}"
+                                                         alt="{!! $purchase_item->product->name !!}"
+                                                         class="img-thumbnail"
+                                                         width="60">
+                                                @endforeach
+                                            @endif
+                                        </th>
+                                        <td>{!! $purchase_item->product != null ? $purchase_item->product->name : '' !!}</td>
+                                        <td>{!! $purchase_item->product->price !!}</td>
+                                        <td>{!! $purchase_item->qty !!}</td>
+                                        <td>{!! $purchase_item->product->qty !!}</td>
+                                        <td>${!! ($purchase_item->qty*$purchase_item->product->price) !!}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th colspan="12">This product maybe deleted or something</th>
+                                    </tr>
+                                @endif
                             @endforeach
                         @endif
                         </tbody>

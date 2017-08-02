@@ -46,7 +46,6 @@ class OrderController extends Controller
         $purchase = Purchase::where('status', 4);
         $count_order = $purchase->count();
         $order = Purchase::with('purchase_items.product', 'customer')->find($id);
-        //dd($order);
         $purchase_item = PurchaseOrder::wherePurchaseId($order->id)->get();
         $product_id = [];
         foreach ($purchase_item as $products) {
