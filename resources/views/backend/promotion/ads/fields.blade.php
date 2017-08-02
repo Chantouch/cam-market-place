@@ -54,7 +54,7 @@
         {!! Form::label('expired_at', 'Ads expired at:') !!}
         <div class="form-group">
             <div class="form-line">
-                {!! Form::date('expired_at', isset($ad->expired_at)? $ad->expired_at->format('m/d/Y') : null, ['class' => 'form-control', 'placeholder' => 'Pick your ads expired date']) !!}
+                {!! Form::date('expired_at',null, ['class' => 'form-control', 'placeholder' => 'Pick your ads expired date']) !!}
             </div>
             @if ($errors->has('expired_at'))
                 <span class="help-block">

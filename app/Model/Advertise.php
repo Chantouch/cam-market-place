@@ -54,8 +54,8 @@ class Advertise extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-//    public function getExpiredAtAttribute()
-//    {
-//        return Carbon::parse($this->attributes['expired_at']);
-//    }
+    public function getExpiredAtAttribute()
+    {
+        return Carbon::parse($this->attributes['expired_at'])->format('Y-m-d');
+    }
 }

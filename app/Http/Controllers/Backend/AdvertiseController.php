@@ -94,6 +94,8 @@ class AdvertiseController extends Controller
         if ($id === null) {
             return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
         }
+        $ad = Advertise::with(['image','owner'])->find($id);
+        return response()->json($ad);
     }
 
     /**
@@ -159,10 +161,25 @@ class AdvertiseController extends Controller
      */
     public function destroy($id)
     {
-        $decoded = $this->hashid->decode($id);
-        $id = @$decoded[0];
-        if ($id === null) {
-            return redirect()->route('admin.promotions.ads.index')->with('error', 'We can not find this ads, please try the other');
+        try {
+            $decoded = $this->hashid->decode($id);
+            $id = @$decoded[0];
+            if ($id === null) {
+                return response()->json(['status', 'We can not find this ads, please try the other']);
+            }
+            $ad = Advertise::with('image')->find($id);
+            $old_file = [$ad->path . $ad->image->img_name];
+            if (File::exists($ad->path)) {
+                File::delete($old_file);
+            }
+            $img_delete = $ad->image->delete();
+            $delete = $ad->delete();
+            if (!$delete || !$img_delete) {
+                return response()->json(['status', 'We can not find this ads, please try the other']);
+            }
+            return response()->json(['status', 'Ads deleted successfully!']);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json(['status', 'We can not run your request right now.']);
         }
     }
 
@@ -177,7 +194,9 @@ class AdvertiseController extends Controller
                 $rule = ['attachment' => 'mimes:jpeg,bmp,png|max:10240'];
                 $message = ['attachment.mimes' => 'The attachment must be type of jpeg, bmp, png only'];
                 $this->validate($request, $rule, $message);
-                $img = Images::make($request->file('attachment'))->resize(370, 221);
+                $img = Images::make($request
+                    ->file('attachment'))
+                    ->resize($request->types == 2 ? 570 : 370, $request->types == 2 ? 202 : 221);
                 $extension = $request->file('attachment')->getClientOriginalExtension();
                 $file_name = uniqid() . '_' . time() . '.' . strtolower($extension);
                 $img->save($destinationPath . $file_name, 100);

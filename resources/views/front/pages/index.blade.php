@@ -83,7 +83,7 @@
         <div class="container">
             <div class="row">
                 @if(count($banners))
-                    @foreach($banners as $banner)
+                    @foreach($banners->where('types', 1) as $banner)
                         <div class="col-sm-4">
                             <div class="banner-left">
                                 <div class="banner-image">
@@ -178,24 +178,20 @@
     <div class="two-banner-area">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="banner-left">
-                        <div class="banner-image">
-                            <a href="#">
-                                <img src="img/home-4/banner/cms44.jpg" alt="">
-                            </a>
+                @if(count($banners))
+                    @foreach($banners->where('types', 2) as $banner)
+                        <div class="col-sm-6">
+                            <div class="banner-left">
+                                <div class="banner-image">
+                                    <a href="{!! $banner->link !!}">
+                                        <img src="{!! asset(isset($banner->image) ? $banner->path.$banner->image->img_name : '/uploads/product/no-photo-available.jpg') !!}"
+                                             alt="">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="banner-right">
-                        <div class="banner-image">
-                            <a href="#">
-                                <img src="img/home-4/banner/cms45.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
