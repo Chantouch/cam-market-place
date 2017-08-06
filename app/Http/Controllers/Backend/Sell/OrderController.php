@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Sell;
 
 use App\Model\Product;
 use App\Model\Purchase;
+use App\Model\Customer;
 use App\Model\PurchaseOrder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -134,6 +135,12 @@ class OrderController extends Controller
         } catch (ModelNotFoundException $exception) {
             return redirect()->route('admin.sells.orders.index')->with('error', 'We can not find order with that id, please try the other');
         }
+    }
+
+    public function show_invoice($id){
+        $order = Purchase::with('purchase_items.product', 'customer.addresses', 'customer.country')->find($id);
+        // dd($order->purchase_items);
+        return view('backend.sell.order.invoice',compact('order'));
     }
 
 }

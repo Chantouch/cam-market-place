@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Request;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Model\Country;
 
 class Customer extends Authenticatable
 {
@@ -154,6 +155,10 @@ class Customer extends Authenticatable
     public function addresses()
     {
         return $this->hasMany(Address::class, 'customer_id', 'id');
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
     }
 
     /**
