@@ -41,11 +41,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
                                 <div class="body">
-                                    <button class="btn btn-default">Print order</button>
+                                    <button class="btn btn-default" id="print_invoice" data-id="{!! $order->id !!}" data-has="{!! $order->hashid !!}">Print order</button>
                                     <button class="btn btn-default">
                                         <a href="{!! route('admin.sells.orders.show_invoice',$order->id) !!}">View invoice</a>
                                     </button>
-                                    <button class="btn btn-default">View delivery slip</button>
+                                    <!-- <button class="btn btn-default">View delivery slip</button> -->
                                 </div>
                             </div>
                             <div class="clearfix row">
@@ -61,11 +61,11 @@
                                                 <i class="material-icons">face</i> DOCUMENTS
                                             </a>
                                         </li>
-                                        <li role="presentation">
+                                        <!-- <li role="presentation">
                                             <a href="#shipping" data-toggle="tab">
                                                 <i class="material-icons">face</i> SHIPPING
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                                     <!-- Tab panes -->
@@ -96,27 +96,25 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Date</th>
-                                                    <th>Document</th>
+                                                    <!-- <th>Document</th> -->
                                                     <th>Number</th>
                                                     <th>Amount</th>
-                                                    <th>Action</th>
+                                                    <th>Status</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <th>1</th>
-                                                    <th>05/04/2017</th>
-                                                    <th>Invoice</th>
-                                                    <th><a href="#">#IN000011</a></th>
-                                                    <th>$14.00</th>
-                                                    <th>
-                                                        <button class="btn btn-default">Add more</button>
-                                                    </th>
+                                                    <th>{!! $order->id !!}</th>
+                                                    <th>{!! date("d/m/Y",strtotime($order->created_at))!!}</th>
+                                                    <!-- <th>Invoice</th> -->
+                                                    <th><a href="#">{!! $order->order_reference !!}</a></th>
+                                                    <th>${!! number_format($order->total,2) !!}</th>
+                                                    <th>{!! $payment_status !!}</th>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="shipping">
+                                        <!-- <div role="tabpanel" class="tab-pane fade" id="shipping">
                                             <table class="table table-hover table-bordered">
                                                 <thead>
                                                 <tr>
@@ -143,7 +141,7 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +243,13 @@
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <label for="status"></label>
-                                                    {!! Form::select('status', $order_status, null, ['class'=>'form-control']) !!}
+                                                    <?php
+                                                        $add_arr = array();
+                                                        foreach ($order->customer->addresses as $add) {
+                                                            $add_arr[$add->id] = $add->address;
+                                                        }
+                                                    ?>
+                                                    {!! Form::select('add_ship', $add_arr, null, ['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -263,7 +267,7 @@
                                             <div class="form-group">
                                                 <div class="form-line">
                                                     <label for="status"></label>
-                                                    {!! Form::select('status', $order_status, null, ['class'=>'form-control']) !!}
+                                                    {!! Form::select('add_invoice', $add_arr, null, ['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -336,4 +340,34 @@
             </div>
         </div>
     </div>
+    <div class="print_invoice">
+        
+    </div>
+@stop
+@section('script')
+    <script type="text/javascript">
+        $(function(){
+            $(document.body).on("click","#print_invoice",function(){
+               var old_html = $('body').html();
+               var id = $(this).data("id");
+               var has_id = $(this).data("has");
+               url ="/admin/sells/orders/print_invoice/"+id;
+               $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+                data:{},
+                success:function(response){
+                    $(".print_invoice").html(response.html);
+                    $('body').html($(".print_invoice").html());
+                    setTimeout(function(){
+                        window.print();
+                        document.body.innerHTML = old_html;
+                        window.location.href = "/admin/sells/orders/"+has_id+"/show";
+                    },100);
+                }
+               });
+            });
+        });
+    </script>
 @stop

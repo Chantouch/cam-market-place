@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div class="invoice-title">
-                        <h2>Your logo here</h2>
+                        <img src="{!! asset('img/home-4/logo.png') !!}" style="margin-top: 5%;">
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -43,12 +43,12 @@
                 <div class="col-xs-4">
                     <address>
                     <strong>From:</strong><br>
-                        Your Company Name<br>
-                        1234 Main Address<br>
-                        City,Country
+                        CAMMARKET PLACE<br>
+                        Toerk Tla,Khan Sen Sok<br>
+                        Phnom Penh,Cambodia
                     </address>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-4">
                     <address>
                         <strong>To:</strong><br>
                         Client Name: {!! $order->customer->first_name.' '.strtoupper($order->customer->last_name) !!}<br>
@@ -63,12 +63,12 @@
                             @else
                                 <?php $br ="<br/>";?>
                             @endif
-                        Address {!! $i !!}: {!! $add->address !!}
+                        Address {!! $i !!}: {!! $add->address." ".$br !!}
                         <?php $i++;?>
                         @endforeach
                     </address>
                 </div>
-                <div class="col-xs-5">
+                <div class="col-xs-4">
                     <address>
                         <strong>Invoice Description:</strong><br>
                         {!! $order->customer->phone_number !!}<br>
@@ -126,7 +126,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <a href="#" id="print_invoice" class="btn btn-primary print_invoice">Print Invoice</a>
+            <a href="#" id="print_invoice" data-id="{!! $order->id !!}" class="btn btn-primary print_invoice">Print Invoice</a>
             <a href="{!! route('admin.sells.orders.show', [$order->hashid]) !!}" class="btn btn-primary">Back</a>
         </div>
     </div>
@@ -134,11 +134,15 @@
 @stop
 @section('script')
 <script type="text/javascript">
-        $('.print_invoice').click(function(){
+        $(document.body).on("click",".print_invoice",function(){
             var old_html = $('body').html();
+            var id= $(this).data("id");
             $('body').html($('#invoice_content').html());
              window.print();
              document.body.innerHTML = old_html;
+             setTimeout(function() {
+                  window.location.href = "/admin/sells/orders/show_invoice/"+id;
+                }, 50);
         });
 </script>
 @stop

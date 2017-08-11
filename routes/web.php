@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('orders/{id}/show', 'Backend\Sell\OrderController@show')->name('orders.show');
         Route::patch('orders/{id}', 'Backend\Sell\OrderController@orderStatus')->name('orders.status');
         Route::get('orders/show_invoice/{id}', 'Backend\Sell\OrderController@show_invoice')->name('orders.show_invoice');
+        Route::get('orders/print_invoice/{id}', 'Backend\Sell\OrderController@print_invoice')->name('orders.print_invoice');
         Route::patch('customers/add-update-note/{id}', 'Backend\Sell\OrderController@addUpdatePrivateNote')->name('orders.add-update-note');
         Route::resource('customers', 'Backend\Sell\CustomerController');
     });

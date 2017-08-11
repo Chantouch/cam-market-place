@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        ADD CITY
+                        ADD ADVERTISING
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -19,7 +19,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.promotions.ads.index') !!}">CITY LIST</a></li>
+                                <li><a href="{!! route('admin.promotions.ads.index') !!}">ADVERTISEMENT LIST</a></li>
                             </ul>
                         </li>
                     </ul>
