@@ -15,9 +15,9 @@
                     <i class="material-icons">playlist_add_check</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TASKS</div>
-                    <div class="number count-to" data-from="0" data-to="125" data-speed="15"
-                         data-fresh-interval="20"></div>
+                    <div class="text">NEW CUSTOMERS</div>
+                    <div class="number count-to" data-from="0" data-to="{!! $this_week_customers !!}" data-speed="1500"
+                         data-fresh-interval="25"></div>
                 </div>
             </div>
         </div>
@@ -27,8 +27,8 @@
                     <i class="material-icons">help</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TICKETS</div>
-                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000"
+                    <div class="text">NEW PARTNERS</div>
+                    <div class="number count-to" data-from="0" data-to="{!! $this_week_partner !!}" data-speed="1000"
                          data-fresh-interval="20"></div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                     <i class="material-icons">forum</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW COMMENTS</div>
-                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000"
+                    <div class="text">TOTAL PRODUCTS</div>
+                    <div class="number count-to" data-from="0" data-to="{!! $total_products_available !!}" data-speed="1000"
                          data-fresh-interval="20"></div>
                 </div>
             </div>

@@ -57,4 +57,13 @@ class Country extends Model
         return Hashids::encode($this->attributes['id']);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
+
 }

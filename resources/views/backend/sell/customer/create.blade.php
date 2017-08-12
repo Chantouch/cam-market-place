@@ -1,11 +1,16 @@
 @extends('layouts.backend.app')
+@section('style')
+    <!-- Bootstrap Select Css -->
+    <link href="{!! asset('backend/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet"/>
+@stop
 @section('content')
+    <!-- Vertical Layout -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        MANAGE YOUR CUSTOMERS
+                        ADD CITY
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -14,16 +19,23 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{!! route('admin.sells.customers.create') !!}">Add</a></li>
-                                <li><a href="javascript:void(0);">Import</a></li>
-                                <li><a href="javascript:void(0);">Export</a></li>
+                                <li><a href="{!! route('admin.sells.customers.index') !!}">CUSTOMERS LIST</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                @include('backend.sell.customer.table')
+                <div class="body">
+                    {!! Form::open(['route' => ['admin.sells.customers.store'], 'method' => 'POST']) !!}
+                    @include('backend.sell.customer.fields')
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
-    <!-- #END# Hover Rows -->
+    <!-- #END# Vertical Layout -->
+@stop
+
+@section('plugins')
+    <!-- Select Plugin Js -->
+    <script src="{!! asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') !!}"></script>
 @stop

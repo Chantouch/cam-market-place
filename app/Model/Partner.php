@@ -9,7 +9,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Partner extends Authenticatable
 {
     use Notifiable;
-    protected $table = "users";
+    protected $table = "customers";
     protected $appends = ['hashid'];
     /**
      * The attributes that are mass assignable.

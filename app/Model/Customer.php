@@ -109,7 +109,7 @@ class Customer extends Authenticatable
      * @param $id
      * @return array
      */
-    public static function rules($id)
+    public static function rules($id = null)
     {
 
         switch (Request::method()) {
@@ -157,7 +157,8 @@ class Customer extends Authenticatable
         return $this->hasMany(Address::class, 'customer_id', 'id');
     }
 
-    public function country(){
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
