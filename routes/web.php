@@ -57,11 +57,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('customers/add-update-note/{id}', 'Backend\Sell\OrderController@addUpdatePrivateNote')->name('orders.add-update-note');
         Route::resource('customers', 'Backend\Sell\CustomerController');
     });
+    //---------------Report controller----------------//
+    Route::prefix('report')->name('report.')->group(function () {
+        Route::get('Backend\ReportController@index')->name('index');
+    });
 });
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('single_product', 'SingleController@index');
-
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('details/{slug}', 'Frontend\ProductController@show')->name('details');
     Route::get('category/{slug}', 'Frontend\ProductController@category')->name('category.slug');
@@ -71,7 +74,6 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::resource('wish-lists', 'Frontend\WishlistController');
     Route::delete('empty-wish-list', 'Frontend\WishlistController@emptyWishlist')->name('empty.wishlist');
     Route::post('switch-to-cart/{id}', 'Frontend\WishlistController@switchToCart')->name('switch.cart');
-
     Route::get('search', 'HomeController@search_product')->name('search');
 });
 
@@ -98,9 +100,7 @@ Route::prefix('customers')->name('customers.')->group(function () {
     //-----------------Customer Information----------------//
     Route::get('identity', 'Customer\HomeController@information')->name('identity');
     Route::patch('identity', 'Customer\HomeController@post_information')->name('identity.patch');
-
     Route::resource('addresses', 'Customer\AddressController');
-
     Route::get('order-history', 'Customer\OrderHistoryController@index')->name('order.history');
 });
 
@@ -114,8 +114,7 @@ Route::prefix('api')->name('api.')->group(function () {
 Route::get('contact-us', 'Frontend\ContactController@index');
 Route::get('about-us', 'Frontend\AboutController@index');
 Route::get('invoice', 'Frontend\AboutController@invoice');
-
-
+//-------------Partner Controller-------------//
 Route::prefix('partners')->name('partners.')->group(function () {
     //===========Partner Login and Register===========//
     Route::get('register', 'Partner\Auth\RegisterController@showRegisterForm')->name('register');
