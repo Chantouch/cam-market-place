@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-4">
                             <i class="material-icons">book</i>
-                            <p>Products: {!! count($order->purchase_items) !!}</p>
+                            <p>Products: {!! $qty !!}</p>
                         </div>
                     </div>
                 </div>

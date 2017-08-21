@@ -63,7 +63,21 @@
             <span>Advertising</span>
         </a>
     </li>
-
+    <li class="{!! Request::is('admin/report*') ? 'active' : '' !!}">
+        <a href="javascript:void(0);" class="menu-toggle">
+            <i class="material-icons">report</i>
+            <span>Reports</span>
+        </a>
+        <ul class="ml-menu">
+            <li class="{!! Request::is('admin/report.sale*') ? 'active' : '' !!}">
+                <a href="{!! route('admin.report.index') !!}">
+                    <i class="material-icons">store</i>
+                    <span>Sale</span>
+                </a>
+            </li>
+        
+        </ul>
+    </li>
     <li class="header">Settings</li>
     <li class="{!! Request::is('admin/home-sliders*') ? 'active' : '' !!}">
         <a href="{!! route('admin.home-sliders.index') !!}">

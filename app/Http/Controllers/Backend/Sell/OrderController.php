@@ -55,10 +55,15 @@ class OrderController extends Controller
             array_push($product_id, $products->product_id);
         }
         
+        $qty=0;
+        foreach ($order->purchase_items as $key => $value) {
+            $qty +=$value->qty;
+        }
+
         $total_pay = Purchase::where('customer_id', $order->customer->id)
             ->where('status', 4)->sum('total');
         return view('backend.sell.order.show',
-            compact('order', 'order_status', 'count_order', 'total_pay','payment_status')
+            compact('order', 'order_status', 'count_order', 'total_pay','payment_status','qty')
         );
     }
 

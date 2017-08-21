@@ -59,7 +59,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     //---------------Report controller----------------//
     Route::prefix('report')->name('report.')->group(function () {
-        Route::get('Backend\ReportController@index')->name('index');
+        Route::get('sale','Backend\ReportController@index')->name('index');
+        Route::get('show_detail/{date}', 'Backend\ReportController@show_detail')->name('show_detail');
     });
 });
 
